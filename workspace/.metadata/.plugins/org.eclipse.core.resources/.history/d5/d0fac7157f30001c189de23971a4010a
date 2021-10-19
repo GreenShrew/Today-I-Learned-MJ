@@ -1,0 +1,10 @@
+package days02;
+
+public class JavaThird {
+
+	public static void main(String[] args) {
+		System.out.printf("\\n : new line");
+
+	}
+
+}
