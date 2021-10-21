@@ -696,3 +696,1676 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2021-10-21 09:27:51.065 -----------------------------------------------
+eclipse.buildId=4.21.0.I20210906-0500
+java.version=17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jface 2 0 2021-10-21 09:27:56.424
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-10-21 09:27:56.424
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@11b74ecb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@78839c2e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2021-10-21 09:28:01.156
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Onion'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2021-10-21 15:08:42.071
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.AbstractDocument.getChar(AbstractDocument.java:783)
+	at org.eclipse.core.internal.filebuffers.SynchronizableDocument.getChar(SynchronizableDocument.java:141)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaSourceHover.getBracketHoverInfo(JavaSourceHover.java:177)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaSourceHover.getHoverInfo(JavaSourceHover.java:138)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaSourceHover.getHoverInfo2(JavaSourceHover.java:118)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:35.689
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = (kor % 2) = 1
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2021-10-21 15:09:35.690
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2021-10-21 15:09:35.691
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:35.697
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = (kor % 2) = 1
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2021-10-21 15:09:35.698
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2021-10-21 15:09:35.699
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:35.768
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = (kor % 2) = 1
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2021-10-21 15:09:35.769
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2021-10-21 15:09:35.769
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:38.700
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = (kor % 2) = 1)
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2021-10-21 15:09:38.701
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2021-10-21 15:09:38.702
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:40.190
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = (kor % 2) = 1)
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2021-10-21 15:09:40.192
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2021-10-21 15:09:40.193
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:41.207
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = ((kor % 2) = 1)
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2021-10-21 15:09:41.208
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2021-10-21 15:09:41.209
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:41.218
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = ((kor % 2) = 1)
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2021-10-21 15:09:41.219
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2021-10-21 15:09:41.219
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2021-10-21 15:09:43.299
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		// 피연산자 : boolean, 연산의 결과 : boolean
+		int a = 80;
+		boolean b = true && false;	// 기본 구조. 우항에서 연산을 통해 true false를 가려내고 좌항의 변수에 넣는다.
+		boolean b1 = a>70;		// true
+		boolean b2 = a<100;		// true
+		b = b1 && b2;				// true
+		// 이런 구조로 만들어진다.
+		// 위 구조를 19번 코드와 같이 한줄로 만들 수 있다.
+		
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		b = (70<a) && (a<100);
+		// 참고로 연산의 우선순위는 &&, || 과 같은 연산자보다 부등호 연산자가 우선순위를 가진다. 따라서 괄호는 없어도 됨.
+		System.out.println("70 < a < 100 : " + b);
+		// 주의! 70 < a < 100 이러한 연산은 불가능하다. 
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+
+		
+		// AND 연산자 (&&)
+		// 좌항과 우항의 관계(비교)식 결과 또는 boolean 값이 모두 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 중 하나라도 false인 경우 false가 결과값으로 출력.
+		// 좌항의 비교연산 결과가 false인 경우 우항의 식을 비교하지 않는다. (이미 false이기 때문)
+		System.out.printf("F && F = %b\n", false&&false);
+		System.out.printf("T && F = %b\n", true&&false);
+		System.out.printf("F && T = %b\n", false&&true);
+		System.out.printf("T && T = %b\n", true&&true);
+		
+		System.out.println("-----------------------------");
+		
+		// OR 연산자 (||)
+		// 좌항과 관계(비교)식 결과 또는 boolean 값이 하나라도 true인 경우 true가 결과값으로 출력.
+		// 좌항과 우항 모두 false인 경우 false가 결과값으로 출력.
+		// 좌항의 결과가 true인 경우 우항의 식을 비교하지 않는다. (이미 true이기 때문)
+		System.out.printf("F || F = %b\n", false||false);
+		System.out.printf("T || F = %b\n", true||false);
+		System.out.printf("F || T = %b\n", false||true);
+		System.out.printf("T ||T = %b\n", true||true);		
+		
+		System.out.println("-----------------------------");
+		
+		// NOT 연산자(!)
+		// 단항연산자(피연산자가 1개임)
+		// 관계식의 결과를 반대값으로 바꾸어 나타냄. true -> false, false -> true
+		System.out.printf("Not %b = %b\n", false, !false);
+		System.out.printf("Not %b = %b\n", true, !true);
+		
+		// 어떤 상황에서 이런게 쓰일까?
+		// 점수가 80점 이상이면서 90점 이하면 true, 아니면 false 출력
+		int number = 80;	//(이면서, 그리고, ~이고)
+		boolean result = (number>=80) && (number<=90);
+//		result =  80 <= number <= 90		이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+		
+		// 점수가 100 이상이거나 50 미만이면 true, 아니면 false	(이거나, 또는)
+		number = 150;
+		result = (number>=100) || (number<50);
+//		result = 100 >= number < 50			이렇게 쓰면 오류.
+		System.out.printf("result = %b\n", result);
+
+		System.out.println("-----------------------------");
+		
+		// 간단한 문제풀이
+		int kor=35, eng=98, mat=95;
+		double avg;	
+//		System.out.printf("result = %b\n", result);		이 양식을 사용하자.
+		// 평균이 80 이상이면서 영어점수가 75점 이상이면 true, 아니면 false 출력
+		avg = (kor+eng+mat)/3.0;
+		result = avg >= 80 && eng >= 75;
+		System.out.printf("result = %b\n", result);
+		
+		// 국어 : 50 이상, 영어 : 60 이상, 수학 : 70 이상이면 true, 아니면 false 출력
+		result = (kor >= 50) && (eng >= 60) && (mat >= 70);
+		System.out.printf("result = %b\n", result);
+		
+		// 세과목중 한 과목이라도 40점 미만이라면 true, 모두 40점 이상이면 false를 출력
+		result = (kor < 40) || (eng < 40) || (mat < 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 평균 60점 이상, 모든 과목은 40점 이상이라면 true, 아니면 false를 출력
+		result = (avr >= 60) && (kor >= 40) && (eng >= 40) && (mat >= 40);
+		System.out.printf("result = %b\n", result);
+		
+		// 국어점수가 짝수이면 true, 홀수이면 false 를 출력
+		result = ((kor % 2) = 1)
+	}
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2021-10-21 15:09:43.299
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2021-10-21 15:09:43.300
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2033)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1207)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3054)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

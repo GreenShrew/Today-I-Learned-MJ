@@ -1,0 +1,20 @@
+package days04;
+
+public class Operator04 {
+
+	public static void main(String[] args) {
+		// 논리연산자 &&(AND), ||(OR), !(NOT)
+		// 다수개의 관계(비교)연산식 결과를 조합하여 하나의 boolean 값을 결과로 얻는 연산
+		
+		int a = 80;
+		// a 변수의 값이 70보다 크고 100보다 작으면 true, 아니면 false를 출력
+		boolean b = (70<a) && (a<100);
+		System.out.println("70 < a < 100 : " + b);
+		
+		a = 30;
+		// a 변수의 값이 70보다 크거나 40보다 작으면 true, 아니면 false 출력
+		b = (70<a) || (a<40);
+		System.out.println("70 < a 이거나 a < 40 : " + b);
+	}
+
+}

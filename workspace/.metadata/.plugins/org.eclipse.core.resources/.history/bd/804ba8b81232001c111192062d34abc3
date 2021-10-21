@@ -1,0 +1,38 @@
+package days04;
+
+public class Variable08 {
+
+	public static void main(String[] args) {
+		// char 형 변수의 값 대입 : 하나의 글자를 다른 글자와 구분하기 위해 작은 따옴표('', 'A', ' ' 등)를 사용한다.
+		char ch = 'A';
+		// String 형 데이터는 큰 따옴표("", "A", "ABCD", "   " 등)를 사용한다.
+		String st = "ABCD";
+		// printf 에서 char 데이터를 넣는 문자데이터에 쓰이는 이스케이프 문자는 %c
+		System.out.printf("ch -> %c\n",ch);
+		
+		// char 형 데이터는 컴퓨터 저장장치에 저장될때, 이진수 코드로 저장된다.
+		// 문자를 저장하기 위한 코드체계에 의해 조합된 코드(ASCII 코드)이다.
+		// 이를 십진수로 변화하면 정수로도 변환이 가능하다.
+		// 위의 내용을 기초로 한 결과, 정수와 문자간 호환성이 발생된다.
+		int intchar = ch;
+		System.out.printf("ch -> 정수형 변수에 저장 %d\n", intchar);
+		System.out.printf("ch -> 정수형 변수로 캐스팅 %d\n", (int)ch);
+		ch = 'B';
+		System.out.printf("'B' -> 정수값으로 캐스팅 %d\n", (int)ch);
+		System.out.printf("'B' -> 정수값으로 캐스팅 %d\n", (int)'B');		//	66 출력
+		System.out.printf("'C' -> 정수값으로 캐스팅 %d\n", (int)'C');		// 67 출력
+		System.out.printf("'Z' -> 정수값으로 캐스팅 %d\n", (int)'Z');		// 90 출력
+		// 대문자는 65 ~ 90까지 있다.
+		System.out.printf("'a' -> 정수값으로 캐스팅 %d\n", (int)'a');		// 97 출력
+		System.out.printf("'z' -> 정수값으로 캐스팅 %d\n", (int)'z');		// 122 출력
+		// 소문자는 97 ~ 122까지 있다.
+		System.out.printf("'0' -> %d, '9' -> %d\n", (int)'0', (int)'9');		// 48, 57 출력
+		
+		// 65~90, 97~122, 48~57을 기억해두자!
+		
+		// 대문자 B 값에 32를 더하여 소문자 b로 변경
+		System.out.printf("%c + 32 -> %c\n", ch, ch + 32);
+		
+	}
+
+}
