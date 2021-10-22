@@ -19,6 +19,7 @@ public class Operator02 {
 		n=n*10;	// n*=10;
 		System.out.println("n = n * 10 -> n : " + n);
 		double d = 50.0;
+		n=n-10;	// n-=10;
 		System.out.println("d 의 최초값 : " + d);
 		d=d/10.0;	// d/=10;
 		System.out.println("d = d / 10 -> n : " + d);

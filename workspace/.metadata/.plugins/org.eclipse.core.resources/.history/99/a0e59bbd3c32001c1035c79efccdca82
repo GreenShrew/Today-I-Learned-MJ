@@ -6,7 +6,7 @@ public class Variable07 {
 
 	public static void main(String[] args) {
 		// (입력) 사과 갯수 입력, 한 상자에 담길 사과의 갯수 입력
-		// (출력) 포장된 박스 갯수, 남은 사과 갯수 출력
+		// (출력) 포장된 박수 갯수, 남은 사과 갯수 출력
 		
 		Scanner sc = new Scanner(System.in);
 		

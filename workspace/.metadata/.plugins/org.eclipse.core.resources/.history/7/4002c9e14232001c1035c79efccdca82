@@ -22,8 +22,6 @@ public class Operator01 {
 		System.out.println(n1 + "/" + n2 + "=" + result2);
 		double result3 = (int)(result2*100)/100.0;
 		System.out.println(n1 + "/" + n2 + "=" + result3);
-		result1 = n1 % n2;
-		System.out.println(n1 + "%" + n2 + "=" + result1);
 		
 		// 자료형과 산술연산
 		byte b1 = 10;

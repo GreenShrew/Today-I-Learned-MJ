@@ -3,7 +3,7 @@ day 4
 제목 : 변수의 Casting, Operator(연산자)
 
 
-- Variable06
+- Variable07
  간단한 문제풀이 1
 
 입력 -> 연산 -> 출력
