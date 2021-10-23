@@ -17,7 +17,7 @@ public class ControlOpIf02_1 {
 		} else {
 			System.out.println("불합격입니다.");
 		}
-		// 평균 60점 이상이면서 모든 과목 점수가 40점 이상이라면 합격, 아니면 불합격
+		// 평균 60점 이상이면서 모든 과목 점수가 40점 이상이라면 합격, 아니면 불합격.
 		if(avg>=60 && kor>=40 && eng>=40 && mat>=40) {
 			System.out.println("합격입니다.");
 		} else {

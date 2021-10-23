@@ -1,0 +1,17 @@
+package simple_example;
+
+public class simpleExample01 {
+
+	public static void main(String[] args) {
+		// Day 2 problem 1
+
+		System.out.println("\\n : new line");
+		System.out.println("\\t : tab");
+		System.out.println("\\b : 백스페이스");
+		System.out.println("\\' : \' 출력");
+		System.out.println("\\\" : \" 출력");
+		System.out.println("\\% : % 출력");
+		System.out.println("\\\\ : 역슬래시 출력");
+	}
+
+}

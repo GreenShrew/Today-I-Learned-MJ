@@ -10,7 +10,7 @@ public class ControlOpIf02 {
 		int a = sc.nextInt();
 		int b = a%2;
 		
-//		if( b == 0 ) {
+//		if( b ==0 ) {
 //			System.out.println("입력한 정수는 짝수(even)입니다.");
 //			b = 1;
 //		}
