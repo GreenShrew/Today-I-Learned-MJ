@@ -1,0 +1,35 @@
+package days06;
+
+import java.util.Scanner;
+
+public class ControlOpSwitch01 {
+
+	public static void main(String[] args) {
+		int a;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수를 입력하세요 : ");
+		a = sc.nextInt();
+		//아래는 입력하는 a값에 따라 결과가 출력되는 if문이다.
+//		if(a==1) System.out.println("1을 입력하셨습니다.");
+//		else if (a==2) System.out.println("2를 입력하셨습니다.");
+//		else if (a==3) System.out.println("3을 입력하셨습니다.");
+//		else if (a==4) System.out.println("4를 입력하셨습니다.");
+		
+		// switch 문은 if 문과 비슷한 구조이지만, 변수값의 단순 참조에 의해 실행될 명령이 선택되는 것이 다르다.
+		
+		switch(a) {	// 괄호안의 a 변수값을 참조하여, 아래 해당 값이 있는 case에 있는 명령을 실행한다.
+		case 1:
+			System.out.println("1을 입력하셨습니다.");
+		case 2:
+			System.out.println("2를 입력하셨습니다.");
+		case 3:
+			System.out.println("3을 입력하셨습니다.");
+		case 4:
+			System.out.println("4를 입력하셨습니다.");
+		case 5:
+			System.out.println("5를 입력하셨습니다.");
+		}
+		
+	}
+
+}

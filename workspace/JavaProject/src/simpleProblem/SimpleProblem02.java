@@ -258,6 +258,6 @@ public class SimpleProblem02 {
 			System.out.println("수요일");
 		}else if(d==0) {
 			System.out.println("목요일");
-		}		
+		}
 	}
 }
