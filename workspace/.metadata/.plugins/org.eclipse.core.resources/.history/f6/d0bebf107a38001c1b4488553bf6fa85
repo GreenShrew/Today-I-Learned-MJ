@@ -1,0 +1,18 @@
+package days10;
+
+public class Method02 {
+	// 매개변수 :
+	// 메서드 호출시 메서드가 필요로하는 데이터를 전달해줄 수 있는 매개 역할의 변수
+	// 메서드 호출시 괄호안에 넣어주는 데이터 <- 전달인수
+	// 메서드의 몸체에서 괄호안에 위치하면 전달된 값을 받아주는 변수 <- 매개변수
+	
+	// 매개 변수의 선언
+	// public static void 메서드이름(자료형 매개변수, 자료형 매개변수 ...){
+	//}	매개변수 또한 필요한 갯수 만큼 선언해서 사용할 수 있다.
+	
+	// String[] args : main 메서드의 매개변수
+	public static void main(String[] args) {
+		System.out.println(args[0]);
+	}
+
+}

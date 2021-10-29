@@ -1,0 +1,10 @@
+package days10;
+
+public class Method03 {
+	// 매개변수의 역할과 생명 주기
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

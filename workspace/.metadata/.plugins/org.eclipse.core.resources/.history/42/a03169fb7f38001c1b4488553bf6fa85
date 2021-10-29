@@ -1,0 +1,22 @@
+package days10;
+
+public class Method03 {
+	// 매개변수의 역할과 생명 주기
+	public static void updateValue(int num) {
+		num = 100;
+		System.out.printf("updateValue의 num -> %d\n",num);
+	}
+	// 1. main 영역에서 전달인수로 넣어주는 변수와 updateValue 영역의 매개변수로 쓰인 변수의 이름이
+	//		같아도 상관 없다.
+	//		위에서 언급한 두 변수는 지역변수라고 부르며, 서로 다른 변수로 사용된다.
+	
+	// 2. 전달인수의 변수값이 매개변수 변수로 "값"만 전달되는 방식을
+	//		Call by Value 라고 부른다.
+	public static void main(String[] args) {
+		int num = 10;
+		System.out.printf("main의 num -> %d\n",num);
+		updateValue(num);
+		System.out.printf("main의 num -> %d\n",num);
+	}
+
+}
