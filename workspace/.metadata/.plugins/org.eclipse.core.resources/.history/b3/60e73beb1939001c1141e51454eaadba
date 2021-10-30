@@ -1,0 +1,59 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class SimpleProblem03 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		// Day 6 problem 1
+		// 2021년의 요일을 묻는 문제인데, 그냥 년, 월, 일 입력으로 전체 요일 탐색이 가능하도록 해보았다.
+
+		System.out.println("몇년?");
+		int y = Integer.parseInt(sc.nextLine());
+		System.out.println("몇월?");
+		int m = Integer.parseInt(sc.nextLine());
+		System.out.println("몇일?");
+		int d = Integer.parseInt(sc.nextLine());
+		int total=0;
+		
+		for(int i=1;i<y;i++) {
+			if(y%4==0 && y!=100 || y%400==0) {
+				total+=366;
+			}else {
+				total+=365;
+			}
+		}
+		switch(m) {
+		case 12: total+=30;
+		case 11: total+=31;
+		case 10: total+=30;
+		case 9: total+=31;
+		case 8: total+=31;
+		case 7: total+=30;
+		case 6: total+=31;
+		case 5: total+=30;
+		case 4: total+=31;
+		case 3:
+			if(y%4==0 && y!=100 || y%400==0) {
+				total+=29;
+			}else {
+				total+=28;
+			}
+		case 2: total+=31;
+		}
+		total+=d;
+		total%=7;
+		switch(total) {
+		case 0:System.out.println("월요일"); break;
+		case 1:System.out.println("화요일"); break;
+		case 2:System.out.println("수요일"); break;
+		case 3:System.out.println("목요일"); break;
+		case 4:System.out.println("금요일"); break;
+		case 5:System.out.println("토요일"); break;
+		case 6:System.out.println("일요일"); break;
+		}
+		System.out.println(total);
+	}
+
+}

@@ -1,0 +1,32 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class dustmqwkd {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+
+		System.out.print("첫 번째 정수 입력 : ");
+		int q1 = Integer.parseInt(sc.nextLine());
+		System.out.print("두 번째 정수 입력 : ");
+		int q2 = Integer.parseInt(sc.nextLine());
+		int min;
+		if(q1>q2) {
+			min=q2;
+		}else {
+			min=q1;
+		}
+		int q=0;
+		System.out.print("공약수 : ");
+		for(int i=1;i<=min;i++) {
+			if(q1%i==0 && q2%i==0) {
+				System.out.printf("%d ",i);
+				q = i;
+			}
+		}
+		System.out.println("최대 공약수 : "+q);
+	}
+
+}

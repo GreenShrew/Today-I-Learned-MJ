@@ -1,0 +1,15 @@
+package days10;
+
+public class asdfads {
+
+	public static void main(String[] args) {
+	
+	
+		int [][] b = {{1,2},{3,4},{5,6}};	// 참고로 배열 {3,4}의 이름은 b[1]
+		// int [][] b = new int[3][2]; 와 같다. 값이 모두 0으로 초기화
+		for (int k : b[1]) {	// 3, 4가 저장되어 2회 반복실행한다.
+			System.out.printf(k + " ");
+		}	
+		
+	}
+}

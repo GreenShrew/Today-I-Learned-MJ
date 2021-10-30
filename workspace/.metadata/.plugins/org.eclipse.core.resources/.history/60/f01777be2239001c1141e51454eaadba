@@ -1,0 +1,29 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class dustmqwkd {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("팩토리얼 정수 입력 : ");
+		int p = Integer.parseInt(sc.nextLine());
+		System.out.print(p+"! = ");
+		int ptot=1;
+		for(int i=1;i<p;i++) {
+			System.out.print(i+"x");
+			ptot*=i;
+		}
+		System.out.println(p+" = "+(ptot*p));
+
+		System.out.print(p+"! = ");
+		ptot=1;
+		for(int i=p;i<1;i--) {
+			System.out.print(i+"x");
+			ptot*=i;
+		}
+		System.out.println(1+" = "+ptot);
+	}
+
+}

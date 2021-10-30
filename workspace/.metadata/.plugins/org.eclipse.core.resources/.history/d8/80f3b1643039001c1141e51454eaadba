@@ -1,0 +1,20 @@
+package simpleProblem;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class dustmqwkd {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Random rd = new Random();
+		int i=2;
+		System.out.print("원하는 단을 입력하세요(0을 누르면 종료됩니다) : ");
+		int dan1 = Integer.parseInt(sc.nextLine());
+		int r =Integer.parseInt(sc.nextLine());
+		System.out.println(r);
+		
+
+	}
+
+}

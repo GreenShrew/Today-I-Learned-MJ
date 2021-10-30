@@ -1,0 +1,42 @@
+package simpleProblem;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class dustmqwkd {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Random rd = new Random();
+		int i=2;
+		
+		System.out.print("가위(1), 바위(2), 보(3)! (0을 누르면 종료됩니다) : ");
+		int user = Integer.parseInt(sc.nextLine());
+		
+		while(user!=0) {
+			int com=rd.nextInt();
+			if(com<-1) {
+				com*=-1;
+				com=(com%3)+1;
+			}
+			
+			if(user==com) {
+				System.out.println("\n비겼습니다.");
+			}else if((user==1&&com==2)||(user==2&&com==3)||(user==3&&com==1)){
+				System.out.println("\n졌습니다.");
+			}else {
+				System.out.println("\n이겼습니다.");
+			}
+			
+			System.out.print("가위(1), 바위(2), 보(3)! (0을 누르면 종료됩니다) : ");
+			user = Integer.parseInt(sc.nextLine());
+			
+		}
+		
+		int r =rd.nextInt();
+		System.out.println(r);
+		
+
+	}
+
+}

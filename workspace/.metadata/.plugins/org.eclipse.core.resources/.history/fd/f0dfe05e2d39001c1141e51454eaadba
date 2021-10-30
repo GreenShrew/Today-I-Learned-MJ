@@ -1,0 +1,25 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class dustmqwkd {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int i=2;
+		System.out.print("팩토리얼로 나타낼 숫자를 입력하세요 : ");
+		int p1 = Integer.parseInt(sc.nextLine());
+		
+		i=1;
+		int ptot1=1;
+		ptot1=1;
+		System.out.print(p1+"! = ");
+		while(p1>1) {
+			System.out.printf("%dx",i);
+			ptot1*=p1;
+			p1--;
+		}
+		System.out.print("1 = "+(ptot1);
+	}
+
+}

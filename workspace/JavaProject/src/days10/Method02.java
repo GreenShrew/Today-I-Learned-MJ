@@ -13,7 +13,7 @@ public class Method02 {
 	// String[] args : main 메서드의 매개변수
 	public static void main(String[] args) {
 		myPrint(100);	// 괄호 안에 입력한 숫자 100은 전달인수
-		// 100 : 전달인수 -> 괄호 안에 전달된 인수는 메서드가 실행될 때
+		// 100 : 전달인자 -> 괄호 안에 전달된 인수는 메서드가 실행될 때
 		// 메서드의 정의 영역 괄호안에 선언된 n변수에 저장된다.
 		myPrint(200);
 		myPrintWith2Int(300, 400);

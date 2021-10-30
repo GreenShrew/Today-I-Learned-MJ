@@ -54,7 +54,7 @@ public class Array11 {
 		int [][] arr3 = new int[][] {{1,2,3},{4,5,6}};
 		// 2행 3열 2차원 배열
 		System.out.println(arr3[0][2]);
-		System.out.println(arr[1][1]);
+		System.out.println(arr3[1][1]);
 		int [][]arr4 = {{1,2},{4,5},{7,8}};	// 3행 2열 2차원 배열
 		System.out.println(arr4[0][1]);
 		System.out.println(arr4[1][1]);
