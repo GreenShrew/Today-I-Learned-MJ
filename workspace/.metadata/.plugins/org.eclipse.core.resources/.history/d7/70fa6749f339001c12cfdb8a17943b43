@@ -1,0 +1,17 @@
+package simpleProblem;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class dustmqwkd {
+// simple problem을 풀어보는 연습장
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		char[]grade= {'F','F','F','F','F','F','D','C','B','A','A'};
+		System.out.print("점수를 입력하세요 : ");
+		int score=Integer.parseInt(sc.nextLine());
+		System.out.println(grade[score%10]);
+	}
+
+}

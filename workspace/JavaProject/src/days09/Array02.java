@@ -29,12 +29,12 @@ public class Array02 {
 		a4[0] = 100;
 		System.out.println(a3[0]+" "+a4[0]);
 		
-		// 4. 배열 변수 arr5, arr6를 선언하는 코드
+		// 4. 배열 변수 a5, a6를 선언하는 코드
 		int [] a5, a6;
 		a5 = new int[3];
 		a6 = new int[3];
 		
-		// 5. 배열 변수 arr7, arr8, 일반 int형 변수 arr9를 생성하는 코드
+		// 5. 배열 변수 a7, a8, 일반 int형 변수 a9를 생성하는 코드
 		int a7[], a8[], a9;
 		a7 = new int[3];
 		a8 = new int[3];

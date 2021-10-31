@@ -7,7 +7,7 @@ public class Array13 {
 	public static void main(String[] args) {
 		// Array04에서 만들었던 성적표를 이차원배열로 간단하게 만들어보자.
 		// 3명 학생의 3과목 점수 저장 배열로 만들어보자. 마지막 열은 총점.
-		int [][] score = new int[3][4];
+		int [][] score = new int[3][4];	// 학생은 3명, 국어,영어,수학,총점
 		String [] name = new String[3];
 		double [] avg = new double[3];
 		

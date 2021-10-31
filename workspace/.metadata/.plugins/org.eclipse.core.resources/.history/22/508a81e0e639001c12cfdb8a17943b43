@@ -1,0 +1,36 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class dustmqwkd {
+// simpleproblem을 풀어보는 연습장
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("학생의 숫자 : ");
+		int s1=Integer.parseInt(sc.nextLine());
+
+		String [] name1=new String[s1];
+		int [] kor1=new int[s1];
+		int [] eng1=new int[s1];
+		int [] mat1=new int[s1];
+		int [] tot1=new int[s1];
+		double [] avg1=new double[s1];
+		
+		
+		for(int i=1;i<=s1;i++) {
+		System.out.printf("%d번 학생의 이름 : ",i+1);
+		name1[i]=sc.nextLine();
+		System.out.printf("%d번 학생의 국어점수 : ",i+1);
+		kor1[i]=Integer.parseInt(sc.nextLine());
+		System.out.printf("%d번 학생의 영어점수 : ",i+1);
+		eng1[i]=Integer.parseInt(sc.nextLine());
+		System.out.printf("%d번 학생의 수학점수 : ",i+1);
+		mat1[i]=Integer.parseInt(sc.nextLine());
+		tot1[i]=kor1[i]+eng1[i]+mat1[i];
+		avg1[i]=tot1[i]/3.0;
+		}		
+		
+	}
+
+}

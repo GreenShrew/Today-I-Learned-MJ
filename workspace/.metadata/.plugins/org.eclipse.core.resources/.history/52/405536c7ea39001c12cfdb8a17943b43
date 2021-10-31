@@ -1,0 +1,24 @@
+package simpleProblem;
+
+import java.util.Scanner;
+
+public class dustmqwkd {
+// simple problem을 풀어보는 연습장
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int [] a = {56, 87, 96, 87, 45, 89, 69, 36, 13, 98};
+		for(int i=0;i<a.length;i++) {
+			for(int j=i+1;j<a.length;j++) {
+				if(a[i]<a[j]) {
+					int x = a[i];
+					a[i]=a[j];
+					a[j]=x;
+				}
+			}
+			System.out.printf("%d ",a[i]);
+		}
+		
+	}
+
+}

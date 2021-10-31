@@ -80,6 +80,7 @@ public class Array14 {
 			System.out.println();
 		}
 		// 2차원 배열은 새로 공간 생성후 각각의 값을 다시 복사해야 완벽한 복사가 된다.
+		// 배열 f에 배열 d를 복사해보자.
 		int [][] f = new int[d.length][d[0].length];
 		for(int i=0;i<d.length;i++) {
 			for(int j=0;j<d[i].length;j++) {
