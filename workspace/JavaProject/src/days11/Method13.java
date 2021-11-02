@@ -24,8 +24,6 @@ public class Method13 {
 		// 정의된 메소드들의 매개변수들과 맞지 않은 호출은 에러가 난다.
 //		System.out.println("세 개의 정수 중 큰 값 "+max(11,33,55,44));		에러
 //		System.out.println("세 개의 정수 중 큰 값 "+max(11.0,33,55.0));		에러
-		
-		// 내가 만든 형태는 
 	}
 
 	public static double max(double a, double b) {

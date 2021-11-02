@@ -1,0 +1,26 @@
+package days12;
+class Animal{
+	String name;
+	int age;
+	
+	// 멤버 메소드 : 클래스에 소속되어 클래스 객체에 종속된 메소드이다.
+	// 멤버 메서드는 특별한 경우를 제외하곤 static을 사용하지 않는다.
+	public void output1() {	// name, age는 class 내에서 쓸 수 있는 변수이다.
+		System.out.printf("나의 이름은 %s, 나의 나이는 %d 입니다\n",name,age);	// name, age는 class 내에서 쓸 수 있는 변수이다.
+	}
+	// 멤버메소드는 클래스형으로 생성된 객체"전용" 메소드이다.
+	// 메소드의 실행이 객체전용으로만 사용이 된다는 뜻이다.
+	// 멤버메소드의 내용은 객체와 상관없는 명령이 들어갈수도 있지만, 보통은 멤버면수들의 조작, 출력, 입력을 위한 명령들로 주로 구성된다.
+	void input(String n, int a) {
+		name=n;
+		age=a;
+	}
+}
+public class Class03 {
+	
+	public static void main(String[] args) {
+		int a = 0;
+		System.out.printf("멤버변수 값 %d 입니다.\n",a);	// 얘는 
+
+	}
+}

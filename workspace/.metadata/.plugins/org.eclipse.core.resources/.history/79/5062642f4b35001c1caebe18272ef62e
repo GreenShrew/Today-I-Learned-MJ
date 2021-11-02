@@ -1,9 +1,0 @@
-package days06;
-
-public class ControlOpFor03 {
-
-	public static void main(String[] args) {
-		// 1부터 10까지의 합 (어디서든 나오는 예제)
-	}
-
-}

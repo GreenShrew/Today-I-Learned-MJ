@@ -1,0 +1,82 @@
+package days12;
+
+import java.util.Scanner;
+
+class AccountWithPermission{
+	private double balance;
+	
+	public void initBanance(int money) {	// 초기 잔액
+		balance = money;
+	}
+
+	public void withraw() {		// 출금코드
+		Scanner sc = new Scanner(System.in);
+		System.out.println("출금할 금액을 입력하세요.");
+		int money = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("비밀번호를 입력하세요.");
+		int pass = Integer.parseInt(sc.nextLine());
+		if(pass != 1234) {
+			System.out.println("비밀번호가 맞지 않습니다.");
+			return;
+		}
+		// void 메소드의 return은 리턴될 값 없이 사용되며, 메소드를 현 위치에서 종료하라는 명령이다.
+		if(money>balance) {
+			System.out.println("잔액이 부족합니다.");
+			return;
+		}
+		balance -=money;	// 위의 비밀번호, 남은 잔액 상황이 해결되어야 출금 코드가 실행된다.
+	}
+	
+	public void deposit() {
+		Scanner sc = new Scanner(System.in);
+		System.out.printf("입금할 금액을 입력하세요.");
+		int money = Integer.parseInt(sc.nextLine());
+		
+		if(money<=0) {
+			System.out.println("입금액 오류. 관리자에게 문의하세요.");
+			return;
+		}
+		balance += money;
+	}
+	
+	public void display() {
+		System.out.printf("현재 잔액은 %.2f 원 입니다.\n",balance);
+	}
+	
+}
+public class Class06 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int selectMenu;
+		
+		AccountWithPermission a = new AccountWithPermission();	// 객체 생성
+		a.initBanance(50000);	// 잔액초기화
+		
+		System.out.printf("메뉴선택 : 1. 입금 2. 출금 3.잔액확인 4. 종료 -> ");
+		selectMenu=sc.nextInt();
+		
+		while(selectMenu!=4) {
+			
+			switch(selectMenu) {
+			case 1:
+				a.deposit();
+				break;
+			case 2:
+				a.withraw();
+				break;
+			case 3:
+				a.display();
+				break;
+			}
+			
+			System.out.printf("메뉴선택 : 1. 입금 2. 출금 3.잔액확인 4. 종료-> ");
+			selectMenu=sc.nextInt();
+		}
+		System.out.println("프로그램이 종료되었습니다.");
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package days12;
+class Student{
+	private int bun;
+	private String name;
+	private int kor;
+	private int eng;
+	private int mat;
+	private int tot;
+	private double ave;
+}
+public class Class04 {
+
+	public static void main(String[] args) {
+		Student std1 = new Student();
+	}
+
+}

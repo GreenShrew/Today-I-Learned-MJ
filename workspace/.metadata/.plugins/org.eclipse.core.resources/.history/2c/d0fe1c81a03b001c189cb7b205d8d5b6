@@ -1,0 +1,15 @@
+package days12;
+class ThisA{
+	private int num;
+	public void init(int num) {
+		
+	}
+}
+public class Class14 {
+
+	public static void main(String[] args) {
+		ThisA t1 =new ThisA();
+		t1.init(100);
+	}
+
+}

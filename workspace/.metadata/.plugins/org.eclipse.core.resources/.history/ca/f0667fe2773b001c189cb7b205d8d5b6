@@ -1,0 +1,18 @@
+package days12;
+class Animal{
+	String name;
+	int age;
+	
+	// 멤버 메소드 : 클래스에 소속되어 클래스 객체에 종속된 메소드이다.
+	// 멤버 메서드의 일반적인 사용은 static을 사용하지 않는다.
+	public void output() {
+		System.out.println("나의 이름은 %s, 나의 나이는 %d 입니다\n",name,age);	// name, age는 class 내에서 쓸 수 있는 변수이다.
+	}
+}
+public class Class03 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

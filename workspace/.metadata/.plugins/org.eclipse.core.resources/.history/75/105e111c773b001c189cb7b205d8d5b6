@@ -1,0 +1,18 @@
+package days12;
+class Animal{
+	String name;
+	int age;
+	
+	// 멤버 메소드
+	// 멤버 메서드의 일반적인 사용은 static을 사용하지 않는다.
+	public void xxxx() {
+		
+	}
+}
+public class Class03 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}
