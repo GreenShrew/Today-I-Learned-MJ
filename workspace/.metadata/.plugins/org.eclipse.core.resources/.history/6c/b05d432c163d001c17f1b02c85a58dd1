@@ -1,0 +1,22 @@
+package days14;
+// static 변수, static 메소드, 인스턴스 변수, 인스턴스 메소드 의 관계!
+class Mymath{
+	int a,b;
+	static int c=0;
+	Mymath(){
+		c++;
+	}
+	
+	// 인스턴스 메소드들은 인스턴스 변수에 자유롭게 접근이 가능하다.
+	int add() {return a+b;}
+	int subtract() {return a-b;}
+	int multiply() {return a*b;}
+	double divide() {return a/(double)b;}
+}
+public class Class22 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

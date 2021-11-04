@@ -1,0 +1,11 @@
+package days14;
+
+public class Class28_Card {	// 카드 한장에 담긴 정보(숫자, 무늬)가 담긴 클래스
+	static int sapde = 4;
+	static int diamon = 3;
+	static int heart = 2;
+	static int clover = 1;
+	
+	private int kind;	// 4:Spade 3:Diamond 2:Heart 1:Clover
+	private int number;
+}

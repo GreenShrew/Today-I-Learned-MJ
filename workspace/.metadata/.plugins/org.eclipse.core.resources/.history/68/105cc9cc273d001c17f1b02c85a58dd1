@@ -1,0 +1,18 @@
+package days14;
+
+// 싱글턴 패턴(Singleton Pattern) : 특정 클래스의 인스턴스를 반드시 한개만생성할 수 있도록 강제하는 패턴
+// (언제 쓰나?) 멤버 필드값이 객체들간 스태틱 변수가 아니면서 일관된 값을 가져야하고, 객체도 둘 이상 더 만들 필요가 없다면
+// 하나의 인스턴스를 여러 레퍼런스 변수가 공유하여 사용하도록 제어하는 싱글턴 방식이 사용된다.
+class SingletonEx{
+	
+}
+public class Class26 {
+
+	public static void main(String[] args) {
+		SingletonEx s1 = new SingletonEx();
+		SingletonEx s2 = new SingletonEx();
+		// 싱글턴 방식이란, 위의 s1와 s2의 레퍼런스 변수가 같은 주소를 같게 하는 방식이다.
+		// 현재는 new로 인해 s1과 s2는 다른 주소를 가지고있다.
+	}
+
+}

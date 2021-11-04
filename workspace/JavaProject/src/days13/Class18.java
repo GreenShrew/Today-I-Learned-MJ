@@ -46,7 +46,7 @@ public class Class18 {
 		
 		// 동적 변수와 마찬가지로, 스태틱 변수가 private으로 보호되지 않았다면 임의 접근이 가능하고,
 		StaticA.number=10;
-		System.out.println(StaticA.number);
+		System.out.println("a 객체의 정적 멤버변수 값 : "+StaticA.number);
 		// private로 보호된 static 변수는 static 메소드를 사용하여 값을 저장하거나 얻어낸다.
 		// static이 아닌 멤버메소드들에서는 접근이 불가능하다.
 		

@@ -1,0 +1,17 @@
+package days14;
+// static 메소드
+// static 멤버 필드와 같이 프로그램의 구동전에 메모리에 로딩되어 객체의 생성없이 클래스의 이름을 호출해 사용 가능한 메소드이다.
+// 클래스 이름을 앞에 도구 (.)으로 연결해서 사용한다.
+// (중요) 객체 생성 없이 사용 가능하다!
+
+public class Class21 {
+
+	public static void main(String[] args) {
+		abc();	// class 내부에서 쓸때는 그냥 쓴다.
+	}
+	public static void abc() {	// 이런 메소드는 많이 만들어봤다.
+		
+	}
+}
+// 클래서 외부에서 abc 메소드를 사용하고자 할 때는
+// Class21.abc();와 같이 써야 사용이 가능하다. (물론 여기는 실행영역 밖이므로 에러)

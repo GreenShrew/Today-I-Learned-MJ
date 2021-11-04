@@ -1,0 +1,23 @@
+package days14;
+// 스태틱변수는 클래스 내부에 존재하지만, 객체 생성과 상관 없이 프로그램 시작전 한번만 생성된다.
+// 또한 프로그램 종료시까지 변수가 갖는 값을 일관되게 유지 또는 변경 관리한다.(이후에 값을 넣으면 바뀐다)
+class StaticB{
+	int bunho;
+	static int count =0;
+	StaticB(){	// 객체가 만들어지면 count가 1씩 증가한다.
+		count++;
+	}
+}
+public class Class19 {
+
+	public static void main(String[] args) {
+		System.out.printf("count = %d\n",StaticB.count);	// 0
+		StaticB b1 = new StaticB();
+		System.out.printf("count = %d\n",StaticB.count);	// 1
+		StaticB b1 = new StaticB();
+		System.out.printf("count = %d\n",StaticB.count);	// 2
+		StaticB b1 = new StaticB();
+		System.out.printf("count = %d\n",StaticB.count);	// 3
+	}
+
+}
