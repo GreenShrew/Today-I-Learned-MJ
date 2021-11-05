@@ -3,7 +3,7 @@ package days15;
 // 부모클래스의 private 멤버는 아무리 자식 클래스여도 접근할 수 없는 멤버이다.
 class SuperA{
 	// private : 현재 클래스 내에 있는 멤버 메서드를 통해서만 접근 가능한 완전 은닉 멤버변수(n1)
-	private int n1=1234;
+	private int n1;
 	
 	public int n2;	// public : 어디서든 자유롭게 접근 가능(n2)
 
@@ -44,9 +44,6 @@ public class Extends03 {
 
 	public static void main(String[] args) {
 		SubA a = new SubA();
-		int x = a.getN1();
-		System.out.println(x);
-		a.printInfo();
 	}
 
 }

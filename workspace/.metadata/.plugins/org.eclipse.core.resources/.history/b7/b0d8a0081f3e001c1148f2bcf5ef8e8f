@@ -40,12 +40,9 @@ public class Extends07 {
 		Dog d = new Dog();
 		Cat c = new Cat();
 		d.crying();	// 오버라이딩을 하지 않으면 둘 다 '소리를 냅니다.' 만 출력한다
-		System.out.println("-");
 		c.crying();	// 오버라이딩을 하면 각각 '멍멍!', '야옹!' 을 출력한다.
 		
-		System.out.println("--");
 		d.sound();
-		System.out.println("---");
 		c.sound();	// 각각 '멍멍!', '야옹!' 을 출력한다.
 		
 //		c.super.crying();	에러! 규칙 8
@@ -60,6 +57,6 @@ public class Extends07 {
 // 4. 부모 클래스의 메소드의 원형과 반드시 일치해야 한다.(리턴값의 타입, 메소드 이름, 매개변수)
 // 5. 접근지정자는 축소될 수 없다.(다형성의 구현때문에..)
 // 6. 부모 클래스의 final로 정의된 메소드는 오버라이딩 할 수 없다.
-// 7. 오버라이딩 된 자식 클래스의 메소드에서 super.crying(); 이란 명령으로 부모 클래스의 메소드를 호출 할수 있다.
+// 7. 오버라이딩 된 자식 클래스의 메소드에서 super.crying(); 이란 명령으로 부모  클래스의 메소드를 호출 할수 있다.
 // 8. 클래스의 외부에서는 super라는 말을 쓸 수 없으므로, 생성된 객체를 통한 super 사용은 허용하지 않는다. 
 // ( c.super.crying(); <- 에러 )

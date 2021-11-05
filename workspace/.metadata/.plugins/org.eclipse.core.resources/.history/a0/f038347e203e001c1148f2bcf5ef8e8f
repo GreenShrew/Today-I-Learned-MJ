@@ -17,7 +17,6 @@ class Animal{
 // 메소드 오버라이딩을 구현하면, 부모 클래스에서 물려받은 메소드는 무시되고, 새롭게 정의한 메소드가 사용된다.
 class Dog extends Animal{
 	public void sound() {
-		crying();	// 자식의 오버라이딩된 crying() 호출!
 		System.out.println("멍멍!");
 	}
 	public void crying() {	// 오버라이딩!

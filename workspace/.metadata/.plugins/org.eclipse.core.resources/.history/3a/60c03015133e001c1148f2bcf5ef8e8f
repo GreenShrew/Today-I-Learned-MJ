@@ -46,7 +46,6 @@ public class Extends03 {
 		SubA a = new SubA();
 		int x = a.getN1();
 		System.out.println(x);
-		a.printInfo();
 	}
 
 }

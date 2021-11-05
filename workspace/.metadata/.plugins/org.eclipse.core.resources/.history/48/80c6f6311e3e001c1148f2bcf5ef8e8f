@@ -1,4 +1,4 @@
-package days15;
+package days15;	// 시험 출제된다!
 class SuperD{
 	public SuperD() {	// 전달인자가 없는 디폴트 생성자
 		this(1);		// 정수형 매개변수가 있는 생성자 호출!

@@ -44,7 +44,7 @@ public class Extends07 {
 		c.crying();	// 오버라이딩을 하면 각각 '멍멍!', '야옹!' 을 출력한다.
 		
 		System.out.println("--");
-		d.sound();
+		
 		System.out.println("---");
 		c.sound();	// 각각 '멍멍!', '야옹!' 을 출력한다.
 		

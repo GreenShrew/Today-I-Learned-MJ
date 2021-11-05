@@ -47,6 +47,7 @@ public class Extends03 {
 		int x = a.getN1();
 		System.out.println(x);
 		a.printInfo();
+		System.out.println(a.n4);
 	}
 
 }
