@@ -1,10 +1,10 @@
 package days14;
 class StaticD{
-	// private으로 지정된 static 멤버는 클래스의 내부에서만 사용이 가능한 멤버이다.
+	// private으로 지정된 static 변수(멤버)는 클래스의 내부에서만 사용이 가능한 멤버이다.
 	private static int count;
 	
-	// static 멤버는 static 메소드와 인스턴스 메소드 둘에서 모두 접근이 가능하므로
-	// private 으로 지정된 static 멤버를 이용하고자 한다면, public으로 지정된 멤버메소드 (static, 인스턴스)러 이용한다.
+	// static 변수는 static 메소드와 인스턴스 메소드 둘에서 모두 접근이 가능하므로
+	// private 으로 지정된 static 멤버를 이용하고자 한다면, public으로 지정된 멤버메소드 (static, 인스턴스)로 이용한다.
 	public static void setCount(int count) {
 		StaticD.count = count;
 	}

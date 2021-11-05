@@ -23,7 +23,7 @@ class Animal{
 		phone = p;
 	}
 	
-	// Animal a3 = a1 copy1();	이 메소드를 호출한 참조값이 this에 저장되어 있다. 즉, this에는 a1 참조값이 저장되어 있다.
+	// Animal a3 = a1.copy1();	이 메소드를 호출한 참조값이 this에 저장되어 있다. 즉, this에는 a1 참조값이 저장되어 있다.
 	Animal copy1() {
 		Animal temp = new Animal();
 		temp.name = this.name;

@@ -1,7 +1,7 @@
 Day 14
 
 
-Class18 - 이거 내용 못 쓴것들 있으니 확인해서 쓰고 올리자
+Class18 - 확인 완
 
 static?
 
@@ -64,7 +64,7 @@ Class23(위랑 묶어)
 
 Class24
 
-- privat으로 지정된 static 변수
+- private으로 지정된 static 변수
 
 
 Class25 (초기화블럭)

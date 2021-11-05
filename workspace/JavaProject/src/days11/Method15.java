@@ -10,7 +10,7 @@ public class Method15 {
 	// 같은형의 갯수가 정해지지 않은 전달인자와, 다른 자료형의 전달인자가 동시에 전달되어야 한다면,
 	// 반드시 ... 으로 처리할 데이터들 보다 왼쪽에 전달되게 위치시킨다.
 	public static void sort(String op,int...a) {		//(int...a, String op)라고 쓰면 문제가 생긴다.
-		if(op.equals("asc:")) {
+		if(op.equals("asc")) {
 			for(int i=0;i<a.length;i++) {
 				for(int j=i+1;j<a.length;j++) {
 					if(a[i]>a[j]) {

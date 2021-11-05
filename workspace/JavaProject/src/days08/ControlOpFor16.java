@@ -18,7 +18,7 @@ public class ControlOpFor16 {
 		System.out.printf("정수를 입력하시오 : ");
 		int num1=sc.nextInt();
 		
-		
+		// 입력 숫자 이하에 있는 소수를 출력하는 코드
 		for(int i=1; i<=num1; i++) {
 			for(int j=1;j<=i;j++) {
 				if(i%j==0) {

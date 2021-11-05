@@ -5,7 +5,7 @@ class Student{
 	private int [] scores;
 	
 	static int count = 0;
-	// 여기까지 코드블럭
+	
 	public void prn() {	// 번호, 이름, 점수 출력 메소드
 		System.out.println(this.bun+" : "+this.name+" : "+this.scores[0]+" : "+this.scores[1]+" : "+this.scores[2]);
 	}
@@ -32,7 +32,6 @@ class Student{
 	}
 }
 public class Class20 {
-// 메인은 전부 코드블럭
 	public static void main(String[] args) {
 		Student s1 = new Student("홍길남",98,69,87);
 		Student s2 = new Student("홍길서",45,87,78);

@@ -1,4 +1,4 @@
-package days14;
+package days14; // 자바에 내장된 static 메소드들
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ public class Class21 {
 
 	public static void main(String[] args) {
 		abc();	// class 내부에서 쓸때는 그냥 쓴다.
-		
+
 		// java.lang 패키지에 있는 클래스의 static 메소드 실제 사용 예
 		// 간단한 공용 기능을 제공하기 위한 Math 클래스
 		// Math 클래스 안에 public static int abs(int n) { } 와 같은 양식의 sqrt, random 메서드가 있다.
