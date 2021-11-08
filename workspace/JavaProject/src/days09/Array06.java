@@ -18,7 +18,7 @@ public class Array06 {
 					}
 					a[i]=a[i]%45+1;	// 로또는 1~45 사이의 숫자! 0은 없다!
 					
-					int j;
+					int j;	// 같은 숫자 나오면 다시 뽑게 하는 코드
 					for(j=0;j<i;j++) {
 						if(a[i]==a[j]) {
 							break;

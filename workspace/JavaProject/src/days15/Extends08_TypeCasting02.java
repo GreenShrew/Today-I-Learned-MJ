@@ -7,7 +7,7 @@ class SuperF{
 }
 class SubF extends SuperF{
 	int subNum;
-	void abc() {	// 오버라이드  한 메소드!
+	void abc() {	// 오버라이드 한 메소드!
 		System.out.println("sub method");
 	}
 }
@@ -42,7 +42,7 @@ public class Extends08_TypeCasting02 {
 		// 현재의 부모 레퍼런스 변수가 저장한 주소에 자식 인스턴스가 저장된 경우로 제한한다.
 		SuperF super4 = new SubF();
 		SubF sub4 = (SubF)super4;
-		// 자식 레퍼런스 <- (타입캐스팅) 부모 레퍼런스 <- 자식 인스턴스의 주소
+		// 자식 레퍼런스 <- (타입캐스팅) 부모 레퍼런스 <- 자식 인스턴스의 주소		이런 방식으로 한다.
 		// 근데 굳이 이 방법이 필요할까?
 		// 나중에 다 필요한 때가 있다!
 		

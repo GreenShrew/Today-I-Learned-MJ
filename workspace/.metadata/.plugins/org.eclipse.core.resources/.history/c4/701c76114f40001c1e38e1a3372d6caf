@@ -1,0 +1,21 @@
+package days16;
+class Human{
+	private String name;
+	private int age;
+	public Human(String name, int age) {
+		this.name=name;
+		this.age=age;
+	}
+	public String toString() {
+		String info = "name = "+this.name + ", ";
+		info += "age = " + this.age;
+		return  info;	// "name = 홍길동, age = 26"
+	}
+}
+public class Extends09_Object04 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

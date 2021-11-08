@@ -9,7 +9,7 @@ public class Extends08_TypeCasting01 {
 
 	public static void main(String[] args) {
 		// 예전에 배웠던 Casting 내용
-		// 기본 자료형간의 형변환(TypeCasting)은 자료형의 크기에 에약을 받는다.
+		// 기본 자료형간의 형변환(TypeCasting)은 자료형의 크기에 제약을 받는다.
 		short s =10;
 		int i = s;	// 자동 형변환 (short -> int) : 작은 용량에서 큰 용량의 변수로
 		int j = 10;

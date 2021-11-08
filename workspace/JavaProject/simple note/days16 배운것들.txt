@@ -1,0 +1,77 @@
+day 16
+
+Extends08_TypeCasting 1,2 정리해서 블로그에 올려
+
+
+
+ArrayMethodTest
+
+- 간단한 문제 풀이 1
+ 다음 그림과 같은 결과를 나타내도록 코드를 작성해보자.
+배열을 생성하는 메소드의 이름은 input, 그림과 같이 출력하는 메소드의 이름은 prn으로 설정한다.
+
+
+Extends08_TypeCasting 1,2
+
+객체의 형변환
+
+
+Extends08_TypeCasting03
+
+- 연산자 'instanceof'를 사용한 객체의 타입 확인!
+
+instanceof는 좌측의 객체가 우측의 타입이 맞는지 확인해 줍니다. 자식클래스는 부모클래스의 타입이기 때문에 "자식클래스 객체 instanceof 부모클래스 타입"은 true가 됩니다. 하지만 당연히 반대는 성립하지 않습니다. 기준이 되는 좌측은 인스턴스가, 우측은 인스턴스가 아닌 타입이 명시돼야 합니다.
+(https://codevang.tistory.com/103)
+
+
+Extends09_Object01 - 여기 볼 내용이 많다고 한다.
+
+- 오브젝트 클래스
+
+ 따로 상속해준다고 언급 안 해도 상속이 되는 최상위의 부모 클래스
+
+- object가 가진 메소드들
+getClass, hashCode
+
+
+Extends09_Object02 (2, 3은 Object 가 가지는 메소드들인데, 가장 많이 오버라이딩 되는 메소드이다.)
+
+- toString 메소드
+- toString 메소드의 오버라이딩
+
+
+Extends09_Object03 (2랑은 따로, 4랑은 같이 쓴다.)
+
+- equals 메소드
+- equals 메소드의 오버라이딩
+
+※ Object 클래스의 equals 메소드는 기본적으로 두 객체의 레퍼런스 값을 비교하는 연산만을 수행한다.
+
+String 안에는 이미 equals가 오버라이딩 되어있기 때문에 주소 안의 데이터를 비교할 수 있다.
+
+
+Extends09_Object04(day14 ~ 16의 내용이 다 들어가있다!)
+
+- equals 메소드 오버라이딩하기!
+ "다른 클래스에 대하여 equals 메소드를 만들어주세요!" 라는 문제가 출제될 예정이다.
+
+
+Extends09_Object05 (TypeCasting의 활용과 Object를 사용하는 예제)
+Vector라는 클래스를 사용한다.
+아래는 Vector에 있는 멤버 메소드들
+item.add
+item.isEmpty
+item.size
+item.get
+
+- 활용 예시
+
+ 상품과 구매자를 클래스로 만들고 구매, 환불 등의 동작을 메소드로 제작해보자.
+
+- 이 예시를 보면서 주목해야할 점은, 부모 자식 형변환, 자식 부모 형변환 이걸 따져보자.
+원래 부모의 주소값을 자식의 레퍼런스 변수에 저장하는건 불가능 한데 왜 되는거지? 같은것들을 잘 보자.
+
+
+StringClass01 (이건 오늘 약간만) (day 17에 저장해)
+
+- String 클래스는 어떤 기능이 있고, 어떤 메소드들이 있나?

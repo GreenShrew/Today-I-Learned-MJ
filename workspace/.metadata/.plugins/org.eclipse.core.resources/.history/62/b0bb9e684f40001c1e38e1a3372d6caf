@@ -1,0 +1,26 @@
+package days16;
+class Human{
+	private String name;
+	private int age;
+	public Human(String name, int age) {
+		this.name=name;
+		this.age=age;
+	}
+	public String toString() {
+		String info = "name = "+this.name + ", ";
+		info += "age = " + this.age;
+		return  info;	// "name = 홍길동, age = 26"
+	}
+}
+public class Extends09_Object04 {
+
+	public static void main(String[] args) {
+		Human s1 = new Human("홍길동",21);
+		Human s2 = new Human("홍길서",22);
+		Human s3 = new Human("홍길남",23);
+		System.out.println("Human1의 정보 : "+s1);
+		System.out.println("Human2의 정보 : "+s2);
+		System.out.println("Human3의 정보 : "+s3);
+	}
+
+}

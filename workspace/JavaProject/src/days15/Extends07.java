@@ -47,7 +47,7 @@ public class Extends07 {
 		d.sound();
 		System.out.println("---");
 		c.sound();	// 각각 '멍멍!', '야옹!' 을 출력한다.
-		
+		System.out.println();	
 //		c.super.crying();	에러! 규칙 8
 	}
 
