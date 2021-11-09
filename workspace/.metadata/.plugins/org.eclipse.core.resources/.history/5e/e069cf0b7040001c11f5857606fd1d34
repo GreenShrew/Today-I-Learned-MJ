@@ -28,7 +28,7 @@ public class Extends09_Object03 {
 		// == 연산은 변수가 직접적으로 저장한 값으로 비교해주는 연산자라는 것을 감안하면
 		// s1==s2 는 두개의 참조변수값(주소값)이 비교되었다는 것을 알 수 있다.
 		// 현재 s1과 s2는 같은 주소를 가지고 있다는 말이다.
-		
+		System.out.println(n1);
 		
 		// String s1 = "Hello"; 실행시에 HEAP 영역에 Hello가 저장되고 그 주소가 s1 변수에 저장된다.
 		// String s2 = "Hello"; 실행시에는 새로운 영역에 Hello가 저장되는게 아니라 이미 존재하는 Hello의 주소를 s2에 또 저장한다.

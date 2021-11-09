@@ -31,7 +31,6 @@ public class Extends09_Object02 {
 		
 		String x = "Hello"; // 참고로, 이 값이 해쉬코드가 나오지 않는 이유는 String이라는 클래스 안에 있는 toString이 오버라이딩 되어있기 때문.
 		// 이미 String 클래스에는 저장된 문자가 리턴되는 toString 메소드가 오버라이딩 되어있다.
-		System.out.println(x);
 	}
 
 }

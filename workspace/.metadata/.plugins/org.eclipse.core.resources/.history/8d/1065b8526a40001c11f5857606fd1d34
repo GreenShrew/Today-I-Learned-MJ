@@ -21,7 +21,7 @@ public class Extends09_Object02 {
 
 	public static void main(String[] args) {
 		UserClassB obj = new UserClassB();
-		System.out.println("오버라이딩 되지 않은 toString() => "+obj.toString());
+		System.out.println("오버라이딩 되지 않은 toString() => "+obj);
 		Point p = new Point(30,20);
 		System.out.println("오버라이딩 된 toString() =>"+p.toString());
 		// .toString()은 print 에서 사용되거나 다른 문자열과 '+' 연산될때 생략 가능하다.
@@ -31,7 +31,6 @@ public class Extends09_Object02 {
 		
 		String x = "Hello"; // 참고로, 이 값이 해쉬코드가 나오지 않는 이유는 String이라는 클래스 안에 있는 toString이 오버라이딩 되어있기 때문.
 		// 이미 String 클래스에는 저장된 문자가 리턴되는 toString 메소드가 오버라이딩 되어있다.
-		System.out.println(x);
 	}
 
 }
