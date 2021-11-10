@@ -1,0 +1,26 @@
+package days18;
+
+class Unit{
+	int hp;	// 현재 체력
+	int max_hp;	// 최대 체력
+	Unit(int p){
+		max_hp = p;	// super()로 호출되고 전달된 체력을 max_hp에 저장
+		hp = (int)(p*0.8);
+	}
+	public void prnHP() {
+		System.out.println("최대 체력 : "+max_hp+", 현재 체력 : "+hp);
+	}
+	public void move(int x, int y) {
+		System.out.println("x : "+x+", y : "+y+"로 이동합니다.");
+	}
+}
+
+
+
+public class Extends11_Interface04 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

@@ -1,6 +1,0 @@
-다음 평가!
-
-days16의 Extends09_Object04
-
-equals 메소드를 만드는 방법에 대해 공부
-boolean 부분의 변수들이 다르게 나올 예정이다.

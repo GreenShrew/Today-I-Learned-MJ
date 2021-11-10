@@ -1,0 +1,24 @@
+package days18;
+interface InterC_Super1{
+	public abstract void interC_Super1Test();
+}
+interface InterC_Super2{
+	public abstract void interC_Super2Test();
+}
+
+// 인터페이스들간의 상속(extends) : 인터페이스끼리 상속해서 부모의 추상 메소드를 물려받을 수 있다.
+interface InterC_Sub extends InterC_Super1, InterC_Super2{
+	public abstract void interC_SubTest();
+//	public abstract void interC_Super1Test();		상속받은 추상 메소드
+//	public abstract void interC_Super2Test();		상속받은 추상 메소드
+}	// 인터페이스끼리의 extends는 추상 메소드의 override 의무는 면제된다.
+// 다만 상속받은 추상메소드를 보유하게 되어 이를 implements한 클래스가 오버라이드 하게 한다.
+
+public class Extends11_Interface03 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

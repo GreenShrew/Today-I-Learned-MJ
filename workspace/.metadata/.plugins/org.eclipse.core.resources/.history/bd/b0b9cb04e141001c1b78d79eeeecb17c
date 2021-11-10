@@ -1,0 +1,54 @@
+package days18;
+
+abstract class Unit{
+	private int hp;	// 현재 체력
+	private int max_hp;	// 최대 체력
+	Unit(int p){
+		max_hp = p;	// super()로 호출되고 전달된 체력을 max_hp에 저장
+		hp = (int)(p*0.8);
+	}
+	public void prnHP() {
+		System.out.println("최대 체력 : "+max_hp+", 현재 체력 : "+hp);
+	}
+	public abstract void move(int x, int y);		// 아래 메소드를 추상클래스로 만들었다.
+//	public void move(int x, int y) {
+//		System.out.println("x : "+x+", y : "+y+"로 이동합니다.");
+//	}
+}
+
+class GroundUnit extends Unit{
+	GroundUnit(int p) {
+		super(p);
+	}
+	@Override
+	public void move(int x, int y) {
+		System.out.println("x : "+x+", y : "+y+"로 뛰어갑니다.");
+	}
+}
+class AirUnit extends Unit{
+	AirUnit(int p) {
+		super(p);
+	}
+	@Override
+	public void move(int x, int y) {
+		System.out.println("x : "+x+", y : "+y+"로 날아갑니다.");
+	}
+}
+
+class Tank extends GroundUnit{
+	Tank(){
+		super(150);
+	}
+	public String toString() {
+		return "Tank";
+	}
+}
+
+public class Extends11_Interface04 {
+
+	public static void main(String[] args) {
+		Tank t = new Tank();
+		t.
+	}
+
+}

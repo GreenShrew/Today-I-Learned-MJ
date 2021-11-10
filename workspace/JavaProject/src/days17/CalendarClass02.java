@@ -16,7 +16,6 @@ public class CalendarClass02 {
 		
 		// set 메서드에 필드명과 값을 넣어주면 해당 필드값만 변경된다.
 		date2.set(Calendar.MONTH, 6);	// 월만 7월로 바뀜!
-		// 여기까지 코드블록
 		
 		// 위 date1과 date2에 설정된 날짜를 "0000년 0월 0일 0요일" 형식으로 출력하자.
 		// System.out.println(); 안에 한번에 구성해서 출력하자.

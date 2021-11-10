@@ -6,4 +6,6 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="days14.StaticD"/>
     <fullyQualifiedTypeName name="days14.SingletonEx"/>
+    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+    <fullyQualifiedTypeName name="days18.AbstractAnimal"/>
 </qualifiedTypeNameHistroy>
