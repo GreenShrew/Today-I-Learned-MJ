@@ -1,0 +1,138 @@
+day 19
+
+Collection 클래스의 명령어는 결국 외워야한다!
+
+
+
+Collection04(day 19로 이전)
+
+day18에서 했던 내용에 추가적으로 덧붙임
+
+- HashSet 타입의 객체 내부를 순회하는 방법
+1. Iterator 객체를 사용하는 방법
+2. for문을 사용하는 방법(개선된 형태)
+
+
+
+Collection05
+
+- Hashtable, HashMap 클래스
+- 무엇인가, 왜 사용되는가, 특징은?
+- Hashtable, HashMap의 데이터 추가 및 리턴
+
+- Hashtable, HashMap 클래스 내부의 데이터를 반복문을 통해서 접근하는 예
+※ 결국 get()에 Key값을 넣는게 핵심이다
+1. Enumeration 타입을 사용하는 방법
+2. for 문을 활용하여 Key 값을 순회하는 방법
+
+
+
+Collection06
+
+※ Hashtable을 출력하면 저장되는 순서대로 출력이 되지 않는다.
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=dg110&logNo=10146729442
+
+- Hashtable, HashMap에 데이터 추가
+1. 중복되지 않은 키 값으로 데이터 추가
+2. 키 값은 중복이 없고 밸류값은 중복되게 추가
+3. 동일한 키 값으로 다른 Value가 입력되는 경우(기존의 Value값이 수정된다)
+
+
+
+Collection07
+
+- collection 프레임워크의 메소드들을 본다.
+
+
+
+Collection08
+
+- indexOf와 contains의 사용예시
+
+
+
+Collection09
+
+- 키 값이 사용자 정의 클래스 객체일때
+Hash 알고리즘을 기반으로 구현된 클래스에서는 equals 메소드가 호출되지 않는 문제점이 있다.
+
+- Hash 기반의 클래스에서  키 값의 중복을 제거하기 위해서 실행되는 과정(키 값이 사용자 정의 클래스 객체일때)
+
+-> hashCode 메소드의 오버라이딩( 권장하지 않음 )
+
+
+
+Exception01
+
+- 예외
+- 에러와 예외의 차이
+- 예외처리 하는 방법 (try{ }catch( ){ })
+ 관건은 try와 catch의 중괄호 { }에 무엇을 넣어야 하는가? catch의 소괄호 ( )에는 또 무엇이 들어갈 수 있을까? 이다.
+
+
+
+Exception02
+
+- Exception의 특징
+
+※ Exception e 는 모두를 포함-수용하는 최상위의 예외 클래스이다.
+
+
+
+Exception03
+
+- Exception의 특징 2
+catch를 여러개 쓸 수 있다.
+예외 발생시 에러의 종류를 확인하고, catch 내의 에러가 맞다면 이하 catch는 싹 무시한다.
+
+
+
+Exception04
+
+- catch를 늘려본 예시
+- 예외상황 고의발생! (thorw)
+
+
+
+Exception05
+
+- 예외처리를 해결하는 방법들
+#1 try {} catch(){} 에 넣는다.
+#2 add throw declaration 메뉴를 사용한다.
+
+-  throws Exception 꼬리표가 붙은 메소드의 호출
+
+
+
+Exception06
+
+- 예외 사용 예시
+
+
+
+Exception07
+
+- 간단한 문제 풀이 1
+ 순수하게 숫자만으로 이루어진 정수를 입력 받는 while과 try-catch를 제작하자.
+ 만약 숫자 외의 다른것이 입력되면 '잘못 입력했습니다.'를 출력하도록 만들자.
+
+힌트 1. sc.nextInt()는 입력 내용에 문자가 섞이면 InputMismatchException 에러가 발생한다.
+
+※ 주의 : sc.next();를 이용하여 sc.nextInt();에서 입력되는 입력버퍼를 비워야한다. 그렇지 않으면 무한으로 반복할 것이다.
+
+
+
+Exception08
+
+- 예제
+- finally : 예외처리가 생겼든 안 생겼든 반드시 실행하고 지나갈 영역
+
+
+
+SwingEx(day 20에 할 내용 미리보기)
+
+- 자바로 윈도우(창) 만들기
+ JFrame을 상속할 필요가 있다.
+
+
+
