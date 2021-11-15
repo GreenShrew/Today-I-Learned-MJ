@@ -1,0 +1,21 @@
+package days20;
+
+import java.awt.Container;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+class JBorderLayout extends JFrame{
+	JBorderLayout(){
+		Container con = getContentPane();
+		con.setLayout(new BorderLayout(10,10));
+	}	
+}
+public class Swing07 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

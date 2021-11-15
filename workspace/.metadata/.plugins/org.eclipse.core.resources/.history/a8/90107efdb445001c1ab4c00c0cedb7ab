@@ -1,0 +1,20 @@
+package days20;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+class ButtonEvent extends JFrame{
+	JButton male = new JButton("남자");
+	JButton female = new JButton("여자");
+	JLabel label = new JLabel("당신의 성별은?");
+	result = new JLabel("");	// 버튼 클릭에 의해서 실행 결과가 담길 라벨
+	
+}
+public class Swing03 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

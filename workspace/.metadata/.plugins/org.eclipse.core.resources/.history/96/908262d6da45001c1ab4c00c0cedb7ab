@@ -1,0 +1,32 @@
+package days20;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
+// 컨테이너의 레이아웃 : 5행 1열의 GridLayout
+// 1 행 : JPanel p1 배치 -> p1에는 FlowLayout으로 TextField 한개 배치(가로크기 적당히)
+// 2 행 : JPanel p2 배치 -> p2에는 GridLayout으로 버튼 4개 배치 (7,8,9,+)
+// 3 행 : JPanel p2 배치 -> p2에는 GridLayout으로 버튼 4개 배치 (4,5,6,-)
+// 4 행 : JPanel p2 배치 -> p2에는 GridLayout으로 버튼 4개 배치 (1,2,3,×)
+// 5 행 : JPanel p2 배치 -> p2에는 GridLayout으로 버튼 4개 배치 (C,0,=,÷)
+
+class Calculator extends JFrame implements ActionListener{
+	Calculator(){
+	Container con = getContentPane();
+	con.setLayout(new GridLayout());
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+}
+public class Swing13 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

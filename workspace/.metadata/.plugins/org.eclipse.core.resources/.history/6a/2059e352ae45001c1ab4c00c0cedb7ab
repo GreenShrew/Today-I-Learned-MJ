@@ -1,0 +1,20 @@
+package days20;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+// 윈도우 프로그래밍에 필요한 윈도우 구성요소를 보유한 클래스(JFrame)를 상속받아
+// 추가기능 탑재 형식의 개발을 진행한다.
+class ButtonTest extends JFrame{
+	// 윈도우 최초 화면의 구성은 대부분 생성자 메소드에서 구성한다.
+	ButtonTest(){
+		JButton male;
+		Jbutton female;
+	}
+}
+public class Swing01 {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

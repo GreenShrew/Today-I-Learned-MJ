@@ -14,7 +14,7 @@ class WindowTest extends JFrame{
 public class SwingEx {
 
 	public static void main(String[] args) {
-		WindowTest win = new WindowTest();	// 객체가 생성됨과 동시에 WindowTest의 생성자가 실행된다. 프로그램 실행시 생성자에 설정된 윈도우(창)이 출력된다.
+		new WindowTest();		// 객체가 생성됨과 동시에 WindowTest의 생성자가 실행된다. 프로그램 실행시 생성자에 설정된 윈도우(창)이 출력된다.
 	}
 
 }

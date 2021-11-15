@@ -1,0 +1,37 @@
+package days20;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+class ButtonEvent extends JFrame{
+	ButtonEvent(){
+		JButton male = new JButton("남자");
+		JButton female = new JButton("여자");
+		JLabel label = new JLabel("당신의 성별은?");
+		JLabel result = new JLabel("");	// 버튼 클릭에 의해서 실행 결과가 담길 라벨
+		
+		Container con = getContentPane();
+		con.setLayout(new FlowLayout());
+		con.add(label);
+		con.add(male);
+		con.add(female);
+		con.add(result);
+		
+		setTitle("버튼 이벤트 테스트");
+		setSize(300,200);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setVisible(true);
+		
+	}
+}
+public class Swing03 {
+
+	public static void main(String[] args) {
+		new ButtonEvent();
+		new ButtonTest();
+	}
+
+}

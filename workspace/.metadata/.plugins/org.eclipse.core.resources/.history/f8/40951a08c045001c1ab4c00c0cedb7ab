@@ -1,0 +1,34 @@
+package days20;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+// 배치 관리자
+class JFlowLayout extends JFrame{
+	JFlowLayout(){
+		// 배치관리자 없이 버튼을 컨테이너에 무작정 올린 상태
+		// 버튼이 겹쳐서 결과적으로 '버튼3'만 보인다.
+/*
+		JButton btn1 = new JButton("버튼1");
+		JButton btn2 = new JButton("버튼2");
+		Container con = getContentPane();
+		con.add(btn1);
+		con.add(btn2);
+		con.add(new JButton("버튼3"));	// btn1, 2처럼 레퍼런스 변수를 쓰지 않고 바로 넣은 모습이다.
+*/
+		setTitle("배치관리자 실습");
+		setSize(500,400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+}
+public class Swing06 {
+
+	public static void main(String[] args) {
+		new JFlowLayout();
+	}
+
+}
