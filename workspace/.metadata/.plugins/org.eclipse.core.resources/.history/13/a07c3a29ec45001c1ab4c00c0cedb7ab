@@ -24,6 +24,7 @@ class ButtonTest extends JFrame{
 		
 		// 윈도우 위에 생성된 컨트롤 객체들을 올려놓을 수 있게 해주는 객체
 		Container con = getContentPane();	// 싱글톤 방식. 객체 생성이 아니라 클래스 내부에서 만들어진 단 하나의 객체를 가져오는 방식.
+		
 		// 윈도우 위에 올라갈 컨트롤들을 담을 바구니 - 담으면 윈도우에 표시될 준비가 완료된다.
 		// 컨테이너에 add 되어지는 순서를 한줄로 화면에 구성
 		con.setLayout(new FlowLayout());

@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 class ButtonEvent extends JFrame implements ActionListener{
 	// 1. ActionListener를 implements 한다.
 	// 2. 적용할 컨트롤에 addActionListener 메소드로 감시 설정을 한다.
-	// 3. 해당 컨트롤에 이벤트가 발생하면 호출된 ActionPerformed 메소드를 오버라이드한다.
+	// 3. 해당 컨트롤에 이벤트가 발생하면 호출된 ActionPerformed 메소도으를 오버라이드한다.
 	
 	JLabel result;
 	

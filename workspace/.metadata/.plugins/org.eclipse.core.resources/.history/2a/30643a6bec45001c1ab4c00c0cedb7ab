@@ -52,4 +52,4 @@ public class Swing01 {
 // 순서는
 // 1. 필요한 컴퍼넌트를 객체로 생성하고
 // 2. 객체를 올릴 container를 만들고
-// 3. container에 객체를 올려 윈도우에 나타나게 한다.
+// 3. container의 객체를 올려 윈도우에 나타나게 한다.
