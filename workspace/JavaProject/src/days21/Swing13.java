@@ -226,7 +226,7 @@ class Calculator extends JFrame implements ActionListener{
 		case "◀":
 			// 힌트 (String 클래스에 내장된 substring을 이용한다. Day 17에서 정리한적이 있다.)
 			// substring과 length를 활용하여 백스페이스 키를 완성하자.
-			// 총 글자수 - 1 만큼 왼쪽부터 sbustring으로 취한다. 그리고 다시 setText한다.
+			// 총 글자수 - 1 만큼 왼쪽부터 substring으로 취한다. 그리고 다시 setText한다.
 			// jt.getText().length() : 텍스트 필드에 있는 글자의 총 갯수
 			// 98765가 있다면 총 글자갯수 5, 인덱스는 0번부터 4번까지이다.
 			// 이중 9876만 취하고싶다면, substring에 0,4라고 써야 0번부터 3번 글자까지 추출된다.

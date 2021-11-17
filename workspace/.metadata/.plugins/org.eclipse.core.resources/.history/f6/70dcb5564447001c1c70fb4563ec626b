@@ -1,0 +1,49 @@
+package days22;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+// 6행 1열
+class Resume extends JFrame implements ActionListener{
+
+	JTextField jt;
+	JRadioButton jr1;
+	JRadioButton jr2;
+	JCheckBox jc1;
+	JCheckBox jc2;
+	JCheckBox jc3;
+	JCheckBox jc4;
+	JComboBox<String> jcb;
+	JTextField jt_phone2;
+	JTextField jt_phone3;
+	JComboBox<String> jcb2;
+	
+	Resume(){
+		Font f = new Font("굴림",Font.BOLD,20);
+		Container con = getContentPane();	// 메인 컨테이너
+		con.setLayout(new BorderLayout());
+		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+}
+public class Swing19 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

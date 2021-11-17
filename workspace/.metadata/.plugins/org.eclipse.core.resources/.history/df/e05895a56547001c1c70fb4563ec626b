@@ -1,0 +1,23 @@
+package days22;
+
+import java.io.IOException;
+
+public class IO03 {
+
+	public static void main(String[] args) throws IOException {
+		// System.in 객체를 사용하여 더하기 연산을 수행하는 프로그램을 작성하자.
+		// 첫번째 정수 : 123, 두번째 정수 : 25	결과 : 123 + 25 = 148
+		
+		byte [] firstNumber = new byte[10];
+		byte [] secondNumber = new byte[10];
+		// 자료형이 Byte라는건 배열 한칸에 -128~127까지를 저장한다는 뜻이다.
+		// 입력받은 하나의 숫자가 -128~127로 제한되는 것이 아니라
+		// 입력 받은 아라비아 기호의 아스키코드 값이 -128~127까지 제한된다는 뜻이다.
+
+		System.out.print("첫번째 정수 : ");
+		int size_1 = System.in.read(firstNumber);
+		System.out.print("두번째 정수 : ");
+		int size_2 = System.in.read(secondNumber);
+	}
+
+}

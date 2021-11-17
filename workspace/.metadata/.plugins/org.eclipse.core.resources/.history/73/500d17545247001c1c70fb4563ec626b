@@ -1,0 +1,23 @@
+package days22;
+
+class ThreadC1 extends Thread{
+	public void run() {
+		for(int i=10;i>0;i--) {
+			System.out.println(i);
+			try {
+				sleep(1000);
+			}catch(Exception e) {
+				
+			}
+		}
+	}
+}
+public class Thread03 {
+
+	public static void main(String[] args) {
+		ThreadC1 t1 = new ThreadC1();
+		t1.start();
+
+	}
+
+}

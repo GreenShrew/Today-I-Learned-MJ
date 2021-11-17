@@ -1,0 +1,17 @@
+package days22;
+
+import java.io.File;
+
+public class IO07 {
+
+	public static void main(String[] args) {
+		// 파일 처리
+		// File 클래스 : 파일 또는 디렉토리에 관련된 메타정보를 제공하는 클래스
+		// 파일을 생성, 디렉토리를 생성 등의 추가적인 기능을 제공
+		
+		// D:\heejoonk\Java_se\temp 폴더를 참조하는 File 객체 생성
+		File d = new File("D:\\JAVA01\\Java_se\\temp");
+		System.out.println("D:\\JAVA01\\Java_se\\temp");
+	}
+
+}
