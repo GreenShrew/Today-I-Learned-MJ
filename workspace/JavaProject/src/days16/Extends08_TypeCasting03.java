@@ -19,7 +19,7 @@ public class Extends08_TypeCasting03 {
 			System.out.println("SubG3 클래스 타입");
 		}else if(s instanceof SuperG) {
 			System.out.println("SuperG 클래스 타입");
-		}
+		}	// 이 경우 s, s1, s2, s3 모두 
 		// instanceof 연산자를 이용하여 부모와 자식 클래스의 타입을 비교하는 경우, 반드시 부모 클래스는 마지막에 비교한다.
 		// 왜냐하면 자식이 먼저 위에서 부모로 판별될 수 있기 때문이다.
 		

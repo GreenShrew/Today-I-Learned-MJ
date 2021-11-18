@@ -47,7 +47,7 @@ public class Collection05 {
 		hm.put(2,"Two");
 		hm.put(3,"Three");
 		
-		// Hashtable, HashMap 클래스느 get 메소드에 Key 값을 전달하여 value를 리턴받는다.
+		// Hashtable, HashMap 클래스는 get 메소드에 Key 값을 전달하여 value를 리턴받는다.
 		System.out.printf("\"Three\" = %d\n",ht.get("Three"));
 		System.out.printf("3 = %s\n",hm.get(3));
 		

@@ -45,7 +45,7 @@ public class Extends08_TypeCasting02 {
 		// 자식 레퍼런스 <- (타입캐스팅) 부모 레퍼런스 <- 자식 인스턴스의 주소		이런 방식으로 한다.
 		// 근데 굳이 이 방법이 필요할까?
 		// 나중에 다 필요한 때가 있다!
-		
+		// https://programmers.co.kr/learn/courses/5/lessons/193 참고
 
 		// 근데 객체를 생성하는 new 명령이 수천줄 위에 있어서 상속 관계를 모를 때는 어떻게 해야 할까
 		// 아래의 방법을 쓴다.

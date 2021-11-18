@@ -6,7 +6,7 @@ package days16;
 class UserClassB{	// toString 메소드를 오버라이딩하지 않은 클래스
 	
 }
-class Point {
+class Point {	// toString 메소드를 오버라딩한 클래스
 	private int x;
 	private int y;
 	public Point(int x, int y) {

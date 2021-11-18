@@ -9,7 +9,8 @@ package days22;
 class ThreadA1{
 	public void run() {
 		for(int i=1;i<=10;i++) {
-			System.out.printf("ThreadA1 : i -> %d\n",i);try {
+			System.out.printf("ThreadA1 : i -> %d\n",i);
+			try {
 				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -20,7 +21,8 @@ class ThreadA1{
 class ThreadA2{
 	public void run() {
 		for(int i=1;i<=10;i++) {
-			System.out.printf("ThreadA2 : i -> %d\n",i);try {
+			System.out.printf("ThreadA2 : i -> %d\n",i);
+			try {
 				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

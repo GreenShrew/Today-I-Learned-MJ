@@ -10,7 +10,7 @@ public class CalendarClass02 {
 		Calendar date1 = Calendar.getInstance();
 		Calendar date2 = Calendar.getInstance();
 		
-		// date1 달력객체의 오늘 날짜는 2015년 8월 15일로 설정할 수 있다(특정 날짜로 설정할 수 있다)
+		// date1 달력객체의 날짜를 2015년 8월 15일로 설정할 수 있다(특정 날짜로 설정할 수 있다)
 		date1.set(2015, 7, 15);
 		// set : 원하는 특정 날짜로 객체내 날짜구성을 재설정, date2는 아직 오늘 날짜인 상태
 		

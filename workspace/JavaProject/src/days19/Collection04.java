@@ -63,8 +63,8 @@ public class Collection04 {
 		// - Iterator 객체는 컬렉션 내부의 데이터를 순회할 수 있는 객체(HashSet, Vector, ArrayList...된다!)
 		Iterator<Integer> iter = lotto.iterator();
 		Iterator<Integer> iter2 = list.iterator();
-		while(iter.hasNext()) {		// .hasNext() : 다음 데이터가 있으면 true가 리턴되는 메소드
-			System.out.printf("%d ",iter.next());	// .next() : 다음 데이터를 리턴하는 메소드
+		while(iter.hasNext()) {		// .hasNext() : 다음 데이터가 있으면 true가 리턴되는 메소드, Iterator의 메소드
+			System.out.printf("%d ",iter.next());	// .next() : 다음 데이터를 리턴하는 메소드, Iterator의 메소드
 		}
 		while(iter.hasNext()) {
 			System.out.printf("%d ",iter2.next());
