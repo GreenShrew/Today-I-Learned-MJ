@@ -1,4 +1,4 @@
-package days23;
+package days24;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,10 +22,13 @@ public class IO21 {
 		Date iDate;
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
+		// 내가 시도했던 방법
+		// 21_1은 풀이
+		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		
 		// day17의 FormatterClass02 참고하면서 계속 작성하자
-		
+
 		while(true) {
 			try {
 				inputDate = String.valueOf(in.readLine());
@@ -34,9 +37,10 @@ public class IO21 {
 			}catch(Exception e){
 				System.out.print("예와 같이 다시 입력해주세요. (입력예:2020-01-01)");
 			}
-		}
+		}	// 여기까지는 비슷하다. 다만 inputDate를 그냥 readLine으로 입력했다.
+		
 		// 읽어올 파일 경로 설정
-		File dir = new File("D:\\JAVA01\\Java_se\\temp");
+		File dir = new File("C:\\Users\\Onion\\Desktop\\TIL\\Today-I-Learned-MJ\\Java_se\\temp");
 		// 폴더에서 모든 파일 목록 불러옴
 		String [] f = dir.list();
 		for(String fn : f) {		// 파일 이름은 f에 있다.

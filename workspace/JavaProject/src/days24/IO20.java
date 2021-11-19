@@ -1,4 +1,4 @@
-package days23;
+package days24;
 
 import java.io.BufferedInputStream;
 import java.io.File;

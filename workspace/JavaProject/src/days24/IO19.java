@@ -1,4 +1,4 @@
-package days23;
+package days24;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
