@@ -27,4 +27,15 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.text.ParseException"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.io.OutputStream"/>
+    <fullyQualifiedTypeName name="java.net.SocketTimeoutException"/>
+    <fullyQualifiedTypeName name="java.io.DataOutput"/>
+    <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
+    <fullyQualifiedTypeName name="java.io.DataInputStream"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
 </qualifiedTypeNameHistroy>
