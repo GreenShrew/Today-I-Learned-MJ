@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>15_Table</title>
+</head>
+<body>
+<!-- table 태그의 옵션들 -->
+<!-- width : 테이블의 전체 가로 크기 -->
+<!-- height : 테이블의 전체 세로 크기 -->
+<!-- cellpadding : 한 칸(셀)의 안쪽 여백 - 글자와 셀경계선과의 간격, 상하좌우 간격-->
+<!-- cellspacing : 셀과 셀 사이의 간격 -->
+<!-- align : 브라우저 상에 표시할 '표'의 좌우 정렬, 디폴트값은 왼쪽정렬-->
+<!-- bgcolor : 표의 배경색 -->
+
+<!-- tr 태그의 옵션들 -->
+<!-- height : 한 행의 세로크기 -->
+<!-- bgcolor : 행의 배경색, 각 행마다 다른 배경색을 지정할 수 있다. 지정하지 않으면 투명색 -->
+<!-- align : 한 행에 적용할 각 열의 표시내용 정렬방식, 디폴트값은 왼쪽정렬 -->
+
+<!-- td 태그의 옵션들 -->
+<!-- width : 한 열의 가로 크기, 각 열마다 별도 지정이 가능하지만, 다른 행에 똑같이 적용된다. -->
+<!-- bgcolor : 1열(1칸, 1셀)의 배경색, 각 칸마다 다른 배경색을 지정할 수 있다. 지정하지 않으면 투명색 -->
+<!-- align : 1열(1칸, 1셀)에 적용할 각 열의 표시내용 정렬방식, 디폴트값은 왼쪽정렬 -->
+
+<!-- 5행 5열의 테이블 작성 -->
+<table width="700" height="500" cellspacing="1" bgcolor="blue" 
+	cellpadding="10" align="center">	<!-- border는 현재 0으로 적용 -->
+	<tr bgcolor="yellow" align="center" height="100">
+		<td bgcolor="white" width="100">1행 1열</td>
+		<td width="200">1행 2열</td>
+		<td bgcolor="white" width="100">1행 3열</td>
+		<td width="200">1행 4열</td>
+		<td bgcolor="white" align="right" width="100">1행 5열</td>
+	</tr>
+	<tr bgcolor="white"  height="200">
+		<td>2행 1열</td>
+		<td>2행 2열</td>
+		<td>2행 3열</td>
+		<td>2행 4열</td>
+		<td>2행 5열</td>
+	</tr>
+	<tr bgcolor="yellow"  height="100">
+		<td>3행 1열</td>
+		<td>3행 2열</td>
+		<td>3행 3열</td>
+		<td>3행 4열</td>
+		<td>3행 5열</td>
+	</tr>
+	<tr bgcolor="white"  height="200">
+		<td>4행 1열</td>
+		<td>4행 2열</td>
+		<td>4행 3열</td>
+		<td>4행 4열</td>
+		<td>4행 5열</td>
+	</tr>
+	<tr bgcolor="yellow"  height="100">
+		<td>5행 1열</td>
+		<td>5행 2열</td>
+		<td>5행 3열</td>
+		<td>5행 4열</td>
+		<td>5행 5열</td>
+	</tr>
+</table>
+</body>
+</html>

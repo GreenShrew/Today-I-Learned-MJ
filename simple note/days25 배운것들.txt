@@ -79,7 +79,7 @@ file:///D:/JAVA01/workspace/WEB01_HTML5/src/main/webapp/01_First.html
 
 02_Comment
 
-- HTML에서 주석차리 하는 방법
+- HTML에서 주석처리 하는 방법
 <!-- -->,  블록처리하고 Ctrl + Shift + '/' 누르면 자동 주석처리가 된다.
 
 
@@ -183,7 +183,7 @@ ul의 속성에 type의 사용에 따라 모습이 바뀐다.
 
 13_ListTag2
 
-- 같이 쓰는 모습
+- ol과 ul을 같이 쓰는 모습
 
 
 

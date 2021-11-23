@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>25_Color</title>
+</head>
+<body>
+<!-- 
+* 색상 단위
+1. 키워드를 사용한 색상 적용 : red, orange, blue, black, white, magenta, green, yellow 등)
+
+2. RGB 색상 단위
+	- rgb(red, green, blue) -> (0x00~0xFF - 16진수) 0~255
+	- rgba(... , alpha) -> alpha(투명도 : 0.0(완전투명)~1.0(완전불투명))
+	
+3. Hex코드 색상 단위 : #000000(검은색), #FFFFFF(흰색), #FF0000(빨간색), #00FF00(녹색)
+							#0000FF(파란색), #FF00FF(보라색)
+							
+4. HSL색상단위 : hsl(hue(색상), saturation(채도), lightness(명도))
+					  hsla(... , alpha)
+					  
+※ http://www.colorpicker.com
+-->
+<h1 style="background-color: rgb(241,14,33);">Header-1</h1>
+<h2 style="background-color: rgba(241,14,33,0.5);">Header-2</h2>
+<h3 style="background-color: #F0F641; opacity:0.5;">Header-3</h3>
+<h4 style="background-color: hsl(111,91%,38%);">Header-4</h4>
+<h5 style="background-color: hsl(111,91%,38%,0.5);">Header-5</h5>
+<h5 style="background-color: orange">Header-5</h5>
+</body>
+</html>
