@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>09_Hover</title>
+<style type="text/css">
+	#box1{background:yellow; height:50px; width:800px; transition-duration:1s;}
+	#box2{background:yellow; height:50px; width:800px; transition-duration:1s;}
+	
+	#box1:hover{background:red; color:white;}
+	#box2:hover{background:blue; color:white;}
+	
+	#box1:active{background:blue; height:150px;}
+	#box2:active{background:red; height:150px;}
+	
+	#box1:active+#box2{background:green; color:white;}
+	/* 하나의 반응선택자가 변경하는 사항을 다른 선택자에 적용하려면
+		"자신의 형제나 후손 선택자에게만" 적용이 가능하다.
+		자신의 부모나 부모의 형제, 또는 부모의 형제의 자손 등은
+		적용할 수 없다. 그들에게 적용하려면 자바스크립트 또는 제이쿼리를 사용해야한다.*/
+</style>
+</head>
+<body>
+	<div id="box1">
+		<h1>User Action Selector</h1>
+	</div>
+	<div id="box2">
+		<h1>User Action Selector</h1>
+	</div>
+</body>
+</html>

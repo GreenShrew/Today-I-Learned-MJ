@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- 
+- ID Selector : 태그에 지정된 아이디에 '#'을 붙여서 CSS를 지정한다.
+- 태그의 id는 다른 태그들과 구분하기 위해 사용될 목적으로 만들어졌으므로,
+ 각 태그에 유일한 값으로 지정한다. 물론 서로 다른 두 태그의 id가 같다고 해서 
+ 에러가 발생하지는 않는다. 하지만 유일한 값을 목적으로 하는 이상 가능한 중복되지 
+ 않은 값으로 id를 지정해주고, CSS에서는 유일한 태그에 지정될 내용을 기술해주는것이 보통이다.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>04_ID_Selector</title>
+<style type="text/css">
+	#header{
+		width:800px; height:150px; margin:0 auto; color:white; background:red;
+	}
+	/* color : 글자 색*/
+	/* margin:0 auto <- 위아래는 0, 좌우는 자동 맞춤*/
+	/* margin의 사용 방법
+	1.	margin-left, margin-right, margin-top, margin-bottom을 이용하여 각 네곳의 마진을 따로 설정한다.
+		margin-left:10px; margin-right:20px; margin-top:30px; margin-bottom:5px;
+	2. margin 이라는 이름 하나만 사용하여, 네곳의 마진을 동일한 값으로 설정한다.
+		margin:10px;
+	3.	margin:0 auto; 이와 같이 두개의 값만 사용하여 첫번째 값은 위와 아래 마진으로, 두번째 값은 좌와 우의 마진으로
+		사용한다. 좌우 값으로 지정한 auto 값은 자신을 감싸고 있는 태그 안에서 균등한 마진을 자동으로 지정하여
+		가운데 맞춤을 하라는 의미이다. */
+	
+	#wrap{
+		width:800px; height:200px; margin:0 auto; color:white; border:5px solid blue; overflow:hidden;
+	}
+	/* border-width:5px; */
+	/* border-style:solid; */
+	/* border-color:blue; */
+	/* border:5px solid blue : wrap이라는 div에 외곽선을 5px 실선 파란색으로 표시 */
+	/* color 스타일은 현재 태그의 하위태그에도 적용된다. */
+	/* overflow:hidden; : 안쪽 내용물이 가로 800px, 세로 200px 경계선을 넘어갈정도로 크기가 크다면
+								   바깥쪽으로 빠져나가는 부분을 화면에서 보이지 않게 함*/
+								   
+	#aside{
+		width:200px; height:300px; background:blue; float:left
+	}
+	#contents{
+		width:600px; height:300px; background:green; float:left
+	}
+	/* float:left; : block 형식을 사용하면 바로 줄바꿈이 일어나는 div에, 줄바꿈 없이 왼쪽으로 차곡차곡 쌓이는 배치를 하라는 속성 */
+	#footer{
+		width:800px; height:100px; background:silver; margin:0 auto;
+	}
+</style>
+</head>
+<body>
+	<div id="header">
+		<h1>Header-1</h1>
+		<h3>Header-3</h3>
+	</div>
+	<div id="wrap">
+		<div id="aside"><h3>Aside(subMenu)</h3></div>
+		<div id="contents"><h3>Contents</h3></div>
+	</div>
+	<div id="footer">
+		<span>footer</span>
+	</div>
+</body>
+</html>

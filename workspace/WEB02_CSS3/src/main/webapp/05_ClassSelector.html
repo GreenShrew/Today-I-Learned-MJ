@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 
+* 클래스 선택자
+- 특정한 클래스를 가지고 있는 태그를 선택할 때 사용하는 선택자.
+- 웹페이지를 개발할 때 가장 많이 사용하는 선택자.
+- 여러개의 클래스 선택자 사용.
+	class 속성은 공백으로 구분해서 여러 클래스를 하나의 태그에 적용할 수도 있다.
+- id는 유일한 값으로 태그들을 구분하기 위한 목적으로 사용하지만, class는 서로 다른 태그도
+ 하나의 이름을 갖는 class로 그룹화하여 사용하기 위한 목적으로 사용한다.
+- 태그 선택자와 클래스 선택자를 함께 사용해 다양한 태그를 그룹짓고 구분하여 선택할 수 있다.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>05_ClassSelector</title>
+<style type="text/css">
+	.select{
+		color:red;
+	}
+	.item{
+		background:yellow;
+	}
+</style>
+</head>
+<body>
+	<h1 class="select">웹 프로그래밍</h1>
+	<ul class="select">
+		<li class="item">HTML</li>
+		<li class="item">CSS</li>
+		<li>jQuery</li>
+	</ul>
+	<hr/>
+	<!-- 두개의 클래스 이름을 적용하여 두개의 스타일을 동시 적용하는 예 -->
+	<h1 class="item select">화면 구현</h1>
+</body>
+</html>

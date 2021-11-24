@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>07_Decendant02</title>
+<style type="text/css">
+	#header>h1{background:blue; color:white;}
+	/* 후손선택자 사용시 ' ' 공백을 사용하면 지목된 선택자 안의 모든 후손을 선택
+	  '>' 를 사용하면 바로 아래 후손 선택자만 선택된다.*/
+	#header>h2{background:orange; color:white;}
+	#header>#nav>h1{background:red; color:white;}
+	#nav>h2{background:green; color:white;}
+</style>
+</head>
+<body>
+	<div id="header">
+		<h1 class="title">회사 이름/로고</h1>
+		<div id="nav">
+			<h1>#header>#nav>h1</h1><h2>header 2</h2><h3>CSS3</h3>
+		</div>
+		<h1>#header>h1</h1>
+		<h2>#header>h2</h2>
+	</div>
+	<div id="section">
+		<h1 class="title">Aside</h1><p>헌법개정안이 제2항의 찬성을 얻은 때에는 헌법개정은 확정되며, 
+		대통령은 즉시 이를 공포하여야 한다. 대통령은 국회에 출석하여 발언하거나 서한으로 의견을 표시할 수 있다. 
+		대통령이 임시회의 집회를 요구할 때에는 기간과 집회요구의 이유를 명시하여야 한다. 교육의 자주성·전문성·정치적 중립성 
+		및 대학의 자율성은 법률이 정하는 바에 의하여 보장된다.</p>
+	</div>
+</body>
+</html>

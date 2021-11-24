@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>09_HoverEx</title>
+<style type="text/css">
+	#base{width:250px; height:1000px; background:#595959;}
+	#top{width:100%; height:150px; border:1px solid white; text-align:center;}
+	.menuall{width:100%; height:40px; border:1px solid yellow; background:#232323; color:white; line-height:0px; text-align:center;}
+	.submenuall{width:100%; height:0px; border:1px solid yellow; background:#989898; transition-duration:1s;}
+	
+	/*
+	#menu1:hover+#submenu1{height:100px;}
+	#menu1:hover{color:orange;}
+	#menu2:hover+#submenu2{height:100px;}
+	#menu2:hover{color:orange;}
+	#menu3:hover+#submenu3{height:100px;}
+	#menu3:hover{color:orange;}
+	#menu4:hover+#submenu4{height:100px;}
+	#menu4:hover{color:orange;}
+	#menu5:hover+#submenu5{height:100px;}
+	#menu5:hover{color:orange;}
+	*/
+	
+	.menuall:hover{color:orange;}
+	.menuall:hover+.submenuall{height:100px;}
+</style>
+</head>
+<body>
+<!-- 각 메뉴에 마우스를 올리면 부메뉴가 100px만큼 펼쳐지게 만들자.
+각 메뉴의 글자색은 오렌지색으로 변경, 각 동작은 1초간 진행된다. -->
+<div id="base">
+	<div id="top"></div>
+	<div id="menu1" class="menuall"><h2>NEWS</h2></div>
+	<div id="submenu1" class="submenuall"></div>
+	<div id="menu2" class="menuall"><h2>PORTPOLIO</h2></div>
+	<div id="submenu2" class="submenuall"></div>
+	<div id="menu3" class="menuall"><h2>BOARD</h2></div>
+	<div id="submenu3" class="submenuall"></div>
+	<div id="menu4" class="menuall"><h2>ALBUM</h2></div>
+	<div id="submenu4" class="submenuall"></div>
+	<div id="menu5" class="menuall"><h2>CONTACT</h2></div>
+	<div id="submenu5" class="submenuall"></div>
+</div>
+</body>
+</html>

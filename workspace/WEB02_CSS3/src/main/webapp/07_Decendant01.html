@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 
+* 후손선택자 : 특정한 태그 아래에 있는 후손을 선택할 때 사용하는 선택자.
+* id의 사용을 남용하지 않고 상대적 위치로 Selector를 사용한다.
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>07_Decendant01</title>
+<style type="text/css">
+	#section h1{color:blue;}
+	/* 빈칸(공백)으로 선택자가 이어지면, 아래에 포함되어 있는 child 선택자들을 모두 지목하게 된다.*/
+	#header h1{color:red;}
+	
+	#header h1, #header h3{background:yellow;}
+	/* ','로 구분하면 두개의 후손선택자를 동시에 선택 가능하다.
+	 #header h1, h3 -> header 내부의 h1과 h3이 아니라, header 내부의 h1과 내부외부 포함 모든 h3이라는 뜻이다.*/
+</style>
+</head>
+<body>
+	<div id="header">
+		<h1 class="title">회사 이름/로고</h1>
+		<div id="nav">
+			<h1>Navigation</h1><h2>header 2</h2><h3>CSS3</h3>
+		</div>
+	</div>
+	<div id="section">
+		<h1 class="title">Aside</h1>
+		<p><h1 class="title">Aside</h1>헌법개정안이 제2항의 찬성을 얻은 때에는 헌법개정은 확정되며, 
+		대통령은 즉시 이를 공포하여야 한다. 대통령은 국회에 출석하여 발언하거나 서한으로 의견을 표시할 수 있다. 
+		대통령이 임시회의 집회를 요구할 때에는 기간과 집회요구의 이유를 명시하여야 한다. 교육의 자주성·전문성·정치적 중립성 
+		및 대학의 자율성은 법률이 정하는 바에 의하여 보장된다.</p>
+		<h1 class="title">Aside</h1>
+	</div>
+</body>
+</html>

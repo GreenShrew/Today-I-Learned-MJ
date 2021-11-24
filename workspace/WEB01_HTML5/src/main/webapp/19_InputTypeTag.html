@@ -28,11 +28,11 @@
 	둘째<input type="checkbox" value="second" name="ch"/>
 	셋째<input type="checkbox" value="third" name="ch"/><hr/>
 	<!-- 복수개의 선택이 가능하다. 서버로 전송되는건 name과 value 들이 전달되는데,
-	이때 전달된 복수개의 value들은 자바에서 사용하는 String [] s 와 같은 1차원 문자 배열 형태로 처리된다, -->
+	이때 전달된 복수개의 value들은 자바에서 사용하는 String [] s 와 같은 1차원 문자 배열 형태로 처리된다. -->
 	
 	<!-- 라디오 버튼 : 체크박스와 비슷하지만 그룹 중 하나만 선택이 가능한 선택 버튼이다. -->
-	남자<input type="radio" value="gender" name="m"/>
-	여자<input type="radio" value="gender" name="f"/><hr/>
+	남자<input type="radio" name="gender" value="m"/>
+	여자<input type="radio" name="gender" value="f"/><hr/>
 	
 	<!-- 펼침 목록, 콤보상자 -->
 	<select name="food">

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>11_Checked</title>
+<style type="text/css">
+	#text{width:650px; height:300px; background:silver; overflow:hidden; transition-duration:1s;}
+	input[type=checkbox]:checked~#text{height:0px;}
+	
+	#button1{width:300px; height:20px; background:yellow; border:1px solid black;}
+	#button1:active+#text{height:0px;}
+</style>
+</head>
+<body>
+<input type="checkbox"/>체크하면 아래 텍스트가 사라집니다.&nbsp;&nbsp;&nbsp;
+<div id="button1">클릭하면 아래 텍스트가 사라집니다.</div>
+<div id="text">
+	<h1>Lorem Ipsum</h1>
+	<p>모든 국민은 그 보호하는 자녀에게 적어도 초등교육과 법률이 정하는 교육을 받게 할 의무를 진다. 
+	선거에 관한 경비는 법률이 정하는 경우를 제외하고는 정당 또는 후보자에게 부담시킬 수 없다. 
+	국가는 주택개발정책등을 통하여 모든 국민이 쾌적한 주거생활을 할 수 있도록 노력하여야 한다. 
+	국회의 회의는 공개한다. 다만, 출석의원 과반수의 찬성이 있거나 의장이 국가의 안전보장을 위하여 
+	필요하다고 인정할 때에는 공개하지 아니할 수 있다. 
+	광물 기타 중요한 지하자원·수산자원·수력과 경제상 이용할 수 있는 자연력은 법률이 정하는 바에 의하여 
+	일정한 기간 그 채취·개발 또는 이용을 특허할 수 있다.</p>
+</div>
+</body>
+</html>

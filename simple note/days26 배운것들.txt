@@ -75,8 +75,7 @@ type에 hidden은 name, value만 있고 형체가 없는 입력란이다. - 검�
 <option></option> : 콤보 박스에 들어갈 내용을 적는 태그
 <textarea></textarea> : 텍스트박스를 만들어주는 태그
 
-
-라디오버튼 소스코드 확인해
+http://tcpschool.com/html-input-types/hidden : input 태그의 type 속성값 정리
 
 
 20_Join
