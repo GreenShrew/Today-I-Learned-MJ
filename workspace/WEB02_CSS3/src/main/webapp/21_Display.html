@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>21_Display</title>
+<style type="text/css">
+	.box{background-color:yellow; width:300px; height:100px; margin:10px;}
+	#box1{display:none;}	/* 화면에서 사라진다. 자리도 없어진다. */
+	#box2{display:inline;}	/* div에 display:inline; 이 적용되면 width, height가 적용되지 않고 span처럼 작동한다. */
+	#box3{display:inline-block;}	/* inline에서 width, height만 살려내서 표시한다. */
+	#box4{display:block;}	/* display:block 원래 div가 block이므로 아무런 변화가 없다. */
+</style>
+</head>
+<body>
+<span>Dummy</span>
+<div id="box1" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span></div>
+<span>Dummy</span><br/><br/>
+<span>Dummy</span>
+<div id="box2" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span></div>
+<span>Dummy</span><br/><br/>
+<span>Dummy</span>
+<div id="box3" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span></div>
+<span>Dummy</span><br/><br/>
+<span>Dummy</span>
+<div id="box4" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span></div>
+<span>Dummy</span><br/><br/>
+</body>
+</html>

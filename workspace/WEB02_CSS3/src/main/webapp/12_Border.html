@@ -37,6 +37,12 @@
 	
 	text-align:center;
 	}
+	.box2{width:400px; height:150px; border:5px solid blue; border-radius:30px;/* 50px 100px 70px 30px;*/}
+	/* 만약 border-radius의 값을 중괄호 안의 주석처럼 4개를 넣을 경우
+		왼쪽 위->오른쪽 위->오른쪽 아래->왼쪽 아래 순서로 적용된다.*/
+
+	/* border에 의한 선 굵기는 div 또는 박스모델의 전체 크기에 합산되어 관여한다.
+		따라서 box2는 양쪽 5px의 선굵기가 포함되어서 너비 410px, 높이 410px가 된다. */
 </style>
 </head>
 <body>

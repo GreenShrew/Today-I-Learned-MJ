@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>15_PseudoClass03</title>
+<style type="text/css">
+	/* body>*:first-of-type{color:red;} */
+	/* body 태그 안의 모든 태그들(body>*) 중 같은 유형의 첫번째 태그들(first-of-type) */
+	
+	h1:first-of-type{color:red;}
+	h1:last-of-type{color:blue;}
+	h2:first-of-type{color:green;}
+	h3:nth-of-type(2n){color:orange;}
+	h1:nth-of-type(2){color:yellow;}
+</style>
+</head>
+<body>
+<h1>Header - 1</h1>
+<h2>Header - 2</h2>
+<h3>Header - 3</h3>
+<h3>Header - 3</h3>
+<h2>Header - 2</h2>
+<h1>Header - 1</h1>
+<h1>Header - 1</h1>
+<h3>Header - 3</h3>
+</body>
+</html>

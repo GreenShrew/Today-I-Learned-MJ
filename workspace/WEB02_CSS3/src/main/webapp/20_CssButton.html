@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>20_CssButton</title>
+<style type="text/css">
+	.button{width:150px; height:70px; background:#FF6A00;
+		box-shadow:5px 5px 5px #555555; border:10px solid white; text-align:center;
+		line-height:70px; font-size:200%; color:white; text-shadow:2px 2px 2px #333333;
+		border-radius:30px;}
+/* 	box-shadow : 5px 5px 5px #55555 <- 오른쪽 아래로 5px씩 번짐정도의 5px 정도의 그림자를 회색계열로 표시
+		text-align:center;	텍스트의 좌우 정렬(가운데)
+		line-height:70px;	줄간격 70이며, 여러줄일때 줄과 줄 사이의 간격을 나타낸다. 다만 한줄의 텍스트에서
+									div의 세로크기와 같은 크기를 지정하면, 상하 가운데 맞춤이 된다. */
+	a{font-weight:bold; text-decoration:none; color:white;}
+	/* text-decoration:none -> 밑줄 등의 스타일을 없앤다. 주로 앵커태그 밑줄을 없앨때 많이 사용된다.*/
+	
+	input[type=button]{width:170px; height:90px; background:#FF6A00;
+	border:10px solid white; text-align:center; font-size:200%; box-shadow:5px 5px 5px #555555;
+	text-shadow:2px 2px 2px #333333; border-radius:30px; color:white; font-weight:bold;}
+</style>
+</head>
+<body>
+<!-- css로 버튼 생성 -->
+<div class="button"><a href="#">Click</a></div>
+
+<br/><hr/><br/>
+<input type="button" value="Click"/>
+</body>
+</html>

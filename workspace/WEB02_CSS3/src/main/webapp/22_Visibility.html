@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>22_Visibility</title>
+<style type="text/css">
+	.box{background-color:yellow; width:300px; height:50px; margin:10px;}
+	#box1{display:none;}		/* 태그까지 화면에서 제거 */
+	#box2{visibility:hidden;}	/* 태그가 화면에 보이지 않을 뿐 블럭 형식이 동작된다. */
+	#box3{visibility:collapse;}	/* collapse가 일반 태그에 적용되면, hidden과 같이 적용. */
+	table{visibility:collapse;}	/* 테이블에 적용되면 블럭 형식만 남고 공간은 없어진다. */
+	
+</style>
+</head>
+<body>
+<span>Dummy</span>
+<table border="1">
+	<tr><td>Test1</td><td>Test2</td></tr>
+	<tr><td>Test3</td><td>Test4</td></tr>
+</table>
+<span>Dummy</span><br/><br/><hr/>
+<span>Dummy</span>
+<div id="box1" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span>
+</div>
+<span>Dummy</span><br/><br/><hr/>
+<span>Dummy</span>
+<div id="box2" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span>
+</div>
+<span>Dummy</span><br/><br/><hr/>
+<span>Dummy</span>
+<div id="box3" class="box">
+	<span>국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다.</span>
+</div>
+<span>Dummy</span><br/><br/><hr/>
+</body>
+</html>

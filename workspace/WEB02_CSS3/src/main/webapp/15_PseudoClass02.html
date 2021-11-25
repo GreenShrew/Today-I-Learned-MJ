@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>16_PseudoClass02</title>
+<style type="text/css">
+	li>a:first-child{color:red;}
+	/* 모든 li 안의 첫번째 a 태그들 - 이번 예시에서는 li 안에 모두 a태그가 하나뿐이므로, 결국 모든 a태그를 선택한것과 같다.*/
+	li:first-child>a{color:blue;}
+	/* 첫번째 li 선택 후 그의 자식 태그들 중 a 태그를 선택 */
+</style>
+</head>
+<body>
+<ul>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+	<li><a href="#">PseudoClass</a></li>
+</ul>
+</body>
+</html>

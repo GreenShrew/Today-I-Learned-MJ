@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- * 배경 속성
+	- 특정 태그의 배경 이미지 또는 색상을 지정하는 스타일 속성.
+	- 종류
+		1) background-image 속성
+			- 배경에 넣을 그림을 지정하는 스타일 속성
+			- 속성에는 URL 단위 또는 그레이디언트를 입력
+		2) background-size 속성
+			- 그림 크기를 조절할 때 사용하는 스타일 속성이며, CSS3에서 추가된 기능
+			- 키워드 : contain / cover
+				. contain : 너비를 100%로 지정한 효과
+				. cover : 높이를 100%로 지정한 효과
+		3) background-repeat 속성
+			- repeat : 이미지가 패턴을 이룸
+			- 키워드 : no-repeat/repeat/repeat-x/repeat-y/round/space
+			- repeat-x : x축 방향으로 이미지가 반복
+			- repeat-y : y축 방향으로 이미지가 반복
+		4) background-attachment 속성
+			- 배경 이미지를 어떠한 방식으로 화면에 붙일 것인지를 지정하는 스타일 속성
+			- 속성의 기본 키워드 scroll (키워드 : fixed / scroll)
+			- fixed : 스크롤을 이동해도 배경 이미지 고정
+		5) background-position 속성
+			- background-position : x축 위치;
+			- background-position : x축 위치 y축 위치;
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>17_Background</title>
+<style type="text/css">
+	body{border:1px solid black; margin:0px;}
+	body *{margin:10px; padding:10px; border:1px solid black;}
+	body{
+		background-image:url(images/BackgroundFront.png);
+		background-size:100%;
+		background-repeat:repeat-x;
+		background-attachment:fixed;
+		background-position:0px 500px;
+	}
+</style>
+</head>
+<body>
+<h1>Lorem ipsum</h1>
+<p>국가원로자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 
+제안된 헌법개정안은 대통령이 20일 이상의 기간 이를 공고하여야 한다. 
+군인은 현역을 면한 후가 아니면 국무위원으로 임명될 수 없다. 
+행정권은 대통령을 수반으로 하는 정부에 속한다. 
+피고인의 자백이 고문·폭행·협박·구속의 부당한 장기화 또는 기망 기타의 방법에 의하여 
+자의로 진술된 것이 아니라고 인정될 때 또는 정식재판에 있어서 피고인의 자백이 
+그에게 불리한 유일한 증거일 때에는 이를 유죄의 증거로 삼거나 이를 이유로 처벌할 수 없다.</p>
+
+<h1>Lorem ipsum</h1>
+<p>국가원로자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 
+제안된 헌법개정안은 대통령이 20일 이상의 기간 이를 공고하여야 한다. 
+군인은 현역을 면한 후가 아니면 국무위원으로 임명될 수 없다. 
+행정권은 대통령을 수반으로 하는 정부에 속한다. 
+피고인의 자백이 고문·폭행·협박·구속의 부당한 장기화 또는 기망 기타의 방법에 의하여 
+자의로 진술된 것이 아니라고 인정될 때 또는 정식재판에 있어서 피고인의 자백이 
+그에게 불리한 유일한 증거일 때에는 이를 유죄의 증거로 삼거나 이를 이유로 처벌할 수 없다.</p>
+
+<h1>Lorem ipsum</h1>
+<p>국가원로자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 
+제안된 헌법개정안은 대통령이 20일 이상의 기간 이를 공고하여야 한다. 
+군인은 현역을 면한 후가 아니면 국무위원으로 임명될 수 없다. 
+행정권은 대통령을 수반으로 하는 정부에 속한다. 
+피고인의 자백이 고문·폭행·협박·구속의 부당한 장기화 또는 기망 기타의 방법에 의하여 
+자의로 진술된 것이 아니라고 인정될 때 또는 정식재판에 있어서 피고인의 자백이 
+그에게 불리한 유일한 증거일 때에는 이를 유죄의 증거로 삼거나 이를 이유로 처벌할 수 없다.</p>
+</body>
+</html>
