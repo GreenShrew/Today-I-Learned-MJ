@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout01</title>
+<style type="text/css">
+	body{margin:0;}
+	#base{position:relative; width:100%; height:500px; border:3px dotted black; top:100px;}
+	#box1{position:absolute; width:50%; height:500px; background:yellow; top:0px; left:0px; border:1px solid green;}
+	#box2{position:absolute; width:50%; height:400px; background:orange; border:2px solid red; top:50px; left:45%;}
+	
+	.prob{position:absolute; width:100px; height:100px; background:blue;}
+	#box3{top:0px; left:0px;}
+	#box4{top:0px; right:0px;}
+	#box5{bottom:0px; right:0px;}
+	#box6{bottom:0px; left:0px;}
+</style>
+</head>
+<body>
+<div id="base">
+	<div id="box1"></div>
+	<div id="box2"></div>
+	
+	<div id="box3" class="prob"></div>
+	<div id="box4" class="prob"></div>
+	<div id="box5" class="prob"></div>
+	<div id="box6" class="prob"></div>
+	<div id="box7" class="prob"></div>
+	<!-- 각 div의 크기가 가로 100px, 세로 100px, 배경색 blue 로 하여 각 모서리(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단) -->
+</div>
+</body>
+</html>

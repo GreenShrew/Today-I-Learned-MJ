@@ -1,0 +1,12 @@
+11월 29일
+
+HTML과 CSS를 이용하여 화면을 구성하는 시험!
+
+네이버 회원가입 창 만들기가 시험이다.
+
+https://nid.naver.com/user2/V2Join?token_sjoin=cFHRbjHpSAslsce3&langSelect=ko_KR&chk_all=on&termsService=on&termsPrivacy=on&termsLocation=Y&termsEmail=Y
+
+이 페이지를 만드는게 목적이다.
+
+outline:none; 이나 border:0px; 이런걸 사용해도 된다.
+선을 지우는 방법이라던가 그런걸 인터넷에 검색해서 해도 된다.
