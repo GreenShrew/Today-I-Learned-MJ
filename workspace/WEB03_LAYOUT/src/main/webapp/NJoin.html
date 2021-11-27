@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NJoin</title>
+<style type="text/css">
+	body{margin:0; background:#f5f6f7;}
+
+	#title{position:relative; width:100%; height:130px; background:#f5f6f7;}
+	#logo{position:relative; width:250px; height:50px;margin:0 auto; top:50px;}
+	
+	#base{position:relative; width:100%; height:1000px; background:#f5f6f7;}	
+	#base_box{position:relative; width:450px; height:1000px; background:#f5f6f7; margin:0 auto;}
+	
+	.text_basic{position:relative; width:450px; font-size:15px; font-weight:bold;
+					position:relative; left:0; margin-bottom:10px; background:#f5f6f7; height:20px;}
+					
+	.textbox{width:433px; line-height:50px; font-size:14px; padding:0; padding-left:15px; margin:0; border:1px solid #dadada;}
+	
+	input::placeholder{text-align:right; padding-right:15px;}
+</style>
+</head>
+<body>
+<div id="title">
+	<div id="logo"><img src="images/naver_logo.png"></div>
+</div>
+
+<div id="base">
+	<div id="base_box">
+		<h3 class="text_basic">아이디</h3>
+		<div><input class="textbox" type="text" maxlength="20" placeholder="@naver.com"></div>
+		<h3 class="text_basic">비밀번호</h3>
+		<div><input class="textbox" type="password" maxlength="20"></div>
+		<h3 class="text_basic">비밀번호 재확인</h3>
+		<div><input class="textbox" type="password" maxlength="20"></div>
+		
+		<h3 class="text_basic" style="margin-top:35px;">이름</h3>
+		<div><input class="textbox" type="text" maxlength="20"></div>
+		
+		<h3 class="text_basic">생년월일</h3>
+		<div><input class="textbox" type="text" maxlength="4" style="width:150;"></div>
+	</div>
+	
+	
+</div>
+
+
+</body>
+</html>
