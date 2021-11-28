@@ -13,22 +13,45 @@
 	#base_box{position:relative; width:450px; height:1000px; background:#f5f6f7; margin:0 auto;}
 	
 	.text_basic{position:relative; width:450px; font-size:15px; font-weight:bold;
-					position:relative; left:0; margin-bottom:10px; background:#f5f6f7; height:20px;}
+					left:0; margin-bottom:10px; background:#f5f6f7; height:20px; cursor:pointer;}
 					
-	.textbox{width:433px; line-height:50px; font-size:14px; padding:0; padding-left:15px; margin:0; border:1px solid #dadada;}
+	.textbox{position:relative; width:433px; line-height:50px; font-size:14px; padding:0;
+				padding-left:15px; margin:0; border:1px solid #dadada; cursor:pointer;}
 	
-	input::placeholder{text-align:right; padding-right:15px;}
+	#birthday{position:relative; width:450px; left:0; background:#f5f6f7; height:52px;}
+	#year{float:left; position:relative; width:123px; line-height:50px; font-size:14px; cursor:pointer;
+			padding:0; padding-left:15px; margin:0; margin-right:10px;  border:1px solid #dadada;}
+	
+	#month{float:left; position:relative; width:138px; height:50px; font-size:14px; padding-left:15px;
+				margin-left:5px; margin-right:5px; border:1px solid #dadada; cursor:pointer;}
+	
+	#day{clear:both; position:relative; width:123px; line-height:50px; font-size:14px; cursor:pointer;
+			padding:0; padding-left:15px; margin:0; margin-left:10px;  border:1px solid #dadada;}
+			
+	.select_box{position:relative; width:450px; height:50px; font-size:14px; padding-left:15px;
+				border:1px solid #dadada;}
+				
+	#button1{border:0; line-height:50px; width:110px; font-size:14px; text-align:center; color:white;
+				background:#03c75a; cursor:pointer; padding:0px;}
+				
+	#button2{border:0; line-height:50px; width:450px; padding:0px; font-size:14px; text-align:center; color:white;
+				background:#03c75a; cursor:pointer; margin-top:20px;}
+				
+	.list{float:left; font-size:14px; list-style-type:none; text-align:center; line-height:14px; cursor:pointer;
+		padding:0px 10px;}
+		
+	#last{position:relative; border:0; margin:0 auto; padding:20px 0; float:left; font-size:14px; list-style-type:none;}
 </style>
 </head>
 <body>
 <div id="title">
 	<div id="logo"><img src="images/naver_logo.png"></div>
-</div>
+</div>1
 
 <div id="base">
 	<div id="base_box">
 		<h3 class="text_basic">아이디</h3>
-		<div><input class="textbox" type="text" maxlength="20" placeholder="@naver.com"></div>
+		<div><input class="textbox" type="text" maxlength="20" id="the1"></div>
 		<h3 class="text_basic">비밀번호</h3>
 		<div><input class="textbox" type="password" maxlength="20"></div>
 		<h3 class="text_basic">비밀번호 재확인</h3>
@@ -38,7 +61,73 @@
 		<div><input class="textbox" type="text" maxlength="20"></div>
 		
 		<h3 class="text_basic">생년월일</h3>
-		<div><input class="textbox" type="text" maxlength="4" style="width:150;"></div>
+		<div id="birthday">
+			<div><input id="year" type="text" maxlength="4" placeholder="년(4자)"></div>
+			<div>
+				<select id="month">
+					<option value="">월</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>
+			</div>
+			<div><input id="day" type="text" maxlength="2" placeholder="일"></div>
+		</div>
+		
+		<h3 class="text_basic">성별</h3>
+		<div>
+			<select class="select_box">
+				<option value="">성별</option>
+				<option value="1g">남자</option>
+				<option value="2g">여자</option>
+				<option value="3g">선택 안함</option>
+			</select>
+		</div>
+		
+		<h3 class="text_basic">본인 확인 이메일<span style="font-size:14px; color:#8e8e8e;">(선택)</span></h3>
+		<div><input class="textbox" type="text" maxlength="20" placeholder="선택입력"></div>
+		
+		<h3 class="text_basic" style="margin-top:35px;">휴대전화</h3>
+		<div>
+			<select class="select_box">
+				<option value="+690">뉴질랜드령토켈라우제도 +690</option>
+				<option value="+227">니제르 +227</option>
+				<option value="+505">니카라과 +505</option>
+				<option value="+82" selected>대한민국 +82</option>
+				<option value="+45">덴마크 +45</option>
+				<option value="+299">덴마크령그린란드 +299</option>
+				<option value="+298">덴마크령페로제도 +298</option>
+			</select>
+		</div>
+		
+		<div>
+			<input class="textbox" type="text" maxlength="20" placeholder="전화번호 입력"
+					style="margin-top:10px; width:310px;">
+			<input type="button" id="button1" value="인증번호 받기">
+		</div>
+		<div><input class="textbox" type="text" maxlength="20" placeholder="인증번호 입력하세요"
+					style="margin-top:10px; float:left;" disabled></div>
+
+		<div>
+			<input type="button" id="button2" value="가입하기">
+		</div>
+
+		<div id="last">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+			</ul>
+		</div>
+
 	</div>
 	
 	
