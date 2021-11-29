@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout06</title>
+<style type="text/css">
+	/* second 안의 view의 가로크기 1100px, view 안의 박스 하느의 가로크기 350px, 세로크기 600px*/
+	
+	body{margin:0;}
+	
+	#first{position:relative; width:100%; height:100px; background:#faf969;}
+	#title1{position:relative; width:400px; height:50%; margin:0 auto; background:#d5d673;
+				text-align:center; font-weight:bold; font-size:150%; line-height:50px;}
+	#text1{position:relative; width:400px; height:50%; margin:0 auto; background:#b3b452;}
+	
+	#second{position:relative; width:100%; height:600px; background:#fed49a;}
+	#view{position:relative; width:1100px; height:600px; background:#affc9a; margin:0 auto;}
+	
+	.box{position:relative; width:350px; height:600px; float:left; margin-right:25px; background:#5caefa;
+			overflow:hidden;}
+	.box:last-child{margin-right:0px;}
+	
+	.s_box{position:absolute; width:300px; height:300px; left:25px; top:250px; background:white;
+				box-shadow:5px 5px 5px;}
+	.s_title{position:relative; width:250px; height:100px; margin:0 auto; text-align:center; border:1px solid black;
+				font-size:200%; font-weight:bold; line-height:100px; border-bottom:none;}
+	.s_text{position:relative; width:250px; height:200px; margin:0 auto; border:1px solid black;}
+	
+	.b_button{position:absolute; width:150px; height:40px; right:0; bottom:35px; background:blue; text-align:center;
+				font-size:130%; line-height:40px; color:white;}
+</style>
+</head>
+<body>
+	<div id="first">
+		<div id="title1">Content07 Title</div>
+		<div id="text1">국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다.</div>
+	</div>
+	
+	<div id="second">
+		<div id="view">
+			<div class="box">
+				<img src="images/Penguins.jpg" height="300">
+				<div class="s_box">
+					<div class="s_title">Segment Title</div>
+					<div class="s_text">국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 
+					대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다. 저작자·발명가·과학기술자와 
+					예술가의 권리는 법률로써 보호한다.</div>
+				</div>
+				<div class="b_button">BUTTON</div>
+			</div>
+			
+			<div class="box">
+				<img src="images/Lighthouse.jpg" height="300">
+				<div class="s_box">
+					<div class="s_title">Segment Title</div>
+					<div class="s_text">국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 
+					대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다. 저작자·발명가·과학기술자와 
+					예술가의 권리는 법률로써 보호한다.</div>
+				</div>
+				<div class="b_button">BUTTON</div>
+			</div>
+			
+			<div class="box">
+				<img src="images/Jellyfish.jpg" height="300">
+				<div class="s_box">
+					<div class="s_title">Segment Title</div>
+					<div class="s_text">국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 
+					대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다. 저작자·발명가·과학기술자와 
+					예술가의 권리는 법률로써 보호한다.</div>
+				</div>
+				<div class="b_button">BUTTON</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

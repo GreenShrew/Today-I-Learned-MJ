@@ -2,52 +2,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NJoin</title>
+<title>Layout09</title>
 <style type="text/css">
 	body{margin:0; background:#f5f6f7;}
-
+	
+	input:focus{outline:none;}
+	
 	#title{position:relative; width:100%; height:130px; background:#f5f6f7;}
 	#logo{position:relative; width:250px; height:50px;margin:0 auto; top:50px;}
 	
-	#base{position:relative; width:100%; height:1000px; background:#f5f6f7;}	
+	#base{width:100%; height:1000px; background:#f5f6f7;}
 	#base_box{position:relative; width:450px; height:1000px; background:#f5f6f7; margin:0 auto;}
-	
-	.text_basic{width:450px; font-size:15px; font-weight:bold;
-					left:0; margin-bottom:10px; background:#f5f6f7; height:20px; cursor:pointer;}
-					
+	.text_basic{width:450px; font-size:14px; font-weight:bold; left:0; margin-bottom:10px;
+		background:#f5f6f7; height:20px; cursor:pointer;}
 	.textbox{position:relative; width:433px; line-height:50px; font-size:14px; padding:0;
 				padding-left:15px; margin:0; border:1px solid #dadada; cursor:pointer;}
+				
+				
+	#lock1{position:relative; background-image:url(images/key1.png); background-repeat:no-repeat;
+	background-position:410px center}
+	#lock2{position:relative; background-image:url(images/key2.png); background-repeat:no-repeat;
+	background-position:410px center}
 	
 	#birthday{position:relative; width:450px; left:0; background:#f5f6f7; height:52px;}
-	#year{float:left; position:relative; width:123px; line-height:50px; font-size:14px; cursor:pointer;
-			padding:0; padding-left:15px; margin:0; margin-right:10px;  border:1px solid #dadada;}
 	
-	#month{float:left; position:relative; width:138px; height:50px; font-size:14px; padding-left:15px;
-				margin-left:5px; margin-right:5px; border:1px solid #dadada; cursor:pointer;}
-	
-	#day{clear:both; position:relative; width:123px; line-height:50px; font-size:14px; cursor:pointer;
-			padding:0; padding-left:15px; margin:0; margin-left:10px;  border:1px solid #dadada;}
-			
 	.select_box{position:relative; width:450px; height:50px; font-size:14px; padding-left:15px;
 				border:1px solid #dadada;}
+	
+	input[type=button]{position:relative; border:0; line-height:50px; width:117px; font-size:14px; text-align:center; color:white;
+				background:#03c75a; cursor:pointer; padding:0px; right:0px;}
 				
-	#button1{border:0; line-height:50px; width:117px; font-size:14px; text-align:center; color:white;
-				background:#03c75a; cursor:pointer; padding:0px;}
-				
-	#button2{border:0; line-height:50px; width:450px; padding:0px; font-weight:bold; font-size:18px; text-align:center; color:white;
-				background:#03c75a; cursor:pointer; margin-top:20px;}
-				
-	.list{float:left; font-size:14px; list-style-type:none; text-align:center; line-height:14px; cursor:pointer;
-		padding:0px 10px;}
-		
 	#last{position:relative; width:450px; border:0; margin-top:20px; float:left;}
 	
-	#last>ul{list-style:none; text-align:center; padding:0; margin-bottom:0;}
-	#last>ul>li{display:inline-block; font-size:12px;}
+	ul{list-style:none; text-align:center; padding:0; margin-bottom:0;}
+	li{display:inline-block; font-size:12px;}
 	
 	#last2{position:relative; width:450px; border:0; margin-top:5px; font-size:10px;
 			margin-bottom:30px; float:left; height:12px; text-align:center;}
-	#img{position:relative;}
+			
+	#temp:hover{background:blue;}
+	
+	#place::placeholder{text-align:right; padding:15px;}
 </style>
 </head>
 <body>
@@ -58,20 +53,23 @@
 <div id="base">
 	<div id="base_box">
 		<h3 class="text_basic">아이디</h3>
-		<div><input class="textbox" type="text" maxlength="20"></div>
+		<div><input id="place" class="textbox" type="text" maxlength="20" placeholder="@naver.com"></div>
+		
 		<h3 class="text_basic">비밀번호</h3>
-		<div><input class="textbox" type="password" maxlength="20"></div>
+		<div><input  id="lock1" class="textbox" type="password" maxlength="20"></div>
+		
 		<h3 class="text_basic">비밀번호 재확인</h3>
-		<div><input class="textbox" type="password" maxlength="20"></div>
+		<div><input id="lock2" class="textbox" type="password" maxlength="20"></div>
 		
 		<h3 class="text_basic" style="margin-top:35px;">이름</h3>
 		<div><input class="textbox" type="text" maxlength="20"></div>
 		
 		<h3 class="text_basic">생년월일</h3>
 		<div id="birthday">
-			<div><input id="year" type="text" maxlength="4" placeholder="년(4자)"></div>
+			<div><input class="textbox" type="text" maxlength="4" placeholder="년(4자)"
+			style="float:left; width:123px; margin-right:10px;"></div>
 			<div>
-				<select id="month">
+				<select class="textbox" style="float:left; width:138px; height:50px; margin:0 5px;">
 					<option value="">월</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -87,7 +85,7 @@
 					<option value="12">12</option>
 				</select>
 			</div>
-			<div><input id="day" type="text" maxlength="2" placeholder="일"></div>
+			<div><input class="textbox" type="text" maxlength="2" placeholder="일" style="width:123px; margin-left:10px;"></div>
 		</div>
 		
 		<h3 class="text_basic">성별</h3>
@@ -105,7 +103,7 @@
 		
 		<h3 class="text_basic" style="margin-top:35px;">휴대전화</h3>
 		<div>
-			<select class="select_box">
+			<select class="select_box" style="float:left;">
 				<option value="+690">뉴질랜드령토켈라우제도 +690</option>
 				<option value="+227">니제르 +227</option>
 				<option value="+505">니카라과 +505</option>
@@ -114,20 +112,19 @@
 				<option value="+299">덴마크령그린란드 +299</option>
 				<option value="+298">덴마크령페로제도 +298</option>
 			</select>
+			
+			<input class="textbox" type="text" maxlength="20" placeholder="전화번호 입력"
+					style="margin-top:10px; width:310px;">
+			<input type="button" value="인증번호 받기">
+			<div><input class="textbox" type="text" maxlength="20" placeholder="인증번호 입력하세요"
+					style="margin-top:10px; float:left;" disabled></div>
 		</div>
 		
 		<div>
-			<input class="textbox" type="text" maxlength="20" placeholder="전화번호 입력"
-					style="margin-top:10px; width:310px;">
-			<input type="button" id="button1" value="인증번호 받기">
+			<input  id="temp" type="button" style="width:450px; font-weight:bold; font-size:18px;
+					margin-top:20px;" value="가입하기">
 		</div>
-		<div><input class="textbox" type="text" maxlength="20" placeholder="인증번호 입력하세요"
-					style="margin-top:10px; float:left;" disabled></div>
-
-		<div>
-			<input type="button" id="button2" value="가입하기">
-		</div>
-
+		
 		<div id="last">
 			<ul>
 				<li>이용약관</li>
@@ -136,14 +133,15 @@
 				<li>회원정보 고객센터</li>
 			</ul>
 		</div>
+		
 		<div id="last2">
-			<img src="images/naver_logo.png" width="60" id="img">
+			<img src="images/naver_logo.png" width="60">
 			&nbsp;&nbsp;Copyright&nbsp;&nbsp;<a href="#" style="font-weight:bold; text-decoration:none; color:inherit;">NAVER Corp.</a>
 			&nbsp;&nbsp;All Rights Reserved.
 		</div>
+		
 	</div>
 </div>
-
 
 </body>
 </html>

@@ -12,7 +12,7 @@
 	#base{position:relative; width:100%; height:1000px; background:#f5f6f7;}	
 	#base_box{position:relative; width:450px; height:1000px; background:#f5f6f7; margin:0 auto;}
 	
-	.text_basic{width:450px; font-size:15px; font-weight:bold;
+	.text_basic{position:relative; width:450px; font-size:15px; font-weight:bold;
 					left:0; margin-bottom:10px; background:#f5f6f7; height:20px; cursor:pointer;}
 					
 	.textbox{position:relative; width:433px; line-height:50px; font-size:14px; padding:0;
@@ -31,7 +31,7 @@
 	.select_box{position:relative; width:450px; height:50px; font-size:14px; padding-left:15px;
 				border:1px solid #dadada;}
 				
-	#button1{border:0; line-height:50px; width:117px; font-size:14px; text-align:center; color:white;
+	#button1{border:0; line-height:50px; width:110px; font-size:14px; text-align:center; color:white;
 				background:#03c75a; cursor:pointer; padding:0px;}
 				
 	#button2{border:0; line-height:50px; width:450px; padding:0px; font-weight:bold; font-size:18px; text-align:center; color:white;
@@ -42,8 +42,8 @@
 		
 	#last{position:relative; width:450px; border:0; margin-top:20px; float:left;}
 	
-	#last>ul{list-style:none; text-align:center; padding:0; margin-bottom:0;}
-	#last>ul>li{display:inline-block; font-size:12px;}
+	ul{list-style:none; text-align:center; padding:0; margin-bottom:0;}
+	li{display:inline-block; font-size:12px;}
 	
 	#last2{position:relative; width:450px; border:0; margin-top:5px; font-size:10px;
 			margin-bottom:30px; float:left; height:12px; text-align:center;}
@@ -58,7 +58,7 @@
 <div id="base">
 	<div id="base_box">
 		<h3 class="text_basic">아이디</h3>
-		<div><input class="textbox" type="text" maxlength="20"></div>
+		<div><input class="textbox" type="text" maxlength="20" id="the1"></div>
 		<h3 class="text_basic">비밀번호</h3>
 		<div><input class="textbox" type="password" maxlength="20"></div>
 		<h3 class="text_basic">비밀번호 재확인</h3>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout07</title>
+<style type="text/css">
+	/* second 안의 view의 가로크기 1200px, second의 왼쪽 이미지 크기 600x600, 오른쪽 이미지 크기 188x188*/
+	body{margin:0;}
+	
+	#first{position:relative; width:100%; height:100px; background:#faf969;}
+	#title1{position:relative; width:400px; height:50%; margin:0 auto; background:#d5d673;
+				text-align:center; font-weight:bold; font-size:150%; line-height:50px;}
+	#text1{position:relative; width:400px; height:50%; margin:0 auto; background:#b3b452;}
+	
+	#second{position:relative; width:100%; height:600px; background:#fed49a;}
+	#s_box1{position:relative; width:1200px; height:600px; background:#76bcf5; margin:0 auto;}
+	#contain1{position:absolute; left:0; width:600px; height:600px; overflow:hidden;}
+	
+	#contain2{position:absolute; right:0px; width:600px; height:600px;}
+	.c_box{position:relative; width:600px; height:188px; margin-bottom:18px; background:white;}
+	.c_box:last-child{margin-bottom:0}
+	
+	.cc_box{position:relative; width:412px; height:188px; background:#dadce1; float:left;}
+	.ccs_box{position:relative; width:380px; height:47px; margin:0 auto; text-align:right; font-size:150%; font-weight:bold;
+				line-height:50px; border-top:3px solid black;}
+	.cct_box{position:relative; width:380px; height:135px; margin:0 auto; border-bottom:3px solid black;
+				text-align:right;}
+	
+	.imgs{position:relative; width:188px; height:188px; border-radius:50%; overflow:hidden; float:right;}
+</style	>
+</head>
+<body>
+	<div id="first">
+		<div id="title1">Content08 Title</div>
+		<div id="text1">국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다.</div>
+	</div>
+	
+	<div id="second">
+		<div id="s_box1">
+			<div id="contain1">
+				<img src="images/Lighthouse.jpg" height="600">
+			</div>
+		
+			<div id="contain2">
+				<div class="c_box">
+					<div class="cc_box">
+						<div class="ccs_box">Segment Title</div>
+						<div class="cct_box">국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다.</div>
+					</div>
+					<div class="imgs"><img src="images/Koala.jpg" height="188"></div>
+				</div>
+				
+				<div class="c_box">
+					<div class="cc_box">
+						<div class="ccs_box">Segment Title</div>
+						<div class="cct_box">국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다.</div>
+					</div>
+					<div class="imgs"><img src="images/Penguins.jpg" height="188"></div>
+				</div>
+				
+				<div class="c_box">
+					<div class="cc_box">
+						<div class="ccs_box">Segment Title</div>
+						<div class="cct_box">국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다.</div>
+					</div>
+					<div class="imgs"><img src="images/Jellyfish.jpg" height="188"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
