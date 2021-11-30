@@ -8,10 +8,10 @@
 	
 	input:focus{outline:none;}
 	
-	#title{position:relative; width:100%; height:130px; background:#f5f6f7;}
+	#title{position:relative; width:100%; height:130px; background:#f5f6f7;}	/* 굳이 없어도 나머지 가운데 정렬 해서 맞추면 된다. */
 	#logo{position:relative; width:250px; height:50px;margin:0 auto; top:50px;}
 	
-	#base{width:100%; height:1000px; background:#f5f6f7;}
+	#base{width:100%; height:1000px; background:#f5f6f7;}	/* 굳이 없어도 나머지 가운데 정렬 해서 맞추면 된다. */
 	#base_box{position:relative; width:450px; height:1000px; background:#f5f6f7; margin:0 auto;}
 	.text_basic{width:450px; font-size:14px; font-weight:bold; left:0; margin-bottom:10px;
 		background:#f5f6f7; height:20px; cursor:pointer;}
@@ -46,12 +46,12 @@
 </style>
 </head>
 <body>
-<div id="title">
+<div id="title">	<!-- 굳이 위 아래 박스 두개로 나눌 필요 없이 body를 기준으로 relative 넣어서 차곡차곡 쌓으면 된다. 코드 여러줄이 줄어든다. -->
 	<div id="logo"><img src="images/naver_logo.png"></div>
 </div>
 
-<div id="base">
-	<div id="base_box">
+<div id="base">	<!-- 굳이 위 아래 박스 두개로 나눌 필요 없이 body를 기준으로 relative 넣어서 차곡차곡 쌓으면 된다. 코드 여러줄이 줄어든다. -->
+	<div id="base_box">	<!-- 굳이 위 아래 박스 두개로 나눌 필요 없이 body를 기준으로 relative 넣어서 차곡차곡 쌓으면 된다. 코드 여러줄이 줄어든다. -->
 		<h3 class="text_basic">아이디</h3>
 		<div><input id="place" class="textbox" type="text" maxlength="20" placeholder="@naver.com"></div>
 		
@@ -113,9 +113,11 @@
 				<option value="+298">덴마크령페로제도 +298</option>
 			</select>
 			
+			<!-- 전화번호 입력, 인증번호 받기 이 둘을 하나의 div로 묶어서 공간을 분리하면 된다. -->
 			<input class="textbox" type="text" maxlength="20" placeholder="전화번호 입력"
 					style="margin-top:10px; width:310px;">
 			<input type="button" value="인증번호 받기">
+			
 			<div><input class="textbox" type="text" maxlength="20" placeholder="인증번호 입력하세요"
 					style="margin-top:10px; float:left;" disabled></div>
 		</div>

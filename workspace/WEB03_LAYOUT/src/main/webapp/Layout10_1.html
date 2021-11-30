@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout10_1</title>
+<style type="text/css">
+body{background:#6e6e6e; margin:0;}
+
+#menu{position:fixed; background:#2b2b2b; width:150px; height:800px; top:0px; right:calc(50% + 410px); text-align:center;}
+#movies{position:relative; background:#2b2b2b; width:780px; height:520px; margin:0 auto;}
+
+#submenu{position:relative; width:665px; height:80px; margin:0 auto; border:1px dashed yellow; line-height:80px; text-align:center;}
+#submenu ul{list-style:none; padding:0; margin:0; display:inline-block;}
+#submenu ul li{float:left; color:white; padding:0 10px; border:1px dashed white;}
+
+#posters{position:relative; width:665px; height:425px; margin:0 auto; border:1px dashed orange;}
+.box{position:relative; width:123px; height:212px; float:left; margin-right:10px; border:1px dashed yellow; overflow:hidden;}
+.box:nth-child(5), .box:last-child{margin-right:0px;}
+/* .box:nth-child(5n) 으로 작성해도 작동한다. */
+</style>
+</head>
+<body>
+<div id="menu">
+	<img src="images/naverMovie/logo_ci.png" style="margin:10px 0px;">
+	<img src="images/naverMovie/logo_svc.png" style="margin-bottom:10px 0px;">
+	<img src="images/naverMovie/btn1.png">
+	<img src="images/naverMovie/btn2.png">
+	<img src="images/naverMovie/btn3.png">
+	<img src="images/naverMovie/btn4.png">
+	<img src="images/naverMovie/btn5.png">
+	<img src="images/naverMovie/btn6.png">
+	<img src="images/naverMovie/indi.png">
+</div>
+<div id="movies">
+	<div id="submenu">
+		<ul>
+			<li>예매순</li>
+			<li>현재상영작</li>
+			<li>개봉예정작</li>
+			<li>평점순</li>
+			<li>박스오피스</li>
+			<li>다운로드순</li>
+		</ul>
+	</div>
+	
+	<div id="posters">
+		<div class="box"><img src="images/naverMovie/1.png"></div>
+		<div class="box"><img src="images/naverMovie/2.png"></div>
+		<div class="box"><img src="images/naverMovie/3.png"></div>
+		<div class="box"><img src="images/naverMovie/4.png"></div>
+		<div class="box"><img src="images/naverMovie/5.png"></div>
+		<div class="box"><img src="images/naverMovie/6.png"></div>
+		<div class="box"><img src="images/naverMovie/7.png"></div>
+		<div class="box"><img src="images/naverMovie/8.png"></div>
+		<div class="box"><img src="images/naverMovie/9.png"></div>
+		<div class="box"><img src="images/naverMovie/10.png"></div>
+	</div>
+	
+	
+	
+	
+	
+</div>
+</body>
+</html>

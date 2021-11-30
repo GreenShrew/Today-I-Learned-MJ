@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout11</title>
+<style type="text/css">
+body{margin:0; background:white;}
+
+#first{position:relative; width:1100px; height:65px; margin:0 auto;}
+#second{position:relative; width:1100px; height:65px; margin:0 auto;}
+
+.left{position:relative; float:left; width:550px; height:65px; line-height:65px; font-weight:bold; font-size:120%;}
+.left ul{list-style:none; padding:0; margin:0; display:inline-block;}
+.left ul li{float:left; font-weight:normal; line-height:65px; padding:0 10px;}
+
+.right{position:absolute; left:800px; width:300px; height:65px; line-height:65px;}
+
+
+
+#third{position:relative; width:1200px; height:580px; background:#F8D8D1; margin:0 auto;}
+.button{position:relative; float:left; width:50px; height:580px;}
+
+#box{position:relative; width:1100px; height:550px; margin:0 auto; top:30px; background:white;}
+.sbox{position:relative; width:258px; height:275px; margin-right:20px; border:1px solid black; float:left;}
+.sbox:nth-child(4n){margin-right:0;}
+
+.photo{position:relative; width:258px; height:137px; border-radius:20px; overflow:hidden;}
+.text{position:relative; width:258px; height:137px;}
+</style>
+</head>
+<body>
+<div id="first">
+	<div class="left">
+		<img src="images/logo.png"/> 연예
+<!-- 		<ul>
+			<li>뉴스</li>
+			<li>스포츠</li>
+			<li>영화</li>
+			<li>자동차</li>
+		</ul> -->
+	</div>
+	
+	
+	<div class="right">
+		<img src="images/log.png">&nbsp;
+		<img src="images/all.png">
+	</div>
+</div>
+
+<div id="second">
+	<div class="left">
+	</div>
+
+	<div class="right" style="font-weight:bold;">
+		TV 브랜드관&nbsp;&nbsp;<img src="images/btn_process_down.png">
+	</div>
+</div>
+
+<div id="third">
+	<div class="button">
+	</div>
+	
+	<div id="box">
+		<div class="sbox">
+			<div class="photo"><img src="images/news1.png"></div>
+			<div class="text"></div>
+		</div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+		<div class="sbox"></div>
+	</div>
+
+
+</div>
+
+
+
+
+<div>
+
+</div>
+</body>
+</html>
+
+<!-- 버튼은 백그라운드 이용 -->

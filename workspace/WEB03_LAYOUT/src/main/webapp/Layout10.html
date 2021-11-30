@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout10</title>
+<style type="text/css">
+body{background:#6e6e6e;}
+#menu{position:fixed; top:0; left:8%; width:150px; height:100%; background:#2b2b2b; float:left;} /* 메인 왼쪽에 fix 시켜! */
+.img{height:38px; overflow:hidden;}
+
+#main{position:relative; width:777px; height:525px; margin:0 auto; background:#2b2b2b;}
+#menu2 ul{list-style:none; margin:0; padding:0; display:inline-block; margin:0 auto;}
+#menu2 ul li{float:left; padding:0 5px;}
+#menu2{position:relative; width:645px; height:75px; margin:0 auto; color:white; line-height:90px;}
+
+#movie{position:relative; width:645px; height:450px; margin:0 auto;}
+.movie_box{position:relative; width:125px; height:225px; margin-right:5px; float:left; overflow:hidden;}
+.movie_box:nth-child(5n){margin-right:0;}
+</style>
+</head>
+<body>
+
+<div id="menu" style="text-align:center;">
+	<div style="height:40px; line-height:40px;"><img src="images/naverMovie/logo_ci.png">&nbsp;<img src="images/naverMovie/logo_svc.png"></div>
+	<div class="img"><img src="images/naverMovie/btn1.png"></div>
+	<div class="img"><img src="images/naverMovie/btn2.png"></div>
+	<div class="img"><img src="images/naverMovie/btn3.png"></div>
+	<div class="img"><img src="images/naverMovie/btn4.png"></div>
+	<div class="img"><img src="images/naverMovie/btn5.png"></div>
+	<div class="img"><img src="images/naverMovie/btn6.png"></div>
+	<div class="img"><img src="images/naverMovie/indi.png"></div>
+</div>
+
+<div id="main">
+
+
+
+
+
+
+
+	<div id="menu2">
+		<ul>
+			<li>예매순</li>
+			<li>현재상영작</li>
+			<li>개봉예정작</li>
+			<li>박스오피스</li>
+			<li>다운로드순</li>
+		</ul>
+	</div>
+	
+	<div id="movie">
+	<div class="movie_box"><img src="images/naverMovie/1.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/2.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/3.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/4.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/5.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/6.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/7.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/8.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/9.png" width="125"></div>
+	<div class="movie_box"><img src="images/naverMovie/10.png" width="125"></div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>
+
+
+<!-- 가로 150px, 영화 있는 박스는 센터에 -->
