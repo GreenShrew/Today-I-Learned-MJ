@@ -1,0 +1,68 @@
+@charset "UTF-8";
+body{ margin:0;}
+
+#first{ position: relative; width:100%; height:65px;  
+ 	border-bottom:1px solid silver;}
+#second{ position: relative; width:100%; height:70px; background:#F8E2B1; 
+  	border-bottom:1px solid silver;}
+#third{ position: relative; width:100%; height:570px; background:#D4E6FA; 
+ 	border-bottom:1px solid silver;}  	
+
+ 	
+#first .view{ position: relative; width:1100px; height:65px;  margin:0 auto; 
+ 	border:1px dotted red; }
+#second .view{ position:relative; width:1100px; height:70px; background:#D4E6FA; 
+ 	margin:0 auto; }
+#third .view{ position: relative; width:1200px; height:570px; background:#EDCAFA; 
+ 	margin:0 auto; }
+ 	
+
+#first .view .left{ position:relative; float:left; width:500px; height:65px; 
+	border:1px dotted blue; line-height: 65px; text-align:left; }
+#first .view .left ul{  list-style: none; padding:0; margin:0; display:inline-block;}
+#first .view .left ul li{ float:left; margin-right:20px; color:gray; }
+#first .view .left ul li:nth-child(2){ color:black; font-weight:bold; 
+	font-size:110%}
+img{ vertical-align: middle;}
+#first .view .right{ position:relative; float:right; width:300px; height:65px; 
+	border:1px dotted red; text-align: right; line-height: 65px;}
+#first .view .right ul{ list-style: none; padding:0; margin:0; display: inline-block;}
+#first .view .right ul li{ float:right; margin-left:20px;}
+
+
+
+#second .view .left{ position:relative; float:left; width:500px; height:67px; 
+	border:1px dotted blue; line-height: 67px; text-align: left;}
+#second .view .left ul{ list-style: none; padding:0; margin:0; display: inline-block;}
+#second .view .left ul li{ float:left; margin-right:30px; color:gray; 
+	font-family: Verdana; font-weight:bold; color:black; font-size:120%; 
+	cursor:default; /*마우스포인터가 현재위치로 올라갔을때 마우스 포인터의 모양 */}
+#second .view .right{ position:relative; float:right; width:300px; height:70px; 
+	border:1px dotted red; text-align: right; line-height: 70px; font-weight:bold;}
+
+
+.lbutton{ position:relative; width:50px; height:50px; float:left; top:250px;
+	background:silver; background-image:url(../images/ico_movie_171115.png); background-position:-60px -460px;
+	border-radius:50%;}	
+.news{position:relative; width:1100px; height:540px; background:pink; float:left;}
+.rbutton{position:relative; width:50px; height:50px; float:left; top:250px;
+	background:silver; background-image:url(../images/ico_movie_171115.png); background-position:0px -460px;
+	border-radius:50%;}
+.newsbox{position:relative; width:265px; height:270px; border:1px solid red; 
+	float:left; margin-right:10px;}
+.newsbox:nth-child(4), .newsbox:nth-child(8) {margin:0;}
+ 	
+ 	
+ 
+#third .view .news .newsbox .img{position:relative; width:365px; height:150px; border:1px solid blue;
+	border-radius:30px; overflow:hidden;}
+#third .view .news .newsbox .title{position:relative; width:245px; height:100px; border:1px solid blue;
+	font-size:105%; color:#565656; margin:10px; }
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	

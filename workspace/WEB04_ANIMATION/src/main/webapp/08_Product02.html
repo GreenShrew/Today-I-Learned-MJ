@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>08_Product02</title>
+<style type="text/css">
+    .view{position: relative; width: 600px; height: 600px; margin: 0 auto; border: 1px dashed red; overflow: hidden;}
+    .bigimg{position: absolute; left: 0; top: 0px; background: silver; width: 600px; height: 400px; font-size: 130%; font-weight: bold; color: white; line-height: 400px; text-align: center;}
+    .box1{position: absolute; bottom: 0px; border-radius: 100px; overflow: hidden; width: 198px; height: 198px;}
+    #btn_img{left: 0px;}
+    #btn_img{left: 200px;}
+    #btn_img{left: 400px;}
+    /* 큰 그림을 .bigimg의 왼편으로 옮기고, 보이지 않는 상태로 만들었다. box1에 마우스를 올리면 각각의 box2(큰그림)가 오른쪽으로 옮겨지며 보이게 된다. */
+</style>
+</head>
+<body>
+    <div class="view">
+        <div class="bigimg">이미지에 마우스를 올리면 큰 이미지를 볼 수 있습니다.</div>
+
+        <div class="box1" id="btn_img1"><img src="images/prod1.jpg" widdth="198" height="198"></div>
+        <div class="box1" id="btn_img2"><img src="images/prod2.jpg" widdth="198" height="198"></div>
+        <div class="box1" id="btn_img3"><img src="images/prod3.jpg" widdth="198" height="198"></div>
+
+        <div class="box2" id="view_img1"><img src="images/prod1.jpg" width="600" height="400"></div>
+        <div class="box2" id="view_img2"><img src="images/prod2.jpg" width="600" height="400"></div>
+        <div class="box2" id="view_img3"><img src="images/prod3.jpg" width="600" height="400"></div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- 
+* 변형함수 (2D)
+    1. translate(x,y) : 지정한 크기만큼 x축과 y축으로 이동
+    2. translateX(x) : 지정한 크기만큼 x축으로 이동
+    3. translateY(y) : 지정한 크기만큼 y축으로 이동
+    4. scale(x,y) : 지정한 크기만큼 x축과 y축으로 확대 축소
+    5. scaleX(x) : 지정한 크기만큼 x축으로 확대 축소
+    6. scaleY(y) : 지정한 크기만큼 y축으로 확대 축소
+    7. rotate(각도) : 지정한 각도만큼 회전 (단위:deg)
+    8. skew(x,y) : 지정한 크기만큼 x축과 y축으로 왜곡
+    9. skewX(x) : 지정한 크기만큼 x축으로 왜곡
+    10. skewY(y) : 지정한 크기만큼 y축으로 왜곡
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_Transform_Translate.html</title>
+<style type="text/css">
+.origin{width: 200px; height: 134px; border: 1px solid black; float: left; margin: 40px;}
+
+.movex, .movey, .movexy{transition-duration: 1s;}
+/* transition-duration에서 duration은 생략 가능하다. */
+
+.movex:hover{
+    transform: translateX(50px);
+    -webkit-transform: translateX(50px);
+    -ms-transform: translateX(50px);
+    -moz-transform: translateX(50px);
+    -o-transform: translateX(50px);
+}
+/* 각 운영체제에 따라 명령어가 다를 수 있다. 위와 같이 앞에 운영체제를 정의하고 해당 운영체제의 경우 이러한 명령어를 사용하겠다고 정의한다. */
+.movey:hover{transform: translateY(30px);}
+.movexy:hover{transform: translate(30px, 30px);}
+/* left 값이나 top 값의 변형을 적용하여도 똑같지만, 이들은 절대죄표에 의해 움직이며,
+translateX들은 상대적 좌표 이동이 적용된다. */
+
+</style>
+</head>
+<body>
+    <div class="origin">
+        <div class=movex><img src="images/bus.jpg"></div>
+    </div>
+    <div class="origin">
+        <div class=movey><img src="images/bus.jpg"></div>
+    </div>
+    <div class="origin">
+        <div class=movexy><img src="images/bus.jpg"></div>
+    </div>
+    
+</body>
+</html>

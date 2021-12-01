@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07_TransformEx02</title>
+<style type="text/css">
+#base{width: 250px; height: 1000px; background: #595959;}
+#top{position: relative; width: 100%; height: 150px; border-radius: 1px solid white;}
+.menuall{position: relative; width: 100%; height: 40px; border: 1px solid yellow; background: #232323; color: white; line-height: 0px; text-align: center;}
+.submenuall{position: relative; width: 100%; height: 1px; background: #989898;}
+
+#menu1:hover{color: orange;}
+#submenu1{transform-origin: top;}
+#menu1:hover~#submenu1{transform:scaleY(100);}
+#menu1:hover~#menu2{transform:translateY(100px);}
+#menu1:hover~#menu3{transform:translateY(100px);}
+#menu1:hover~#menu4{transform:translateY(100px);}
+#menu1:hover~#menu5{transform:translateY(100px);}
+
+#menu2:hover{color: orange;}
+#submenu2{transform-origin: top;}
+#menu2:hover~#submenu2{transform:scaleY(100);}
+#menu2:hover~#menu3{transform:translateY(100px);}
+#menu2:hover~#menu4{transform:translateY(100px);}
+#menu2:hover~#menu5{transform:translateY(100px);}
+
+#menu3:hover{color: orange;}
+#submenu3{transform-origin: top;}
+#menu3:hover~#submenu3{transform:scaleY(100);}
+#menu3:hover~#menu4{transform:translateY(100px);}
+#menu3:hover~#menu5{transform:translateY(100px);}
+
+#menu4:hover{color: orange;}
+#submenu4{transform-origin: top;}
+#menu4:hover~#submenu4{transform:scaleY(100);}
+#menu4:hover~#menu5{transform:translateY(100px);}
+
+#menu5:hover{color: orange;}
+#submenu5{transform-origin: top;}
+#menu5:hover~#submenu5{transform:scaleY(100);}
+
+</style>
+</head>
+<body>
+    <!-- 메뉴에 마우스를 올리면, 해당 메뉴의 글자색을 orange로, 바로 아래에 서브메뉴 크기 100px로, 나머지 아래 메뉴 서브메뉴 크기만큼 이동. -->
+    <div id="base">
+        <div id="menu1" class="menuall"><h2>NEWS</h2></div>
+        <div id="submenu1" class="submenuall"></div>
+        <div id="menu2" class="menuall"><h2>PORTPOLIO</h2></div>
+        <div id="submenu2" class="submenuall"></div>
+        <div id="menu3" class="menuall"><h2>BOARD</h2></div>
+        <div id="submenu3" class="submenuall"></div>
+        <div id="menu4" class="menuall"><h2>ALBUM</h2></div>
+        <div id="submenu4" class="submenuall"></div>
+        <div id="menu5" class="menuall"><h2>CONTACT</h2></div>
+        <div id="submenu5" class="submenuall"></div>
+    </div>
+</body>
+</html>
