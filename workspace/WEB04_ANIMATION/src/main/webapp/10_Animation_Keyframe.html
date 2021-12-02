@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_Animation_Keyframe</title>
+<style type="text/css">
+    #a{width: 200px; height: 200px; background: blue; margin: 20px; animation-name: change_bg; animation-duration: 2s;}
+    #b{width: 200px; height: 200px; background: green; margin: 20px; animation-name: change_bg; animation-duration: 2s;}
+
+    /* 애니메이션 키프레임의 정의 - 움직임 또는 변화를 정의한다. */
+    @keyframes change_bg{
+        from{border:1px solid black;}
+        to{
+            background: #a5d6ff;
+            border:10px solid red;
+            border-radius: 50%;
+        }
+    } /* from에서 to까지 변경 */
+
+    /* 변화될 애니메이션의 변경요소를 change-bg라는 이름으로 정의하였다. */
+    /* from : 최초상태, to : 변화된 상태 */
+    /* from : 원래 요소가 갖고 있는 상태에다가 form에 기술된 상태를 더한다. */
+    /* change_bg : 각 키프레임들을 구분할 수 있는 개발자가 정의한 이름 */
+    /* change_bg 애니메이션을 실행하는 명령이 포함된 css의 대상 요소는 from부터 to까지 설정된 시간 내에 애니메이션 효과를 내며 변화한다. */
+
+</style>
+</head>
+<body>
+    <div id="a"></div>
+    <div id="b"></div>
+</body>
+</html>

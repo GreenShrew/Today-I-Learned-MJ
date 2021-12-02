@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>09_Transform_Rotate3D</title>
+<style type="text/css">
+.pers, .no-pers{width: 152px; height: 180px; border: 1px solid black; float:left; margin: 40px;}
+.s{transition: 0.5s;}
+
+.pers .rotatex{perspective: 1000px;}
+.pers .rotatey{perspective: 300px;}
+/* perspective의 단위는 이미지를 바라보는 시점의 거리이다. 위는 300px 시점에서 보느냐, 1000px 시점에서 보느냐의 차이이다. */
+
+.rotatex img:hover{transform:rotateX(50deg);}
+.rotatey img:hover{transform:rotateY(50deg);}
+</style>
+</head>
+<body>
+    <h4>원본 이미지</h4>
+    <div><img src="images/sunset.jpg" alt=""></div>
+    <div class="no-pers">
+        <div class="rotatex"><img src="images/sunset.jpg" class="s"></div>
+    </div>
+    <div class="pers">
+        <div class="rotatex"><img src="images/sunset.jpg" class="s"></div>
+    </div>
+    <div class="pers">
+        <div class="rotatey"><img src="images/sunset.jpg" class="s"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>12_Animation_Count</title>
+<style type="text/css">
+.box{margin-top: 50px; margin-left: 100px; padding: 20px; height: 60px; width: 100px; animation-name: moving; animation-duration: 1.5s; animation-iteration-count: infinite; animation-direction: alternate;}
+
+/* animation-iteration-cont : 애니메이션 반복 횟수. 숫자를 쓰면 그 횟수만큼 반복, infinite를 쓰면 무한반복한다. */
+
+/* animation-direction : 애니메이션의 진행 방향.
+    - 지정이 안 되어있으면 정방향(from->to)
+    - animation-direction: reverse; 역방향(to->from)
+    - animation-direction: alternate; 정방향 한번 역방향 한번 번갈아가면서 진행 */
+
+@keyframes moving{
+    from{background: #faef7c; opacity: 0.5; transform: scale(0.5) rotate(15deg);}
+    to{width: 400px; background: #ff9400; opacity: 1; transform: scale(1) rotate(0deg);}
+}
+</style>
+</head>
+<body>
+    <div class="box">
+        <h3>CSS3 Animaion</h3>
+    </div>
+</body>
+</html>

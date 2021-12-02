@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>11_Animation_name</title>
+<style type="text/css">
+    div{width: 200px; height: 200px; float: left; margin: 50px;}
+    #box1{background-color: #4cff00; border: 1px solid black; animation-name: shape; animation-duration: 2s;}
+    #box2{background-color: #8f06b0; border: 1px solid black; animation-name: rotate; animation-duration: 2s;}
+    
+@keyframes shape{
+    from{border: 1px solid black;}
+    to{border-radius: 50%;}
+}
+@keyframes rotate{
+    from{transform:rotate(0deg);}
+    to{transform: rotate(45deg);}
+}
+</style>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>
+</body>
+</html>

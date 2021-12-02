@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>14_AnimationEx2</title>
+<style tyep="text/css">
+.box{position:relative; left:100px; height: 60px; width: 400px; font-size: 150%; line-height: 60px; padding-left: 50px; background: orange; animation-name: moving; transition-duration: 2s; animation-iteration-count: infinite; animation-direction: alternate; transform-origin: right;}
+
+@keyframes moving{
+    from{transform:perspective(1000px) rotateY(0deg);}
+    to{transform:perspective(1000px) rotateY(180deg);}
+}
+</style>
+</head>
+<body>
+    <div class="box">
+        <h3>CSS Animation</h3>
+    </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+day 33
+
+
+
+08_Product02
+
+- 어제 공부했던 내용의 예시
+ 기본은 absolute를 통해 사진의 위치를 설정하고, hover와 transform:translateX(~~px): 으로 사진을 움직이도록 만드는 것이다.
+
+
+
+09_Transform_Rotate3D
+
+- 이미지 회전
+ 중심을 기준으로 x축 y축으로 돌리는데, 이미지가 좌우, 상하로 찌그러진것처럼 보인다.
+
+perspective: 300px; 이런 명령을 넣어주면 3d로 돌아가는게 실감이 난다.
+perspective의 단위는 이미지를 바라보는 시점의 거리이다. 위는 300px 시점에서 보느냐, 1000px 시점에서 보느냐의 차이이다.
+
+
+
+10_Animation_Keyframe
+
+- 마우스의 이벤트 없이도 동작하는 애니메이션 효과
+
+※ keyframes는 처음 페이지가 로딩될 때 작동한다.
+
+@keyframes '이름'{
+	from{}
+	to{}
+}
+이런식으로 정의한다.
+그리고 정의한 이름을 이용하여 적용할 수 있다.
+
+
+
+11_Animation_name
+
+- 애니메이션 반복 횟수 설정 요소
+
+animation-iteration-count: infinite; <- infinite를 쓰면 무한반복, 숫자를 쓰면 숫자만큼
+
+animation-direction: alternate;
+	alternate를 쓰면 from~to~from 순서로 애니메이션 진행
+	reverse를 쓰면 to~from 순서로 진행
+	아무것도 안 쓰면 from~to 순서로 진행
+
+
+
+13_AnimationEx1
+
+- 12에서 배운 내용의 예제
+
+
+
+14_AnimationEx2 - 이거 왜 작동을 안 하지?
+
+- 12에서 배운 내용의 예제 2
+
+
+
+15_AnimationEx3
+
+- 12에서 배운 내용의 예제 3
+※ 중간에 50%를 쓰면 중간에 과정 하나가 생성되는 것. 3초로 설정했다면 1.5초씩 할당된다.
+ from -> 50% -> to 순서로 진행된다.
+ 만약 %의 숫자를 다르게 한다면, 그만큼의 시간을 할당한다.
+
+
+
+WEB05_JavaScript 생성!
+
+01_JavaScriptBasic01 - 2 문자 자료형 예시 작동이 왜 안되는거지? 아마 나올거야 이제...제목 주석처리를 안 했었음
+
+※ 맨 앞에 주석처리 한 내용들 주석 지우고 실행시키면 된다.
+
+- html의 한계(정적인 기능)를 벗어나개 만들어준다.
+
+정의는 head태그 사이에 <script type="text/JavaScript"></script> 태그 안에 한다.
+
+alert와 document.write 사용.
+
+
+※ 7 변수 부분에 "익명함수" 내용 있다.
+※ 11. 자료형 검사
+ 자바스크립트에서는 변수가 어떤 자료형인지 알려주는 함수를 제공해준다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
