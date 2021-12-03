@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>09_BOM02</title>
+<script type="text/javascript">
+// 2. screen 객체
+    // - 웹브라우저의 화면이 아니라 운영체제 화면의 속성을 가지는 객체.
+    var output='';
+    for(var key in screen){
+        output += '<h3>※'+key+' : '+screen[key] + '</h3>';
+    }
+
+    // 팝업창을 띄우고 팝업창의 크기를 화면의 크기와 일치시킨다.
+    var child = window.open('','','width=300, height=200');
+    // 팝업창의 위치를 왼쪽 최상단에 맞춰 이동한다.
+    child.moveTo(0,0);
+    var width = screen.width;
+    var height = screen.height;
+    child.resizeTo(width,height);   // 화면의 최대 크기로 팝업창 크기 조절
+
+    // setInterval을 사용하여, 좌우 상하 크기를 일정 크기로 반복해서 줄이고, 오른쪽 아래로 일정 위치 이동한다.
+    setInterval(function(){
+        child.resizeBy(-20,-20);    // -20px 씩 가로세로 크기 조절
+        child.moveBy(20,20);        // 오른쪽 아래로 20px씩 이동
+    }, 1000);
+</script>
+</head>
+<body>
+    
+</body>
+</html>

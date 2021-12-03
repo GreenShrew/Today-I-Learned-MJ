@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css"></style>
+<script type="text/javaScript">
+
+/*  13. 배열 */
+    // 배열에 저장되는 자료형이 고정되지 않는다. 또한, 배열 안에 배열을 넣어서 이차원 배열처럼 사용이 가능하다.
+    var array=[273, 'string', true, function() { /* 객체 */ }, { a:100, b:200 }, [150, 170]];
+//    alert(array[0]);
+//    alert(array[1]);
+//    alert(array[2]);
+//    alert(array[3]);
+//    alert(array[4]);
+//    alert(array[5]);
+//    alert(array[5][0]);
+//    alert(array[5][1]);
+//    alert(array);
+
+
+/*  14. undefined 자료형 */
+    // 1. 존재하지 않는 것을 표현하는 자료형
+    // alert(variable); // 에러. - undefined 실행 없이 실행전 에러 발생
+//    alert(typeof(variable));
+
+    // 2 변수를 선언했지만, 초기화하지 않았을 때
+//    var variable2;
+//    alert(variable2);
+//    alert(typeof(variable2));
+
+    // 3. undefined가 아닌 경우 : 변수 생성(선언)없이 바로 값을 대입한 경우
+//    variable3 = 100;
+//    alert(variable3)
+//    alert(typeof(variable3));
+
+
+/*  15. 숫자와 문자열(아라비아기호) 자료형의 변환 */
+    // 1. + 연산자 : 숫자끼리의 연산을 제외한 연산은 모두 이어붙이기
+//    alert(52+273);  // 325
+//    alert('12'+52+273);  // 1252273
+//    alert(52+273+'12');  // 32512, 산술 연산이 먼저 실행된다.
+//    alert('52'+'273');  // 52273
+//    alert('52'+273);    // 52273
+//    alert(52+'273');    // 52273
+
+    // 2. 덧셈을 제외한 사칙 연산 : 문자가 숫자로 변환되어 산술연산 실행
+//    alert('52'*2);  // 104
+//    alert('52'-2);  // 50
+//    alert('52'/2);  // 26
+//    alert('52'%3);  // 1
+//    alert('홍길동'-2);  // NaN 한글, 알파벳과 숫자의 - 연산은 불가능하다.
+//    alert('52'*'2');    // 104
+//    alert('52'-'2');    // 50
+//    alert('52'/'2');    // 26
+//    alert('52'%'3');    // 1
+
+    // 3. 강제 자료형 변환
+    // - 다른 자료형 -> 숫자변환 : Number() 함수 사용.
+    // - 다른 자료형 -> 문자열 변환 : String() 함수 사용.
+//    var input = prompt('숫자를 입력하세요', '숫자');
+//    var num = Number(input);
+//    alert(typeof(input)+' : '+num+" : typeof(num) => "+typeof(num));
+    // 숫자가 아닌 값 입력시 NaN이 출력된다.
+    // NaN 출력 : 자바스크립트로 나타낼 수 없는 숫자를 의미.
+
+//    var str = String(12.123);
+//    alert('stgr : Number -> string : '+str+'\ntypeof(str) : '+typeof(str));
+
+    // 4. Boolean() 자료형 변환
+//    alert('Boolean(0) -> ' + Boolean(0));   // 0은 false, 0이 아닌 숫자는 모두 true
+//    alert('Boolean(NaN) -> ' + Boolean(NaN));   // false
+
+//    alert('Boolean(\'0\') -> ' + Boolean('0'));   // true -> 따옴표 안에 그 어떤 글자라도 존재한다면 true, 비어있거나 null 이라면 false
+//    alert('Boolean(\'false\') -> ' + Boolean('false')); // true
+//    alert('Boolean(\'\') -> ' + Boolean(''));   // false
+
+//    alert('Boolean(null) -> ' + Boolean(null)); // false
+//    alert('Boolean(undefined) -> ' + Boolean(undefined));   // false
+
+
+/* 16. 일치 연산자 */
+    // 양변의 자료형은 틀리지만 자료형을 맞춰서 변환했을 때 변환된 값이 같음
+    // == : 일치가 true
+    // != : 불일치가 true
+//    alert('\'\' == false -> '+(''==false)); // true
+//    alert('\'\' == 0 -> '+(''==0)); // true
+//    alert('0 == false -> '+(0==false)); // true
+//    alert('273 == \'273\' -> '+(273=='273')); // true
+    
+    // === : 양변의 자료형과 값이 모두 일치.
+    // !== : 양변의 자료형과 값이 다름.
+//    alert('\'\' === false -> '+(''===false)); // false
+//    alert('\'\' === 0 -> '+(''===0)); // false
+//    alert('0 === false -> '+(0===false)); // false
+//    alert('273 === \'273\' -> '+(273==='273')); // false
+//    var str = "홍길동";
+//    alert(' "홍길동" === "홍길동" -> ' + (str === "홍길동"));   // true
+</script>
+</head>
+<body>
+    
+</body>
+</html>

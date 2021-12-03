@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_Loop</title>
+<script type="text/javascript">
+/*  1. while 반복문 */
+    // 예제1 - 반복실행 while 문
+    var value = 1;
+    var s = "";
+    while(value<5){
+        alert(value+'번째 반복');
+        s = s + value + "번째 반복\n"
+        value++;
+    }
+    alert(s);
+
+    // 예제2 - 반복실행 while 문
+    var value = 0;
+    var startTime = new Date().getTime();   // 오늘 날짜 현재 시간의 밀리초 환산값
+    // alert(startTime);
+    endTime = startTime +1000;
+
+    while(new Date().getTime() < endTime){
+        value++;    // value 변수에는 1초간 value++ 연산의 횟수가 계속 업데이트
+    }   // value에..... 현재 시간이 밀리초로 환산되어 endTime보다 작은 동안 몇번 반복 실행되는지 횟사가 저장될 예정이다.
+    alert("시작시간 : "+startTime+"\n종료시간(시작시간+1초) : "+endTime+"\n반복횟수 : "+value);
+    
+
+/*  2. do~while 반복문 */
+    var value = 10;
+    do{
+        alert(value+'번째 반복.');
+        value++;
+    }while(value<=5);
+    // 반복 실행의 조건이 처음부터 false가 되어도 한번은 실행하는 특징이 있다.
+
+
+/*  3. for 반복문 */
+    var array = ['포도', '사과', '바나나', '망고'];
+    for(var i=0; i<array.length; i++){
+        alert(array[i]);
+    }
+
+
+/*  4. for in 반복문 */
+    var array = ['포도', '사과', '바나나', '망고'];
+    // 자바에서 사용하던 배열 또는 리스트를 이용한 반복실행
+    // for(String a : array){
+    //    alert(a);
+    // }
+    for(var a in array){    // 배열의 값이 전달되지 않고 배열의 인덱스들이 전달된다.
+        alert(array[a]);    // a 변수에는 0,1,2,3 값이 대입되면서 반복실행된다.
+    }
+</script>
+</head>
+<body>
+    
+</body>
+</html>

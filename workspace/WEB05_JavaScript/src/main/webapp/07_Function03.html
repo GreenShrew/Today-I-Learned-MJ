@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07_Function03</title>
+<script type="text/javaScript">
+// 함수의 재정의 : 함수 호출 전 마지막에 저장된 함수가 실행된다.
+    // 1. 익명함수의 재정의
+    var func = function(){document.write('<h1>익명함수1</h1>');}
+    func(); // 익명함수1
+    var func = function(){document.write('<h1>익명함수2</h1>');}
+    func(); // 익명함수2
+
+    // 2. 선언적 함수의 재정의
+    // - 웹브라우저는 script 태그 내부의 내용을 읽기 전에 선언적 함수를 먼저 읽는다.
+    // - 마지막에 정의된 move 함수가 세군대의 호출 부분에서 실행된다.
+    function move() {document.write('<h1>move() 함수1 호출.</h1>');}
+    move(); // move() 함수3 호출
+    function move() {document.write('<h1>move() 함수2 호출.</h1>');}
+    move(); // move() 함수3 호출
+    function move() {document.write('<h1>move() 함수3 호출.</h1>');}
+    move(); // move() 함수3 호출
+    // 익명함수이든 선언적 함수이든 자바스크립트의 함수는 필요에 따라 위와 같이 재정의되어 사용 가능하다.
+    // 익명함수는 재정의되어 변수에 할당될때마다 내용이 갱신된다.
+    // 반면 선언적 함수는 스크립트 태그 내에서 먼저 읽고 시작되기 때문에 가장 마지막으로 정의된 함수의 내용이 해당 함수 이름으로 정의되고 시작된다.
+    // 따라서 위의 코드의 세번의 move() 함수호출 명령은 모두 'move() 함수3 호출.' 내용을 출력한다.
+</script>
+</head>
+<body>
+    
+</body>
+</html>

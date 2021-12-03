@@ -173,18 +173,38 @@
 
 
 /*  12. 입력 */
-    var input = prompt('이름을 입력하세요.', '두 글자 이상 입력');
+//    var input = prompt('이름을 입력하세요.', '두 글자 이상 입력');
+//    var num = Number(input);
+    // prompt는 모든 입력을 'string'으로 받는다.
+    // 자바에서 integer.parseInt와 같이 숫자로 변환한 것 처럼, 위와 같이 변환시킬 수 있다.
     // 괄호안의 첫번째 텍스트 = 상자 안에 표시될 안내문
     // 괄호안의 두번째 텍스트 = 입력란에 미리 입력되고 블럭처리되어 있을 텍스트
-    alert(input+'님 반갑습니다.');
+//    alert(input+'님 반갑습니다.');
     // boolean을 입력받을 때 사용하는 함수
-    var bool = confirm('수락하시겠습니까?');
+//    var bool = confirm('수락하시겠습니까?');
     // confirm에서 대답한 버튼 '확인' = true, '취소' = false로 전달된다.
-    if(bool){
-        alert('수락하셨습니다.');
-    }else{
-        alert('거절하셨습니다.');
-    }
+//    if(bool){
+//        alert('수락하셨습니다.');
+//    }else{
+//        alert('거절하셨습니다.');
+//    }
+
+/* 국어 영어 수학점수를 입력받고, 총점 평균을 출력하도록 자바 스크립트 명령을 구성해보자.
+    (입력받은 점수, 총점, 평균을 세 줄에 걸쳐서 출력)
+    입력 받은 문자를 숫자로 변환하는 함수 Number()
+    a = Number('123') */
+
+
+    var kor = prompt('국어 점수를 입력하세요.', '100');
+    var eng = prompt('국어 점수를 입력하세요.', '100');
+    var mat = prompt('국어 점수를 입력하세요.', '100');
+    kor = Number(kor);
+    eng = Number(eng);
+    mat = Number(mat);
+
+    var tot = kor+eng+mat;
+    var ave = tot/3;
+    alert("입력한 점수 국어 : " + kor + ", 영어 : " + eng + ", 수학 : " + mat + "\n총점 : " + tot + "\n평균 : " + ave)
 </script>
 </head>
 <body>

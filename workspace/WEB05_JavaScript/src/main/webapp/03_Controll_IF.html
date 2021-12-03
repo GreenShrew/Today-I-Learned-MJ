@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_Controll_IF</title>
+<style type="text/css"></style>
+<script type="text/javaScript">
+/*  1. if 조건문 */
+    var date = new Date();
+    // 자바스크립트의 내장 라이브러리중 날짜 객체를 생성하는 명령. 자바스크립트에도 자바와 같이 활용할 주요 내장 클래스들이 존재한다. 새로운 객체를 생성하기 위해 new는 명령과 함께 객체를 생성하여 사용한다.
+    
+    // 자바스크립트의 if문의 사용은 자바에서의 사용과 똑같다.
+    var hour = date.getHours();
+    if(hour<11){
+        alert(hour+'시 : 아침 먹을 시간입니다.');
+    }else if(hour<15){
+        alert(hour+'시 : 점심 먹을 시간입니다.');
+    }else{
+        alert(hour+'시 : 저녁 먹을 시간입니다.');
+    }
+    alert(hour + "시");
+    var min = date.getMinutes();
+    alert(min + "분");
+    var sec = date.getSeconds();
+    alert(sec + "초");
+
+   // var year = date.getYear(); 는 안 쓴다! 1900년을 뺀 값이 나오기 때문!
+
+    var year = date.getFullYear();
+    alert(year + "년");
+    var month = date.getMonth();
+    alert((month+1) + "월");
+    var date1 = date.getDate();
+    alert(date1 + "일");
+    var week = date.getDay();
+    // 0:일요일, 1:월요일, 2:회요일...6:토요일
+    if(week==1) alert('월요일');
+    else if(week==2) alert('화요일');
+    else if(week==3) alert('수요일');
+    else if(week==4) alert('목요일');
+    else if(week==5) alert('금요일');
+    else if(week==6) alert('토요일');
+    else alert('일요일');
+    
+</script>
+</head>
+<body>
+    
+</body>
+</html>

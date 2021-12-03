@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>05_Function01</title>
+<script type="text/javaScript">
+/*
+함수(Function) :
+    - 자바의 메소드와 같은 뜻의 문법요소이다.
+    - 반복 되거나 단위로 구성될 명령을 하나의 이름으로 묶어놓고, 명령이 필요할때 이름을 불러 실행하는 구조이다.
+    - 보통 head 태그 안의 스크립트 영역에서 함수를 정의해놓고, body의 이벤트에 연결하여 실행시킨다.
+        : 버튼이 클릭되면 실행되는 자바스크립트 함수의 정의
+    - 함수는 선언적 함수와 익명 함수가 있다.
+    - 선언적 함수는 생성 당시 부를 이름을 부여해서 만드는 함수를 의미하고, 익명함수는 이름을 지정하지 않은 상태로 만들어서 함수 자체를 변수에 저장하여 변수 이름으로 사용하곤 한다.
+*/
+
+/*
+* 익명함수
+ - 하나의 변수에 익명함수를 대입하고, 필요할 때 마다 변수 이름으로 실행할 수 있다는 장점이 있다.
+ - 이미 함수가 대입되어 있는 변수에 다른 함수를 대입하여 다른 함수가 실행되게 할수도 있다.
+*/
+// 익명함수
+var func1 = function(){
+    var output = Number(prompt('숫자를 입력하세요.','숫자'));
+    alert(output);
+}
+func1();
+
+func1 = function(){
+   alert("안녕하세요 반갑습니다.");
+}
+func1();
+
+// 선언적 함수
+function move(){
+    var output = Number(prompt('숫자를 입력하세요.','숫자'));
+    alert(output);
+}
+move(); // head의 스크립트 영역에서 직접 호출
+
+// 함수는 익명 함수이든 선언적 함수이든 head 영역의 script 태그 안에서 또는 body 영역의 script 태그 안에서 어디서든 호출 할 수 있다.
+// <body onLoad="move();">
+// <input type="button" onClick="move();" value="클릭">
+// body에서 이벤트에 연결하여 호출한 경우
+</script>
+</head>
+<body>
+<input type="button" value="func1 실행" onclick="func1();">
+</body>
+</html>
