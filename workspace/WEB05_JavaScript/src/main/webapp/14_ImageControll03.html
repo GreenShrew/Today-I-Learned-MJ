@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14_ImageControll03.html</title>
+<script type="text/javascript">
+// 마우스로 이미지를 클릭할때 마다 이미지 이름이 1->2  2->3  3->4 이렇게 변경되도록
+// 코딩합니다. 이미지는 10번까지 있으며, 10번 다음에는 다시 1로 되돌아 옵니다
+var number = 2;
+function changeImg(){
+    var filename = "images/" + number + ".jpg";
+    document.getElementById("target").src = filename;
+    number++;
+    if( number == 11) number=1;
+}
+</script>
+</head>
+<body>
+    <img src="images/1.jpg"  id="target" onClick="changeImg()">
+</body>
+</html>

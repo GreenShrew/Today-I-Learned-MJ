@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20_ImageControll09.html</title>
+<style type="text/css">
+    ul{ list-style:none; margin:0px; padding:0px;}
+    ul li{position:relative; float:left; padding:0px; margin:10px;overflow:hidden;}
+    .caption{ position:absolute; top:200px; width:300px; height:200px; background:black; opacity:0.3; transition:0.5s; }
+    .caption h1, .caption p{color:white; text-align:center;} 
+</style>
+<script type="text/javascript">
+    // 함수 : 마우스를 올리면 해당  caption 이 투명도 0.7   top :0 으로 변하게
+    // 마우스가 빠져나가면 원래 자리와 투명도로 돌아가는 함수를 제작하세요.
+    function caption_up(x){
+        document.getElementById("cap" + x).style.opacity="0.7";
+        document.getElementById("cap" + x).style.webkitTransform = 'translateY(-200px)';
+    }
+    function caption_down(x){
+        document.getElementById("cap" + x).style.opacity="0.3";
+        document.getElementById("cap" + x).style.webkitTransform = 'translateY(200px)';
+    }
+</script>
+</head>
+<body>
+    <ul>
+        <li onmouseover="caption_up(1)" onmouseout="caption_down(1)">
+            <img src="images/prod1.jpg">
+            <div class="caption" id="cap1">
+                <h1>상품1</h1><p>상품1:설명텍스트</p><p>가격:12,345원</p></div>
+        </li>
+        <li onmouseover="caption_up(2)" onmouseout="caption_down(2)">
+            <img src="images/prod2.jpg">
+            <div class="caption" id="cap2">
+                <h1>상품2</h1><p>상품2:설명텍스트</p><p>가격:23,456원</p></div>
+        </li>
+        <li onmouseover="caption_up(3)" onmouseout="caption_down(3)">
+            <img src="images/prod3.jpg">
+            <div class="caption" id="cap3">
+                <h1>상품3</h1><p>상품3:설명텍스트</p><p>가격:34,567원</p></div>
+        </li>
+    </ul>    
+</body>
+</html>

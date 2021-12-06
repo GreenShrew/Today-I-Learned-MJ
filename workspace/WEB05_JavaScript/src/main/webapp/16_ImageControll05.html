@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16_ImageControll05.html</title>
+<script type="text/javascript">
+var number = 1;
+var timer;
+function start(){
+    timer = window.setInterval( function(){
+        number++;
+        document.getElementById("target").src = "images/" + number + ".jpg";
+        if(number==10) number = 0;
+    } , 1000);
+}
+function stop(){
+    window.clearInterval(timer); // 
+}
+</script>
+</head>
+<body onLoad="start()">
+    <img src="images/1.jpg"  id="target" onmouseover="stop();" onmouseout="start();">
+</body>
+</html>

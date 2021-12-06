@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17_ImageControll06.html</title>
+<style type="text/css">
+#a1 {position:absolute; width:170px; height:255px; border:2px solid black; top:100px; left:100px;}
+</style>
+<script type="text/javascript">
+// setInterval 을 이용해서 0.5초에 20도씩 회전하게 해주세요. 마우스를 올리면 반대방향으로 회전, 마우스가 빠져나가면 원래방향으로 회전
+var aa =0 ;
+var timer1, timer2;
+function clockwise(){  
+    window.clearInterval(timer2);   // 반시계방향 회전을 하고 있는 setInterval 멈춤
+    timer1 = window.setInterval( function(){
+        aa += 20;
+        document.getElementById("a1").style.webkitTransform='rotate(' + aa + 'deg)';
+        //if(aa==360) aa = 0;
+    }, 500);
+}
+function counterclockwise(){
+    window.clearInterval(timer1);  // 시계방향 회전을 하고 있는 setInterval 멈춤
+    timer2 = window.setInterval( function(){   // 새로 setInterval 시작
+        aa -= 20;
+        document.getElementById("a1").style.webkitTransform='rotate(' + aa + 'deg)';
+        //if(aa==0) aa = 360;
+    }, 500);
+}
+</script>
+</head>
+<body onload="clockwise()">
+    <div id='a1' onmouseout="clockwise()" onmouseover="counterclockwise()">
+        <img src="images/1.jpg">                           
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11_BOM04.html</title>
+<script type="text/javascript">
+/* 4. navigator 객체 */
+    // - 웹페이지를 실행하고 있는 브라우저에 대한 정보를 가짐.
+    var output = '';
+    for(var key in navigator){
+        output+='<h3>※ ' + key + ':' + navigator[key] + '</h3>';
+    }
+    output += '<h3>' + navigator.userAgent + '</h3>';
+    document.write(output);
+
+    /* navigator 가 제공하는 핵심기능 : 
+        접속하는 디바이스(엄밀히 말하면 운영체제)에 따라 표시되는 페이지(엄밀히 말하면 표시될 페이지의 경로를 달리해서)를 표시합니다 
+
+    if(	 (navigator.userAgent.match(/iPhone/i) )  ||  (navigator.userAgent.match(/iPod/i))
+    || (navigator.userAgent.match(/iPad/i))  || (navigator.userAgent.match(/Windows CE/i))
+	|| (navigator.userAgent.match(/Symbian/i)) || (navigator.userAgent.match(/BlackBerry/i))
+	|| (navigator.userAgent.match(/Android/i)) ) {
+	    // 모바일 및 태블릿 으로 접속했을때 이동할 곳으로 이동
+        location.href='mobile.html';
+    } else {
+        // PC로 접속했을때 이동할 곳으로 이동
+        location.href='desktop.html';
+    }
+    */
+
+
+/* 5. window 객체의 onload 이벤트 속성 */
+    //- window 객체가 로드가 완료되고 자동으로 할당된 함수를 실행.
+    window.onload=function(){  
+        alert('Hello JavaScript onload Event...'); 
+    };
+    //  window.onload 에 연결된 익명함수의 실행내용과, <body body onLoad="abc();"> 에서 호출된  abc();함수의  실행내용이 같은 경우 입니다.
+    function abc(){	
+        alert('Hello JavaScript onload Event...'); 
+    }
+</script>
+</head>
+<body body onLoad="abc();">
+    
+</body>
+</html>

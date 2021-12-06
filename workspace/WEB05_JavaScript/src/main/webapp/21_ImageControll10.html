@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21_ImageControll10.html</title>
+<style type="text/css">
+.view{position:relative; width:600px; height:600px; margin:0 auto; border:1px dashed red; overflow: hidden;}
+.bigimg{position:absolute; left:0; right:0px; background: silver; width:600px; height:400px; font-size:130%; font-weight:bold; color:white; line-height:400px; text-align:center;}
+.box1{position: absolute; bottom:0px; border-radius: 100px; overflow: hidden; width:198px; height:198px;}
+#btn_img1{left:0px;}
+#btn_img2{left:200px;}
+#btn_img3{left:400px;}
+.box2{position: absolute; top:0px; left:-600px; transition: 1s;}
+</style>
+<script type="text/javascript">
+
+function move(x){
+    //document.getElementById("view_img1").style.left = '-600px';
+    //document.getElementById("view_img2").style.left = '-600px';
+    //document.getElementById("view_img3").style.left = '-600px';
+    for(var i=1; i<=3; i++)
+        document.getElementById("view_img" + i).style.left = '-600px';
+
+    document.getElementById("view_img" + x).style.left = '0px';
+}
+
+</script>
+</head>
+<body>
+    <div class="view">
+        <div class="bigimg">이미지에 마우스를 올리면 큰 이미지를 볼 수 있습니다.</div>
+        <div class="box1" id="btn_img1" onmouseover="move(1)"><img src="images/prod1.jpg" width="198" height="198"></div>
+        <div class="box1" id="btn_img2" onmouseover="move(2)"><img src="images/prod2.jpg" width="198" height="198"></div>
+        <div class="box1" id="btn_img3" onmouseover="move(3)"><img src="images/prod3.jpg" width="198" height="198"></div>
+        <div class="box2" id="view_img1"><img src="images/prod1.jpg" width="600" height="400"></div>    
+        <div class="box2" id="view_img2"><img src="images/prod2.jpg" width="600" height="400"></div>
+        <div class="box2" id="view_img3"><img src="images/prod3.jpg" width="600" height="400"></div>
+    </div>
+</body>
+</html>

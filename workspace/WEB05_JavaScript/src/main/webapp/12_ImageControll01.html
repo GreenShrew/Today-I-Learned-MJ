@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12_ImageControll01.html</title>
+<script type="text/javascript">
+function changImg1(){
+    document.getElementById("img1").src = "images/3.jpg";
+}
+function changImg2(){
+    // changImg 함수 입장에서는 누가 자신을 호출했는지 알수가 없고 , 호출되면 실행될 뿐입니다
+    // 나를 호출한 태그 또는 지정 태그 의 이미지를 바꿔주려면, 그 태그를 현재위에서 접근할수 있는 함수 또는 명령을 써야합니다. 
+    // document.getElementById("") : body 내부의 태그를 id로 이름불러 사용하기위한 명령
+    document.getElementById("img2").src = "images/4.jpg";
+}
+
+function changeImg3(){
+    document.getElementById("img1").src = "images/5.jpg";
+}
+function changeImg4(){
+    document.getElementById("img2").src = "images/6.jpg";
+}
+function recoverImg1(){
+    document.getElementById("img1").src = "images/1.jpg";
+}
+function recoverImg2(){
+    document.getElementById("img2").src = "images/2.jpg";
+}
+</script>
+</head>
+<body>
+    <img src="images/1.jpg" id="img1" onclick="changImg1();" onmouseover="changeImg3();" onmouseout="recoverImg1();">
+    <img src="images/2.jpg" id="img2" onclick="changImg2();" onmouseover="changeImg4();" onmouseout="recoverImg2();">
+    <!--
+    - onmouseover="" : 해당 태그에 마우스포인터가 올라가면 일어나는 이벤트 
+    - onmouseout="" : 해당 태그에서 마우스 포인터가 밖으로 벗어나면 일어나는 이벤트
+    --> 
+</body>
+</html>
