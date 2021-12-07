@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>23_ImageControll12.html</title>
+<style type="text/css">
+    #view{ position:relative; width:600px; height:400px; margin:0 auto; border:1px dashed black; overflow: hidden;}
+    #imgs{ position:absolute; width:4800px; height:400px; left:0px; top:0; border:1px dashed red; transition: 0.3s; }
+    img{ width:600px; height:400px; }
+    #lbutton{ position:absolute; left:0; bottom:0; width:50px; height:50px; border-radius:50%; overflow:hidden; background-image:url(images/ico_movie_171115.png); background-position:-60px -460px;}
+    #rbutton{ position:absolute; right:0; bottom:0; width:50px; height:50px; border-radius:50%; overflow:hidden; background-image:url(images/ico_movie_171115.png); background-position:0px -460px;}
+</style>
+<script type="text/javascript">
+    var num = 0;
+    function moveLeft(){
+        // 현재 그림번호가 0번이라면 왼쪽에 그림이 더 없으므로  함수 실행중지
+        if(num==0) return; 
+        num--;
+        
+        var dist = -600 * num;
+        document.getElementById("imgs").style.left = dist + "px"; 
+    }
+    function moveRight(){
+        // 현재 그림번호가 7번이라면 오른쪽에 그림이 더 없으므로 함수 실행중지
+        if(num==7) return; 
+        num++;
+        
+        var dist = -600 * num;
+        document.getElementById("imgs").style.left = dist + "px"; 
+    }
+
+    function move(x){
+        if(x==-1){
+            if(num==0) return; 
+            num--;
+        }else{
+            if(num==7) return; 
+            num++;
+        }
+        var dist = -600 * num;
+        document.getElementById("imgs").style.left = dist + "px";
+    }
+</script>
+</head>
+<body>
+    <div id="view">
+        <div id="imgs"><img src="images/Koala.jpg"><img src="images/Chrysanthemum.jpg"><img src="images/Desert.jpg"><img src="images/Hydrangeas.jpg"><img src="images/Jellyfish.jpg"><img src="images/Lighthouse.jpg"><img src="images/Penguins.jpg"><img src="images/Tulips.jpg"></div>
+
+        <div id="lbutton" onClick="move(-1);"></div>
+        <div id="rbutton" onClick="move(1);"></div>
+    </div>
+</body>
+</html>

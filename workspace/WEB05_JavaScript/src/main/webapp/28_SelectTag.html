@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>28_SelectTag.html</title>
+<style type="text/css">
+    #base{ position:relative; width:500px; height:150px; border:1px solid black;}
+    #title{ position:relative; width:200px; height:30px; border:1px solid gray; left:100px; top:50px; line-height: 30px; font-size:120%; font-weight:bold;}
+    #num{ position:absolute; top:0; left:0px; width:75px; height:30px;  /* border:1px dashed red; */ }
+    #arrow{ position:absolute; width:25px; height:30px;  /* border:1px dashed blue; */ right:0; top:0;background-image:url(images/ico_movie_171115.png); background-position:-275px -320px; overflow:hidden;  }
+
+    #dropmenu{ position:absolute; width:300px; height:250px; top:80px; left:100px; border:1px solid #EEEEEE; box-shadow:2px 2px 5px gray; background: white; overflow-y:scroll; overflow-x: hidden;  visibility: hidden; }
+
+    #dropmenu div{ font-weight:bold; height:45px; width:100%; line-height:45px; }
+
+    #dropmenu div:hover{background:#555555; color:white;}
+</style>
+<script type="text/javascript">
+    var Mstate = false;
+    function clickTitle(){
+        if( Mstate==true){
+            document.getElementById("dropmenu").style.visibility='hidden';
+            Mstate = false;
+        }else {
+            document.getElementById("dropmenu").style.visibility='visible';
+            Mstate = true;
+        }
+    }
+    function selectMenu( x ){
+        document.getElementById("num").innerHTML = "&nbsp;+" + x;
+        document.getElementById("dropmenu").style.visibility='hidden';
+        Mstate = false;
+    }
+</script>
+</head>
+<body>
+    <div id="base">
+        <div id="title" onclick="clickTitle();">
+            <div id="num">&nbsp;+82</div>
+            <div id="arrow"></div>
+        </div>
+        <div id="dropmenu" >
+            <div onClick="selectMenu(1);">+1 &nbsp;&nbsp;&nbsp; Canada</div>
+            <div onClick="selectMenu(1);">+1 &nbsp;&nbsp;&nbsp; United States</div>
+            <div onClick="selectMenu(63);">+63 &nbsp;&nbsp;&nbsp; Philippines</div>
+            <div onClick="selectMenu(62);">+62 &nbsp;&nbsp;&nbsp; Indonesia</div>
+            <div onClick="selectMenu(84);">+84 &nbsp;&nbsp;&nbsp; Vietnam</div>
+            <div onClick="selectMenu(55);">+55 &nbsp;&nbsp;&nbsp; Brazil</div>
+            <div onClick="selectMenu(86);">+86 &nbsp;&nbsp;&nbsp; China</div>
+            <div onClick="selectMenu(85);">+85 &nbsp;&nbsp;&nbsp; HongKong</div>
+            <div onClick="selectMenu(82);">+82 &nbsp;&nbsp;&nbsp; Korea</div>
+        </div>
+    </div>
+</body>
+</html>

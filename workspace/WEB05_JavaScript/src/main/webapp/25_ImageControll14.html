@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>25_ImageControll14.html</title>
+<style type="text/css">
+    #view{ position:relative; width:600px; height:400px; margin:0 auto; border:1px dashed black; overflow: hidden;}
+    #imgs{ position:absolute; width:4800px; height:400px; left:0px; top:0; border:1px dashed red; transition: 0.3s; }
+    img{ width:600px; height:400px; }
+    #remot{ position:relative; width:200px; height:50px; border:1px solid white; margin:0 auto; top:350px;}
+    #remot div{ position:relative; width:25px; height:25px; background:white; border-radius: 50%; line-height:25px; text-align:center; cursor: pointer; margin:13px auto;}
+</style>
+<script type="text/javascript">
+    var playing = false;
+    var timer;
+    var num = 0;
+    function play_stop(){
+        if( playing == true ){  // play -> stop
+            playing = false;
+            // #btn 태그의 내용을 대입하는 글자로 글자를 바꿉니다.
+            document.getElementById("btn").innerHTML = '▶';
+            window.clearInterval(timer);
+        }else{   // stop -> play
+            playing = true;
+            // #btn 태그의 내용을 대입하는 글자로 글자를 바꿉니다.
+            document.getElementById("btn").innerHTML = '■';
+            timer = window.setInterval(function(){
+                    var dist = -600 * num;
+                    document.getElementById("imgs").style.left = dist + 'px';
+                    num++;
+                    if(num==8)num = 0;
+            }, 1000);
+        }
+    }
+</script>
+</head>
+<body onload="play_stop()">
+    <div id="view">
+        <div id="imgs"><img src="images/Koala.jpg"><img src="images/Chrysanthemum.jpg"><img src="images/Desert.jpg"><img src="images/Hydrangeas.jpg"><img src="images/Jellyfish.jpg"><img src="images/Lighthouse.jpg"><img src="images/Penguins.jpg"><img src="images/Tulips.jpg"></div>
+        <div id="remot">
+            <div id="btn" onClick="play_stop()">■</div>
+        </div>
+    </div>
+</body>
+</html>

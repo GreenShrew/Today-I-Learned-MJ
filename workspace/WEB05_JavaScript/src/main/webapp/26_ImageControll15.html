@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>26_ImageControll15.html</title>
+<style type="text/css">
+    #view{ position:relative; width:600px; height:400px; margin:0 auto; border:1px dashed black; overflow: hidden;}
+    #imgs{ position:absolute; width:4800px; height:400px; left:0px; top:0; border:1px dashed red; transition: 0.3s; }
+    img{ width:600px; height:400px; }
+
+    #remot{ position:relative; width:350px; height:50px; border:1px solid white; margin:0 auto; top:350px; text-align: center;}
+    #remot ul{ list-style:none; margin:0; padding:0; display:inline-block;}
+    #remot ul li{ float:left; width:16px; height:16px; background:white;  margin:18px 7px; font-size:80%; font-weight:bold; line-height: 16px; cursor: default; font-weight:bold;}
+</style>
+<script type="text/javascript">
+    var playing = false;
+    var num = 0;
+    var timer;
+    var dist;
+    function move( x ){
+        switch(x){
+            case -1:
+                if(num==0 || playing==true) return;
+                num--;
+                dist = -600 * num;
+                document.getElementById("imgs").style.left = dist + 'px';
+                break;
+            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+                if(playing==true) return;
+                dist = -600 * x;
+                document.getElementById("imgs").style.left = dist + 'px';
+                num = x;
+                break;
+            case 8:
+                if(num==7 || playing==true) return;
+                num++;
+                dist = -600 * num;
+                document.getElementById("imgs").style.left = dist + 'px';
+                break;
+            case 9:
+                if( playing==true){  // play -> stop
+                    playing = false;
+                    document.getElementById("btn").innerHTML = '▶';
+                    window.clearInterval(timer);
+                }else{ // stop -> play
+                    playing = true;
+                    document.getElementById("btn").innerHTML = '■';
+                    timer = window.setInterval(function(){
+                        var dist = -600 * num;
+                        document.getElementById("imgs").style.left = dist + 'px';
+                        num++;
+                        if(num==8)num = 0;
+                    }, 1000);
+                }
+                break;
+        }
+    }
+</script>
+</head>
+<body>
+    <div id="view">
+        <div id="imgs"><img src="images/Koala.jpg"><img src="images/Chrysanthemum.jpg"><img src="images/Desert.jpg"><img src="images/Hydrangeas.jpg"><img src="images/Jellyfish.jpg"><img src="images/Lighthouse.jpg"><img src="images/Penguins.jpg"><img src="images/Tulips.jpg"></div>
+        <div id="remot">
+            <ul>
+                <li onClick="move(-1)">◁</li>
+                <li onClick="move(0)">1</li>
+                <li onClick="move(1)">2</li>
+                <li onClick="move(2)">3</li>
+                <li onClick="move(3)">4</li>
+                <li onClick="move(4)">5</li>
+                <li onClick="move(5)">6</li>
+                <li onClick="move(6)">7</li>
+                <li onClick="move(7)">8</li>
+                <li onClick="move(8)">▷</li>
+                <li onClick="move(9)" id="btn">▶</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
