@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02_JQuery_Basic02.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+/* 4-1 jQuery 자식(손)선택자와 후손 선택자 1  
+//- 자식(손) 선택자	, 후손 선택자
+$(function(){  	$('div h1').css('color', 'red');	});
+$(function(){  	$('div>h1').css('color', 'blue');	})
+// 선택자1와 선택자2 사이 공백(선택자1 선택자2) : 선택자1의 자손중 선택자2 모두(자손의 자손도 포함)
+// 선택자1 > 선택자2 : 선택자1의 바로 아래 자손들중  선택자2 모두(자손의 자손은 미포함)
+*/
+
+
+/* 4-2 jQuery 자식(손)선택자와 후손 선택자 2 - 두개이상의 요소를 한번에 변경 
+$(function(){
+    $("#wrap > section").children().css(   
+        // #wrap 의 자손 중  section 태그를 찾고,  다시 그 자손들의  css  변경
+        { "background-color":"yellow", "border":"3px solid #f00" , "color":"red" }
+    );
+    $("#wrap  h1").css( 
+        { "background-color":"yellow" , "border":"2px dashed #00f" }
+    );
+    $("#wrap > h1").css("border","2px dashed #0f0"); 
+}); 
+// a = { b:10. c:20 };
+// css 에 적용할 속성이 둘 이상이라면 .css(  {  }  ) 의 중괄호 안에 속성명과 적용값을 콜론(:) 으로 연결하고, 서로의 요소들은 (,)컴마로 구분하여 쓸수 있습니다
+ */
+
+/* prev(), next(), $(".txt + p") 
+$(function(){
+    var style_1 = {"background-color":"#0ff", "border":"2px solid #f00"};
+    var style_2 = {"background-color":"#ff0", "border":"2px dashed #f00"};
+    $(".txt").prev().css( style_1 );
+
+    //$(".txt + p").css( style_2 );
+    $(".txt").next().next().css( style_2 );  
+});
+*/
+
+/* 함수형 선택자들 정리
+$("요소선택자").parent() : 요소선택자의 부모 요소를 선택합니다
+$("요소선택자").parents() : 요소선택자의 상위요소를 모두 선택합니다
+$("요소선택자").closest("div") : 요소선택자의 상위 요소중 가장 가까운 div만 선택
+$("요소선택자 하위요소") : 요소선택자의 지정하위요소 모두를 선택합니다
+$("요소선택자>자식요소") : 요소선택자의 1단계 자식에 있는 자식요소만 선택
+$("요소선택자+하위요소") : 요소선택자의 바로 다음에 나오는 지정하위요소를 선택합니다
+$("요소선택자~하위요소") : 요소선택자의 뒤로 나오는 지정하위요소들을 선택합니다
+$("요소선택자").children() : 요소선택자의 모든 자식 요소를 선택합니다
+$("요소선택자").prev():요소선택자의 바로 이전 요소 선택합니다
+$("요소선택자").prevAll(): 요소선택자의 모든 이전 요소를 선택합니다
+$("요소선택자").prevUntil("요소명") : 요소선택자의 요소명에 지정한 곳까지 모두 선택합니다
+$("요소선택자").next() : 요소 선택자의 다음 요소를 선택합니다
+$("요소선택자").nextAll() : 요소선택자의 다음 모든 요소를 선택합니다
+$("요소선택자").nextUntil("h2") : 요소선택자부터 H2 태크 요소까지 모두 선택합니다
+$("요소선택자").siblings() : 요소선택자의 형제요소 전체를 선택합니다
+*/
+/* prevAll(), nextAll(), sibling() 
+$(function(){
+    var style_1 = {"background-color":"#0ff","border":"2px solid #f00"};
+    var style_2 = {"background-color":"#ff0","border":"2px dashed #f00"};
+    var style_3 = {"color":"#f00"};
+    $(".txt").prevAll( ).css(style_1);
+    $(".txt").nextAll( ).css(style_2);  
+    $(".txt").siblings( ).css(style_3);
+});
+*/
+
+
+
+/* nextUntil()   prevUntil()  
+$(function(){
+    var style_1 = {"background-color":"#0ff","border":"2px solid #f00"};
+    var style_2 = {"background-color":"#ff0","border":"2px dashed #f00"};
+    $(".txt3").prevUntil(".title").css(style_1);
+    $(".txt3").nextUntil(".txt6").css(style_2);
+});
+*/
+
+
+/* 	.parents()   parents("div") 
+$(function(){
+    $(".txt1").parents().css({	"border":"3px dashed #00f"	});
+    //$(".txt2").parents("div").css({"border":"3px solid #f00"	});
+    //$(".txt1").parent().css({	"border":"3px solid #000"	}); 
+}); 
+*/
+
+
+
+/* 	closest("div") */
+$(function(){
+    $(".txt1").closest("div").css("border","2px solid #f00");
+});   
+</script>
+</head>
+<body>
+<!-- closest("div") -->
+<h1 class="title">선택자</h1>
+<div style="border: 3px dashed blue; padding:5px;">
+    <div  style="border:3px dashed blue;padding:5px;">
+        <p class="txt1">내용</p>
+    </div>
+</div>
+
+
+
+
+    <!-- .parents()   parents("div")   
+<h1 class="title">선택자</h1>
+<section>
+    <div><p class="txt1">내용</p>	</div>
+</section>
+<section>
+    <div><p class="txt2">내용</p>	</div>
+</section>
+-->
+
+<!--   nextUntil()   prevUntil()   
+<h1 class="title">선택자</h1>
+<p>내용1</p>
+<p>내용2</p>
+<p class="txt3">내용3</p>
+<p>내용4</p>
+<p>내용5</p>
+<p class="txt6">내용6</p> -->
+
+
+
+<!-- prev(), next(), $(".txt + p") -->
+<!-- prevAll(), nextAll(), siblings() 
+<div id="wrap">
+    <h1>인접 관계 선택자</h1>
+    <p>내용0</p>
+    <p>내용1</p>
+    <p class="txt">내용2</p>
+    <p>내용3</p>
+    <p>내용4</p>
+</div>-->
+    
+
+
+<!-- 4-2 자식(손) 선택자와 후손 선택자 2 
+<div id="wrap">
+    <h1>인접 관계 선택자</h1>
+    <p>내용1</p>
+    <section>
+        <h1>자식 요소 선택자</h1>
+        <p>내용2</p>
+    </section>
+    <h1>인접 관계 선택자</h1>
+</div>-->
+
+<!--4-1 자식(손) 선택자와 후손 선택자
+<div>
+    <h1>자식(손) 선택자와 후손 선택자</h1>
+    <ul>
+        <li><h1>Apple</h1></li>
+        <li>Bag</li>
+        <li>Cat</li>
+        <li>Dog</li>
+    </ul>
+    <h1>자식(손) 선택자와 후손 선택자</h1>
+</div>-->
+
+</body>
+</html>

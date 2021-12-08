@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03_JQuery_Basic03.html</title>
+
+<style type="text/css">
+    .high-light { background:yellow; }
+    .high-light-0 { background:yellow; }
+    .high-light-1 { background:orange; }
+    .high-light-2 { background:blue; }
+    .high-light-3 { background:green; }
+    .high-light-4 { background:red; }
+</style>
+
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+/* jQuery 속성 선택자 
+//- 기본 선택자 뒤에 붙여 사용.
+//- 입력 양식과 관련된 태그를 선택할 때 많이 사용.
+$(function(){
+    $('input[type=text]').val('Hello JQuery').css("background", "yellow");	
+});   */
+
+/* jQuery 필터 선택자 */
+// 1) 입력 양식 필터 선택자 (상태에 의한)
+// input:button
+// input:checkbox
+// input:radio
+// input:file
+// input:image  -> <input type="image" src=""> : submit 버튼을 이미지로 대신할때 사용. submit 버튼을 대시하는 이미지이기 때문에, 경로에 그림이 없으면 "엑박"이 표시되고 옆에 "제출"이라는 말이 같이 표시됩니다.
+// input:password
+// input:text
+// input:submit
+// input:reset
+// 요소:checked
+// 요소:disabled
+// 요소:enabled
+// 요소:focus
+// 요소:selected
+
+/*
+$(function(){
+    setInterval( function(){
+        var value = $('select>option:selected').val();
+        alert(value);
+    } , 5000);
+});
+*/
+
+
+
+
+/* 2) 위치 필터 선택자  
+    $(function(){
+    $('tr:odd').css('background' , 'yellow');  // odd 홀수번째,  even 짝수번째
+    $("li:first").css({"background":"#ff0"});
+    $("li:last").css({"background":"#0ff"});            
+}); 
+*/
+
+
+//   . 선택자를 사용해 문서 객체를 선택한 후에 다음과 같은 위치를 지정한다.
+//     요소:odd -> 홀수 번째에 위치한 문서 객체 선택.
+//     요소:even -> 짝수 번째에 위치한 문서 객체 선택.
+//     요소:first -> 첫번째에 위치한 문서 객체 선택.
+//     요소:last -> 마지막에 위치한 문서 객체 선택.
+
+// 특정 필터 선택자
+//$("요소선택:first-of-type") : 요소 무리중 첫번째 요소 선택
+//$("요소선택:last-of-type") : 요소 무리중 마지막번째 요소 선택
+//$("요소선택:nth-child(3)") : 요소 무리중 세번째 요소 선택
+//$("요소선택:nth-child(3n)") : 요소 무리중 3의 배수번째 요소 선택
+
+//$("요소선택:nth-last-of-type(2)") : 요소 무리중 뒤에서 두번째 선택
+//$("요소선택:only-child") : 부모요소내에 자식요소가 1개뿐인 요소 선택
+//   -> $("li:only-child") : 부모 요소내에 <li> 요소가 1개뿐인 요소 선택
+//$("요소선택:eq(index)") : 요소 무리중 인덱스번호가 참조하는 요소
+//   -> $("요소선택").eq(index)  와 같은 표현
+//$("요소선택 :gt(index)") : 요소 무리중 인덱스번호보다 큰 인덱스가 참조하는 요소
+//$("요소선택 :lt(index)") : 요소 무리중 인덱스번호보다 작은 인덱스가 참조하는 요소
+//$("요소선택").slice(index, index) : 요소 무리중 인덱스번호부터 뒷쪽 인덱스 번호 전까지 참조하는 요소
+
+
+
+
+$(function(){
+    //$("#menu li").eq(2).css({"background-color":"#ff0"});
+    //$("#menu li:lt(2)").css({"background-color":"#0ff"});
+    //$("#menu li:gt(2)").css({"background-color":"#f0f"});
+    $("#menu li").slice(5,9).css({"background-color":"#DDD"});
+    $("#menu2 li:first-of-type").css({"background-color":"#ff0"});
+    $("#menu2 li:last-of-type").css({"background-color":"#0ff"});
+    $("#menu3 li:only-child").css({"background-color":"#F00"});
+}); 
+
+
+
+
+
+/* jQuery를 사용한 배열 관리(1) 
+//- each() 메서드 사용
+// . 매개 변수로 입력한 함수 사용.
+// . for in 반복문처럼 객체나 배열의 요소 검사하는 메서드
+//- each() 메서드의 사용형태
+
+// 배열의 생성은 자바스크립트와 같습니다.
+var a1 = [1,2,3,4,5,6,7,8];  //a1[0]   a1[1]  a1[2]
+// 객체를 배열의 요소로 넣어서 배열을 생성할 수 있습니다
+var array = [ {name:'Naver', link:'https://www.naver.com'} , 
+              {name:'Daum', link:'https://www.daum.net'}, 
+              {name:'Nate', link:'https://www.nate.com'} 
+            ];
+
+// each 함수를 이용한 배열의 각 요소 접근
+$(function(){
+    // 배열을 이용한 반복 실행 - $.each( 배열의 이름, 반복실행할 내용을 담은 익명함수 );
+    // 익명함수의 매개변수로  index, item 이 사용될수 있는데,
+    // index 는 매 반복실행에 적용되는 배열의 첨자(번호)값이며, item 은 그 첨자위치의 배열의 실제 값을 의미합니다.
+    $.each( array, function( index, item ){
+        // index : 반복실행 배열의 현재번호
+        // item : 반복실행 배열의 현재값
+        var output = '';
+        // 배열 요소중  name 과 link 를 이용해 anchor 태그 구성
+        output = '<a href="' + item.link + '" ><h1>' + item.name + '</h1></a>';
+        // 그것을  body 의 내용으로 삽입
+        document.body.innerHTML += output;
+    } );
+
+    var m_days = [31,28,31,30,31,30,31,31,30,31,30,31];	
+    // 특정 배열을 대상으로 하는 반복실행. m_days 배열의 값을 하나씩 item 변수에 전달하면 반복을 진행. index 는 그때 그때의 첨자(인덱스). 배열을 대상으로 하는 반복 실행
+    $.each(m_days, function(index, item){
+        var output = '';
+        output = (index+1) + '월 마지막 날짜 : ' + item + '일'+'<br />';
+        document.body.innerHTML += output;
+    });
+});
+*/
+
+
+
+/* jQuery를 사용한 배열 관리(2) & 제이쿼리 명령으로 태그에 class 추가 및 제거  
+$(function(){
+    $('h1').addClass('high-light');
+    // h1 태그에 class='high-light'  를 추가하세요
+    // <h1>item - 0</h1>  =>  <h1 class="high-light">item - 0</h1>  로 변경 
+});
+*/
+
+// - 각 h1 태그에 서로 다른 class 를 추가한다면,
+/*$(function(){
+    $('h1:eq(0)').addClass('high-light-0');
+    $('h1').eq(1).addClass('high-light-1');
+    $('h1').eq(2).addClass('high-light-2');
+    $('h1').eq(3).addClass('high-light-3');
+    $('h1').eq(4).addClass('high-light-4');
+});*/
+
+/*
+$(function(){
+    // 배열을 대상으로 하느 each -> $.each(배열이름, 매개변수가 있는 익명함수){} );
+    // selector 선택한 다수의 동일한 태그를 대상으로 할때
+    // $('selector').each( 매개변수가 있는 익명함수){} );
+    $('h1').each( function(index, item){ 
+        // index : 0~4    item : $('h1').eq(0) ~ $('h1').eq(4)
+        $(item).addClass( 'high-light-' + index);
+        // $(this).addClass( 'high-light-' + index);
+        // this : 반복실행문에선 해당 인덱스번째의 아이템을 지목합니다
+    } );
+
+    // $.each( $('h1')  , function(index, item){  } );  // 배열의 이름처럼 selector 를 지정할수도 있습니다.
+});
+*/
+$(function(){
+    $('h1').addClass(  function(index){return 'high-light-' + index;  }  );
+});  // $('h1') 에 의해 선택된 태그들과 그들에 부여된 index 가 서로 매칭되며 함수를 index 만큼 호출합니다
+
+// 다수의 태그(또는 class)를 선택자로 선택하면, 선택자 내부에 자동으로 index 값이 부여됩니다. 이 index 값은 위와 같은 each 함수 뿐만아니라 일반 익명함수에서도 사용될 수 있습니다.
+
+
+</script>
+</head>
+<body>
+<!--  jQuery를 사용한 배열 관리(2) -->
+<h1>item - 0</h1>  
+<h1>item - 1</h1>
+<h1>item - 2</h1>
+<h1>item - 3</h1>
+<h1>item - 4</h1>
+
+
+
+
+
+<!--
+<h1>탐색 선택자</h1>
+<ul id="menu3">
+    <li>내용one</li>
+</ul>
+<ul id="menu2">
+    <li>내용1</li>    <li>내용2</li>    <li>내용3</li>    <li>내용4</li>
+</ul>
+<ul id="menu">
+    <li>내용1</li>	<li>내용2</li>	<li>내용3</li>	<li>내용4</li><li>내용5</li>
+    <li>내용6</li>	<li>내용7</li>	<li>내용8</li><li>내용9</li>	<li>내용10</li>
+</ul>
+-->
+
+
+
+
+
+<!-- 위치 필터 선택자  
+<h1>탐색 선택자</h1>
+<ul>
+    <li>내용1</li><li>내용2</li><li>내용3</li><li>내용4</li>
+</ul>
+<table border="1">
+    <tr><th>이름</th><th>혈액형</th><th>지역</th></tr>
+    <tr><td>홍길동</td><td>AB형</td><td>서울시 강남구</td></tr>
+    <tr><td>홍길서</td><td>A형</td><td>서울시 마포구</td></tr>
+    <tr><td>홍길남</td><td>B형</td><td>서울시 서초구</td></tr>
+    <tr><td>홍길북</td><td>O형</td><td>서울시 송파구</td></tr>
+    <tr><td>김길동</td><td>O형</td><td>서울시 영등포구</td></tr>
+    <tr><td>이길동</td><td>A형</td><td>서울시 강서구</td></tr>
+    <tr><td>박길동</td><td>B형</td><td>서울시 용산구</td></tr>
+</table>
+-->
+
+
+
+    <!--
+<select>
+    <option>Apple</option>
+    <option>Bag</option>
+    <option>Cat</option>
+    <option>Dog</option>
+</select>
+-->
+
+
+<!--jQuery 속성 선택자 
+<input type="text"/><br>
+<input type="password"/><br>
+<input type="radio"/><br>
+<input type="checkbox"/><br>
+<input type="file" /><br>
+<input type="image" src = "images/Koala.jpg" width="100"/><br>
+-->
+</body>
+</html>

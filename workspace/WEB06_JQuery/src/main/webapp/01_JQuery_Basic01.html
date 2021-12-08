@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01_JQuery_Basic01.html</title>
+<!-- jQuery 기본
+	1. jQuery 개요
+    	- 모든 브라우저에서 동작하는 클라이언트 자바스크립트 라이브러리.
+		- 다음의 기능을 위해 제작
+			. DOM과 관련된 처리를 쉽게 구현
+			. 일관된 이벤트 연결을 쉽게 구현
+			. 시각적 효과를 쉽게 구현
+			. ajax 애플리케이션을 쉽게 구현
+		- http://jquery.com
+		- jQuery 사용 방법
+			1) 직접 다운받아 사용하는 방법.
+			2) CDN 호스트 사용하는 방법.
+				 . Content Delivery Network
+				 . 사용자에게 간편하게 콘텐츠를 제공하는 방식을 의미.
+				 . 구글, 마이크로소프트, jQuery측에서 사용자가 jQuery를 사용하기 편하게 콘텐츠를 제공.
+-->
+<!--  1. 라이브러리 다운받아 포함하는 방법 : 2가지 방식
+방법1 링크 연결  
+★ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>  의 기술
+★ 아래에 있는 <script type="text/javascript"></script> 와는 별도로 작성합니다
+-->
+
+<!-- 방법2 직접 다운로드하여 저장하고 script 태그에 위치를 지정  -->
+<script src="script/jquery-3.6.0.js"></script>
+
+<!-- 사용자가 정의한 스크립트 내용도 별도로 저장해두고 제이쿼리처럼 불러다 쓸 수 있습니다 -->
+<script src="script/Basic.js"></script>
+<!-- 이와 같은  script  태그는 갯수와 상관없이 추가가 가능합니다. -->
+
+<script type="text/javascript">
+/* 2. 제이쿼리를 사용한 웹페이지 형식 */
+// 제이쿼리는 자바스크립트의 확장판이기때문에 작성 영역이  script 태그 내부로 똑같습니다
+// 이영역에  자바스크립트와  제이쿼리를 섞어서 사용해도 무관합니다...
+
+// 작성영역은 똑같지만. 작성된 내용의 시작이 다소 차이가 좀 납니다.
+// 쉽게 말해서 이명령들(이코드들)은 제이쿼리 명령입니다 라는 영역 표시가 필요합니다
+$( document ).ready(   function(){   
+    // 명령 1
+    // 명령 2
+}   );
+
+$( document ).ready( function(){ /* 명령1; 명령2;  */ } );  
+// document 가 화면에 표시될 준비가 끝나면 익명함수 내의 명령을 실행해주세요
+// 자바스크립트 함수를 만들고 body 태그의  onload  이벤트에 연결한것과 같은 효과 입니다
+// function abc(){ }
+
+// 제이쿼리의 명령은 모두 익명함수 안에 넣어줍니다.
+// 그 안에 넣지 않은 명령은 제이쿼리로 인식되지 않고, 스크립트 언어로만 인식되어 실행이 되지
+// 않는 코드가 있을 수 있습니다. 그 명령이 제이쿼리에만 있는 함수나 명령이라면 실행이 안되거나 오류를 발생합니다.
+
+$( document ).ready(   function(){  }    );  
+// 제이쿼리와 자바스트립트는 서로 순서에 무관하게 섞여 사용이 될수 있으므로, 이 구문은 여러개가 쓰여도 상관없습니다. 그 안에 명령을 넣지 않으면 제이쿼리 명령은 아무것도 실행되지 않습니다.
+
+// 위에 쓰인 제이쿼리 영역의 표식은 구문의 길어서 대개는 아래와 같이 가략하게 사용하는 것이 대부분입니다
+// 앞으로 위 구문은 아래와 같이 document 와 ready 를 생략한후 간결하게 사용합니다
+// (document).ready 를 생략  --> $(function(){     });
+$( function(){  } );   // 같은 표현  $(document).ready( function(){         } );
+
+// 잘못된 예
+// $("#tit").css("color","red");  // id가 tit 인 태그의 글자색 빨간색으로 변경
+
+// 올바른 예
+//$(function(){   $("#tit").css("color","red");  } );
+$(function(){   
+    $("#tit").css("color","red");  
+} );        
+// 사용 문법은 자바스크립트에서 썼던 문법 모두 다 사용이 가능하고 , 추가로 제이쿼리문법을  추가사용하는 형식입니다
+
+// 일반적인 명령형식
+$(function(){
+    $("body").css("background-color", "#00FFFF");
+    // 선택자로 대상 선택$("body") -> 스타일 또는 구성요소 또는 함수 선택 .css() 
+    // -> 변경 내용 지정("background-color", "#00FFFF")
+});
+
+// 1) 전체 선택자(*)
+$(function(){
+    $("*").css("border","1px solid blue");
+    // .css 안에 스타일요소명과 적용할 값들을 따옴표 묶어서 위와 같이 넣으면, 해당 선택자에서 지목한 태그에 적용됩니다.
+});
+
+//2) 태그 선택자
+$(function(){
+    $("h3").css("background-color","#f0f").css("border","2px dashed #ff0");
+    // .css 가 끝난 곳에 .css 를 이어서 사용하면 다른 스타일도 적용이 가능합니다.
+}); 
+
+//두개 이상의 태그 선택
+$(function(){
+    $("h1, h2").css("background-color","#DDDDDD").css("border", "2px dashed #00f");
+});
+
+//3) 아이디 선택자
+$(function(){
+    $("#tit").css("background-color","#ff0").css("border", "2px solid #f00").css("font-size", "250%");
+}); 
+
+//3) 클래스 선택자
+$(function(){
+    $(".tit2").css("background-color","#ff0").css("border", "2px dashed #f00").css("font-size", "250%");
+});
+
+//종속선택자
+$(function(){
+    $("h1#tit").css("color","red");
+});
+</script>
+</head>
+<body onload="abc();">
+    <h1 id="tit">제목</h1>
+    <h1>제이쿼리</h1>
+    <h2>선택자</h2>
+    <h3>직접 선택자</h3>
+    <h1 class="tit2">제목</h1>
+</body>
+</html>
