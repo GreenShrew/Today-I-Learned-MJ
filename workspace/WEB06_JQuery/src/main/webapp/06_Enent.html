@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06_Enent.html</title>
+<style type="text/css">
+.reverse {background:black; color:white;}
+.outer { width:200px; height:100px; background:Orange; padding:50px; margin:10px;}
+.inner {width:100%; height:100%;background:Pink; }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+/* 1. 이벤트 연결1 
+// 기존(자바스크립트)의 이베트 연결은  태그안에 onClick 등의 속성을 넣고, 자바스크립트 함수를 연결해서 실행되게 하는방식이라면, 제이쿼리는 직접 선택자와 이벤트 이름을 연결하고, 익명함수로 동작을 정의해서 실행되게 합니다.
+//- on()
+//- 사용 형태
+// 1) $(selector).on(  eventName  , function(event){ }  );
+// selctor 에 eventName 이 발생하면, function(event){ } 함수 실행
+$(function(){  // h1 에 'click'이 발생하면 function(event){} 실행
+    $('h1').on( 'click' , function(event){
+        var k = $(this).index();// 클릭된 h1  태그의 인덱스를 얻어낼때 쓰는 함수 $(this).index()
+        $(this).html( function(index, html){return html + k;});
+   } ); // $(this) : 여러개의 h1 중에서 현재 클릭된 h1 (click의 주체 h1)
+});
+
+//2) $(selector).on(object);   //  두가지 이상의 이벤트와 그에따른 실행 함수 지정
+$(function(){
+    $('h1').on( 
+      { 
+        mouseenter:function(){ $(this).addClass('reverse') },
+        mouseleave:function(){ $(this).removeClass('reverse') }
+      }
+    );  // h1에 마우스가 올라가면  reverse  클래스를 추가, 밖으면 나가면 클래스 제거
+}); 
+*/
+
+
+
+/*
+// 2. 이벤트 연결2 
+//- hover() : mouseenter 이벤트와 mouseleave 이벤트를 동시에 연결.
+//- $(selector).hover(function(event){}, function(event){});
+$(function(){
+    $('h1').hover(
+        function(evevt){ $(this).addClass('reverse'); } , 
+        function(evevt){ $(this).removeClass('reverse');}
+    );
+});
+// 3. 이벤트 제거 
+$(function(){            
+    $('h1').on('click', function(){  
+        $(this).html('CLICK'); // 내용을 CLICK 으로 변경
+        $(this).off(); // 이벤트 제거
+    });
+});
+//  $('h1').on('click', function(){     });
+// 위 명령은 아래와 같이 바꿔서 쓸수 있습니다
+// $('h1').click(  function(){     }  );
+*/
+
+
+
+/* 4. 매개변수 context  
+//. context:selector가 적용하는 범위를 한정.
+//. 특정 부분의 선택자를 선택하고 싶을 때 사용하는 매개변수.
+
+//- $(selector, context)
+// 아래의 내용은 클릭된div안의 h1과 p을 선택자로 쓰고자할때.....
+// 자손 선택자를 사용하고자 하는데, 부모가  this 라면....
+// $('this h1')  X    
+// this가  ' '안에 들어가는 순간  this로 사용이 안됩니다. 그냥 문자('this')로 인식
+$(function(){
+    $('div').click( function(){
+    // div 중 클릭된 div 를 this로 표현 -> 아래는 h1 중 click된 div 속 h1 을 지징합니다
+        var header = $('h1', this).text();    // h1들 중 클릭된 div 내부의 h1 내용(text)
+        var paragraph = $('p', this).text();  // p들 중 클릭된 div 내부의 p 내용(text)
+        var k = header + " : " + paragraph;
+        $('body').append( $('<h1>' + k + '</h1>') );
+    });
+});
+*/
+
+
+/* 5. 이벤트 강제 발생 
+//- 사용 형태
+//1) $(selector).trigger(eventName);
+$(function(){
+    $('h1').click(function(){
+        $(this).html(function(index, html){ return html + '>';  });
+    });  // 클릭된 DIV 태그의 내용에  '>' 를 추가
+    setInterval( function(){ 
+        $('h1').last().trigger('click');   //$('h1').last().click();
+    }, 3000);  //3초마다 마지막 DIV 를 클릭한 것처럼  내용에 '>' 를 추시
+}); 
+*/
+
+
+/* 6. 마우스 이벤트 
+$(function(){
+    $('.outer').mouseover(function(){
+        $('body').append('<h3>MouseOver~</h3>');
+    }).mouseenter(function(){
+        $('body').append('<h3>MouseEnter</h3>');
+    });
+}); */
+//-click : 마우스 클릭할 때 이벤트 발생.
+//-dbclick : 마우스 더블클릭할 때 이벤트 발생.
+//-mousedown : 마우스 버튼을 누를 때 이벤트 발생.
+//-mouseup : 마우스 버튼을 뗄 때 이벤트 발생.
+//-mouseenter : 마우스가 요소의 경계 외부에서 내부로 이동할 때 발생. 
+//-mouseleave : 마우스가 요소의 경계 내부에서 외부로 이동할 때 발생.
+//-mousemove : 마우스를 움직일 때 발생.
+//-mouseout : 마우스가 요소를 벗어날 때 발생.
+//-mouseover : 마우스가 요소 안에 들어올 때 발생.
+
+
+
+/* 7. 키보드 이벤트 */
+//-keydown : 키보드가 눌러질 때 발생.  
+//-keypress : 글자가 입력될 때 발생(한글지원x).   
+//-keyup : 키보드가 떼어질 때 발생.
+$(function(){
+    $('textarea').keyup( function(event){
+        var inputlength = $(this).val().length; //textarea 에서 글자를 얻어 글자갯수 저장
+        var remain = 150 - inputlength; // 150-글자수 계산
+        $('h1').html(remain);  // 남은 글자 표시
+        if(remain >= 0) $('h1').css('color', 'black'); // 양수는 검정색
+            else  $('h1').css('color', 'red');  // 음수는 빨간색
+    });
+});
+</script>
+</head>
+<body>
+<!--  7.키보드 이벤트 -->
+<div><p>지금 내 생각을</p><h1>150</h1>
+    <textarea cols="70" rows="5"></textarea>
+</div>
+
+
+
+
+    <!--6. 마우스 이벤트  
+<div class="outer">
+    <div class="inner"></div>
+</div>
+-->
+
+
+
+
+
+<!-- 5-1). 이벤트 강제 발생 
+<h1>Start: </h1>
+<h1>Start: </h1>-->
+<!-- 5-2). 이벤트 강제 발생 
+<h1>TRIGGER</h1>
+-->
+
+
+
+
+<!--4. 매개변수 context  
+<div><h1>Header1</h1><p>Paragraph1</p></div>
+<div><h1>Header2</h1><p>Paragraph2</p></div>
+<div><h1>Header3</h1><p>Paragraph3</p></div>
+-->
+
+<!-- 1/2/3. 이벤트 연결/제거 
+<h1>Header-0</h1>
+<h1>Header-1</h1>         
+<h1>Header-2</h1>
+-->
+
+</body>
+</html>

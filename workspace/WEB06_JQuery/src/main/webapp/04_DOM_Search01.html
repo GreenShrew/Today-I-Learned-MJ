@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04_DOM_Search.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+//  DOM 은 자바스크립트 보다 제이쿼리에서 훨씬 활용도 높습니다
+// 선택자 및 필터링으로서의 DOM
+/* 1. 기본 필터링 메서드  
+    //- filter() 메서드 사용 두 가지 형태
+    //1) $(selector).filter(selector);
+    //2) $(selector).filter(function(index){});
+    $(function(){
+        // $('h3').filter(':even').css({backgroundColor:'black', color:'white'});
+        $('h3:even').css({backgroundColor:'black', color:'white'});
+    });  // 선택자의 짜구번째 또는 홀수번째 CSS 변경
+
+    // 위의 예제는 아래의 예제를 줄여서 쓴것과 같습니다
+    //filter() 메서드 적용 형태 #1.
+    $(function(){
+        $('h3').filter(':odd').css({backgroundColor:'red', color:'white'	});
+        // $('h3:odd').css({backgroundColor:'red', color:'white'	});
+    });
+
+    //filter() 메서드 적용 형태 #2
+    $(function(){
+        $('h3').filter( function(index){ return index%3 == 0; } ).css({ backgroundColor:'blue',	color:'white'}); 
+        // filter 내의 익명함수가 전체  index 를 대상으로 하여 3으로 나눈 나머지가 0인 인덱스에만  true 를 리턴해줍니다. filter true 가 리턴된 인덱스에 대해서만 지정된 css 를 적용합니다.
+        // 인덱스 3 과 4만 골라내고 싶으면  익명함수 안에  return index==3 || index==4 ;
+    });
+*/
+
+
+
+/* 2. 문서 객체 탐색 체이닝과 종료 
+    // 예제1.
+    // 체이닝을 사용해 한 줄로 서로 다른 문서 객체에 스타일 적용 가능
+    $(function(){
+        $('h3').css('background','orange').filter(':even').css('color', 'red');
+
+        //$('h3').css('background','orange').css( 'color', 'white');
+        //$('h3').css( {'background':'orange', 'color':'white' } );
+        // 위 두문장은 모두 h3 에 오렌지배경 흰글자 적용으로 같은 효과를 갖습니다
+        // 예제문장은 모든 h3 에 오렌지색 배경을 하고, 그중 짝수번째만 빨간색 글자색을 넣는 효과입니다
+
+        // 관련셀렉터들로 필터링한때 체이닝과 filter를 사용합니다. 전혀 관련없는 대상을 체이닝하지는 않습니다
+        // $('h3').css('background','orange').$('h1').css();  // X
+    });  
+    // 문서객체의 css 변경을 마친 경우 리턴되는 값이 다시 문서객체( $('h3') )이므로 위와 같이 또다른 탐색이나 css 내용을 이어서 적용시킬수 있습니다
+    // 필터링된 선택자로 css 를 변경한 후에 리턴된 선택자는 앞서 필터링한 결과를 그데로 유지합니다. 따라서 다른 채이닝을 이어서 사용하면 계속 필터링된 결과에 적용되게 됩니다. 
+    // 채이닝에의한 필터 결과 유지를 해제하려면 따로 필터링을 하거나 end() 함수를 사용합니다.
+    
+    //예제2. 체이닝을 사용하지 않고 여러 필터결과에 css  적용
+    $(function(){
+        $('h3').css('background', 'orange');
+        $('h3:even').css('color', 'white');
+        $('h3:odd').css('color', 'red');
+        
+        // $('h3').css('background', 'orange').filter(':even').css('color', 'white').filter(':odd').css('color', 'red');   위의 세개의 문장과 다른 동작을 합니다
+        // $('h3').css('background', 'orange') 이문장이 실행되면 리턴 문서객체가 $('h3')이지만, .filter(':even').css('color', 'white') 여기까지 실행되어 리턴된 문서객체는 짝수번째의 h3 들입니다. 따라서 마지막 필터링 .filter(':odd') 은, 리턴된 짝수번째들을 대상으로 홀수번째를 골라냅니다
+
+    });   
+
+    // 예제3. 채이닝과 end() 함수를 같이 사용한 예
+    $(function(){
+        $('h3').css('background', 'silver').filter(':even').css('color', 'red' ).end().filter(':odd').css('color', 'blue');
+    }); 
+    // 바로 앞에 있는 filter - 짝수번째 filter 를 종료하고, h3 중에서 홀수번째를 다시 filtering
+    // end() : 문서 객체 선택을 필터링 이전 한 단계 뒤로 돌리는 함수입니다.
+    */
+
+/* 문서 객체 추가 선택 
+    // - add() : 기존 문서 객체를 포함하여 추가로 문서 객체를 선택.
+    $(function(){
+        $('h1').css('background', 'gray').add('h2').css('color', 'red');
+        // h1에 배경 gray 적용후 h2도 추가해서 글자색 빨깡으로 적용
+        // $('h1').css('background', 'gray');
+        // $('h1, h2').css('color', 'red');
+    });
+*/
+
+
+/* 문서 객체의 특징 판별 */
+    //   - is()
+    $(function(){
+        // $('h1').each(function( index , item){ } ) 의 사용 방식에서...
+        // this 를 사용하면서 index 값이나 item 변수를  fuction() 안에서 생략하여 사용이 가능합니다. 다만 이경우 현재 this 의 인덱스를 알아내려면 별도의 함수가 필요합니다. 
+        // $(this).index() : 현재 객체의 인덱스값
+        // $(this).is(선택자) : 종속 선택자같은 this내부에서 선택자로 추가필터링한 객체
+        $('h1').each(function(){
+            if($(this).is('.select')){  $(this).css('color', 'red');	}
+            // this 객체에 class 속성으로 select 값이 존재한다면.....
+            // 제이쿼리 일반적 선택자로 표현한다면  $('h1.select').css('color', 'red')
+            }); 
+        });    
+</script>
+</head>
+<body>
+<!-- 문서 객체의 특징 판별 -->
+<h1 class="select">Header - 0</h1>
+<h1>Header - 1</h1>
+<h1 class="select">Header - 2</h1>
+
+
+
+<!-- 문서 객체 추가 선택 
+<h1>Header - 0</h1>
+<h2>Header - 1</h2>
+<h1>Header - 2</h1>
+<h2>Header - 3</h2>
+<h1>Header - 4</h1>
+-->
+
+
+<!-- 문서개체 필터링 - 체이닝 - 종료 
+<h3>Header - 0</h3>  
+<h3>Header - 1</h3>
+<h3>Header - 2</h3>  
+<h3>Header - 3</h3>
+<h3>Header - 4</h3>  
+<h3>Header - 5</h3>  
+-->  
+</body>
+</html>
