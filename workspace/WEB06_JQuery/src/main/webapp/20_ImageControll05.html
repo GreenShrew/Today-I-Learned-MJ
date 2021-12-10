@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20_ImageControll05.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+// 1초에 한번씩 이미지가 변경됩니다. 1.jpg ~ 10.jpg 로...
+// 이미지에 마우가 올락면 변경이 멈추고, 이미지에서 마우스가 빠지면 다시 변경이 계속됩니다
+$(function(){
+    var num = 2;
+    var timer;
+    $('img').hover(
+        function(){
+            window.clearInterval(timer);
+        },
+        function(){
+            timer = setInterval(function(){
+                $('img').attr('src', 'images/' + num + '.jpg');
+                num++;
+                if(num==11) num=1;
+            }, 1000);
+        }
+    );
+    $('img').trigger('mouseleave'); 
+});
+</script>
+</head>
+<!--<body onload="function(){}"> X-->
+<body>
+    <img src="images/1.jpg" >
+</body>
+</html>

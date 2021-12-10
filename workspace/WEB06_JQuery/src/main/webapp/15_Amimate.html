@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15_Amimate.html</title>
+<style type="text/css">
+div {width: 50px; height:50px; margin:3px; background-color: orange; position: relative;}
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+// $(선택자).animte({ 속성명 , 값 })
+$(function(){
+    $('div').hover(   // mouseenter 와 mouseout 동시 이벤트
+        function(){ $(this).animate( {left:500} , 1000); } ,   
+        function(){ $(this).animate( {left:0}, 1000 ); }
+    ); // 마우스가 div 에 올라가면  left 값을 500 으로 설정, 마우스가 빠지면 제자리
+});   
+//$(this).css('left', '500px'); 는 자체적 transition-duration 이 없습니다
+</script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

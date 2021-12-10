@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17_ImageControll01.html</title>
+    <script src="script/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+        // 그림을 클릭하면 숫자하나를 입력 받아서  입력받은 숫자.jpg 그림으로 이미지를 바꿉니다
+        $(function(){
+            $('img').click(function(){ 
+                var num = prompt("숫자를 입력하세요", "1");
+                // if( num == '' ) num = '1';  // 입력값이 없으면 1로 설정
+                $('img').attr('src', 'images/' + num + '.jpg');
+            });
+        });
+    </script>
+</head>
+<body>
+    <img src="images/1.jpg">
+</body>
+</html>

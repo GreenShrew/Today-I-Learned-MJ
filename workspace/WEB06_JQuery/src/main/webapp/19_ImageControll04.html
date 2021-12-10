@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19_ImageControll04.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+// 1초 한번씩 다음 이미지로 변경합니다. 이미지 번호는 1~10까지 입니다. 10번이 지나면 1번으로 다시 갑니다.
+$(function(){
+    var num=0;
+    setInterval(function(){
+        $('img').attr('src', 'images/' + num + '.jpg');
+        num++;
+        if(num == 11) num = 1;
+    }, 1000);
+});
+</script>
+</head>
+<body>
+    <img src="images/1.jpg" >
+</body>
+</html>

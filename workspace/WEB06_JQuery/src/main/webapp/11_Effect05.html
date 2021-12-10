@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11_Effect05.html</title>
+<style type="text/css">
+    p { position:relative; width:400px; height:90px; } 
+    div {position:absolute; width:400px; height:65px; font-size:36px; text-align:center;
+    color:yellow; background:red; padding-top:25px; top:0; left:0; display:none; } 
+    span {display:none;  } 
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('#fadeIn').click(function(){
+        $('div').fadeIn(1000, function(){
+            $('span').fadeIn(1000);
+        });
+        
+    });
+    $('#fadeOut').click(function(){
+        $('div').fadeOut(1000, function(){
+            $('span').fadeOut(1000);
+        }); 
+    });
+    $('#fadeToggle').click(function(){
+        $('div').fadeToggle(1000, function(){ 
+            $('span').fadeToggle(100);  
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <p>불투명도를 점점 높여서 보이도록 한다.speed를 fast, normal, slow 또는 0이상의 숫자(밀리세컨드 단위)를 준다. 에니메이션이 끝난 후에 실행할 함수를 지정한다. </p>
+    <div><span>SUCCESS!</span></div>
+    <button id="fadeIn">fadeIn</button>
+    <button id="fadeOut">fadeOut</button>
+    <button id="fadeToggle">fadeToggle</button>
+</body>
+</html>

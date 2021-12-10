@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07_Effect01.html</title>
+<style type="text/css">
+    span{ font-size:180%; font-weight:bold; display:none; }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+// .show() - 화면에 표시하는 함수.   .hide() - 화면에서 보이지 않게 감추는 함수.
+// display 속성이 조정되는거라 자리차지가 없이 제거되고, 다른 태그를 밀어내며 표시 됩니다.
+$(function(){
+    $('button').click(function(){
+        var i = $(this).index();
+        if(i==0){ /* 클릭된 버튼의 인덱스가 0 이라면  실행 */ }
+    });  
+    $('button:eq(0)').click(function(){
+        /* 0 번 버튼을 클릭했을때 실행 */
+        // $('span:first').css('background', 'yellow'); // 배경색 변경
+        // $('span:first').show(); // .show() - 화면에 보여지게 하는 함수
+        $('span:first').show(function(){ $(this).css('background', 'yellow'); });
+        // show 와 함께 다른 동작을 추가하고 싶다면
+        // .show(  function(){    } )   이처럼  show() 안에 function(){} 을 넣어서
+        // 실행시킵니다.  이는 hide도 마찬가지입니다. 
+        // .show() 에 익명함수를 넣으면, 함수 동작 시간에 약간의 동작시간지연이 포함됩니다
+    });
+    $('button:eq(1)').click(function(){
+        $('span:first').hide(500);
+    });
+
+    // css의 transition 처럼 show hide 에동작시간을 설정합니다
+    $('button:eq(2)').click( function(){
+        $('span:last').show( 2000, function(){
+            $(this).css('background','orange');
+        });
+    }); // show() 와 hide() 에는 추가 동작을  function(){} 을 통해 정의할수도 있고, 
+    // 위아래처럼 동작 시간을 밀리초단위로 설정이 가능합니다.
+    $('button:eq(3)').click( function(){
+        $('span:last').hide( 2000 );
+    } );
+});
+</script>
+</head>
+<body>
+    <button>Show It</button>   <!--버튼을 만드는 또다른 방법-->
+    <button>Hide It</button>
+    <span>안녕하세요.</span>
+    <br>
+    <button>Show It slow</button>
+    <button>Hide It slow</button>
+    <span>반갑습니다.</span>     
+</body>
+</html>

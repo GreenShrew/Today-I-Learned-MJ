@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16_ImageControll01.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">  
+$(function(){
+    // 1 <- -> 3        2 <- -> 4
+    $('img:first').hover(
+        function(){ $(this).attr('src','images/3.jpg'); },
+        function(){ $(this).attr('src','images/1.jpg'); }
+    );
+    $('img:last').hover(
+        function(){ $(this).attr('src','images/4.jpg'); },
+        function(){ $(this).attr('src','images/2.jpg'); }
+    );
+}); 
+</script>
+</head>
+<body>
+    <img src="images/1.jpg" >
+    <img src="images/2.jpg" >
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18_ImageControll03.html</title>
+    <script src="script/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+    // 마우스로 이미지를 클릭할때만다 파일이 바뀌도록 코딩하세요 파일이름은 1.jpg ~ 10.jpg 입니다
+    // 10 다음으로 다시 1로 돌아 옵니다.
+    $(function(){
+        var num = 2;
+        $('img').click(function(){
+            $(this).attr('src', 'images/' + num + '.jpg');
+            num++;
+            if(num == 11) num = 1;
+        });        
+    });
+    </script>
+</head>
+<body>
+    <img src="images/1.jpg" >
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12_EffectEx.html</title>
+<style type="text/css">
+    div{position: absolute; left:0; top:0; display: none; }
+    img{width:500px; height:350px;}
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+// setInterval 을 사용하여 1초에 한번씩 익명함수가 실행되게 합니다
+// 익명함수의 내용은  모든 div 를  fadeout  하고
+// 변수에 의해 진행되고 있는 번호로 선택한  div 만  fadein 합니다
+//  $('div').eq(num).fadeIn()
+
+$(function(){
+    var num = 0;
+    setInterval( function(){
+        /*
+        $('div').eq(0).fadeOut(1000);
+        $('div').eq(1).fadeOut(1000);
+        $('div').eq(2).fadeOut(1000);
+        $('div').eq(3).fadeOut(1000);
+        $('div').eq(4).fadeOut(1000);
+        $('div').eq(5).fadeOut(1000);
+        $('div').eq(num).fadeIn(1000);
+        */
+
+        /*
+        $('div').fadeOut(1000); // 모든 div 태그 fadeOut
+        $('div').eq(num).fadeIn(1000);
+        */
+        
+        /*
+        for(var i=0; i<=5; i++){
+            $('div').eq(i).fadeOut(1000);
+        } // 모든 div 태그 fadeOut
+        $('div').eq(num).fadeIn(1000);
+        */
+
+        for(var i=0; i<=5; i++){
+            if(num==i) $('div').eq(i).fadeIn(1000);
+            else $('div').eq(i).fadeOut(1000);
+        }
+
+
+        num++;
+        if(num==6)num=0;
+    }, 2000);
+});
+</script>
+</head>
+<body>
+    <div><img src="images/Desert.jpg" /></div>    
+    <div><img src="images/Hydrangeas.jpg" /></div>    
+    <div><img src="images/Chrysanthemum.jpg" /></div>    
+    <div><img src="images/Koala.jpg" /></div>    
+    <div><img src="images/Penguins.jpg" /></div>    
+    <div><img src="images/Tulips.jpg" /></div>
+</body>
+</html>
