@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>temp</title>
+<style>
+#view{position: relative; width: 600px; height: 400px; margin: 0 auto; border: 1px dashed black;  overflow: hidden;}
+#imgs{position: absolute; width: 4800px; height: 400px; border:1px dashed red; left: 0; top: 0;}
+#remot{position: relative; text-align: center; width: 300px; height: 50px; border: 1px dashed white; margin: 0 auto; top: 350px;}
+ul{list-style: none; padding:0; margin:0; display: inline-block;}
+ul li{float: left; width: 14px; height: 14px; background:white;  margin: 18px 5px; font-weight: bold; line-height: 16px; font-size: 80%; cursor: default;}
+img{width:600px; height:400px;}
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('li').click(function(){
+        var num = $(this).index();
+        var dist = -600 * num;
+        $('#imgs').animate({left:dist}, 300);
+    });
+});
+$(function(){
+    var num=0;
+    var timer;
+    $("li:last-of-type").click(
+        function(){
+            $("li:nth-child(1),li:nth-child(2),li:nth-child(3),li:nth-child(4),li:nth-child(5),li:nth-child(6),li:nth-child(7),li:nth-child(8)").off('click');
+            timer = setInterval(function(){
+                $('#imgs').animate({ left : num * -600 },1000);
+                num++;
+                if(num==8)num=0;
+            }, 1000);
+        }
+    );
+});
+</script>
+</head>
+<body>
+<div id="view">
+    <div id="imgs"><img src="images/Koala.jpg"><img src="images/Chrysanthemum.jpg"><img src="images/Desert.jpg"><img src="images/Hydrangeas.jpg"><img src="images/Jellyfish.jpg"><img src="images/Lighthouse.jpg"><img src="images/Penguins.jpg"><img src="images/Tulips.jpg"></div>
+    <div id="remot">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>▶</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

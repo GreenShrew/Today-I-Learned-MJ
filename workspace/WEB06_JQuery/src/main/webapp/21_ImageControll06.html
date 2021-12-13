@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21_ImageControll06.html</title>
+<style type="text/css">
+    #view{position:relative; width:170px; height:255px; border:3px solid blue; left:50px;  overflow: hidden; }
+    #imgs{position:absolute; width:1700px; height:255px; left:0; top:0px; border:1px dashed red; }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    var num=1;
+    var timer;
+    $('#view').hover(
+        function(){
+            window.clearInterval(timer);
+        },
+        function(){
+            timer = setInterval(function(){
+                $('#imgs').animate({ left : num * -170 },1000);
+                num++;
+                if(num==10)num=0;
+            }, 1500);
+        }
+    );
+    $('#view').trigger('mouseleave'); 
+});
+</script>
+</head>
+<body>
+    <div id="view">
+        <div id="imgs" >
+            <img src="images/1.jpg"><img src="images/2.jpg"><img src="images/3.jpg"><img src="images/4.jpg"><img src="images/5.jpg"><img src="images/6.jpg"><img src="images/7.jpg"><img src="images/8.jpg"><img src="images/9.jpg"><img src="images/10.jpg">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+day 40
+
+
+
+
+27_Plugin.html - 여기서 jQuery는 여기까지
+
+
+
+
+
+※ 여기서부터 다시 이클립스 사용한다.
+
+
+지금부터 DataBase 시작.
+
+
+
+※ 오라클 셋팅
+- 상업용은 유료! 교육용은 무료!
+
+https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+
+여기서 다운로드
+
+다운로드 중 password는 아래와 같이 쓴다.
+adminuser
+
+※ 설치 후 초기설정
+
+cmd - 명령:sqlplus - 명령:system - 명령:위 비밀번호 쓰기(adminuser <- 커서가 안 움직이는데 정상이다. 다 쓰고 엔터) - create user '이름'(scott 으로 설정할것) identified by tiger;(id는 scott, password는 tiger로 설정. 세미콜론 ; 을 반드시 추가해주자!) - grant dba to '이름'('이름'에게 권한을 넘김) - conn(유저변경) - scott으로 접속
+
+
+
+프로젝트는 Java Project, 이름은 Oracle_DataBase
+
+New Connection Profile 설정시 oracle Thin Driver 11 버전
+
+Jarlist 탭에서 아래의 기존 jar 삭제 후 아래 경로의 jar을 추가한다.
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 의 ojdbc6.jar 선택
+
+Properties 탭의 Connection URL을 아래와 같이 바꾼다.
+jdbc:oracle:thin:@localhost:1521:xe
+Database Name 을 xe로 바꾼다
+Password와 User ID에 각각 tiger, scott으로 바꾸고 ok를 누른다.
+
+우측 하단 Text Connection 눌러서 Ping succeeded! 뜨면 Save password 체크, finish!
+
+
+src에 추가하는 파일은 SQL Development의 SQL File이다!
+
+
+
+
+01_scott (이건 뭐지? 셋팅 같은데? 코드를 카페에서 쭉 긁어왔다.)
+
+- type : oracle 11
+- name : New Oracle
+- Database : xe
+
+
+02_First (정의를 쭉 써 내려갔다. 이후에 하나하나 배우면서 사용해볼 예정이다.)
+
+- DB의 정의? : 관련 데이터들의 집합
+데이터들을 표(Table)로 저장하는 DB를 관계형 데이터베이스라고 한다.
+
+- DB에 활용되는 언어(SQL)와 SQL의 종류! 그리고 각각의 명령어들
+
+- 기본키, 외래키의 정의
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

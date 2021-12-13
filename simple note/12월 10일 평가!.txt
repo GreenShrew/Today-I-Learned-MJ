@@ -4,3 +4,14 @@
 
 
 26_ImageControl15를 jquery로 제작하는것이 문제!
+
+
+
+22_ImageControll07.html 를 배껴서 적당히 내야겠다..
+
+22_ImageControll06.html 을 참고하면 사진 자동 이동하는 방법이 있다.
+19_ImageControll04.html 사진 자동 이동 - 다만 이건 이름을 바꾸는 방법이다.
+
+
+css를 고대로 사용하면 될 것 같다..
+제목만 좀 button이나 box로 바꿔서 내면 될 것 같다.

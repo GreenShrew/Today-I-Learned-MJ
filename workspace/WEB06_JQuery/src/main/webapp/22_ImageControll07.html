@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22_ImageControll07.html</title>
+<style>
+#view{position: relative; width:600px; height:400px; margin: 0 auto; border:1px dashed black;  overflow:hidden;}
+#imgs{ position: absolute; width:4800px; height:400px; left:0; top:0; border:1px dashed red; }
+#remot{ position: relative; width:200px; height:50px; border:1px dashed white; margin:0 auto; top:350px; text-align: center;}
+ul{ list-style: none; padding:0; margin:0; display: inline-block;}
+ul li{float: left; width:14px; height:14px; background: white; border-radius: 7px 7px 7px 7px; margin:18px 4px;}
+img{ width:600px; height:400px; }
+.select{background: red; width:30px}
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('li').click(function(){
+        var num = $(this).index();
+        var dist = -600 * num;
+        $('#imgs').animate({left:dist}, 300);
+        $('li').removeClass('select');
+        $('li').eq(num).addClass('select');
+        //$('li').css('background','white');
+        //$('li').eq(num).css('background','red');
+    });
+});
+</script>
+</head>
+<body>
+<div id="view">
+    <div id="imgs"><img src="images/Koala.jpg"><img src="images/Chrysanthemum.jpg"><img src="images/Desert.jpg"><img src="images/Hydrangeas.jpg"><img src="images/Jellyfish.jpg"><img src="images/Lighthouse.jpg"><img src="images/Penguins.jpg"><img src="images/Tulips.jpg"></div>
+    <div id="remot">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
