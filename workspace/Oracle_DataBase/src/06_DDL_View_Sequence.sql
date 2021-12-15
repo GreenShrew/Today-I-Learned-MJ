@@ -31,10 +31,39 @@
 -- 일련번호정도로 이해해도 무방하다.
 -- number(자리수) : 자료형의 자리수가 몇자리냐에 따라 그 만큼 숫자가 증가할 수 있다.
 
+drop sequence member_seq;
 -- [1] 시퀀스의 생성
 create sequence member_seq start with 1 increment by 1;
-insert into memberlist(num, name, phone) value (member_seq.nextVal, '홍길서', '010-3333-4444');
-insert into memberlist(num, name, phone) value (member_seq.nextVal, '홍길남', '010-5555-6666');
-insert into memberlist(num, name, phone) value (member_seq.nextVal, '홍길북', '010-7777-8888');
-
+insert into memberlist(num, name, phone) values (member_seq.nextVal, '홍길서', '010-3333-4444');
+insert into memberlist(num, name, phone) values (member_seq.nextVal, '홍길남', '010-5555-6666');
+insert into memberlist(num, name, phone) values (member_seq.nextVal, '홍길북', '010-7777-8888');
+-- birth : not null이 아니므로 공백이어도 상관 없다. bpoint : default 값으로 0이 되어있다.
 select * from memberlist;
+
+
+-- [2] 현재 시퀸스가 어디까지 증가되어져 있는지 확인. <- 계속 실행하면 숫자가 계속 늘어난다
+select member_seq.currval, member_seq.nextVal from dual;
+
+
+-- 아래 주석처리 이유는 실행하지 말라고 해둔것임...
+
+-- [3] 시퀸스 수정 : 최대 증가값을 14(바꿀 수 있다)까지로 제한하는 방법.
+-- alter sequence member_seq maxvalue 14;
+
+
+-- [4] 시퀸스 삭제
+-- drop sequence member_seq;
+
+
+-- [5] 시퀸스 재생성 : 다음 숫자부터 시작하게 하여 기존 레코드와 중복되지 않게 한다.
+-- create sequence member_seq start with 15 increment by 1;
+
+
+-- 1부터 1씩 늘어나는 book_seq, rent_seq를 생성하라.
+create sequence book_seq start with 1 increment by 1;
+create sequence rent_seq start with 1 increment by 1;
+
+-- member_seq를 삭제했다가 4부터 늘어나도록 다시 생성하라.
+drop sequence member_seq;
+create sequence member_seq start with 4 increment by 1;
+
