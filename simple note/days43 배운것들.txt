@@ -1,0 +1,188 @@
+day 43
+
+
+08_DML_Select
+
+- 조건식(ANY, SOME, ALL, (IN))
+1. ANY
+2. SOME
+※ ANY, SOME, IN 은 사용 방법이 조금 다르지만 거의 비슷하다고 보면 된다
+3. ALL <- 사용 빈도수가 낮다.
+4. 논리조건식 NOT
+
+
+- 정렬(Sort)
+where 구문 뒤에, 또는 구문의 맨 끝에 Order by 필드명 [desc] 라고 기술한다.
+※ desc는 내림차순 정렬할때 쓴다. 오름차순은 asc를 써야하나 생략 가능하다.
+
+-- job으로 내림차순 정렬
+select * from emp order by job desc;
+
+(두번 연속으로 정렬하는 방법)
+-- job으로 내림차순 정렬 후 같은 job_id 사이에서는 순서를 hiredate의 내림차순으로 정렬
+select * from emp order by job desc, hiredate desc;
+
+
+
+- 그 외 활용하기 좋은 select에 대한 예제들
+
+
+
+09_Function
+
+- * 오라클 명령어 : 내장 함수
+
+ [1] 샘플 테이블인 dual 테이블
+ [2] 임시 데이터의 출력
+
+
+*** 문자열 처리 관련 함수 ***
+
+ [3] lower() : 모든 문자를 소문자로 변환
+ [4] upper() : 모든 문자를 대문자로 변환
+ [5] initcap() : 모든 문자를 소문자로 변환
+※ dual에서 함수 연산의 결과는 화면에 결과로 보여질 뿐, 테이블의 값을 변경하는것은 아니다.
+ [6] concat() : 문자열 연결
+ [7] length() : 문자열의 길이
+ [8] substr() : 문자열 추출(데이터, 인덱스(1), 카운트)
+ [9] instr() : 문자열 시작 위치
+ [10] lpad(), rpad() : 자리 채우기
+ [11] trim() : 컬럼이나 대상 문자열에서 특정 문자 마지막 글자이면 잘라내고 남은 문자열만 반환.
+
+
+*** 수식 처리 관련 함수 ***
+
+ [12] round() : 반올림(음수 : 소수점 이상 자리)
+※ 음수를 사용하면 1의 자리, 10의 자리, 100의 자리...에서 반올림 한다.
+ [13] abs() : 절대값
+ [14] floor() : 소수점 아래 절삭, 반올림 없음. 
+       ceil() : 소수점 아래에서 올림.
+ [15] trunc() : 특정 자리 자르기, 반올림 없음
+ [16] mod() : 나머지
+
+
+
+*** 날짜 처리 관련 함수 ***
+
+ [17] sysdate : 날짜
+ [18] months_between() : 개월 수 구하기
+ [19] add_months() : 개월 수 더하기
+ [20] next_day() : 다가올 요일에 해당하는 날짜
+ [21] last_day() : 해당 월의 마지막 일 수
+ [22] to_char() : 날짜형식을 문자열로 반환
+ [23] to_date() : 문자형식을 날짜형(date)으로 변환
+ [24] nvl() : NULL 인 데이터를 다른 데이터로 변경.
+
+
+
+- POWER 함수
+select POWER(3, 2), POWER(3, 3), POWER(3, 3.0001) from dual;
+첫번째 요소값을 두번째 요소 만큼 거듭 제곱
+
+- 제곱근 SQRT
+select SQRT(2), SQRT(5) from dual;
+
+
+
+ [25] decode() : 자바에서의 switch의 역할을 하는 함수
+
+※ d드라이브에 카페에 올라온 데이터 다운로드 받아서 backup 폴더 만들어서 넣고, cmd에 명령
+
+d:
+cd backup
+imp scott/tiger file=expall.dmp log=expall.log ignore=y grants=y rows=y indexes=y full=y
+
+그리고 이로 추가된 emlployees 테이블에 decode()를 사용
+
+
+ [26] case() : if ~ else if ~ 와 비슷한 구조
+
+
+
+- mod와 remainder
+
+- 문자함수 replace
+
+- 변환함수
+이하 여러 함수들..
+
+
+
+※ order by : 정렬. 이걸 어디서 배웠는지 한번 검색해봐
+
+10_GroupFunction
+
+- 그룹 함수(Group Function) : 지정된 필드의 값 전체를 대상으로 한번 계산하는 함수
+
+
+- sum() : 특정 필드의 합계
+- count(*) : 필드내의 데이터 갯수(레코드 갯수)
+- avg : 평균
+- max : 최대값
+- min : 최소값
+- variance(분산), stddev(표준편차)
+
+
+※ 주의!!!
+ group by 절에는 select와 from 사이에 쓰여진 함수를 제외한 모든 필드를 반드시 써주어야 한다!
+
+
+
+
+11_Join
+
+- 두개 이상의 테이블에 나눠져있는 관련 데이터들을 하나의 테이블로 모아서 조회하고자 할 때 사용하는 명령어.
+
+ [1] 이름 Douglas Grant가 근무하는 부서명, 상급부서의 이름을 출력하고자 한다면... 
+ -> 두번을 명령해야 한다.
+위의 두번의 명령을 합하는 역할을 join 명령이 실행한다.
+
+- cross join : 두개 이상의 테이블이 조인될때 where 절에 의해 공통되는 컬럼에 의한 결합이 발생하지 않는 경우
+다만 이 방식은 가장 최악의 결과를 얻는 조인 방식이다!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
