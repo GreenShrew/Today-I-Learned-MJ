@@ -33,7 +33,7 @@ select * from dept, emp where emp.deptno = dept.deptno;
 
 -- 연습
 -- 각 사원의 이름, 부서번호, 부서명, 지역을 출력하자.
-select * from emp.ename, emp.deptno, dept.dname, dept.loc from dept, emp where emp.deptno = dept.deptno
+select * from emp.ename, emp.deptno, dept.dname, dept.loc from dept, emp where emp.deptno = dept.deptno;
 
 
 -- 시험문제!

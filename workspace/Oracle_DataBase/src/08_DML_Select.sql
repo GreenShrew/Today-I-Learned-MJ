@@ -23,7 +23,7 @@ desc rentlist;
 	select empno || '-' || ename as empInfo  from emp;
 	-- 오라클 SL 에서  || 는 이어붙이기 연산입니다.
 	-- empno || '-' || ename : empno 값과 ename 값을 '-' 와 함께 이어 붙이기 하고 그렇게 
-	-- 만들어진 필드의 이름을 emp_info 로 설정합니다
+	-- 만들어진 필드의 이름을 empinfo 로 설정합니다
 	-- 필드명에 공백이 있거나 기술하기 어려운 필드명일때도 as로 별칭을 붙이기도 합니다.
 	select empno as 사원번호 , ename as "사원 성명"   from emp
 
@@ -110,7 +110,7 @@ select * from emp where deptno not in (10,20,40);
 
 
 
--- 정열(Sort) - where 구문 뒤에, 또는 구문의 맨 끝에 Order by 필드명 [desc] 라고 기술한다.
+-- 정렬(Sort) - where 구문 뒤에, 또는 구문의 맨 끝에 Order by 필드명 [desc] 라고 기술한다.
 -- select 명령의 결과를 특정 필드값의 오름차순이나 내림차순으로 정렬하라는 명령.
 -- asc : 오름차순 정렬, 쓰지 않으면 기본 오름차순 정렬로 실행된다.
 -- desc : 내림차순 정렬, 내림차순 정렬을 위해서는 반드시 필드명 뒤에 써야하는 키워드이다.

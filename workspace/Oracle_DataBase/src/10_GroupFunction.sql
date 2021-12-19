@@ -43,7 +43,7 @@ select rentdate, count(*) from rentlist group by rentdate order by rentdate desc
 -- 연습
 -- employees 테이블의 department_id별 급여(salary)의 평균
 select department_id, round(avg(salary)) from employees group by department_id order by department_id;
---kor_loan_status 테이블의 period(년도와 월)을 그룹으로 대출 잔액(loan_jan_amt)의 합계
+-- kor_loan_status 테이블의 period(년도와 월)을 그룹으로 대출 잔액(loan_jan_amt)의 합계
 select period, sum(loan_jan_amt) from kor_loan_status group by period;
 
 

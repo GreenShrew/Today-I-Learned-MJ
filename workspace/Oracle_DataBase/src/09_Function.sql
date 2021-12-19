@@ -17,7 +17,7 @@ select 1234*1234 from dual;
 select lower('Hong Kil Dong') as "소문자" from dual;
 -- [4] upper() : 모든 문자를 대문자로 변환
 select upper('Hong Kil Dong') as "대문자" from dual;
--- [5] initcap() : 모든 문자를 소문자로 변환
+-- [5] initcap() : 첫 문자를 대문자로 변환
 select initcap('hong kil dong') as "첫 글자만 대문자" from dual;
 
 -- 해당 함수는 입력값이 필드명일때 from 뒤에 테이블 이름이 쓰여지며, 연산의 대상은 써놓은 필드값들이 된다.
