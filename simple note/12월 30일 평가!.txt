@@ -1,0 +1,19 @@
+12월 30일 DB 시험!
+
+day 43의 11_Join에서 한문제 출제!
+
+-- 조인된 테이블에 계산식으로 필드를 생성할수도 있다.
+-- 위의 코드에 대여금액에 할인금액을 차감한 매출금액을 넣었다.
+select a.rentdate as "대여일자", b.subject as "도서제목", c.name as "회원이름", c.bpoint as "포인트", b.rentprice - a.discount as "매출금액" from rentlist a, booklist b, memberlist c
+where a.booknum = b.num and a.membernum = c.num order by a.rentdate;
+
+
+
+day 45의 book_select~delete
+이것들이 나올 수 있다.
+
+
+day 45의 Book_Dao
+DAO에 대해 아는대로 설명하라.
+- 무엇의 약자인가?
+- 어떤 역할을 하는가?
