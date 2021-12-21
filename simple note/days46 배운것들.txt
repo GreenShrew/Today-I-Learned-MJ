@@ -1,0 +1,102 @@
+day 46
+
+※ 데이터 수정 삭제 등의 프로그램을 제작시 일반적으로 Driver, Dao, Dto 세개의 클래스를 만들게 된다.
+
+※ Dto는 많은 데이터들을 하나의 객체로 만들어서 이를 한번에 전달하기 위한 클래스이다.
+
+※ 'class' 단원 다시 공부하는것도 좋을 것이다!
+메소드들에 대해 한번 더 복습 필요
+private, void 등등...
+
+※ 지금 보니깐 상속 등등을 거의 다 까먹은 것 같다...
+
+※ finally는 try~catch 내에서 반드시 실행될 구문이다. 이 안의 내용으로 con, pstmt, rs를 닫는 명령을 넣어준다.
+
+
+
+
+
+Book_Driver, Book_Dao, Book_Dto
+※ 이 부분 처음부터 끝까지 한번 알아서 만들어보는것도 좋을 것 같다.
+
+
+- Driver 내의 switch문의 내용을 따로 메소드로 만들었다.
+※ case 2 - insert 기능을 insert() 메소드로 만들었다.
+
+
+
+- select는 사정이 다르다. 테이블의 그 많은 데이터를 하나하나 가져오는게 아니라 한꺼번에 가져와야 한다.
+이걸 객체 하나로 묶은 Dto 클래스와 ArrayList를 이용하여 가져온다.
+
+dao에서 [ArrayList<Book_Dto> list = new ArrayList<Book_Dto>();]를 만든다.
+그리고 기존 방식대로 rs = pstmt.executeQuery(); 를 통해 결과물을 얻고, while문에서 list에 bdto 객체에 데이터를 쌓아 이를 result로 보낸다.
+
+보낸 result는 Driver의 select 메소드의 BookDto_list에 전달되어 for문을 통해 하나하나 데이터를 입력하여 출력하게 된다.
+
+
+
+
+- update는 기존의 테이블에 있던 데이터 중 수정할 열을 지정해서 Dto에 넣고, 내가 바꾸고싶은 데이터만 바꿔 Dto에 저장한 뒤 이를 전부 Dao에 전달하는 방식을 사용.
+
+Driver의 case 3 에서도 update() 메소드를 만든다.
+
+-> update 메소드에서 해야할 일
+ - 수정할 도서번호를 입력받는다. (미입력시 재입력 화면으로 돌아가도록 만든다.)
+ - 도서번호로 도서 하나를 조회해서 Book_Dto에 담아둔다.
+	-> Book_Dto에 getBook() 메소드를 하나 더 만든다.
+	getBook은 데이터가 있다면 도서 하나를 조회해서 가져온다.
+ - 수정할 사항을 차례로 모두 입력할 화면을 제공하되, 수정하지 않을 항목은 엔터만 입력받아 지나간다. 수정할 사항은 저장해둔 BookDto에 업데이트한다.
+ - Dao에 BookDto를 보내서 해당 레코드를 수정한다.
+	-> bdao.update(bdto);를 이용해서 보낸다.
+	-> 전달받은 bdto를 이용해 Dao에서 전부 수정한다.
+	-> executeUpdate를 다시 Driver로 보내서 수정 여부를 알리도록 한다.
+
+
+
+
+- delete는 update와 마찬가지로 번호 하나를 선택한다.
+
+
+
+
+
+
+
+새로운 패키지를 만든다!!!
+jdbc04 - 이번 패키지에서 할 내용은 jdbc03에서 했던 내용과 많이 겹친다. 그러므로 새로운 내용을 배우며 배운 내용을 복습하는것도 겸하자.
+
+그 아래 MemberDao, MemberDto, MemberDrive를 만든다.
+
+
+jdbc03에서의 문제점은 bdao가 계속 만들어진다는 점이다.
+4개정도는 문제 없지만, 접속자가 많아지면 문제가 발생한다.
+
+jdbc04에서는 이를 방지하고자 '싱글톤 패턴'을 이용한다.
+
+
+
+MemberDrive, MemberDao, MemberDto
+
+- MemberDao에 싱글톤 패턴을 만든다.
+Dao에 있는 5개의 메소드에 공통적으로 들어가는 내용들이 있다.
+DB에 연결하는 부분과 연결을 끊는 부분이 5번 반복된다.
+-> 이를 getConnection, close라는 메소드로 묶어서 'con=getConnection()', 'close()' 문장 하나만 써서 접속과 접속종료가 가능하도록 만들었다.
+-> 다만 'pstmt = con.prepareStatement(sql);' 를 try ~ catch로 예외처리해야한다.
+
+
+
+- Drive에 select(), insert(), update(), delete() 생성
+
+MemberDao, MemberDrive의 select, update 부분 소스코드 한번 확인해야해.. 왠 에러가 자꾸 나오냐..
+아마 오늘은 select 까지만 할 예정이나 update는 select 이해하고 내가 고쳐야 할 것이다.
+
+※ Date 입력의 변환 방법
+java.util.Date() 형식의 입력 후 java.sql.Date()로의 변환이 필요하다.
+
+
+
+
+
+
+
+

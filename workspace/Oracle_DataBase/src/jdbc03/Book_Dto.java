@@ -1,8 +1,9 @@
 package jdbc03;
 
-// Dto : Data Transfer Object 다른 말로 JAVA Bean. 다수의 자료를 갤체에 한번에 담아서 한번에 전송하기 위해 만들어진 클래스, 객체
+// Dto : Data Transfer Object 다른 말로 JAVA Bean. 다수의 자료를 객체에 한번에 담아서 한번에 전송하기 위해 만들어진 클래스, 객체
+// 이 클래스가 없었다면 Book_Driver과 Book_Dao의 매개변수/전달인자에 내용을 100개든 1000개든 일일히 다 넣고 있어야 한다.
 public class Book_Dto {
-	
+	// 외부에서 함부로 수정할 수 없도록 private를 설정하고, getter/setter를 만든다.
 	private int num;
 	private String subject;
 	private int makeyear;

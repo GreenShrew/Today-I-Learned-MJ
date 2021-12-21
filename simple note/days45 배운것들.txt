@@ -1,0 +1,140 @@
+day 45
+
+
+
+※ 자바를 이용해 DB에 연결하고 sql 명령을 보내 table의 select, insert, update, delete 작업을 하는 방법을 배웠다.
+
+
+※ 주의!
+ pstmt.executeQuery();  pstmt.executeUpdate(); 이게 없으면 실행이 안 된다!
+쿼리를 보내는 역할을 한다(맞나?).
+ 그 결과로 executeQuery는 정상 동작시 ture, 동작을 안 하면 false를 return.
+ excuteQuery는 정상 동작시 1, 동작을 안 하면 0을 return.
+
+JDBC_Select - Select 프로그램 만들기!
+
+- DB에 연결하고 SQL에게 명령 보내기
+String sql = "select * from customer";
+pstmt = con.prepareStatement(sql);	<- 공식으로 기억했다가 사용한다. 이게 있어야 setString, setInt 등등...을 사용 할 수 있다.
+rs = pstmt.executeQuery();
+ 여기까지 쓰면 DB의 Table을 읽어오게 된 것이다.
+
+※ rs.next() : 최초 실행은 객체의 시작부분(데이터 없는 곳)에서 첫번째 레코드로 이동하는 메소드. 그 다음부터는 다음 레코드로 이동.
+ ----- 주의 : 여기서 rs는 'ResultSet rs = null;'로 만든 객체.
+
+while문과 .next() 메소드를 사용하면 테이블의 데이터를 전부 꺼낼 수 있다.
+
+
+- 순서 정리
+1. pstmt에 sql을 장착하고 실행해서, 그 결과를 rs 에 저장한다.
+2. 저장 결과를 하나씩 레코드별로 필드별로 하나씩 꺼내서 콘솔창에 출력한다.
+
+
+
+
+
+JDBC_Insert - Insert 프로그램 만들기!
+
+- 테이블에 레코드를 추가하는 방법!
+ 결과물을 출력하는게 아니기 때문에 ResultSet을 사용하지 않는다!
+
+-> Scanner로 레코드에 입력할 내용을 각 변수(num, name, email, tel)에 저장하게 한다.
+
+-> 다음과 같이 명령을 넣을 수 있다.
+String sql = "insert into customer values(" + num + ", '" + name + "', '" + email + "', '" + tel + "')";
+Scanner로 입력된 값을 + 이어붙이기로 넣는 방식.
+다만, 이는 고전 방식이다!
+
+String sql = "insert into customer values(?, ?, ?, ?)";
+이게 요즘 방식!
+
+-> sql 명령을 pstmt. 에 장착한다.
+-> ?의 순서에 맞춰서 입력값들을 셋팅한다.
+
+-> pstmt를 executeUpdate 메소드를 사용하여 변수에 저장한다.
+
+
+- 순서정리
+1. Scanner를 이용하여 레코드에 추가할 내용을 넣을 수 있도록 만들고
+2. sql에 명령어를 저장해서
+3. sql 변수를 pstmt에 장착하고
+4. ?의 순서에 맞추어 입력값들을 셋팅한 뒤
+5. executeUpdate() 메소드를 result 변수에 넣는다. (DB에 쿼리를 날린다...라는 표현을 쓰는데 이게 뭐지?)
+
+※ 추가 : Sequence를 JDBC_Table 파일에 추가하여 매번 레코드가 몇번까지 있는지 확인하는 번거로움을 제거하였다!
+
+
+
+
+JDBC_Update - Update 프로그램 만들기!
+
+- Table의 레코드 데이터를 수정!
+
+-> Scanner로 번호를 입력받아
+-> if문이나 switch 문으로 spl에 어떤 명령어를 넣을지 결정하고
+-> sql = "update customer set email=? where num=?"; 을 사용한다.
+
+
+
+
+JDBC_Delete - Delete 프로그램 만들기!
+
+- Table의 레코드 데이터를 삭제!
+
+-> sql 명령어 만들고
+-> pstmt에 장착하고
+-> .executeUpdate 메소드로 result에 넣는다.
+
+
+
+
+
+
+jdbc02 패키지 생성!!!
+
+아래는 예전에 만들었던 booklist table을 이용한 연습들이다.
+
+Book_Select
+
+- select 연습
+
+
+Book_Insert
+
+- insert 연습
+
+
+Book_Update
+
+- update 연습
+
+
+Book_Delete
+
+- delete 연습
+
+
+
+
+jdbc03 패키지 생성!!!!!!!!
+위의 기능들을 한 군데에 몰아넣을 예정이다.
+
+
+
+Book_Driver
+
+- 여기에 select, insert, update, delete를 다 넣어야하는데, 엄청 복잡해질것이다!
+그러므로 새로운 클래스를 만들어 메소드를 만들고 이를 가져온다!
+
+
+Book_Dao
+
+- Dao : Database Access Object - 데이터베이스 접근(Access) 및 처리를 담당하는 클래스 객체
+
+
+Book_Dto
+
+- Dto : Data Transfer Object 다른 말로 JAVA Bean. 다수의 자료를 갤체에 한번에 담아서 한번에 전송하기 위해 만들어진 클래스, 객체
+
+ Dao 클래스에서 만든 메소드의 전달인자/매개변수 갯수를 있는 그대로 쓰는 불편함을 해결해줌.
+ 이 클래스의 객체를 불러옴으로서 모든 전달인자/매개변수를 전부 쓰는것을 해결했다.
