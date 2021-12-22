@@ -62,4 +62,5 @@ public class MemberDto {
 		this.age = age;
 	}
 	
+	
 }
