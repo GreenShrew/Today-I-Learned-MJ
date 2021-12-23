@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="insert"/>
+		<item key="selection" value="DBM"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="true"/>
 		<list key="findhistory">
+			<item value="DBm"/>
 			<item value="insert"/>
 			<item value="01~11이 시험범위!"/>
 			<item value="remainder"/>
@@ -22,9 +23,9 @@
 			<item value="center"/>
 			<item value="bold"/>
 			<item value="size"/>
-			<item value="float"/>
 		</list>
 		<list key="replacehistory">
+			<item value="DBM"/>
 			<item value=""/>
 			<item value="메서드"/>
 			<item value="ㅁ"/>

@@ -1,0 +1,178 @@
+day 48
+
+
+※ 스키마가 무엇인지 찾아보자!
+
+
+
+RentDriver, Dao, Dto, DBmanager의 delete 부분까지 마무리하고, booklist, memberlist, rentlist 세 테이블을 join해서 모두 select 하였다.
+
+
+※ 메뉴의 6번에 프로그램 종료, 5번에 상세데이터 열람으로 바꾼다.
+5번을 누르면 join된 list들을 모두 출력한다.
+
+모든 내용을 담을 selectAll() 메소드 제작.
+
+
+RentDto에는 이름, 매출금액 등의 변수가 없기 때문에 selectAll()에서의 sql문을 받아 데이터를 전송할 수 없다.
+그렇기에 새로운 클래스 'RentDetail'을 만들어 이를 추가한다.
+
+
+※ 주의!
+자바에서 sql문을 쓸 때 엔터를 치면 +와 함께 문장이 완성되는데,
+.... memberlist c"
++ "where ....
+위와 같이 "와 문자 사이에 띄어쓰기가 없다면 이는
+... memberlist cwhere ....
+와 같은 명령이 되어버린다.
+
+
+- 매번 긴 sql문을 복사 붙여넣기 해야할까? 아니다!
+view로 만들어서 매번 해당 sql 문이 필요할 때마다 view의 이름을 부르는것으로 가져올 수 있다.	<- 11_join에 'rentdetail' 이라는 이름으로 view를 제작하였다.
+※ 주의!
+써놓기만 한다고 되는게 아니라 sql에서 view를 실행시켜서 만들어야 작동한다!
+
+
+
+ ----------------------------------------
+
+
+
+이제 MySQL로 간다.
+
+※ 오라클의 경우 기업이 쓰려면 유료, MySQL은 일정 부분까지 무료이다.
+기업의 주머니 사정마다 다른 프로그램을 쓰게 되므로 MySQL, 마리아DB 등 여러 DB 프로그램이 있는것을 염두해두자.
+
+- MySQL 설치
+
+https://dev.mysql.com/downloads/ 접속
+-> MySQL Installer for Windows 선택
+-> Windows (x86, 32-bit), MSI Installer 다운로드 버튼 선택
+-> 로그인, 회원가입 선택 거르고 No thanks, just start my download. 버튼 눌러 다운로드 시작
+
+
+https://dev.mysql.com/downloads/ 접속
+-> Connector/J 선택
+-> Select Operating System 에서 Platform Independent 선택
+-> Platform Independent (Architecture Independent), ZIP Archive 다운로드
+
+※ 주의!
+ MySQL 설치시 윈도우 계정이 '한글'이면 다운로드 할 수 없다! 또한 설치 경로에 '한글'이 포함되어있어도 불가능하다!
+
+
+
+MySQL Installer 실행
+-> Custom 선택
+-> MySQL Servers의 가장 아래 하위의 MySQL Server 8.0.27 - X64와 Applications의 MySQL Workbench 가장 아래 하위의 MySQL Workbench 8.0.27 - X64 선택
+-> Execute
+-> Port번호 3306 확인하고 next
+-> Accounts and Roles의 Root Password에 adminuser
+-> 마지막 excute로 설치 마무리
+
+
+MySQL Workbench 실행시 사용 가능한 1개의 root 계정이 보인다.
+스패너 모양 누르고 password 에 Stroe in Vault 눌러서 패스워드 넣고 test 해서 success 나오면 완료
+
+
+
+※ MySQL은 1개의 계정에 여러 스키마를 만들 수 있다.
+근데 스키마라는게 뭐야.....
+
+
+- MySQL 계정 접속 후 좌측 하단에 Schemas 클릭
+위에 있는 버튼 중 네번째의 Create a new schema... 를 누른다.
+
+이름은 scott, Charset에서 맨 아래 utf8mb4 누르고 Apply
+
+누르면 아래의 코드와 함께 창이 뜬다.
+CREATE SCHEMA `scott` DEFAULT CHARACTER SET utf8mb4 ;
+이 코드는 나중에 이클립스에서 사용할 내용이다!
+
+이제 여기에다가 이전에 만들었던 테이블들을 만들 예정이다!
+
+
+
+
+-------
+
+
+
+
+
+
+01_DDL
+
+
+이클립스를 통해 자바 프로젝트를 하나 생성한다.
+이름은 MySQL_DataBase
+
+그리고 src에 SQL 파일 하나를 만든다.
+이름은 01_DDL
+
+program 폴더에 있는 mysql-connector-java-8.0.27 안에서 mysql-connector-java-8.0.27.jar를 JAVA01 폴더로 복사한다.
+
+다시 이클립스로 돌아와서 하단의 Data Source Explorer의 Connections 우클릭 후 NEW
+MySQL 선택 - 우상단 버튼
+Name/Type에 5.1 버전
+JAR List의 내용 다 날리고 아까 JAVA01에 복사한 jar 파일 선택
+Properties에서 URL을 jdbc:mysql://localhost:3306/scott 로 바꾸고 비밀번호를 adminuser
+test 눌러서 ping success 되면 save password 박스 체크 후 finish
+
+Connection profile은 MySQL_5.1, New MySQL, database 선택하면 된다.
+
+
+다시 MySQL에서 tables에서 우클릭 - create table
+
+테이블 이름은 booklist
+charset은 utf8mb4
+나머지는 건드릴게 없다.
+Comments는 그냥 테이블 설명을 써두는 곳이다.
+
+※ MySQL은 시퀸스를 따로 만들지 않는다!
+
+- 아래 칸은 직접 테이블을 만드는 장소이다.
+PK : Primary key
+NN : Not Null
+UN : Unsigned data type <- 숫자 앞에 부호 x 즉, -128 ~ 127이 아니라 0~255 를 저장한다.
+AI : Auto Increment <- 이걸 선택하면 시퀀스를 만든것과 동일한 효과를 보인다!
+
+이런저런 구성을 해서 Apply를 누르면 명령들이 샘플로 보여진다. 여기서 Apply를 누르면 Table이 실행되지만, 이를 복사해서 이클립스의 01_DDL에 넣어서 만들었다!
+
+맨 윗줄의
+`scott`.`booklist`
+에서 scott은 '스키마 이름' 이다.
+
+이를 드래그해서 실행시키면 테이블이 만들어진다.
+
+select * from scott.booklist; 명령을 실행해보면 테이블을 확인할 수 있다.
+
+
+- 옵션들, 자주 쓰는 자료형, 자주 쓰는 제약조건 정리
+
+
+여기서 테이블을 만들고 다시 MySQL로 넘어가서 Refresh를 누르면 Table에 booklist 테이블이 생겨있음을 볼 수 있다.
+booklist에서 우클릭 - Select Rows 를 누르면 저절로 'SELECT * FROM scott.booklist' 명령이 쓰여지고 실행된다.
+
+
+- 테이블의 수정
+ 이클립스에서는 'alter table' 명령으로 수정하였다.
+ MySQL에서는 테이블 이름 위에서 우클릭 후 ALTER TABLE 선택하면 수정할 수 있다.
+
+
+
+- 연습문제로 memberlist 테이블을 만들었다.
+
+- 연습문제로 rentlist 테이블을 만들었다.
+
+
+
+- 외래키 설정 방법
+rentlist에서 Alter를 눌러 booknum을 외래키로 설정할 것이다.
+
+Alter을 선택하고 하단의 Foreign Keys 탭 클릭
+-> Foreign Key Name에 외래키 이름을 설정(여기서는 fk1)
+-> Referenced Table에서 booklist 선택
+-> 우측의 현재 테이블의 컬럼에서 booknum을 누르고 num을 참조할 컬럼으로 선택
+-> 우측의 On Update, On Delete를 CASCADE로 설정한다.
+(CASCADE로 설정하면 참조되는 값이 바뀌거나 삭제되면 참조하는 값도 바뀌거나 삭제된다.)
+-> 같은 방법으로 memberlist의 num을 membernum의 참조 컬럼으로 선택 후 CASCADE 선택한다. 

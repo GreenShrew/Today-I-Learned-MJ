@@ -11,9 +11,11 @@ public class RentDriver {
 			System.out.println("\n--- 메뉴 선택 ---");
 			System.out.printf("1. 데이터열람.");    		System.out.printf("  2. 데이터추가.");
 			System.out.printf("  3. 데이터수정.");		System.out.printf("  4. 데이터삭제.");
-			System.out.println("  5. 프로그램 종료.");	System.out.print(">>메뉴 선택 : ");			
+			System.out.printf("  5. 상세 데이터 열람.");
+			System.out.println(" 6. 프로그램 종료.");
+			System.out.print(">>메뉴 선택 : ");
 			String choice = sc.nextLine();
-			if( choice.equals("5")) break;
+			if( choice.equals("6")) break;
 			switch( choice ) {
 				case "1": 
 					select(); break;
@@ -21,11 +23,47 @@ public class RentDriver {
 					insert(); break;
 				case "3": 
 					update(); break;
-				case "4": break;
+				case "4": 
+					delete(); break;
+				case "5":
+					selectAll(); break;
 				default : System.out.println("메뉴 선택이 잘못되었습니다");
 			}
 		}
 		System.out.println("프로그램을 종료합니다");
+	}
+
+	private static void selectAll() {
+		RentDao rdao = RentDao.getInstance();
+		ArrayList<RentDetailDto> list =rdao.selectAll();
+		
+		System.out.println("날짜\t\t\t순번\t회원번호\t성명\t대여금액\t도서번호\t도서제목");
+		System.out.println("--------------------------------------------------");
+		for(RentDetailDto dto : list)
+			System.out.printf("%s\t%d\t%d\t%s\t\t%d\t%d\t%s\n", dto.getRentdate(), dto.getRentnumber(), dto.getMembernumber(), dto.getMembername(),
+					dto.getRentprice2(), dto.getBooknumber(), dto.getSubject());
+	}
+
+	private static void delete() {
+		Scanner sc = new Scanner(System.in);
+		RentDao rdao = RentDao.getInstance();
+		RentDto rdto = null;
+		
+		// 삭제할 대여번호 입력
+		System.out.print("삭제할 대여건의 number를 입력하세요");
+		String input;
+		while(true) {
+			input = sc.nextLine();
+			if( input.equals("") ) System.out.println("number 입력은 필수입니다");
+			else break;
+		}
+		int num = Integer.parseInt(input) ;
+		rdto = rdao.getRent(num);
+		if( rdto == null ) {
+			System.out.println("입력한 number 의 대여건이 없습니다");
+			return;
+		}
+		rdao.delete(num);
 	}
 
 	private static void update() {

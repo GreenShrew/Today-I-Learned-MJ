@@ -86,8 +86,7 @@ public class RentDao {
 	public int update(RentDto rdto ){
 		int result = 0;
 		con = DBmanager.getConnection();	
-		String sql = "update rentlist set rentdate = to_date(''||?||'', 'YYYYMMDD') , "
-				+ " booknum =?,  membernum=?, discount=? where num=?";
+		String sql = "update rentlist set rentdate = to_date(, 'YYYY-MM-DD'), booknum =?,  membernum=?, discount=? where num=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString( 1, rdto.getRentdate() );
@@ -103,7 +102,16 @@ public class RentDao {
 	public int delete(  int num ){
 		int result = 0;
 		con = DBmanager.getConnection();
-		
+		String sql = "delete from rentlist where num=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBmanager.close(con, pstmt, rs);
+		}
 		DBmanager.close( con, pstmt, rs );
 		return result;
 	}
@@ -136,5 +144,36 @@ public class RentDao {
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { 	DBmanager.close( con, pstmt, rs );  }
 		return result;
+	}
+
+
+	public ArrayList<RentDetailDto> selectAll() {
+		ArrayList<RentDetailDto> list = new ArrayList<RentDetailDto>();
+//		String sql = "select to_char(a.rentdate, 'YYYY-MM-DD') as rentdate, a.num as rentnum, c.num as membernumber, c.name as membername, b.rentprice - a.discount as rentprice2, b.num as booknumber, b.subject as subject from rentlist a, booklist b, memberlist c where a.booknum = b.num and a.membernum = c.num order by a.num desc";
+		String sql = "select * from rentdetail";
+		// 긴 sql문을 전부 쓰지 않고, rentdetail이라는 view 테이블을 생성한 뒤 위와같이 view 이름만 이용해서 불러올 수 있다!
+		con = DBmanager.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				RentDetailDto rdto = new RentDetailDto(); 
+				rdto.setRentdate(rs.getString("rentdate"));		// as ~ 로 쓴 별칭 ~을 " " 안에 쓴다.
+				rdto.setRentnumber(rs.getInt("rentnum"));
+				rdto.setMembernumber(rs.getInt("membernumber"));
+				rdto.setMembername(rs.getString("membername"));
+				rdto.setRentprice2(rs.getInt("rentprice2"));
+				rdto.setBooknumber(rs.getInt("booknumber"));
+				rdto.setSubject(rs.getString("subject"));
+				list.add(rdto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBmanager.close(con, pstmt, rs);
+		}
+		
+		return list;
 	}
 }
