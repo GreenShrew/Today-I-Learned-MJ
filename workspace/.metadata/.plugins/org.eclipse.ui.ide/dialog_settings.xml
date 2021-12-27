@@ -15,4 +15,18 @@
 			<item value="C:\Users\Onion\Desktop\TIL\Today-I-Learned-MJ\workspace\WEB02_CSS3"/>
 		</list>
 	</section>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Onion\Desktop\TIL\Today-I-Learned-MJ\workspace\WEB07_JSP_SERVLET"/>
+			<item value="C:\Users\Onion\Desktop\TIL\Today-I-Learned-MJ\workspace\MySQL_DataBase"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
 </section>

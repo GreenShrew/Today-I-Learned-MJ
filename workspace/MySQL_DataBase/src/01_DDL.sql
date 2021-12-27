@@ -98,7 +98,9 @@ CHANGE COLUMN `discount` `discount` INT NULL DEFAULT 0 ;
 
 
 
---
+
+
+-- 외래키 설정!
 
 ALTER TABLE `scott`.`rentlist` 
 ADD INDEX `fk1_idx` (`booknum` ASC) VISIBLE,

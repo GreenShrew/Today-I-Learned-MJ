@@ -1,0 +1,145 @@
+day 49
+
+※ 02_Function의 date_format과 str_to_date의 사용 방법 등을 자세히 알아봐야한다
+헷갈려!
+
+
+
+02_Function
+
+- MySQL에 내장되어있는 함수들
+ 해당 내용들은 무조건 다 외워야하는것은 아니지만, 이런것이 있다는 것 정도를 기억하고, 나중에 필요할 때 꺼내다 볼 수 있도록 해야한다.
+
+#1 숫자 관련 함수
+
+#2 문자 관련 함수
+
+#3 집계 함수
+
+#4 날짜 관련 함수
+
+#4-1 날짜관련 함수에 쓰일 수 있는 형식지정자들
+
+
+
+
+03_DML_Insert
+
+- 각 10개의 레코드를 가진 scott.booklist, scott.memberlist, scott.rentlist를 제작하였다.
+
+
+
+
+04_ETC (이것저것)
+
+- 명령 프롬프트(cmd) 창에서 운영되는 프로그램 접속 방법
+
+mysql -h localhost -u root -p
+
+※ 만약 위 명령이 안 먹힌다면 환경변수가 설정 안되어있어서 그렇다
+https://jinseongsoft.tistory.com/33
+제어판 - 시스템 - 고급시스템 설정 - 고급 - 환경변수
+위 아래 Path 항목에
+C:\Program Files\MySQL\MySQL Server 8.0\bin 이 경로를 추가해준다. (MySQL이 설치된 경로의 bin 폴더를 설정해주는 것)
+
+
+password를 입력하라고 나온다.
+adminuser 를 입력한다.
+여기까지 하면 cmd로 mysql에 접속하게 된 것이다.
+
+
+use scott; 입력
+-> scott으로 들어가는 명령.
+
+show tables; 입력
+-> 접속한 schema에 있는 table들을 나열
+
+desc 테이블이름; (테이블 이름 : booklist, rentlist, memberlist) 입력
+-> 입력한 테이블의 구조 나열
+
+
+
+
+- LIMIT
+select로 데이터를 조회할 때 조회할 레코드의 갯수를 조절 및 제한하는 방법.
+
+- OFFSET
+select로 데이터를 조회할 때, 맨 위에서부터 offset에 지정한 번째까지는 뛰어넘고 그 다음부터 리턴하는 방법.
+
+※ limit와 offset을 동시에 사용할 수 있다.
+※ limit와 offset은 게시판이나 상품 진열시에 페이지를 표시하기 위한 용도로 가장 많이 사용한다.
+
+
+
+
+---------
+jdbc01 패키지를 만들고 테이블을 조회, 추가, 수정, 삭제 기능을 하는 프로그램을 제작하자.
+
+
+※ 다시 쓰지만, 기본적으로 Driver, Dao, Dto 그리고 DBM으로 이루어져있다.
+
+※ 다시 쓰지만, 기본적으로 Dao는 select, insert, update, delete (+ 추가적인 것들)의 기능을 가지도록 한다.
+ 이 네개를 CRUD(Create, Read, Update, Delete)라고 부르기도 한다.
+
+※ 반복 학습을 통해 어떤 식으로 데이터가 다른 클래스에 넘어가고 어떤 데이터 형식으로 돌아오는지 파악하자.
+
+※ Dao와 같이 DB에 연결하고 끊는 동작의 코드는 모든 메소드에서 동일하다.
+
+
+
+※ 문제 생기던 부분을 해결하긴 했는데...
+MemberDao의 75번째 코드를 선생님의 코드와 비교해봐..
+---------
+
+
+Dbman 클래스 - 앞서 만들었었던 DBmanager 파일과 같은 역할을 한다.
+
+- driver, url, id, pw 변수를 만든다.
+
+
+- mysql-connector-java-8.0.27.jar 파일을 추가 (이 파일은 받아둔것.. JAVA01 폴더에 넣어놨다.)
+프로젝트(좌측의 MySQL_DataBase 폴더) 우클릭 - properties - java build path - libraries - add external jars - mysql-connector-java-8.0.27.jar 추가
+referenced 폴더 생성된다.
+
+
+- getConnection, close 메소드를 만들어 DB에 연결과 해제를 가능하도록 만든다.
+
+
+
+
+Dbman, MemberDao, MemberDto, MemberDriver 클래스 생성
+
+- MemberDao를 싱글톤으로 만듦
+
+
+
+
+여기까지가 DB였다!
+학습은 끝났지만, 과정이 진행되는 내내 계속해서 사용할 것이다.
+===================================
+여기서부터는 day 50으로 넘겨
+
+
+
+이 다음부터는 JSP(JAVA SERVER PAGE 의 약자이다)
+
+
+새로운 프로젝트를 만든다
+Dynamic web project로 생성
+이름은 WEB07_JSP_SERVLET
+
+프로젝트 이름 위에서 우클릭 - properties - project facets - Java 버전 1.8로 설정 - 우측 runtime의 Apache Tomcat 체크박스 클릭
+
+src/main/webapp 에 '01' 폴더를 생성
+
+01 폴더에 JSP 파일 생성 - 01_time.jsp 생성
+
+
+
+01_time
+
+- HTML에 JSP 명령을 사용하는 방법
+<% %>
+<%= %> : 페이지에 출력될 내용을 기술하고자 할 떄 사용
+
+
