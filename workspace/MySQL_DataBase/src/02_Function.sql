@@ -71,11 +71,11 @@ select substring('나는 버스를 타고 갑니다', 8, 2) from dual;
 -- now() : 현재 날짜와 시간 (datetime 형식)
 -- curdate() or current_date() : 현재 날짜 (date 형식)
 -- curtime() or current_time() : 현재 시간 (time 형식)
--- DATE_ADD(날짜, INTERVAL 기준값 더할숫자) : 날짜에서 기준값만큼 더한다.
+-- DATE_ADD(날짜, INTERVAL 더할숫자 기준값) : 날짜에서 기준값만큼 더한다.
 -- 기준값 : YEAR, MONTH, DAY, HOUR, MINUTE, SECOND
 select date_add(now(), interval 2 day) from dual;
 select date_add(now(), interval 3 month) from dual;
--- DATE_SUB(날짜, INTERVAL 기준값 뺄숫자) : 날짜에서 기준값만큼 뺀다.
+-- DATE_SUB(날짜, INTERVAL 뺄숫자 기준값) : 날짜에서 기준값만큼 뺀다.
 -- 기준값 : YEAR, MONTH, DAY, HOUR, MINUTE, SECOND
 select date_sub(now(), interval 1 month) from dual;
 
@@ -93,11 +93,12 @@ select date_sub(now(), interval 1 month) from dual;
 -- FROM_DAYS(날 수) : 00년 00월 00일 부터 날 수 만큼 경과한 날의 날짜 출력
 -- TO_DAYS(날짜) : 00년 00월 00일 부터 날짜까지의 일자 수 출력
 -- DATE_FORMAT(날짜, '형식') : 날짜를 형식에 맞게 출력
+-- STR_TO_DATE(문자, '형식') : 문자열을 형식에 맞게 (날짜로) 출력
 
 
 -- 예시)
 -- 오라클의 to_char() 날짜 -> 문자
-date_format(now(), '%Y%m%d')
+date_format(now(), '%Y%m%d');
 -- 오라클의 to_date() 문자 -> 날짜
 str_to_date ('20211013', '%Y%m%d')
 
