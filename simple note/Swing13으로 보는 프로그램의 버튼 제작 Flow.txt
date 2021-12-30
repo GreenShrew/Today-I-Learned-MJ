@@ -1,0 +1,14 @@
+- Swing13으로 보는 프로그램의 버튼 제작 Flow
+
+container 만들고
+Layout으로 범위 설정하고
+JPanel로 각 범위에 들어갈 바구니를 만들고
+텍스트필드, 버튼 등의 컴포넌트를 만들고
+컴포넌트를 JPanel 바구니에 원하는 위치에 add하고
+바구니를 container에 add한다.
+
+이벤트에 따라 처리할 동작이 있는 버튼들은 .addActionListener(this)를 달아주고
+actionPerformed 메소드에서 매개변수를 .getActionCommand();로 호출해서 담고
+getText(), setText() 등의 메소드를 이용하여 원하는 동작을 작성.
+
+간단하게 써도 되지만, 확장성을 위해 switch 등을 쓸 수 있다.

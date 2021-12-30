@@ -1,0 +1,254 @@
+day 52
+
+※ day 50~51의 내용 잠깐
+Request 객체 : 02/05_Request 한번 다시 보자
+Forward = 자료를 가지고 감
+sendRedirect = 해당 페이지로 이동시킴
+
+
+※ 081을 보며 든 의문
+자바 빈(Bean) 객체란 무엇인가?
+액션태그의 Property란 무엇인가?
+scope란 무엇인가? - 분명 배웠던것임..내용의 수명을 페이지에서 끝낼지 다음까지 이어갈지 페이지 닫을때까지 유지할지 서버 내릴때까지 유지할지..
+useBean이란 무엇인가?
+
+
+
+
+
+03_Session
+
+※ 앞서 한번 봤었던 내용..
+바로 session에 내용을 저장하는 방법
+넣는건 정말 간단하다!
+
+session.setAttribute("id", "hong");
+session.setAttribute("age", 20);
+이렇게 저장하면 된다!
+
+
+- 빼는 방법은 절차가 있다.
+setAttribute 는 저장소가 Object형이기 때문에 여러 자료형을 전부 저장할 수 있다! 배열을 넣던 정수를 넣던 객체를 넣던...
+
+
+
+04_getSession
+
+- session에 저장된 값 추출방법
+
+String id = (String) session.getAttribute("id");
+Integer age = (Integer) session.getAttribute("age");
+"id"와 "age"에 저장된 값을 추출하였다.
+이렇게 맞는 형태로 형변환을 시켜주어야 추출할 수 있다.
+
+
+- 세션에 설정된 모든 값 얻어오기 (https://byungmin.tistory.com/13  -  Enumeration에 대한 내용)
+
+하나하나 가져오지 않고 모두 한번에 가져올 수 있다.
+
+Enumeration<String> names = session.getAttributeNames();
+이를 사용하면 세션에 저장된 키값들(id, age)만 얻어서 저장한다.
+
+Enumeration을 사용하기 위해서는
+<%@ page import="java.util.Enumeration" %>
+이를 import 해주어야 한다.
+
+
+그리고 names에 저장된 키값들을 while문을 통해 쭉 사용한다.
+※ while(names.hasMoreElements()) : 현재의 names값의 다음에 요소가 있으면 true
+※ String name = names.nextElement().toString();
+
+nextElement() : names의 현재 값을 불러오고, 다음 값을 불러온다.
+
+
+
+05_Session_Info
+
+- 세션 정보를 얻어오는 메소드 사용하기
+
+세션의 고유코드, 세션 생성 시간과 마지막 접근 시간 등을 볼 수 있다.
+
+
+
+06_RemoveAttribute
+
+※ 세션에는 로그인정보 등의 내용이 저장된다. 이를 시간이 지나면 지우거나 해야한다.
+ 은행 사이트에 갔을때 시간이 지나면 로그아웃되는 것이 예시이다.
+
+- 세션을 지우는 방법
+
+session.removeAttribute("지울 세션의 key 이름");
+
+이를 사용해서 지울 수 있다.
+
+
+
+071_LoginForm
+
+- session 활용방법
+
+ 위에서 배운 내용을 토대로, 로그인 정보를 session에 넣어서 login form이 동작하는 예시를 만들었다.
+※ Servlet을 만들지 않고 xxx_do를 사용하였다.
+
+-> login form을 만든다.
+
+-> 072_Login_do 제작 (id와 pw가 맞으면 073으로, 틀리면 071로)
+
+-> 073_main 제작
+-> 로그인 없이 접속하면 로그인창으로 되돌리고, 마이페이지/로그아웃 시킬 수 있는 버튼 form 제작
+
+-> 074_logout_do 제작
+-> 저장된 세션을 모두 지우고 071로 보내도록 만든다. ※1
+
+-> 075_myPage_do 제작
+-> 마이페이지로 가기 전에 로그인 여부를 확인한다. 왜냐하면 로그인도 안 한 사람이 마이페이지에 가서 정보를 빼낼 수 있으므로.
+
+-> 076_myPage 제작
+-> 여기서도 로그인체크 해야한다. 다이렉트로 이 페이지에 들어오는 사람들을 로그인 창으로 보낸다.
+
+
+
+
+※1 06_RemoveAttribute에서 배운 삭제 방법과는 다르다!
+session.invalidate(); : 현재 세션 아이디에 저장된 세션의 내용을 모두 지운다.
+session.removeAttribute("loginUser"); : 세션의 내용 중 해당 이름을 가지는 내용 하나만 지운다.
+
+
+
+
+※ 보통 session에 아이디 하나만 저장하는게 아니라 이전에 jdbc 단원에서 만든 Dto 파일처럼 아이디, 이름, 주소 등등의 정보가 담긴 '객체'를 담는다.
+이를 Servlet을 이용해서 담을 것이다.
+
+
+
+
+
+081_useBeanActionTag
+
+- Servlet을 이용해 정보가 담긴 객체를 담는 방법
+
+src/main/java 폴더에
+com.ezen.dto
+패키지를 만든다.
+
+-> 패키지에 MemberBean 클래스 생성
+-> 객체에 담을 내용(변수)들을 생성하고 getter setter
+
+-> userBeanActionTag에 객체를 생성
+--> JSP 문법으로 객체를 생성하는 방법 두가지
+--> 액션 태그로 객체를 생성하는 방법
+--> 생성한 객체를 JSP 문법으로 다루는 방법과 액션태그로 다루는 방법
+※ 주의!
+ - JSP 문법으로 만든 객체는 액션태그로 접근이 불가능하다!
+ - 반대로 액션태그로 만든 객체는 JSP 문법으로 접근이 가능하다!
+
+
+
+
+082_useBeanForm
+
+- 
+
+081에서 배운 내용을 토대로 입력값을 객체에 넣어서 사용하는 예시
+
+
+-> 083_useBeanAction_do 생성
+-> 082에서 전달된 데이터를 bean에 저장
+--> request.getParameter 로 값을 받아서
+--> 액션태그로 dto 객체(MemberBean)를 생성하고 변수들을 파라미터로 받아온 값으로 변경
+-> 값을 084_useBeanAction로 전송
+
+-> 084_useBeanAction 생성
+-> 받은 내용들 출력
+--> 이름은 액션태그로 받는 방법
+
+
+
+03 폴더는 여기까지
+==============================
+
+
+04 폴더 생성
+
+※ C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 의 ojdbc6을
+workspace\WEB07_JSP_SERVLET\src\main\webapp\WEB-INF\lib 에 복사해서 붙여넣는다.
+Properites 의 JAVA Build Path에서 Jar 추가하는것과 똑같다.
+
+
+※ 이제부터는 DB에 내용을 담고, 여기에 있는 내용을 끄집어다가 다룰 예정
+과거 jdbc를 배울때처럼 조회, 수정, 추가, 삭제 기능을 다룰것이다.
+처음에는 한 페이지마다 하나의 기능을 배우고, 후에는 Dao,Dto처럼 나눙것이다.
+
+
+
+sql.sql 생성
+
+- MEM 테이블 생성
+id, name, pwd, phone을 가지는 테이블
+실습에서 이 테이블을 쓸 예정이다.
+
+
+
+
+MemberMGR (여기서 MGR은 그냥 Management의 약자..별 의미는 없다)
+
+- DB에 연결하고 select 기능 추가
+
+
+-> 우선 DB에 연결하기 위해 필요한 것들을 import한다.
+-> 그리고 head 태그 내에 DB에 접속하기 위한 동작을 선언한다.
+
+-> body 부분에 내용을 넣을 table을 만들고
+-> Class.forName(driver); , con = ... 를 이용해 DB에 연결하자.
+※ 얘는 자동으로 try~ catch~ 문구를 만들어주지 않는다..
+
+-> pstmt에 sql 명령을 담고, 이를 rs로 실행시킨다.
+-> while문으로 이를 출력하되, while문의 1회 반복 실행을 테이블의 1행 출력과 같도록 구성한다.
+
+-> addMemberForm, deleteMember, updateMemberForm으로 이동하여 멤버를 추가하거나 삭제, 수정 할 수 있도록 한다.
+
+
+
+- Insert 기능 추가
+
+-> addMemberForm 생성
+-> 추가할 회원의 정보를 입력할 Form을 만든다
+-> 전송 버튼을 누르면 addMember_do로 정보를 보내도록 한다.
+
+-> addMember_do 생성
+-> DB에 연결하고 insert 기능을 만든다. 그리고 전달된 데이터를 받아 만든 insert 기능의 sql문에 넣고 실행
+-> 01_MemberMGR.jsp로 이동시킴
+
+
+
+
+- delete 기능 추가
+
+-> deleteMember 생성
+-> MemberMGR에서 삭제 버튼을 누르면 id를 전달받아 해당 id를 가진 유저의 테이블을 삭제한다.
+※ 같은 id를 가지고 있는 사람들도 전부 삭제된다! 다만, id는 중복해서 만들어지도록 설계되지 않는다.
+
+
+
+
+- update 기능 추가
+
+-> updateMemberForm 생성
+-> MemberMGR에서 수정 버튼을 누르면 id를 전달받아 해당 id를 가진 유저의 테이블의 정보를 수정한다.
+
+-> 검색을 해서 해당 멤버가 가진 데이터를 기본으로 넣고 시작한다. (단, 비밀번호는 공란)
+-> 수정하는 form을 만들고, 수정한 데이터가 updateMember_do.jsp로 날아가도록 만든다.
+
+-> updateMember_do 생성
+-> 데이터를 update할 sql문을 만들고, 전달받은 내용을 토대로 이를 실행시킨다.
+-> MemberMGR.jsp로 다시 돌아가게 만든다.
+
+
+
+
+
+
+
+
+
+

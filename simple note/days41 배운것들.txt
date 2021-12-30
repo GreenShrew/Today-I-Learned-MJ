@@ -118,8 +118,8 @@ ALTER TABLE 테이블명 DROP COLUMN 삭제할필드명;
 - 테이블의 제거
 
 
-
-06_DDL_View_Sequence
+※ 여기부터는 day 42로 넘어간다.
+06_DDL_View_Sequence 
 
 - 뷰(View) : 다른 테이블을 사본으로 만들어서 보여주는 명령. 테이블 자체가 저장이 되지 않는다.
 - 뷰의 생성 방법
@@ -129,4 +129,4 @@ Create or Replace View 뷰이름 as (select 구문)
 - 시퀀스의 생성 방법
 create sequence 시퀀스이름 start with 시작숫자 increment by 증가량;
 
-[1] 시퀀스의 생성 <- 이부분 소스 코드 보고 긁어와야해..
+[1] 시퀀스의 생성

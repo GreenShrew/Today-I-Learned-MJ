@@ -4,6 +4,8 @@ day 48
 ※ 스키마가 무엇인지 찾아보자!
 
 
+※ 집에서는 01_DDL의 테이블을 모두 alt+x로 셋팅하자!
+
 
 RentDriver, Dao, Dto, DBmanager의 delete 부분까지 마무리하고, booklist, memberlist, rentlist 세 테이블을 join해서 모두 select 하였다.
 
