@@ -13498,3 +13498,32 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jst.jsp.core 4 4 2021-12-30 17:05:26.169
+!MESSAGE Could not read externalized JSPTranslator at C:\Users\Onion\Desktop\TIL\Today-I-Learned-MJ\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\translators\362183840.translator
+!STACK 0
+java.io.FileNotFoundException: C:\Users\Onion\Desktop\TIL\Today-I-Learned-MJ\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\translators\362183840.translator (지정된 파일을 찾을 수 없습니다)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslatorPersister.getPersistedTranslator(JSPTranslatorPersister.java:105)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslationAdapterFactory.createAdapter(JSPTranslationAdapterFactory.java:47)
+	at org.eclipse.wst.sse.core.internal.provisional.AbstractAdapterFactory.adaptNew(AbstractAdapterFactory.java:122)
+	at org.eclipse.wst.sse.core.internal.provisional.AbstractAdapterFactory.adapt(AbstractAdapterFactory.java:66)
+	at org.eclipse.wst.sse.core.internal.provisional.AbstractNotifier.getAdapterFor(AbstractNotifier.java:95)
+	at org.eclipse.jst.jsp.core.internal.java.search.JSPSearchDocument.getJSPTranslation(JSPSearchDocument.java:121)
+	at org.eclipse.jst.jsp.core.internal.java.search.JSPSearchDocument.getCharContents(JSPSearchDocument.java:79)
+	at org.eclipse.jst.jsp.core.internal.java.search.JavaSearchDocumentDelegate.getCharContents(JavaSearchDocumentDelegate.java:43)
+	at org.eclipse.jdt.internal.core.search.indexing.SourceIndexer.indexDocument(SourceIndexer.java:107)
+	at org.eclipse.jdt.internal.core.search.JavaSearchParticipant.indexDocument(JavaSearchParticipant.java:83)
+	at org.eclipse.jst.jsp.core.internal.java.search.JSPSearchParticipant.indexDocument(JSPSearchParticipant.java:74)
+	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.indexDocument(IndexManager.java:656)
+	at org.eclipse.jdt.internal.core.search.indexing.IndexManager$2.execute(IndexManager.java:1280)
+	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:432)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+!ENTRY org.eclipse.ui.navigator 2 0 2021-12-30 20:13:18.837
+!MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering
+
+!ENTRY org.eclipse.ui.navigator 2 0 2021-12-30 20:13:18.838
+!MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering

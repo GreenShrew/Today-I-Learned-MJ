@@ -27,3 +27,9 @@ jdbc는 04와 05를 보면서 공부하는게 맞는 것 같다
 
 
 시험범위는 day 52까지
+
+
+02 폴더의 121 122 123 124
+respose.sendRedirect
+Forward
+Action Tag 방법 다 나온다.
