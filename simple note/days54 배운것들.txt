@@ -1,0 +1,256 @@
+day 54
+
+※ 확인할 내용
+
+11에서 나오는 로케일(locale)이란 무엇인가?
+
+
+
+
+06_ForEach
+
+- JSP의 반복실행문!
+
+저장한 배열을 JSP 문법으로 출력하는 예시
+
+
+- EL과 jstl을 이용한 반복 실행문!
+
+<c:forEach> 태그를 이용한다.
+태그 안에 items="반복 실행에 이용할 리스트 또는 배열 이름"을 넣는다.
+그리고 그 배열을 저장할 변수를 var="변수이름"으로 지정해준다.
+
+<c:forEach items="${movieList}" var="movie"> 라고만 써도 배열이 반복된다.
+
+
+
+07_ForEach02
+
+- 반복실행문으로 테이블 만들기
+EL과 jstl을 이용한 반복 실행문으로 테이블을 만든다면?
+
+※ varStatus 속성 활용하기!
+https://postitforhooney.tistory.com/entry/JSPJSTL-JSTL-foreach%EC%97%90%EC%84%9C%EC%9D%98-varStatus-%EC%86%8D%EC%84%B1-%EC%9D%B4%EC%9A%A9
+
+varStatus를 활용하면 숫자 카운팅 등등의 역할이 가능하다!
+
+<c:forEach .... varStatus="status">
+--> varStatus : 반복식행의 상태값을 갖고 있는 클래스
+--> status : 현재 반복순서 객체 변수
+
+
+
+- 첫번째, 마지막 루프 선택하기
+
+- 마지막 아이템 빼고 각 아이템 사이에 , 찍어서 출력하기
+
+- 횟수를 임의 지정한 반복 실행문
+--> 리스트의 숫자만큼 반복되는 실행문이 아니라 내가 숫자를 카운팅하는 실행문이다.
+
+
+※ 마지막 테이블은 각 명령이 어떤 식으로 숫자를 카운트 하는지 비교해주는 명령
+
+
+
+
+08_Import
+
+- JSTL의 import 방법
+
+import와 url로 생각하면 된다!
+
+
+
+
+09_Redirect
+
+- JSTL의 Redirect 방법
+
+다만, 자주 쓰이지는 않을 것이다.
+
+
+
+=========
+
+※ 여기서부터 JSTL에서 유용하게 쓰일 내용들이 있다.
+
+
+
+10_Format01
+
+- JSTL로 날짜 데이터를 원하는 형식으로 바꾸기
+
+날짜를 넣을지, 시간을 넣을지 선택할 수 있다.
+
+--> 일반적인 출력은 now 변수에 날짜의 value(값)을 저장한다.
+<c:set var="now" value="<%=new java.util.Date()%>"></c:set>
+
+--> 그리고 출력한다.
+${now}
+
+----> 이를 내가 원하는 형식으로 출력할 수 있다.
+<fmt:formatDate value="${now}" type="date, time 혹은 both, 아니면 type 자체를 안 쓴다."></fmt:formatDate>
+
+아무것도 안 쓰면 date와 똑같이 나온다.
+
+
+
+- 출력 스타일 바꾸기
+formatDate 태그 내부에 dateStyle 혹은 timeStlye에
+default, short, medium, long, full
+을 사용하여 바꿀 수 있다.
+
+<fmt:formatDate value="${now}" type="both" dateStyle="short" timeStyle="short"/>
+
+
+- 사용자 지정 스타일
+type이나 style 요소를 사용하지 않고 pattern 요소를 사용한다.
+
+<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초"/>
+
+
+
+
+
+11_Format02
+
+- JSTL로 로케일, 통화(원, 달러 등..), 숫자, 날짜 format 변경하기
+
+-->  <fmt:setLocale value="ko_KR"/>
+위 명령으로 로케일을 설정한다
+
+이 후에 통화(currency)와 날짜를 확인하면 한국에서 쓰는 원화와 달력이 나온다!
+
+
+-->  <fmt:setLocale value="en_US"/>
+로케일을 영어로 설정하면 달러가 나온다!
+
+
+-->  <fmt:setLocale value="ja_JP"/>
+로케일을 일본어로 설정하면 엔화가 나온다!
+
+
+※ number을 쓰면 숫자 3자리마다 콤마(,)가 들어간다.
+
+
+
+여기까지가 jstl의 내용
+
+=========
+
+
+
+
+
+121_ParameterForm, 122_ParameterTo
+
+- 앞서 배운 내용들을 이용해 데이터를 보내는 form을 만들고 이를 어떻게 받는지 확인
+
+--> 고전적인 방식
+--> EL방식
+
+
+
+
+
+131_ParameterCal, 132_ParameterCal_To
+
+- 보내어진 Parameter간의 연산
+
+num1과 num2를 132로 전송하고 이를 지금까지 배운 내용 토대로 계산하는 방법을 확인
+
+--> 고전적인 방식
+--> EL방식
+
+
+
+
+141_Checkbox_EL, 142_CheckBox_EL_to
+
+- 데이터를 전송 받아서 EL, JSTL로 Check박스를 만드는 방법
+
+
+
+
+여기까지가 사이트를 구성하는 내용들을 배웠다.
+데이터를 보내고 DB를 이용하고 등등...
+
+
+
+
+===========
+
+DB에서 데이터를 잘 주고받고, 이를 화면에 잘 출력하면 그것이 웹 프로그래밍 끝!
+
+이제부터 본격적으로 웹을 만들어보자!
+
+
+
+여기서부터 새로운 프로젝트
+웹 페이지를 제작할것이다!
+
+file - new - Dynamic Web Project
+
+프로젝트 이름은
+WEB08_MemberMGR_UseServlet
+
+프로젝트 위에서 우클릭 - properties - project facets - java 버전 1.8, runtime 탭에 톰캣
+
+일전에는 JSP로 처리했지만, 이번에는 각 페이지마다 모두 Servlet을 이용할것이다.
+
+
+
+
+index
+
+- 페이지의 첫 페이지
+index 페이지가 열리자마자 
+<%response.sendRedirect("login.do"); %>
+를 이용해서 해당 페이지로 이동시킨다.
+이 명령은 LoginServlet의 doGet으로 이동시킨다.
+
+※ response.sendRedirect("member/loginForm.jsp");
+이런식으로 보내면 경로가 노출이 되므로 Servlet을 거쳐서 보낸다.
+
+
+
+(servlet) LoginServlet
+
+src/main/java 폴더에 com.ezen.member 패키지를 만든다.
+그 안에 이름이 LoginServlet 인 Servelt을 만들고, next 를 눌러 URL mapping에 /LoginServlet을 /login.do으로 바꾸어준다.
+----> 이렇게 하면 클래스의 이름은 LoginServlet이지만, 이제 login.do를 쓰면 이 Servlet으로 찾아올 수 있다.
+
+
+--> doGet, doPost 메소드를 만진다.
+
+
+
+webapp폴더 안에 member 폴더를 생성하고, loginForm.jsp를 만든다.
+--> 이 로그인폼은 LoginServlet의 doPost 메소드로 가게 된다.
+
+
+즉, index -> LoginServlet -> loginForm -> LoginServlet 이렇게 작동한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
