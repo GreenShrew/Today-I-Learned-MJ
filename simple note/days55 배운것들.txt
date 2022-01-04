@@ -1,0 +1,334 @@
+day 55
+
+--> day 54의 뒷부분부터 시작한다.
+
+----> 오늘은 로그인 페이지를 제작했다.
+----> 또한, 
+
+
+
+
+※ WEB05의 javascript를 다시 복습하자... 필수!
+뭔 소리인지 잘 모르겠어..
+
+※ WEB 07의 JSP도 복습하자
+데이터 전달 헷갈린다.
+
+※ JSTL의 choose, forEach와 EL문 사용을 다시 본다.
+
+※ 지금까지 배웠던 내용들(싱글톤, JSP, jdbc, EL, JSTL 등..)을 이용하여 웹 페이지를 만든다.
+
+
+
+
+
+
+
+
+※ 중요!!!!
+ 시작 페이지 index 를 괜히 만든것이 아니다.
+ 처음 index를 실행하면 servlet 페이지로 갔다가 login 페이지에 간다.
+ 이는 시작 위치를 멤버폴더가 아니라 한단계 위인 폴더에 설정하도록 만든다. 이렇게 만들면 loginForm.jsp에서
+action="../login.do" 이렇게 써야할 것을 action="login.do"로 쓸 수 있다.
+
+만약 index에서 페이지를 시작하지 않고 바로 loginForm.jsp에서 페이지 실행 후 로그인 버튼을 누르면
+요청된 리소스 [/WEB08_MemberMGR_UseServlet/member/login.do]은(는) 가용하지 않습니다.
+라는 에러 메세지를 볼 수 있다.
+이는 시작 지점을 member 폴더로 잡았고, member폴더 안에는 login.do 라는 파일이 없기 때문이다. 만약 action="../login.do"로 설정했다면 사용 가능했을 것.
+
+
+
+index, LoginServlet, loginForm
+
+- day 54에 이어서 로그인 페이지 만들기
+
+
+
+
+webapp 폴더에 SQL 파일 만들기
+이름은 SQL
+Oracle_11 버전에 연결
+실습에 사용할 member table 만들기
+
+※ 혹시 테이블이 이미 있어서 member 테이블을 만들 수 없다면
+drop table member cascade constraints;
+명령을 사용한다
+테이블도 지우고 참조도 지운다.
+
+테이블을 만들고 3개의 데이터를 작성한다.
+
+
+
+
+loginForm
+
+- 아무것도 안 쓰고 로그인 버튼을 누르면 servlet에서 에러가 나온다!
+그러므로 javascript로 이를 해결할것이다.
+
+<head> 태그 안에 자바 스크립트 태그를 넣고 함수 function을 제작한다.
+if(document.frm.userid.value == "")
+여기에서 frm은 아래 form 태그의 name이 frm인 태그를 선택하고,
+userid는 frm 이하 태그들 중에 name이 userid인 것을 선택하고,
+value는 선택된 userid의 value를 말한다.
+
+만약 아이디 or 비밀번호가 비어있다면, false를 반환한다.
+
+
+이후 <body> 태그의 <input>의 submit을 누르는 순간 실행되도록 onclick을 넣는다.
+만약 onclick 속성에 return false가 입력되면, form의 action의 이벤트를 막는다.
+
+
+이 모든것을 통과하면 LoginServlet에 post 방식으로 데이터가 넘어간다.
+
+
+
+
+LoginServlet
+
+- 이미 로그인 된 상태의 유저를 main 페이지로 보내기
+
+로그인 되어있는 상태에서 또다시 로그인을 시도할 경우 main.jsp로 보내버리도록 doGet에 만든다.
+
+
+넘어온 로그인 정보는 session에 저장된다. 단, JSP의 뒤에 있는 Servlet은 이를 모른다.
+
+그렇기 때문에 이를 request에서 꺼내와야한다.
+HttpSession session = request.getSession();
+※ 자세한 내용과 이렇게 하는 이유는 주석으로 달아놓았다.
+
+
+이제 가져온 session을 이용해 loginUser 값을 가져오자.
+session.getAttribute("loginUser")
+만약 이 값이 null이 아니라면 main.jsp로 보내도록 만든다.
+
+
+
+- 로그인을 위한 회원 정보 비교하기
+
+loginForm에서 doPost로 넘어온 정보를 
+request.getParameter();
+를 통해 각각 변수에 저장한다.
+
+
+이후 두가지 Action을 생각할 수 있다.
+
+#1. 로그인이 실패했을 경우
+--> loginForm.jsp로 forwarding
+#2. 로그인이 성공했을 경우
+--> main.jsp로 forwarding
+
+
+
+#1과 #2의 경우를 판별하기 위해서는?
+DB에 연결하고 접속하여 이를 비교하고 결과를 내보내야한다.
+
+이러한 기능을 하기 위해 Dao와 Dto를 만들어야 한다.
+
+
+
+----- 패키지 com.ezen.dto 를 생성
+그 안에 MemberDto 클래스를 생성하고 변수, getter setter 만들고 저장한다.
+
+
+
+----- 패키지 com.ezen.dao 를 생성
+그 안에 MemberDao 클래스를 생성한다.
+여기서 DB에 접속하고 Servlet에서 전달받은 내용을 토대로 DB를 검색할 것이다.
+
+
+MemberDao
+
+- 싱글톤으로 만들기.
+
+- DB 연결을 위한 연결객체 준비
+
+- 연결정보 준비
+
+- DB에 연결/단절 함수 생성
+
+----- 여기까지가 Dao 준비
+
+
+
+다시 loginServlet
+
+- Dao의 메소드를 호출하기 위해 객체를 생성
+
+- id로 검색해서 해당 아이디의 멤버 정보를 dto 형태로 리턴받는다
+--> getMember 메소드는 MemberDao에 만들 메소드
+아이디를 받으면 해당 id에 대한 내용을 모두 긁어오는 메소드
+
+- 마우스를 올려서 메소드 생성
+
+
+
+다시 MemberDao
+
+- id를 검색할 sql문 제작
+
+- getConnection으로 DB연결
+
+- pstmt에 sql문 장착
+
+- setString으로 sql 문에 전달된 id값 넣기
+
+- rs로 결과 실행
+
+- if문으로 검색결과가 있는지 확인
+
+- 검색 결과가 있다면 new로 mdto 객체 생성, 불러온 회원 정보들을 저장한다. 
+
+----- 여기까지가 jdbc 일련의 과정..
+
+
+
+다시 loginServlet
+
+- MemberDao에서 전달된 mdto를 검사
+--> 
+※ 참고로 비밀번호 검사 순서의 이유
+비밀번호가 null이면 equals가 에러나고(equals는 null을 비교할 수 없다)ㄴ, id가 없다면 비번이 맞았을 경우를 맨 위로 올렸을때 에러가 나온다.
+
+
+
+webapp 폴더에 main.jsp 생성
+
+- session에 저장된 값은 웹 브라우저가 닫히지 전 까지 계속 지속된다.
+그렇기 때문에 EL문을 사용할 수 있다.
+
+
+
+-----------------------------
+
+
+여기서부터는 관리자로 로그인하고, 관리자 로그인시 가입한 사람들의 정보들을 나열하도록 할 것이다.
+
+main.jsp나 LoginServlet 에서 위의 기능을 다 담을 수 없다. 그러므로 새로운 Servlet을 만들고, LoginServlet의 내용이 해당 Servlet으로 가서 일반인인지 관리자인지 구분하고, 관리자라면 회원의 정보를 모두 main.jsp로 가져가서 출력하는 기능을 만들것이다.
+
+
+ 우선 com.ezen.member 패키지에 MainServlet(mapping은 main.do로 설정)을 만든다.
+ 그리고LoginServlet의 main.jsp를 main.do로 만든다.
+
+
+
+MainServlet
+
+ MainServlet에서는 doPost 기능을 사용하지 않으므로 그대로 놔둔다.
+그리고 정보에 한글이 나올 수 있으므로 UTF-8로 인코딩을 한다.
+
+해야 할 내용은
+#1. 전체 학생을 조회해서 리스트로 리턴받기
+#2. 조회한 리스트를 리퀘스트에 저장
+#3. main.jsp로 Forwarding
+이다.
+
+
+#1. mdao.selectMember() 메소드를 만든다.
+--> MemberDao 로 간다.
+--> selectMember 메소드에 모든 회원의 정보를 조회해서 긁어오도록 한다.
+--> 긁은 내용을 다시 MainServlet으로 가져간다.
+
+#2, #3. 가져온 list 내용을 main.jsp로 넘긴다.
+
+
+
+SQL 파일로 가서
+update member set admin=1 where userid='somi';
+명령으로 somi를 관리자로 만든다.
+
+
+
+이제 main.jsp로 돌아가서
+관리자가 접속했을 때 나오는 화면을 구성한다.
+
+--> JSTL, EL 이용
+--> 회원의 아이디 이름 등의 정보를 테이블에 출력, 그리고 관리자에서 일반회원, 일반회원에서 관리자로 변경시킬 수 있는 버튼을 제작한다.
+--> 해당 버튼은 누르면 EditAdminServlet 서블릿으로 보낼 수 있도록 한다.
+
+※ 참고로 loginUser는 LoginServlet에서 저장했던 session에 저장되어있다.
+session은 웹페이지가 닫힐때까지 계속 살아있기 때문에 main.jsp에서도 ${loginUser}로 불러올 수 있다.
+
+
+
+
+
+여기까지가 로그인 기능이다.
+day 55의 내용은 여기까지 
+
+==============================================
+
+
+이제부터는 로그인 이후에 사용 가능한 기능들(로그아웃, 일반인이면 회원정보변경, 관리자면 관리자 승격 등...)과 회원가입의 기능을 만들 차례이다.
+
+
+
+※ 중요!
+자바스크립트 명령에 의해 이동하는 방법
+onClick="location.href='경로'"
+이런식으로 보내야한다.
+
+
+
+------------------------------
+
+로그아웃 기능
+
+
+member 패키지 안에 LogoutServlet(mapping은 logout.do)을 만든다
+
+LogoutServlet
+
+해야하는 기능은 다음과 같다.
+#1. 존재하는 세션을 받는다.
+HttpSession session = request.getSession();
+
+#2. 받은 세션을 모조리 지운다.
+session.invalidate();
+
+#3. 다시 로그인 페이지로 Forwarding 시킨다.
+
+
+
+-----------------------------------------
+
+회원가입 기능
+
+
+member 패키지 안에 JoinServlet(mapping은 join.do)을 만든다.
+
+doGet, doPost 둘 다 사용하게 된다.
+하나는 회원가입 페이지로 이동하는 기능, 하나는 회원가입 페이지에서 적은 내용을 가지고 돌아오는 기능
+
+
+JoinServlet
+
+- doGet에서는 joinForm.jsp로 이동만 시킨다.
+
+
+
+member 폴더 안에 joinForm.jsp를 제작한다.
+
+joinForm
+
+- 회원가입 양식
+이름, 아이디, 비밀번호 등의 데이터를 쓰고 이를 JoinServlet으로 보낼것이다.
+아이디 중복체크, 비밀번호 재확인, 회원 등급 선택의 기능을 넣을것이다.
+
+--> 중복체크 버튼을 누르면 idCheck() 메소드가 실행되도록 만든다.
+--> javascript로 이를 확인하는 기능을 만든다.
+
+----> 이부분 javascript 복습해야해...
+
+
+
+member패키지 안에 IdCheckServlet(mapping은 idcheck.do)을 만든다.
+
+IdCheckServlet
+
+- doGet만을 사용한다.
+
+중복되는 id가 있나 없나는 체크하는 작업이다! 그렇기에 mdto가 null이면 사용가능!
+
+
+
+member 폴더에 idcheck.jsp를 만든다.

@@ -35,7 +35,7 @@ ${status.index} : 0부터 시작한 반복의 현재 아이템
 <ul>
 	<c:forEach var="movie" items="${movieList}" varStatus="status">
 		<c:choose>
-			<c:when test="${status.first}">	<!-- 목록의 첫번쨈나 빨간색으로 작성 -->
+			<c:when test="${status.first}">	<!-- 목록의 첫번째만 빨간색으로 작성 -->
 				<li style="color:red;">${movie}</li>
 			</c:when>
 			<c:otherwise>
