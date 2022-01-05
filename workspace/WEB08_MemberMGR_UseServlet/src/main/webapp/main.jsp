@@ -5,15 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
+<script type="text/javascript">
+function withDrawConfirm(){
+	var bool = confirm('정말로 탈퇴하시겠습니까???????');		// 이거 javascript 단원에서 배운거야..
+	if(bool){
+		location.href="withdrawal.do?userid=" + "${loginUser.userid}";
+	}else{
+		// 사실 else에서 할 일은 없다.
+	}
+}
+</script>
 </head>
 <body>
 <table>	<!-- 일반 유저의 경우 나오는 table -->
-	<tr><td>안녕하세요. ${loginUser.name}(${loginUser.userid})님 로그인하셨습니다.</td></tr>
+	<tr><td>안녕하세요. ${loginUser.name}(${loginUser.userid})님 로그인하셨습니다.&nbsp;&nbsp;${message}</td></tr>
 	<tr><td> email : ${loginUser.email}</td></tr>
 	<tr><td> 전화번호 : ${loginUser.phone}</td></tr>
 	<tr><td> <input type="button" value="로그아웃" onClick="location.href='logout.do'"/>
-	<input type="button" value="회원정보변경" onClick="location.href='update.do?userid=${loginUser.userid}'"></td></tr>
+	<input type="button" value="회원정보변경" onClick="location.href='update.do?userid=${loginUser.userid}'">
 	<!--  문자데이터들 사이에 EL 문법이 끼어들어 조합문자데이터 구성이 가능하다. -->
+	<input type="button" value="회원 탈퇴" onClick="withDrawConfirm();">
+	<!-- 회원 탈퇴 Servlet : WithdrawalServlet -->
+	</td></tr>
 </table>
 
 <!-- 이하 관리자가 접속했을 경우 나오는 내용 -->

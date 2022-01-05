@@ -18,6 +18,35 @@
 		// 팝업창 오픈 메뉴의 idcheck.do는 서블릿이며, 서블릿에서 아이디 중복체크 작업을 한 후, 결과를 싣고 포워딩되는 데이터를 페이지 팝업창에 표시할 예정이다.
 		// 서블릿 호출시 파라미터를 위와 같이 호출되는 주소에 ?와 함께 전달할 수 있다.
 	}
+	
+	function joinCheck(){
+		if(document.frm.name.value == ""){	// 이름이 빈칸이라면 
+			alert("이름은 필수 입력사항입니다.");
+			document.frm.name.focus();
+			return false;
+		}
+		if(document.frm.userid.value.length == 0){		// 아이디가 빈칸이라면, 위와같이 쓸 수 있지만, 길이가 0인것도 빈칸이다! 
+			alert("아이디는 필수 입력사항입니다.");
+			document.frm.userid.focus();
+			return false;
+		}
+//		if(document.frm.userid.value != document.frm.reid.value){	// 아이디 중복체크 했는지 여부!
+//			alert("아이디 중복체크를 하지 않으셨습니다.");
+//			document.frm.userid.focus();
+//			return false;
+//		}
+		if(document.frm.pwd.value.length == 0){	// 비밀번호가 빈칸이라면
+			alert("비밀번호는 필수 입력사항입니다.");
+			document.frm.pwd.focus();
+			return false;
+		}
+		if(document.frm.pwd.value != document.frm.pwd_check.value){	// 작성한 비밀번호와 비밀번호확인 란이 같은지 여부
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			document.frm.pwd_check.focus();
+			return false;
+		}
+		return true;		// 모든 if문을 통과하면 회원가입 완료!
+	}
 </script>
 </head>
 <body>
@@ -28,7 +57,7 @@
 	<tr><td>이름</td><td><input type="text" name="name" size="20">&nbsp;*</td></tr>
 	<tr><td>아이디</td><td><input type="text" name="userid" size="20">&nbsp;*
 		<input type="button" value="중복 체크" onclick="idCheck();"/>
-		<input type="hidden" name="reid" value="">
+		<input type="hidden" name="reid" value="">	<!-- idcheck.jsp에서 idok()로 넘어온  -->
 		</td></tr>
 	<tr><td>비밀번호</td><td><input type="password" name="pwd" size="20">&nbsp;*</td></tr>
 	<tr><td>비밀번호 확인</td><td><input type="password" name="pwd_check" size="20">&nbsp;*</td></tr>

@@ -1,0 +1,369 @@
+day 56
+
+※ day 55에 이어서 회원가입과 로그인 화면에서의 기능을 만들었다.
+
+
+※ 확인할것들
+#1.
+idcheck에 중복체크 창이 작동하지 않는다.
+사용 버튼을 눌러도 창이 닫히지 않는다.
+
+joinForm에 idCheck 메소드 - 아이디 중복체크 여부를 잠깐 주석처리 해놓았다..
+위의 중복체크 문제가 해결되면 해제해
+
+회원가입 자체는 잘 작동한다!
+
+
+#2.
+updateForm에 확인 누르면 메인 페이지로 가긴 하는데 정보는 안 바뀐다
+왜지?
+
+
+
+
+
+어제까지 했던 내용의 경로
+loginForm.jsp -> join.do -> joinForm.jsp -> idcheck.do -> idcheck.jsp -> idcheck.jsp
+
+이제 idcheck.jsp 에서 시작할것이다.
+
+
+
+
+
+
+
+
+idcheck.jsp
+
+- 아이디가 사용 가능하면 실행될 메소드 idok()를 스크립트로 제작한다.
+
+request에 저장되어있는 userid를 opener.document.frm.userid.value와 opener.document.frm.userid.value 에 넣는다.
+
+
+- 아이디가 사용 불가능하면 아이디를 다시 중복체크 할 수 있도록 기능을 만든다.
+
+
+
+- 이 후에는 이름, 아이디 등의 *이 붙은 박스가 빈칸이 아닌지, 중복 체크는 했는지, 비밀번호와 비밀번호 확인이 같은지, 등급은 어떤 등급인지...
+
+
+
+
+다시 joinForm으로
+
+- 자바스크립트로 위의 내용을 검사해줄 joinCheck() 메소드를 제작한다.
+
+
+joinCheck()를 통과하면 이 데이터를 JoinServlet 파일의 doPost로 보낸다.
+
+다시 JoinServlet
+
+- 받은 parameter를 mdto에 넣어서 이를 각 변수에 데이터를 넣고
+--> int result = mdao.insertMember(mdto);
+ 로 Dao의 insertMember 메소드로 전송하고 리턴되는 데이터를 result에 넣는다.
+--> result에 리턴되는 값은 0 혹은 1이 될 것이다.
+---->완료되었다면 로그인 창으로 되돌려보낸다.
+
+------>insertMember 에 마우스를 올리고 create method를 실행한다.
+
+
+
+다시 MemberDao
+
+- 생성된 insertMember를 작성한다.
+여기는 예전에 jdbc에서 insert 제작했던대로 만들면 된다.
+pstmt에 sql문 장착하고 앞서 받아온 회원가입 정보를 ?에 대응되도록 set하면 된다.
+그리고 마지막에 pstmt.executeUpdate();로 실행시키면 끝.
+
+result에 값을 리턴하는것을 잊지 말자.
+
+
+
+
+
+
+
+
+회원가입은 여기까지이다.
+테이블에 무언가를 추가하는 경우는 대개 이런식으로 진행이 된다.
+
+
+===================================
+
+
+현재 로그인중인 유저의 회원정보를 수정하는 기능을 만들자.
+
+
+main.jsp로 간다.
+
+<input type="button" value="회원정보변경" onClick="location.href='update.do?userid=${loginUser.userid}'">
+
+를 통해 update.do에 현재 유저의 userid를 가지고 간다.
+
+
+
+
+member 패키지에 UpdateServlet(mapping은 update.do) 생성
+
+UpdateServlet
+
+- updateForm.jsp로 이동시킨다
+
+다만 로그인이 안 되어있는 사람은 이동할 수 없다!
+따라서 로그인이 되어있는지 안 되어있는지 확인하는 동작 추가
+현재 저장된 세션을 가져와서 확인!
+
+로그인이 되어있다면, 해당 유저를 조회해서 데이터를 mdto로 리턴받고, 이를 request에 저장해서 updateForm.jsp로 Forwarding 시킨다.
+
+
+---> 그런데 이 부분에서 로그인된 회원 정보를 따로 가져오지 않아도, 이미 로그인된 loginUser라는 세션에 이미 똑같은 데이터가 저장되어있기 때문이다
+따라서 굳이 데이터를 updateForm으로 넘기지 않고 session을 가져다 쓴다.
+
+
+
+member 폴더에 updateForm 생성
+
+- 회원 정보를 수정하는 Form 제작. 여기서 수정해서 update.do로 넘긴다.
+
+session에서 로그인된 회원의 정보를 가져다가 box 안에 value로 넣도록 한다.
+이걸 수정하면 수정된다.
+
+--> 다만 아이디는 수정이 불가능, 그냥 보이기만 하도록 하고, 어쨌든 정보를 update.do로 넘겨야하므로 hidden 속성을 이용해서 value값을 지정한다.
+
+----> 여기서 확인 버튼을 누르면 데이터를 update.do로 넘긴다.
+
+
+
+다시 UpdateServlet의 doPost
+
+- 여기서는 updateForm에서 전달해준 내용을 mdto에 하나하나 저장한다.
+--> 그리고 int result = mdao.updateMember(mdto);를 이용해 MemberDao에서 DB에 데이터를 update 시켜줄 수 있도록 한다.
+----> update가 성공했다면 HttpSession으로 세션을 불러와서 세션 로그인 정보를 바뀐 정보로 교체해준다.
+---->이를 main.do로 보낸다.
+
+
+
+이제 MemberDao에 updateMember() 메소드를 만든다
+
+다시 MemberDao
+
+- 여기서는 jdbc에서 했던 Update 기능을 만들면 된다.
+
+
+
+
+
+
+
+
+--------------------------
+
+이번에는 관리자가 유저를 관리자로 변환하거나 일반 회원으로 변환하는 버튼을 만든다
+
+
+member 패키지에 editadmin(mapping은 editadmin)을 만든다.
+
+editadmin
+따로 post 쓰지 않으므로 doGet만 건든다.
+
+- main.jsp에서 버튼을 눌러 회원의 userid 정보를 가져오면, 이를 받아다가 Dao의 editAdmin() 메소드로 보낸다.
+
+
+
+
+
+다시 MemberDao
+
+- editAdmin()을 생성한다.
+
+ 이 메소드에서는 두개의 동작이 들어간다.
+#1. 회원 정보를 조회
+#2. 회원 정보를 수정(admin)
+
+
+
+
+여기까지가 일반회원 관리자 변경 기능이였다.
+
+-------------------------------
+
+회원탈퇴 기능을 만든다.
+
+- 회원탈퇴를 진짜 할지 말지를 물어보는 창은 main.jsp에 withDrawConfirm(); 이라는 자바스크립트를 만들어서 해결한다.
+
+
+
+
+MemberDao의 deleteMember() 메소드로 이동시킨다.
+
+
+다시 MemberDao
+
+- member를 삭제하는 기능을 하는 deleteMember 메소드를 만든다.
+
+
+
+
+여기까지가 로그인, 회원가입 등등...의 기능을 하는 내용들이다.
+==============================
+
+
+
+여기까지 member 패키지를 보면 기능이 8개이므로 servlet도 8개가 만들어졌다.
+각 기능들을 실행하기 위해서는 각각의 이름을 불러야한다!
+이럴바에는 차라리 하나의 web class를 만들어서 servlet들을 하나의 통로를 통해 불러오도록 하는건 어떨까?
+
+----> 이런 방식을 Model2 방식이라고 한다.
+옛날에 JSP 파일에 connection 하고 막 그런건 Model1 방식
+
+지금부터는 Model2를 이용하여 페이지를 만들 것이다.
+
+
+※ 여담
+ Model2 방식도 옛 방식이 되어가고 있다
+지금은 Spring Framework라고 해서 쉽고 간편하게 만든다.
+하지만 이 방법을 알아야 Spring도 이해할 수 있다.
+
+
+==============================
+
+day 57로
+
+
+
+
+새로운 Dynamic Web Project를 생성한다.
+프로젝트 이름은 WEB09_MemberMGR_Model2
+
+역시 프로젝트를 만들면 프로젝트 우클릭 - properties - project facets에서 자바 버전을 1.8로 바꾸고 tomcat을 연결해주는걸 잊지 말자!
+
+또한, WEB-INF 의 lib 폴더에 jstl, ojdbc6, standard jar 파일들을 복사해서 붙여넣기 한다.
+
+
+
+
+webapp 폴더에 index.jsp 파일 생성
+
+index
+
+<%
+response.sendRedirect("member.do?command=loginForm");
+%>
+
+이번에는 모든 내용을 member.do를 통할것이다.
+모든 JSP 파일에의 접근은 이 MemberServlet을 거친다!
+
+
+
+com.ezen.controller 패키지를 만들고 그 안에 MemberServlet(mapping은 member.do)을 만든다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
