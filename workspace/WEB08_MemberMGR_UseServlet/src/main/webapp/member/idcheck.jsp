@@ -6,11 +6,10 @@
 <meta charset="UTF-8">
 <title>idcheck</title>
 <script type="text/javascript">
-	function idok(){
-		<!-- request에 저장되어있는 userid를 opener.document.frm.userid.value와 opener.document.frm.userid.value
-		에 넣는다. -->
-		document.frm.userid.value="${userid}";
-		document.frm.reid.value="${userid}";		// EL 문법이 자바스크립트에서도 쓰일 수 있다.
+	function idok(id){
+		// request에 저장되어있는 userid를 opener.document.frm.userid.value와 opener.document.frm.userid.value에 넣는다.
+		opener.document.frm.userid.value =id;
+		opener.document.frm.reid.value = id;
 		self.close();
 	}
 </script>
@@ -31,7 +30,7 @@
 </c:if>
 <c:if test="${result==-1}">
 	${userid}는 사용 가능한 아이디입니다.
-	<input type="button" value="사용" onClick="idok();">
+	<input type="button" value="사용" onClick="idok('${userid}');">
 </c:if>
 </body>
 </html>

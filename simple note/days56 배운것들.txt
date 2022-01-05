@@ -4,7 +4,7 @@ day 56
 
 
 ※ 확인할것들
-#1.
+#1. - 해결! 주석이 문제였다! <!-- --> 이 아니라 // 로 넣어야했다!
 idcheck에 중복체크 창이 작동하지 않는다.
 사용 버튼을 눌러도 창이 닫히지 않는다.
 
@@ -14,7 +14,12 @@ joinForm에 idCheck 메소드 - 아이디 중복체크 여부를 잠깐 주석�
 회원가입 자체는 잘 작동한다!
 
 
-#2.
+#2. - 해결! MemberDao의 update메소드 부분의 sql이 문제였다.
+String sql = "update member set name=?, pwd=?, phone=?, email=?, admin=?, where userid=?";
+여기에서
+admin=?, where 사이의 콤마 , 는 넣어서는 안 된다.
+
+
 updateForm에 확인 누르면 메인 페이지로 가긴 하는데 정보는 안 바뀐다
 왜지?
 

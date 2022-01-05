@@ -30,11 +30,11 @@
 			document.frm.userid.focus();
 			return false;
 		}
-//		if(document.frm.userid.value != document.frm.reid.value){	// 아이디 중복체크 했는지 여부!
-//			alert("아이디 중복체크를 하지 않으셨습니다.");
-//			document.frm.userid.focus();
-//			return false;
-//		}
+		if(document.frm.userid.value != document.frm.reid.value){	// 아이디 중복체크 했는지 여부!
+			alert("아이디 중복체크를 하지 않으셨습니다.");
+			document.frm.userid.focus();
+			return false;
+		}
 		if(document.frm.pwd.value.length == 0){	// 비밀번호가 빈칸이라면
 			alert("비밀번호는 필수 입력사항입니다.");
 			document.frm.pwd.focus();

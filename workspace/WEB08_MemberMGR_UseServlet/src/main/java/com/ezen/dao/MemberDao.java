@@ -133,7 +133,7 @@ public class MemberDao {
 
 	public int updateMember(MemberDto mdto) {
 		int result = 0;
-		String sql = "update member set name=?, pwd=?, phone=?, email=?, admin=?, where userid=?";
+		String sql = "update member set name=?, pwd=?, phone=?, email=?, admin=? where userid=?";
 		
 		con = getConnection();
 		try {
