@@ -76,6 +76,7 @@
           <tags>persp.newWizSC:org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_Hk6eFWLuEeyCAfd1-0yzeQ" selectedElement="_Hk6eG2LuEeyCAfd1-0yzeQ" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_Hk6eFmLuEeyCAfd1-0yzeQ" elementId="topLeft" containerData="1421" selectedElement="_Hk6eF2LuEeyCAfd1-0yzeQ">
+              <tags>active</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_Hk6eF2LuEeyCAfd1-0yzeQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_Hk8TgGLuEeyCAfd1-0yzeQ" closeable="true">
                 <tags>View</tags>
                 <tags>categoryTag:General</tags>
@@ -524,7 +525,6 @@
       <children xsi:type="basic:PartStack" xmi:id="_Hk7tMGLuEeyCAfd1-0yzeQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_AqFQEG4JEeyLotLBQ8OzZA">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_XE_eQG4GEeyLotLBQ8OzZA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="index.jsp" iconURI="platform:/plugin/org.eclipse.jst.jsp.ui/icons/full/obj16/sourceEditor.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jst.jsp.core.jspsource.source&quot; name=&quot;index.jsp&quot; partName=&quot;index.jsp&quot; title=&quot;index.jsp&quot; tooltip=&quot;WEB08_MemberMGR_UseServlet/src/main/webapp/index.jsp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/WEB08_MemberMGR_UseServlet/src/main/webapp/index.jsp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;112&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
@@ -554,8 +554,6 @@
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
         </children>
       </children>
     </sharedElements>
@@ -565,6 +563,8 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;1&quot; currentWorkingSetName=&quot;Aggregate for window 1634535497141&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;1&quot;>&#xD;&#xA;&lt;lastRecentlyUsedFilters/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_Hk8TgWLuEeyCAfd1-0yzeQ" elementId="org.eclipse.ui.navigator.ProjectExplorer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -885,7 +885,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Hk87F2LuEeyCAfd1-0yzeQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_vlcxwG4FEeyLotLBQ8OzZA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_HlCcNWLuEeyCAfd1-0yzeQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_-SApkG7FEeyYsvCYUmanDg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_HlCcNWLuEeyCAfd1-0yzeQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Hk87JGLuEeyCAfd1-0yzeQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -925,7 +925,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Hk87fGLuEeyCAfd1-0yzeQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_vlfOAG4FEeyLotLBQ8OzZA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_HlCb3GLuEeyCAfd1-0yzeQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_-SE7AG7FEeyYsvCYUmanDg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_HlCb3GLuEeyCAfd1-0yzeQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Hk87iGLuEeyCAfd1-0yzeQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>

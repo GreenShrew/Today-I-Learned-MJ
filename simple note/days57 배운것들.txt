@@ -1,0 +1,310 @@
+day 57
+
+
+※ 복습해야 할 내용
+- 상속, 추상, 인터페이스
+
+
+
+※ 확인해야 할 부분
+joinForm에 id 중복체크...
+아예 팝업창 자체가 안 나온다...
+
+
+※ 오늘 만든 기능들
+로그인, 회원가입, 로그아웃, 회원정보수정
+
+
+
+
+
+※ 이번 프로젝트에서는 MemberServlet이 유일한 servlet이다!
+그리고 이 servlet은 직접적으로 기능을 동작하는 역할은 하지 않고, 자바 파일에 연결시켜주는 역할을 할 것이다!
+이전에 Servlet이 하던 역할을 java 클래스가 할 예정이고, Servlet은 중계자 역할을 한다.
+
+
+
+index
+
+ 이 페이지는 열리자마자 바로 MemberServlet으로 이동한다.
+특이한점은 경로가
+member.do?command=loginForm
+로 command가 붙었다.
+
+이 command라는 parameter는 어떤 역할을 할지 정해주는 parameter가 될 것이다!
+
+
+
+
+
+controller 패키지에 MemberServlet 생성
+
+ index.jsp에서 전달되어진 command 파라미터를 getParameter로 받는다.
+그리고 이를 자바 파일에 보낼 예정이다!
+
+
+
+----> com.ezen.controller.action 패키지를 생성한다.
+이제부터 모든 자바 클래스 파일은 여기에 생성될것이다!
+
+----> action 패키지에 LoginFormAction.java 생성
+
+
+
+LoginFormAction
+
+- 여기에 로그인 Form으로 보내는 기능을 하는 메소드를 만들것이다.
+
+--> 우선 execute()이라는 메소드를 만들고, Forwarding 하는 기능을 만들었다.
+
+※ 주의 : java 클래스는 request와 response가 JSP처럼 자동으로 생성되지 않는다. 그렇기에
+public void execute(HttpServletRequest request, HttpServletResponse response)
+으로 매개변수를 안에 넣어주고 import 시켜주어야 한다.
+
+※ 주의2 : dp.forward(request, response); 에 에러가 나온다. 왜냐하면 request와 response가 잘 전달될지 안 될지에 대한 문제가 생기기 때문
+
+
+여기까지 하면 index에서 파라미터를 전송받아 loginForm으로 보내는 하나의 완벽한 클래스가 만들어진다.
+-------
+
+
+
+webapp 폴더에 member 폴더를 생성
+
+member 폴더에 loginForm.jsp 생성
+
+
+loginForm.jsp
+
+- 로그인 페이지 구성
+ id와 pwd를 쓰고 로그인하거나 회원가입을 할 수 있는 기본적인 구성을 만든다.
+이전에 만들었던 그대로의 모습이다.
+
+--> 다만 다른점은 아래의 태그가 추가된 점이다.
+<input type="hidden" name="command" value="login">
+화면에는 보이지 않지만, 로그인 버튼을 누르면 command를 key 값으로 가지고, login을 value로 가지면서,
+
+
+
+--> 그럼 어떻게 '로그인 화면으로 가라!', '이 회원의 id와 pwd가 맞는지 확인해라!' 등의 많은 java 클래스로의 길 안내를 하나의 Servlet으로 해결할까?
+if ~ else if 를 이용해서 command에 들어온 값을 비교해서 분류한다!
+
+
+
+
+action 클래스에 LoginAction.java 생성
+
+- 여기에 로그인 기능을 만들것이다!
+ 우선 나중에...
+
+-------------------------------------
+
+ 회원가입 역시 위와 마찬가지로 회원가입 화면으로 보내는 기능과 회원가입을 시켜주는 기능을 가지는 java 클래스를 만들고, servlet을 통해 해당 클래스로 이동할 것이다.
+
+
+다시 loginForm.jsp
+
+회원가입 버튼에
+<input type="button" value="회원가입" onClick="location.href='member.do?command=joinForm'">
+으로 onClick을 이용해 joinForm이라는 key를 가지는 command와 함께 memberServlet으로 이동시킨다.
+
+
+
+다시 MemberServlet
+
+ joinForm과 일치하는 if문이 선택되고, 이를 JoinFormAction으로 보낸다.
+
+
+
+계속 기능이 늘어나면 계속 else if가 늘어날 것
+이것이 가장 원시적인 해결방법!
+
+이런식으로 만들면 이제 화면 주소에 member.do만 노출된다!
+
+
+※ 문제점 1
+다만 이런 방식은 servlet의 doGet이 지저분해진다!
+if문이 계속 늘어나면 각각의 클래스에 대한 객체를 생성하고 execute 메소드를 불러오고.....
+길어지고 복잡해지고 지저분해진다!
+
+※ 문제점2
+ 일련의 과정이 반복되는 동안 execute() 라는 메소드가 계속 나오는데, 그럴때마다 java 파일에
+public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+를 계속 타이핑하는건 정말 비효율적이다
+-------------------------------------
+
+위의 문제를 해결하고자 '인터페이스'를 이용한다.
+
+action 패키지에 interface 파일 Action.java를 생성한다.
+(아이콘의 생김새가 약간 다르다. 아이콘 우상단에 보라색 무언가가 있다)
+
+
+
+Action.java
+
+
+
+
+
+ 모든 java 클래스에 공통적으로 만드는 execute 메소드를 추상 메소드로 만들되, 매개변수와 예외처리까지 모두 포함하여
+
+public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+위와 같이 생성한다.
+
+
+
+ 이제 이를 각 클래스를 만들때, 
+
+public class JoinFormAction implements Action
+
+이런식으로 상속하면 자동으로 메소드를 생성해줄 것이다.
+
+
+
+또한, MemberServlet에서는 인터페이스 Action 에 대한 객체를
+
+Action ac = null;
+
+로 생성하면, Action 클래스를 상속받은 자식클래스들은 따로 클래스 객체를 만들지 않아도
+
+ac = new LoginFormAction();
+
+와 같이 객체를 이용할 수 있게 된다.
+(Action ac = new LoginFormAction(); 의 모습이다!)
+(자식 클래스는 부모 클래스의.....뭐시기)
+
+
+
+
+---------------------------
+
+※ 물론, 기능이 추가될 때마다 Servlet에 else if가 추가되는 것은 역시 부담스럽다.
+이 자체도 전부 날려버리고 별도의 함수로 만들 예정이다.
+
+
+
+
+--> 우선 Servlet의 if ~ else if 부분을 전부 주석처리한다.
+
+
+controller 클래스에 ActionFactory 클래스 생성!
+이 안에서 전달된 command에 따라 어떤 동작을 할지 결정해주는 getAction 메소드를 만든다.
+
+
+
+
+
+※ 또다른 문제점
+
+여러명이 접속하면 여러 ActionFactiory 객체 af가 만들어져 메모리 낭비가 생긴다.
+따라서 ActionFactory를 싱글톤으로 만들어 이를 해결한다.
+--> 싱글톤으로 만들면 수천명이 접속해도 객체는 1개이다.
+
+
+
+
+여기까지가 시스템 기본 구조!
+이제부터는 앞선 프로젝트 WEB08에서 만든 기능을 그대로 만들면 된다!
+===================================
+
+※ Model2 방식은 위와 같다.
+command에 전달된 값에 따라 어떤 작업을 할지가 결정이 되어 실행된다.
+각 command별 실행할 작업들은 해당 실행코드가 들어있는 클래스 내부에 존재한다. (그 중에서도 execute 메소드 안에 있다.)
+Model2 방식은 각 기능별로 클래스가 제작되어 실행되기를 기다리고, command 값에 따라 선택되어 실행되는 형식이다!
+
+
+
+
+
+
+==========================
+
+이제 Dto Dao를 만들자
+
+com.ezen.dto 클래스를 생성하고 MemberDto 클래스 생성
+--> 각 변수들의 getter setter 설정
+
+
+com.ezen.dao 클래스를 생성하고 MemberDao 클래스 생성
+--> 싱클톤 처리, DB에 연결하기 위한 객체 생성, 연결 정보 생성, DB에 연결/연결해제 시켜주는 메소드 생성
+
+
+
+이제 본격젹으로 무언가 만들 준비가 되었다!
+
+
+
+
+
+loginForm 으로 돌아와서
+
+자바 스크립트를 이용하여 loginCheck() 기능 구성
+
+
+
+
+===로그인 기능===
+
+LoginAction.java로 돌아와서
+
+--> 로그인 기능 제작
+----> userid, pwd 의 파라미터를 받아서 변수에 저장, 이를 DB의 데이터들과 비교하기 위해 Dao의 getMember 메소드로 넘긴다.
+
+
+MemberDao로 돌아와서
+
+--> 받은 userid에 대한 회원을 조회하고 mdto에 회원의 정보를 저장해서 return
+
+
+LoginAction.java로 돌아와서
+
+--> 받은 mdto를 분석하여 로그인 여부를 결정.
+----> 회원이 없는 경우, 비번이 틀린경우, 등을 따짐
+------> 로그인에 성공하면 url을 main.jsp로 변경하고, 세션에 해당 회원의 정보를 loginUser라는 이름으로 저장해서 로그아웃 될 때까지 유지시킨다.
+※ session은 웹페이지를 닫거나 삭제할때까지 정보를 유지한다.
+
+
+==========
+
+
+
+이제 webapp 폴더에 main.jsp 생성
+
+회원의 정보와 로그아웃, 회원정보변경, 회원탈퇴 버튼이 보이도록 한다.
+
+
+
+===== 로그아웃 기능
+
+main.jsp에서
+onclick="location.href='member.do?command=logout'"
+으로 로그아웃 버튼의 command를 logout으로 설정하고 member.do로 보낸다.
+--> member.do에서는 이를 ActionFactory에 보낸다.
+----> ActionFactory에서는 else if를 추가하여 LogoutAction(); 를 member.do로 보낸다
+------> member.do에서는 받은 내용을 ac와 결합하여 logout 클래스의 execute() 메소드를 호출하여 사용한다.
+--------> LogoutAction 클래스는 인터페이스 Action를 상속받는다. 로그아웃 기능을 하는 execute() 메소드 제작
+
+
+
+==========
+
+
+위와같은 식으로 MemberServlet에 보내고, MemberServlet에서는 ActionFactory를 통해 실행할 메소드를 선별하고, 선별된 클래스의 메소드를 실행하도록 만든다.
+
+
+이후 회원가입, 탈퇴, 정보변경 또한 WEB08과 코드는 같으나 흐름이 다르다.
+
+
+※ idcheck 기능도 ActionFactory를 거쳐간다.
+IdCheckAction에서 회원 정보를 조회하고(Dao의 getMember 이용) 회원이 있는지 없는지를 분류해서 result에 저장한 뒤 idcheck.jsp로 보낸다.
+--> idcheck.jsp에서는 재검색창, result값이 1 or -1 분류해서 결과 내보내기, 아이디 사용하기 기능이 있다.
+
+
+
+※ 회원가입 기능도 ActionFactory를 거쳐간다.
+ JoinForm에서 회원가입 버튼을 누르면 command 값으로 저장된 join을 이용해 MemberServlet - ActionFactory - JoinAction으로 보내고, JoinForm에서 작성한 내용을 mdto에 넣고, 이를 Dao의 insertMember로 보내 추가한다.
+
+
+
+--------------------------------------
