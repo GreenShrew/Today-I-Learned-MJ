@@ -50,7 +50,7 @@ function joinCheck(){
 		</c:choose></td></tr>
 	<tr><td colspan="2" align="center">
 		<input type="submit" value="확인" onclick="return joinCheck()">
-		&nbsp;&nbsp;<input type="reset" value="취소"><input type="button" value="메인으로" onclick="member.do?command=main"/></td></tr>
+		&nbsp;&nbsp;<input type="reset" value="취소"><input type="button" value="메인으로" onclick="location.href='member.do?command=main'"/></td></tr>
 </table>
 </form>
 </body>

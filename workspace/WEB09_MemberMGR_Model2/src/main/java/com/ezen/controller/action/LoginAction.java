@@ -28,7 +28,7 @@ public class LoginAction implements Action{
 		}else if(!mdto.getPwd().equals(pwd)) {
 			request.setAttribute("message", "비밀번호가 맞지 않습니다.");
 		}else if(mdto.getPwd().equals(pwd)) {	// 로그인 성공
-			url = "main.jsp";
+			url = "member.do?command=main";
 			// 로그인에 성공하면 세션에 해당 회원의 정보를 loginUser라는 이름으로 저장해서 로그아웃 될 때까지 유지시킨다.
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", mdto);

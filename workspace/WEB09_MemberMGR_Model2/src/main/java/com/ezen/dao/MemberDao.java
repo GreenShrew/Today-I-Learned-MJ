@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.ezen.dto.MemberDto;
 
@@ -114,5 +115,59 @@ public class MemberDao {
 			close();
 		}
 		return result;
+	}
+	public void deleteMember(String userid) {
+		String sql = "delete from member where userid=?";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	public ArrayList<MemberDto> selectMember() {
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
+		// 관리자는 1번이므로 아래로 내려간다. 그리고 그 안에서 userid로 한번 더 정렬한다.
+		String sql = "select * from member order by admin, userid";
+	
+		con= getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberDto mdto = new MemberDto();
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPwd(rs.getString("pwd"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setAdmin(rs.getInt("admin"));
+				list.add(mdto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return list;
+	}
+	public void editAdmin(String userid, int admin) {
+		String sql = "update member set admin=? where userid=?";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, admin);
+			pstmt.setString(2, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close();
+		}
+		
 	}
 }

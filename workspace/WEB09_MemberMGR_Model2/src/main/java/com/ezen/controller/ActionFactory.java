@@ -1,12 +1,15 @@
 package com.ezen.controller;
 
 import com.ezen.controller.action.Action;
+import com.ezen.controller.action.DeleteMemberAction;
+import com.ezen.controller.action.EditAdminAction;
 import com.ezen.controller.action.IdCheckAction;
 import com.ezen.controller.action.JoinAction;
 import com.ezen.controller.action.JoinFormAction;
 import com.ezen.controller.action.LoginAction;
 import com.ezen.controller.action.LoginFormAction;
 import com.ezen.controller.action.LogoutAction;
+import com.ezen.controller.action.MainAction;
 import com.ezen.controller.action.UpdateAction;
 import com.ezen.controller.action.UpdateFormAction;
 
@@ -36,6 +39,12 @@ public class ActionFactory {
 			ac = new UpdateFormAction();
 		} else if(command.equals("update")) {
 			ac = new UpdateAction();
+		} else if(command.equals("deleteMember")) {
+			ac = new DeleteMemberAction();
+		} else if(command.equals("main")) {
+			ac = new MainAction();
+		} else if(command.equals("editAdmin")) {
+			ac = new EditAdminAction();
 		}
 		
 		return ac;

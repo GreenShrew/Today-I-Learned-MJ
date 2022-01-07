@@ -1,0 +1,224 @@
+day 58
+
+
+오늘은 day 57에서 만들던 웹 페이지를 마무리하였다.
+또한, 위의 페이지를 마무리 짓고 본격적으로 게시판을 가지는 웹 페이지를 만들기 시작하였다.
+
+css를 추가하고 css와 javascript를 다른 파일 내에서 끌어다 쓰는 방법을 사용하였다.
+
+
+
+
+※ 확인할 내용
+
+회원탈퇴 버튼이 먹히질 않는다...
+또한, main.jsp에서 상단 자바스크립트 else 부분 빼먹었다!
+
+- 일반회원 <-> 관리자 변경이 안된다.
+--> 해결!
+
+
+※ 게시판 확인할 내용
+
+
+
+
+
+
+
+
+※ delete 기능은 main.jsp에서 deleteMember() 스크립트를 만들어 정말 회원탈퇴 할건지 질문함
+삭제하겠다고 하면 DeleteMember로 보내 삭제절차를 진행한다.
+
+
+
+※ main.jsp로 가는 모든 경로를
+
+member.do?command=main
+
+로 바꾸어 Servlet을 거쳐서 넘어가도록 만들었다.
+
+
+MainAction에서는 모든 멤버의 데이터를 긁어다가 main으로 보내도록 만든다.
+그래야 main 페이지에서 모든 회원의 정보를 나열할 수 있다.
+
+
+이후에 main에 데이터를 나열하도록 한다. 단, 관리자에게만 보이도록.
+
+
+
+
+여기까지가 간단한 웹 페이지
+
+===============================
+
+
+지금부터는 게시판을 만들것이다.
+
+
+새로운 Dynamic Web Project 생성
+이름은 WEB10_Model2_Board
+
+역시 프로젝트 properties - project facets 에서 자바 버전 변경과 톰켓 지정을 한다.
+
+
+src/main/java 에 com.ezen.board.controller 패키지 생성
+이 안에 Servlet을 만든다. 이름은 BoardServlet, mapping은 board.do
+
+
+
+BoardServlet - 지난번에 만든 Servlet 에서 주석을 모두 걷어낸 모습...
+
+- 우선 할 일은 인코딩을 UTF-8로 셋팅
+
+- command를 받아서 뿌리도록 제작
+(ActionFactory 제작. 조립동작의 역할)
+
+
+
+
+
+com.ezen.board.controller.action 패키지 생성
+
+이 안에 BoardServlet에서 만든 Action을 Interface로 제작한다.
+
+Action
+
+- 여기에 추상메소드 execute()를 만든다.
+매개변수 지정하고 예외처리 지정한다!
+
+
+
+com.ezen.board.controller 패키지에 ActionFactory.java 생성
+ActionFactory는 싱글톤으로 만들것.
+
+--> 이제 command를 넘겨받아 각 역할을 담당하는 자바 클래스로 보내주기 위해 알맞은ac로 조립해줄 getAction() 메소드를 만든다.
+
+----> 다 만든 뒤 command가 index로 들어올 경우를 먼저 만들었다
+
+
+com.ezen.board.controller.action 패키지에 IndexAction 클래스를 생성
+--> 로그인 페이지로 이동시키는 역할을 한다.
+--> 또한 세션을 조회해 로그인 되어있는 사람이라면 메인페이지로 이동시키는 역할을 한다.
+
+
+webapp에 index.jsp 생성
+--> 페이지의 출발점을 만들었다.
+
+
+
+
+------------
+
+로그인 창을 만들것이다.
+
+
+webapp 폴더에 member 폴더를 만든다
+--> member 폴더에 loginForm.jsp를 만든다.
+
+
+loginForm
+
+- 이전과 같이 로그인창을 만들되, div 태그를 이용하였으며, css를 이용하여 모습을 바꾸었다.
+
+--> 다만, loginForm.jsp 에 작성하지 않고 별도의 css 파일을 만들어 
+<link rel="stylesheet" type="text/css" href="css/board.css">
+이런식으로 연결해서 사용할것이다.
+
+----> 이를 위해서 webapp 폴더에 css 폴더를 만들고, css 폴더 안에 board.css 파일을 생성한다.
+그리고 그 안에 적용할 css를 작성한다.
+
+
+다시 loginForm
+
+--> loginForm에서 아이디 비번을 썼는지 체크하는 기능(loginCheck())을 script 태그 내에 작성했는데, 이번에는 위의 css와 마찬가지로 다른 파일에 이를 저장하고 보낼 것이다.
+HEAD 태그 내에
+<script src="script/script.js"></script>
+를 사용하여 script 폴더 내의 script.js 파일에서 불러다 쓸 것이다.
+
+----> 이를 위해서 webapp 폴더 안에 script 폴더를 만들고 script.js 라는 이름의 'File' 을 만든다.
+그리고 그 안에 적용할 함수 function loginCheck()를 작성해준다.
+
+
+
+
+-------------------------------------------------
+
+
+webapp 폴더에 sql이라는 이름의 sql 파일 하나를 만든다
+
+member 데이터는 앞서 만들었던 table을 이용할 것이다.
+
+
+
+sql 파일에서 board라는 이름의 table을 생성하고, 여러 데이터를 집어넣는다.
+이 데이터는 게시판의 게시물이다!
+총 10개를 집어넣는다.
+
+
+여기까지 실습용 데이터 추가였다.
+
+
+-------------------------------------------------
+
+
+이제 Dto를 미리 만들 예정이다
+com.ezen.board.dto 클래스를 생성한다
+--> 그 안에 MemberDto를 생성한다.
+----> 이번에는 Dto를 하나 더 만들어야 한다. 같은 패키지 안에 이름은 BoardDto인 클래스 생성.
+----> BoardDto의 역할은 게시물의 데이터를 다루는 Dto이다!
+
+
+-------------------------------------------------
+
+이제 로그인 기능을 만들것이다.
+
+
+com.ezen.board.action 클래스를 만든다.
+
+ActionFactory에서 해당 기능을 수행할 때 부를 command를 정해서 LoginAction 클래서로 넘어가도록 만들었다.
+
+--> LoginAction 클래스 생성.
+
+----> 다만 이번에는 여기에서 기존의 getConnection, close 메소드를 만들지 않을 것이다.
+com.ezen.board.util 패키지를 만들고 Dbman이라는 클래스를 만들어 여기서 메소드를 만들 것이다.
+
+
+
+Dbman
+
+- 이 클래스에서 여러가지 잡다한 기능들을 넣어둘것이다.
+따라서 나중에는 Dbman.getConnection(); 과 같이 연결하거나 등의 기능을 하도록 할 것.
+
+
+
+
+
+
+webapp 폴더에 main.jsp 파일을 만든다.
+
+
+main.jsp
+
+여기에 게시글 테이블을 만들것이다!
+여기에도 css를 추가할것이다!
+
+이전에 만들었던 board.css에 다시 가서 추가한다!
+
+
+--> 그 후에 아랫쪽에 게시물들이 나오도록 만든다.
+
+--> 여기에 게시물을 가져오기 위해 command가 main인 MainAction을 만든다.
+----> MainAction은 모든 게시물 내용을 가져오는 역할을 한다.
+------> 그러기 위해서는 게시글의 내용을 추가하거나 삭제하거나 등등등 하는 기능을 해주는 Dao, Dto(얘는 변수 저장용)가 필요하다.
+
+
+com.ezen.board.controller.dao 패키지에 BoardDao 클래스 생성
+--> 게시글 내용들을 DB에서 싸그리 긁어올 selectBoard 만들기
+
+
+
+
+
+
+

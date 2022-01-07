@@ -36,7 +36,8 @@ public class UpdateAction implements Action {
 			request.setAttribute("message", "회원정보를 수정하지 못했습니다.");
 		}
 		
-		RequestDispatcher dp = request.getRequestDispatcher("main.jsp");
+		String url = "member.do?command=main";
+		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
 	}
 
