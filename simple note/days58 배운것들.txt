@@ -12,7 +12,18 @@ css를 추가하고 css와 javascript를 다른 파일 내에서 끌어다 쓰�
 ※ 확인할 내용
 
 회원탈퇴 버튼이 먹히질 않는다...
+--> 해결! deleteMember() 함수에 confirm을 comfirm이라고 썼었다!
+오탈자 문제!
+
+----> 또 문제가 생겼다... 리소스가 가용하지 않는다고 나온다..
+
+------> 해결!		location.href="location.href='member.do?command=deleteMember'";
+라고 이상하게 썼다..
+
 또한, main.jsp에서 상단 자바스크립트 else 부분 빼먹었다!
+--> 아니다! 그냥 비워둔것이다!
+
+
 
 - 일반회원 <-> 관리자 변경이 안된다.
 --> 해결!

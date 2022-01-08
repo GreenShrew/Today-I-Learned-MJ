@@ -32,7 +32,7 @@ function joinCheck(){
 <input type="hidden" name="command" value="update">
 <table>	<!-- loginUser로 저장된 session을 EL문으로 가져다 쓴다. -->
 	<tr><td>이름</td><td><input type="text" name="name" value="${loginUser.name}"></td></tr>
-	<tr><td>아이디</td><td>${loginUser.id}<input type="hidden" name="userid" value="${loginUser.userid}"></td></tr>
+	<tr><td>아이디</td><td>${loginUser.userid}<input type="hidden" name="userid" value="${loginUser.userid}"></td></tr>
 	<tr><td>암호</td><td><input type="password" name="pwd" size="20"></td></tr>
 	<tr><td>암호 확인</td><td><input type="password" name="pwd_check" size="20"></td></tr>
 	<tr><td>이메일</td><td><input type="text" name="email" value="${loginUser.email}"></td></tr>

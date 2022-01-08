@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +6,10 @@
 <title>joinForm</title>
 <script type="text/javascript">
 function idCheck(){
-	if(document.frm.user.value.length==0){
+	if(document.frm.userid.value.length==0){
 		alert("아이디를 입력해주세요");
 		document.frm.userid.focus();
-		return
+		return;
 	}
 	
 	var inputid = document.frm.userid.value;
@@ -29,11 +28,11 @@ function joinCheck(){
 		document.frm.userid.focus();
 		return false;
 	}
-/*	if(document.frm.userid.value != document.frm.reid.value){
+	if(document.frm.userid.value != document.frm.reid.value){
 		alert("아이디 중복체크를 하지 않으셨습니다.");
 		document.frm.userid.focus();
 		return false;
-	}*/
+	}
 	if(document.frm.pwd.value.length==0){
 		alert("비밀번호는 필수 입력사항입니다.");
 		document.frm.pwd.focus();

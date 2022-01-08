@@ -9,9 +9,16 @@ day 57
 ※ 확인해야 할 부분
 joinForm에 id 중복체크...
 아예 팝업창 자체가 안 나온다...
+--> 해결! 오탈자 문제..
+
 
 회원정보수정 버튼을 누르면 에러가 나온다..
 --> 되도않는 updateFormAction 파일을 넣어서 그런 것 같다.... 선생님 파일에는 이게 없어.
+----> 아니다 있었다! 클래스 폴더 이름을 오타 냈을 뿐, 파일은 있다!
+------> 해결! properyty 예외, 변수 이름의 문제이다.
+<tr><td>아이디</td><td>${loginUser.id}<input type="hidden" name="userid" value="${loginUser.userid}"></td></tr>
+여기서 문제가 있었는데, ${loginUser.id}가 아니라 ${loginUser.userid}이다. 변수가 문제였음을 확인하니 해결법이 보였다.
+
 
 
 ※ 오늘 만든 기능들

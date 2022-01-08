@@ -7,9 +7,9 @@
 <title>main</title>
 <script type="text/javascript">
 function deleteMember(){
-	var bool = comfirm("정말로 탈퇴하시겠습니까?");
+	var bool = confirm("정말로 탈퇴하시겠습니까?");
 	if(bool){
-		location.href="location.href='member.do?command=deleteMember'";
+		location.href="member.do?command=deleteMember";
 	}else{
 		
 	}
@@ -58,11 +58,5 @@ function deleteMember(){
 		</c:forEach>
 	</table>
 </c:if>
-
-
-
-
-
-
 </body>
 </html>
