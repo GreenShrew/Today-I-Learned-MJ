@@ -1,6 +1,7 @@
 package com.ezen.board.controller;
 
 import com.ezen.board.controller.action.Action;
+import com.ezen.board.controller.action.EditMemberFormAction;
 import com.ezen.board.controller.action.IdCheckAction;
 import com.ezen.board.controller.action.IndexAction;
 import com.ezen.board.controller.action.JoinAction;
@@ -26,7 +27,7 @@ public class ActionFactory {
 		else if(command.equals("joinForm")) ac = new JoinFormAction();
 		else if(command.equals("idcheck")) ac = new IdCheckAction();
 		else if(command.equals("join")) ac = new JoinAction();
-		
+		else if(command.equals("editMemberForm")) ac= new EditMemberFormAction();
 		
 		return ac;
 		

@@ -42,7 +42,7 @@ public class MemberDao {
 
 	public int insertMember(MemberDto mdto) {
 		int result = 0;
-		String sql = "insert into member(userid, name, pwd, phone, email, admin) values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into member(userid, pwd, name, phone, email, admin) values(?, ?, ?, ?, ?, ?)";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);

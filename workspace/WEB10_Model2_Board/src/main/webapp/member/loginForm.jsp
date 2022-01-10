@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>loginForm</title>
 <link rel="stylesheet" type="text/css" href="css/board.css">
-<script src="script/script.js"></script>
+<script type="text/javascript" src="script/script.js"></script>
 </head>
 <body>
 <form action="board.do" method="post" name="frm">
@@ -24,7 +24,7 @@
 		<input type="button" value="회원가입" 
 		onClick="location.href='board.do?command=joinForm'">
 	</div>
-	<div class="box">${message}</div>
+	<div class="box">${message}${param.message}</div>	<!-- 두가지 내용 중 한가지만 나오게 될 것이다. -->
 </form>
 </body>
 </html>

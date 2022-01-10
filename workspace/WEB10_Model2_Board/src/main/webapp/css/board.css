@@ -1,22 +1,33 @@
 @charset "UTF-8";
 
-.box{position:relative; width:500px; height:50px; margin:0 auto; text-align:center; line-height:50px;
-font-weight:bold;}
+.box{ position:relative; width:500px; height:50px; margin:0 auto; text-align:center; 
+line-height:50px; font-weight:bold; }
 
-.label{position:relative; width:248px; height:48px; float:left; background:yellowgreen; font-size:110%;
-text-align:center; line-height:50px; border:1px solid yellowgreen;}
+.label{position:relative; width:248px; height:48px; float:left; background:yellowgreen; 
+font-size:110%; text-align:center; line-height:50px; border:1px solid yellowgreen;}
 
-.item{position:relative; width:248px; height:48px; float:left; border:1px solid yellowgreen;
-font-size:110%; text-align:left; line-height:50px; text-align:center;} /* 왜 text-align이 두번? */
+.item{position:relative; width:248px; height:48px; float:left; border:1px solid yellowgreen; 
+font-size:110%; text-align:left; line-height:50px; text-align:center;}
 
-#loginid{width:200px; height:20px; border:0px; font-size:110%; border:0; outline:none;}
-#loginpwd{width:200px; height:20px; border:0px; font-size:110%; border:0; outline:none;}
+#loginid{ width:200px; height:20px; border:0px; font-size:110%; border:0; outline:none;}
+#loginpwd{ width:200px; height:20px; border:0px; font-size:110%; border:0; outline:none;}
+
+#wrap { width: 971px; margin: 0 auto;}
+h1 {	color: green;}
+table {	width: 100%;	border-collapse: collapse;	font-size: 12px; line-height: 24px; }
+table td, th {border: #d3d3d3 solid 1px;padding: 5px;}
+th{background: yellowgreen;}
+a { text-decoration: none;	 color: black; }
+a:HOVER {	text-decoration: underline;  color: green; }
 
 
 
-#wrap{width:971px; margin:0 auto;}
-h1{color:green;}
-table{width:100%; border-collapse:collapse; font-size:12px; line-height:24px;}
-table td, th{border:#d3d3d3 solid 1px; padding:5px;}
-a{text-decoration:none; color:black;}
-a:HOVER {text-decoration:underline; color:green;}
+
+
+
+
+
+
+
+
+

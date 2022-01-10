@@ -69,3 +69,21 @@ function joinCheck(){
 }
 
 
+function editCheck(){
+	if(document.frm.name.value.length==0){
+		alert("이름은 필수 입력사항입니다.")
+		document.frm.name.focus();
+		return false;
+	}
+	if(document.frm.pwd.value==""){
+		alert("비밀번호는 빈드시 입력하여야 합니다.")
+		document.frm.pwd.focus();
+		return false;
+	}
+	if(document.frm.pwd.value != document.frm.pwd_check.value){
+		alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+		document.frm.pwd.focus();
+		return false;
+	}
+	return true;
+}
