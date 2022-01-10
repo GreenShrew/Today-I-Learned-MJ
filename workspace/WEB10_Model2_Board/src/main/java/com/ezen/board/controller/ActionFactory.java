@@ -1,6 +1,8 @@
 package com.ezen.board.controller;
 
 import com.ezen.board.controller.action.Action;
+import com.ezen.board.controller.action.BoardViewAction;
+import com.ezen.board.controller.action.BoardWriteFormAction;
 import com.ezen.board.controller.action.EditMemberAction;
 import com.ezen.board.controller.action.EditMemberFormAction;
 import com.ezen.board.controller.action.IdCheckAction;
@@ -33,7 +35,7 @@ public class ActionFactory {
 		else if(command.equals("editMember")) ac = new EditMemberAction();
 		else if(command.equals("logout")) ac = new LogoutAction();
 		else if(command.equals("boardView")) ac = new BoardViewAction();
-		
+		else if(command.equals("boardWriteForm")) ac = new BoardWriteFormAction();
 		
 		return ac;
 		

@@ -42,6 +42,49 @@ public class BoardDao {
 		} finally { Dbman.close(con, pstmt, rs);  }
 		return list;
 	}
+
+	public void plusReadCount(int num) {
+		String sql = "update board set readcount = readcount + 1 where num=?";	
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public BoardDto getBoard(int num) {
+		BoardDto bdto = null;
+		String sql = "select * from board where num=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bdto = new BoardDto();	// 이거 안 넣으면 bdto는 null이다.
+				bdto.setNum(rs.getInt("num"));
+				bdto.setUserid(rs.getString("userid"));
+				bdto.setPass(rs.getString("pass"));
+				bdto.setEmail(rs.getString("email"));
+				bdto.setTitle(rs.getString("title"));
+				bdto.setContent(rs.getString("content"));
+				bdto.setWritedate(rs.getTimestamp("writedate"));
+				bdto.setReadcount(rs.getInt("readcount"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return bdto;
+	}
 	
 	
 }
