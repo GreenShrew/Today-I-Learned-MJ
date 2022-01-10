@@ -11,7 +11,7 @@ public class BoardDto {
 	private String title;
 	private String content;
 	private int readcount;
-	private Timestamp writedate;		// 밀리초까지 표기해주는 클래스 Timestamp
+	private Timestamp writedate;
 	
 	public int getNum() {
 		return num;
@@ -61,6 +61,7 @@ public class BoardDto {
 	public void setWritedate(Timestamp writedate) {
 		this.writedate = writedate;
 	}
+	
 	
 	
 }

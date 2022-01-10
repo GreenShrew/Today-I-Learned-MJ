@@ -1,6 +1,7 @@
 package com.ezen.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,11 +35,8 @@ public class BoardServlet extends HttpServlet {
 		ActionFactory af = ActionFactory.getInstance();
 		Action ac = af.getAction(command);
 		
-		if(ac==null) {
-			System.out.println("ac가 null 입니다. command 값 확인 요망.");
-		}else {
-			ac.execute(request,response);
-		}
+		if( ac==null) System.out.println("ac 가 null 입니다. command 값 확인~!!");
+		else ac.execute(request, response);
 		
 	}
 

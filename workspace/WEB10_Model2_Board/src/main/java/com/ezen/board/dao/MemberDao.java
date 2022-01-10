@@ -9,12 +9,12 @@ import com.ezen.board.dto.MemberDto;
 import com.ezen.board.util.Dbman;
 
 public class MemberDao {
-	// 싱글톤으로
+
 	private MemberDao() {}
 	private static MemberDao itc = new MemberDao();
-	public static MemberDao getInstance() {return itc;}
+	public static MemberDao getInstance() { return itc; }
 	
-	Connection con = null;
+	Connection con=null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
@@ -24,24 +24,42 @@ public class MemberDao {
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userid);
+			pstmt.setString(1,  userid);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {	// 로그인 성공시 mdto에 userid에 해당하는 내용들을 하나나 mdto에 추가.
+			if( rs.next() ) {
 				mdto = new MemberDto();
-				mdto.setUserid(rs.getString("userid"));
-				mdto.setName(rs.getString("name"));
-				mdto.setPwd(rs.getString("pwd"));
-				mdto.setPhone(rs.getString("phone"));
-				mdto.setEmail(rs.getString("email"));
-				mdto.setAdmin(rs.getInt("admin"));
+				mdto.setUserid( rs.getString("userid") );
+				mdto.setName( rs.getString("name") );
+				mdto.setPwd( rs.getString("pwd") );
+				mdto.setPhone( rs.getString("phone") );
+				mdto.setEmail( rs.getString("email") );
+				mdto.setAdmin( rs.getInt("admin") );
 			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs);		}
+		return mdto;
+	}
+
+	public int insertMember(MemberDto mdto) {
+		int result = 0;
+		String sql = "insert into member(userid, name, pwd, phone, email, admin) values(?, ?, ?, ?, ?, ?)";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getUserid());
+			pstmt.setString(2, mdto.getPwd());
+			pstmt.setString(3, mdto.getName());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getEmail());
+			pstmt.setInt(6, mdto.getAdmin());
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			Dbman.close(con, pstmt, rs);
 		}
-		return mdto;
+		return result;
 	}
-	
 	
 }

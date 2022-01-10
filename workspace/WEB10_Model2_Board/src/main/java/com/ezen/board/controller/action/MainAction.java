@@ -19,9 +19,10 @@ public class MainAction implements Action {
 		BoardDao bdao = BoardDao.getInstance();
 		ArrayList<BoardDto> list = bdao.selectBoard();
 		
-		request.setAttribute("boardlist", list);
+		request.setAttribute("boardList" , list);
 		RequestDispatcher dp = request.getRequestDispatcher("main.jsp");
 		dp.forward(request, response);
+
 	}
 
 }
