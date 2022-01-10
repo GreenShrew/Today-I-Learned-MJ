@@ -61,5 +61,25 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	public void editMember(MemberDto mdto) {
+		String sql = "Update member set pwd=?, name=?, phone=?, email=?, admin=? where userid=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getPwd());
+			pstmt.setString(2, mdto.getName());
+			pstmt.setString(3, mdto.getPhone());
+			pstmt.setString(4, mdto.getEmail());
+			pstmt.setInt(5, mdto.getAdmin());
+			pstmt.setString(6, mdto.getUserid());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 	
 }

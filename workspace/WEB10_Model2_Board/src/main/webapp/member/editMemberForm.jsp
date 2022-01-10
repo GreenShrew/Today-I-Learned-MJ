@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>editMemberForm</title>
-<link rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/board.css">
+<script type="text/javascript" src="script/script.js"></script>
 </head>
 <body>
 <div id="wrap" align="center">
@@ -33,7 +34,7 @@
 </table><br><br>
 
 <input type="submit" value="수정" onClick="return editCheck();">
-<input type="reset" value="다시 작성"><input type="button" value="목록으로" onClick="location.href='board.do?command=boardlist'">
+<input type="reset" value="다시 작성"><input type="button" value="목록으로" onClick="location.href='board.do?command=main'">
 </form>
 
 </div>

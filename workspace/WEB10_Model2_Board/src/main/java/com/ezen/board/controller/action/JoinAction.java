@@ -1,6 +1,7 @@
 package com.ezen.board.controller.action;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +43,7 @@ public class JoinAction implements Action {
 		
 		// forwarding 메소드로 이동한 최종 도착 페이지에서는 새로고침을 하면 데이터도 한번 더 추가되려고 시도한다.
 		// 새로고침에 의해 Forwarding 이전 코드가 다시 실행되지 않도록 하려면 sendRedirect를 이용한다.
-		response.setCharacterEncoding("UTF-8");
-		response.sendRedirect("board.do?command=index&message=" + message);
+		response.sendRedirect("board.do?command=index&message=" + URLEncoder.encode(message,"UTF-8"));
 	}
 
 }

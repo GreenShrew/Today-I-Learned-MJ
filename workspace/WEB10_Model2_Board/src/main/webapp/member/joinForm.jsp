@@ -25,7 +25,7 @@
 		일반회원 <input type="radio" name="admin" value="1"> 관리자</td></tr>
 </table><br><br>
 <input type="submit" value="등록" onClick="return joinCheck();">
-<input type="reset" value="다시 작성"><input type="button" value="로그인페이지로" onClick="location.href='board.do?command=loginForm'">
+<input type="reset" value="다시 작성"><input type="button" value="로그인페이지로" onClick="location.href='board.do?command=login'">
 
 </form>
 </div>

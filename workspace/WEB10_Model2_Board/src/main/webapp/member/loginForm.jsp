@@ -24,7 +24,7 @@
 		<input type="button" value="회원가입" 
 		onClick="location.href='board.do?command=joinForm'">
 	</div>
-	<div class="box">${message}${param.message}</div>	<!-- 두가지 내용 중 한가지만 나오게 될 것이다. -->
+	<div class="box">${message}</div>
 </form>
 </body>
 </html>

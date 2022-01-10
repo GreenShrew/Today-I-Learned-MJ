@@ -44,12 +44,11 @@ function joinCheck(){
 		document.frm.userid.focus();
 		return false;
 	}
-	// 잠시 해결될 때까지 주석처리
-//	if(document.frm.userid.value != document.frm.reid.value){
-//		alert("아이디 중복체크를 하지 않았습니다..");
-//		document.frm.userid.focus();
-//		return false;
-//	}
+	if(document.frm.userid.value != document.frm.reid.value){
+		alert("아이디 중복체크를 하지 않았습니다..");
+		document.frm.userid.focus();
+		return false;
+	}
 	if(document.frm.name.value.length==0){
 		alert("이름 필수입력사항입니다.");
 		document.frm.name.focus();
@@ -67,6 +66,7 @@ function joinCheck(){
 	}
 	return true;
 }
+
 
 
 function editCheck(){

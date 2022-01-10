@@ -32,11 +32,14 @@
 	<tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회</th></tr>
 	<c:forEach items="${boardList}" var="board">
 		<tr   align="center">
-			<td>${board.num}</td>
-			<td  align="left">${board.title}</td>
-			<td>${board.userid}</td>
-			<td>${board.writedate}</td>
-			<td>${board.readcount}</td>
+			<td width="100">${board.num}</td>
+			<td align="left">&nbsp;&nbsp;
+				<a href="board.do?command=boardView&num=${board.num}">${board.title}</a>
+				<!-- boardview로 넘어갈 때 누른 게시물의 번호를 같이 보낸다. 이 번호를 이용해 DB의 내용 하나를 긁어올 수 있도록 만든다. -->
+			</td>
+			<td width="100">${board.userid}</td>
+			<td width="200">${board.writedate}</td>
+			<td width="100">${board.readcount}</td>
 		</tr>
 	</c:forEach>
 
