@@ -85,6 +85,25 @@ public class BoardDao {
 		
 		return bdto;
 	}
+
+	public void insertBoard(BoardDto bdto) {
+		String sql = "insert into board(num, userid, pass, email, title, content) values(board_seq.nextVal, ?, ?, ?, ?, ?)";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bdto.getUserid());
+			pstmt.setString(2, bdto.getPass());
+			pstmt.setString(3, bdto.getEmail());
+			pstmt.setString(4, bdto.getTitle());
+			pstmt.setString(5, bdto.getContent());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 	
 	
 }
