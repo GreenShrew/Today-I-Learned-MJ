@@ -29,7 +29,7 @@ insert into member values('김윤승', 'light', '1234', 'yoon1@daum.net', '010-9
 select * from board;
 select * from member;
 
-
+alter table board rename column redcount to readcount;
 
 insert into board(num, userid, email, pass, title, content)
 values( board_seq.nextVal, 'hong', 'abc@naver.com', '1234', '첫방문입니다', 

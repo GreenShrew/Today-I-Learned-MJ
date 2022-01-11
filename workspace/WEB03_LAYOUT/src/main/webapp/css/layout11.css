@@ -42,23 +42,23 @@ img{ vertical-align: middle;}
 
 
 .lbutton{ position:relative; width:50px; height:50px; float:left; top:250px;
-	background:silver; background-image:url(../images/ico_movie_171115.png); background-position:-60px -460px;
-	border-radius:50%;}	
+	background-image:url(../images/ico_movie_171115.png);
+	background-position:-60px -460px;  border-radius: 50%; overflow:hidden;}	
 .news{position:relative; width:1100px; height:540px; background:pink; float:left;}
 .rbutton{position:relative; width:50px; height:50px; float:left; top:250px;
-	background:silver; background-image:url(../images/ico_movie_171115.png); background-position:0px -460px;
-	border-radius:50%;}
+	background-image:url(../images/ico_movie_171115.png);
+	background-position:0px -460px; border-radius: 50%; overflow:hidden;}
+	
 .newsbox{position:relative; width:265px; height:270px; border:1px solid red; 
 	float:left; margin-right:10px;}
 .newsbox:nth-child(4), .newsbox:nth-child(8) {margin:0;}
  	
  	
- 
-#third .view .news .newsbox .img{position:relative; width:365px; height:150px; border:1px solid blue;
-	border-radius:30px; overflow:hidden;}
-#third .view .news .newsbox .title{position:relative; width:245px; height:100px; border:1px solid blue;
-	font-size:105%; color:#565656; margin:10px; }
  	
+#third .view .news .newsbox .img{ position:relative; width:265px; height:150px; 
+	border:1px solid blue; border-radius:30px; overflow:hidden;}
+#third .view .news .newsbox .title{ postion:relative; width:245px; height:100px;
+	border:1px solid blue; font-size:105%; color:#565656; margin:10px auto;}	
  	
  	
  	

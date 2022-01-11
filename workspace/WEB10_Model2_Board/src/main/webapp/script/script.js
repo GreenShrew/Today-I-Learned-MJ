@@ -70,9 +70,9 @@ function joinCheck(){
 
 
 function editCheck(){
-	if(document.frm.name.value.length==0){
-		alert("이름은 필수 입력사항입니다.")
-		document.frm.name.focus();
+	if( document.frm.name.value.length==0){
+		alert("이름은 필수입력사항입니다");		
+		document.frm.name.focus();		
 		return false;
 	}
 	if(document.frm.pwd.value==""){
@@ -104,6 +104,22 @@ function boardCheck(){
 	if(document.frm.content.value==""){
 		alert("내용을 입력해주세요.");
 		document.frm.content.focus();
+		return false;
+	}
+	return true;
+}
+
+
+function open_win(num, name){		// 수정, 삭제용 팝업창 명령
+	var url = "board.do?command=boardPassForm&num="+num;	// 패스워드를 입력받는 form
+	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, witdh=500, height=300";
+	window.open(url, name, opt);
+}
+
+function passCheck(){
+	if(document.frm.pass.value.length==0){
+		alert("비밀번호를 입력하세요");
+		document.frm.pass.focus();
 		return false;
 	}
 	return true;

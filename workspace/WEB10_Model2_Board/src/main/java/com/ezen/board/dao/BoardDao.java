@@ -104,6 +104,43 @@ public class BoardDao {
 			Dbman.close(con, pstmt, rs);
 		}
 	}
+
+	public void updateBoard(BoardDto bdto) {
+		String sql = "update board set userid=?, pass=?, email=?, title=?, content=? "
+				+ " where num=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bdto.getUserid());
+			pstmt.setString(2, bdto.getPass());
+			pstmt.setString(3, bdto.getEmail());
+			pstmt.setString(4, bdto.getTitle());
+			pstmt.setString(5, bdto.getContent());
+			pstmt.setInt(6, bdto.getNum());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
+
+	public void deleteBoard(int num) {
+		String sql = "delete from board where num=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
 	
 	
 }

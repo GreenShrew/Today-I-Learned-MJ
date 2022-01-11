@@ -1,0 +1,256 @@
+day 60
+
+
+※ 확인할 내용...
+
+- 수정 비밀번호 확인 팝업창이 엄청 크게 나온다...
+
+- 수정 비밀번호 확인 에서 확인버튼 누르면 하얀 화면만 나온다..
+--> 근데 페이지는 게시글 수정 페이지로 바뀐다...?
+----> 해결! checkSuccess 파일에 self.close();를 넣어주어 클릭시 닫게 만들었다!
+
+- 수정 페이지에서 수정 버튼을 누르면 하얀 화면만 나온다
+--> 근데 게시물 내용은 바뀐다.
+----> 해결! 아직 boardViewWithoutCountAction 페이지를 안 만들어서 그랬던것.
+
+
+
+
+
+※ 오늘은 게시글 수정 및 삭제 버튼을 작동시킬 예정
+
+그리고 댓글을 추가할 수 있다.
+
+
+
+------------------------------------- 게시글 수정 삭제
+※ boardView 페이지에서 num과 update 혹은 delete 를 쭉 넘긴다!
+
+
+- open_win이라는 스크립트를 만든다.
+--> 이 open_win은 게시물의 번호 num과 update 혹은 delete의 문자를 매개변수로 받는다.
+※ 이것들은 수정 or 삭제할 페이지를 선택하고, 수정할지 삭제할지를 결정할 것이다.
+
+----> 게시글의 수정or삭제를 위해서는 비밀번호가 필요하다. 이를 위해 비밀번호를 작성할 팝업 페이지를 하나 나오게 만든다.
+
+------> actionFactory에서 command를 boardPassForm을 가지는 BoardPassFormAction 클래스를 만든다.
+
+
+---------- BoardPassFormAction
+- 하는 역할은 boardCheckPass.jsp로 보내는 역할 뿐이다.
+비밀번호를 입력할 수 있는 팝업창으로 보낸다.
+
+
+---------- boardCheckPass.jsp
+
+- 여기서는 게시글의 비밀번호를 작성하고, 선택한 게시물의 num과 작성한 비밀번호를 command boardCheckPass로 넘긴다
+
+--> 넘어간 command를 바탕으로 BoardCheckPassAction 클래스로 페이지를 넘기도록 한다.
+
+
+----------- BoardCheckPassAction
+
+- 여기서는 할 일은
+
+1. 게시물 번호와 비밀번호를 전달받는다. 전달받은 파라미터들을 변수에 저장한다.
+
+2. 파라미터로 전달된 게시물 번호로 게시물을 조회하고, dto에 저장한다.
+
+3. 파라미터로 전달된 입력 패스워드와 조회된 게시물의 패스워드와 비교한다.
+
+4. 비교하여 비번이 틀리거나 없다면 boardCheckPass.jsp 페이지로, 비번이 맞다면 checkSuccess.jsp 페이지로 넘긴다.
+
+
+---------------board/checkSuccess.jsp
+
+- 여기서는 javascript를 통해 해야할 작업이 수정인지 삭제인지 구분할것.
+이번에는 script 파일로 가는게 아니라 여기서 스크립트를 실행할것이다.
+
+수정이라면 command=boardUpdateForm
+삭제라면 command=boardDelete
+
+
+
+---------------- 수정
+
+ActionFactiory에서 BoardUpdateFormAction 클래스로 넘어간다.
+
+--- BoardUpdateFormAction
+
+여기서 해야할 일은
+
+1. 전달된 게시물 번호로 게시물을 조회한 후
+
+2. request에 담아서 게시물 수정 Form으로 이동. (board/boardUpdate.jsp)
+
+※ 조회하는 이유는 수정 페이지에 내용물을 넣기 위해서이다.
+
+
+------- board 폴더에 boardUpdate
+
+- 여기서는 게시글을 수정하고, submit 버튼을 누르면 이를 boardCheck 스크립트를 통해 빈칸체크 후 command boardUpdate로 보낸다.
+그리고 여기에서 BoardUpdateAction 클래스로 넘긴다.
+
+
+돌아가기 버튼을 누르면 command boardViewWithoutCount로 보내는 역할을 한다.
+※ 그냥 기존에 만들었던 boardView로 가도 되지만, 이 경우에는 조회수가 +1 되기 때문이다.
+
+
+-------- BoardUpdateAction
+
+- 여기서 해야할 일은
+
+1. 전달된 수정 데이터를 Bto에 넣고
+2. bao의 메소드를 이용해서 table 수정을 하고
+3. 조회수가 올라가지 않도록 만든 클래스로 페이지를 넘긴다.
+command는 boardViewWithoutCount와 게시물 번호 num을 보낸다.
+
+----> Dao에서 updateBoard 메소드 제작
+
+------> 다시 BoardUpdateAction에서 command boardViewWithoutCount를 ActionFactory로 보낸다.
+
+--------> boardViewWithoutCountAction 로 넘어간다!
+
+
+
+---- boardViewWithoutCountAction
+
+- 여기서는 BoardViewAction 에서 코드를 긁어와서 조회수 증가시키는 부분만 빼면 된다!
+그럼 조회수는 올리가지 않고 수정버튼을 누르면 해당 페이지로 다시 간다!
+
+
+
+
+----------------------------이번에는 삭제를 만들 것.
+
+command boardDelete 로 BoardDeleteAction 클래스로 넘긴다.
+
+- BoardDeleteAction
+
+여기서 할 일은 
+
+1. checkSuccess에서 지울 게시물의 num값을 받는다.
+
+2. 받은 num 값을 이용해 Dao의 deleteBoard 메소드로 테이블에서 num값에 해당하는 값을 삭제한다.
+
+3. 메인 페이지로 이동시킨다.
+
+
+
+
+
+
+
+여기까지가 수정 및 삭제 부분
+------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
