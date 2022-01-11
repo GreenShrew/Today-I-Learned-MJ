@@ -124,3 +124,15 @@ function passCheck(){
 	}
 	return true;
 }
+
+
+
+
+function reply_check(){
+	if(document.frm_reply.reply.value==""){
+		alert("댓글 내용을 입력하세요");
+		document.frm_reply.reply.focus();
+		return false;
+	}
+	return true;
+}

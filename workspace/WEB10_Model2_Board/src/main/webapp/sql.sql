@@ -62,3 +62,21 @@ insert into board(num, userid, email, pass, title, content)
 values(board_seq.nextVal, 'hana', 'hana@daum.net', '1234', '코로나바이러스' , 
 	'사회적 거리두기2단계 .... 백신접종 등등등');
 	
+	
+	
+-- 댓글 테이블
+drop table reply purge;		-- 만약 이 테이블이 있다면 지우기
+
+create table reply(
+	replynum number(7) primary key,		-- 댓글 순번
+	boardnum number(5),						-- 댓글의 해당 게시물 번호, 외래키를 걸어도 된다. 나중에 지우기 귀찮아져 굳이 걸지는 않는다.
+	userid varchar2(20),							-- 댓글 글쓴이
+	writedate date default sysdate,			-- 작성일
+	content varchar2(1000)						-- 작성 내용
+);
+
+drop sequence reply_seq;	-- 만약 있다면..
+create sequence reply_seq start with 1 increment by 1;
+
+
+select * from reply;

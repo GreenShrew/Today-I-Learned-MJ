@@ -13,7 +13,21 @@ day 60
 --> 근데 게시물 내용은 바뀐다.
 ----> 해결! 아직 boardViewWithoutCountAction 페이지를 안 만들어서 그랬던것.
 
+- 댓글이 안 달린다..
+--> java.sql.SQLSyntaxErrorException: ORA-00917: missing comma
+콤마를 어디서 빼먹었지?
+spl 문이 잘못된 것 같은데..?
+----> sql 문은 해결했는데 또다른 문제가 생김!
 
+- 위에서 이어지는 에러
+boardView의 58번째 줄에 문제가 생겼다.
+--> onClick 속성값에 뭔가 따옴표 잘못 쓴 것 같다.
+----> 해결! ${reply.num} 이 아니라 ${reply.replynum}이다.
+
+
+- 삭제 버튼을 누르면 java.lang.NumberFormatException: Cannot parse null string 에러가 나온다.
+--> 뭐 어디 형태가 틀린 것 같은데...
+DeleteReplyAction과 BoardDao의 deleteReply 메소드 확인
 
 
 
@@ -123,7 +137,12 @@ command는 boardViewWithoutCount와 게시물 번호 num을 보낸다.
 
 ----------------------------이번에는 삭제를 만들 것.
 
+checkSuccess.jsp에서
 command boardDelete 로 BoardDeleteAction 클래스로 넘긴다.
+--> 다만 삭제 전에 삭제 할까말까를 한번 물어보도록 만든다.
+----> 예를 누르면 command= boardDelete로,
+----> 아니오를 누르면 command=boardViewWithdoutCount 로 보낸다.
+
 
 - BoardDeleteAction
 
@@ -140,56 +159,104 @@ command boardDelete 로 BoardDeleteAction 클래스로 넘긴다.
 
 
 
-
 여기까지가 수정 및 삭제 부분
-------------------------------------------------------------------
+뭔가 복잡하고 할게 많아보이는데, 그렇다.
+몇번 더 만들어서 익숙해지는게 답인 것 같다
+
+
+
+.
+-------------------------------------댓글 만들기
+
+
+지금부터는 댓글 기능을 만들것이다.
+
+
+댓글의 데이터를 어디에 저장해야할까?
+board 테이블에 필드 하나를 만들어서 저장하기에는 저장할 요소(작성자, 날짜, 내용 등...)가 많기도 하고, 한 게시물에 하나의 댓글 이상이 달리거나 아예 달리지 않기 때문이다.
+
+--> 따라서 댓글 테이블을 하나 따로 만든다.
+----> 그리고 그 댓글 테이블은 게시물 번호, 글쓴이, 시간, 내용이 들어갈 것이다.
+
+
+
+※ 댓글의 데이터를 받고 내보낼 Dto가 따로 필요하다!
+ReplyDto를 제작한다.
+
+
+댓글은 어디에 쓰는가?
+--> boardView에다가 그 자리를 만든다!
+
+
+boardView의 하단에 댓글 작성 영역을 만든다.
+
+--> 작성자, 날짜시간, 작성란, 버튼을 제작했다.
+
+----> ActionFactory를 이용해 AddReplyAction 클래스 제작
+
+
+----------AddReplyAction
+
+- boardView에서 전달받은 userid와 reply 파라미터를 rdto에 저장한다.
+
+--> BoardDao에 reply table에 댓글의 내용과 날짜 등을 추가할 insertReply 메소드를 만든다.
+
+
+여기까지 하면 reply 테이블에 댓글을 담을 수 있다.
+
+--> 이렇게 담은 댓글을 BoardViewAction.java 페이지에 나타내도록 만든다.
+----> 여기서는 해당 게시글의 boardnum과 일치하는 댓글 list를 긁어오는 selectReply 메소드를 불러온다.
+------> BoardDao에서 해당 메소드를 만든다. 해당 메소드에서는 boardnum이 일치하는 댓글들을 긁어 list에 내용들을 저장해서 return한다.
+--------> 긁은 내용을 BoardViewAction에서 boardView로 가져간다.
+※ 주의!
+이 내용은 boardViewWithoutCountAction 에서도 필요하다!
+얘도 boardView로 돌아가면서 댓글을 표기하기 위해서!
+
+
+
+
+--------- 화면에 댓글 보이게 하기
+
+- 이제 boardView.jsp 페이지로 돌아가서 화면에 댓글을 나타낼 수 있도록 작업한다.
+
+--> 로그인 유저와 댓글을 단 유저가 같다면 댓글을 삭제할 수 있는 버튼이 노출되도록 만든다.
+
+
+
+
+-------- 댓글 삭제
+
+- BoardView에서 command deleteReply로 DeleteReplyAction 클래스로 넘어가게 한다.
+
+--> DeleteReplyAction 에서는 boardnum값과 replynum 값을 받아 해당하는 데이터를 BoardDao의 deleteReply 메소드로 replynum값을 넘겨 삭제하고 전달받은 게시물 번호 boardnum으로 되돌아간다.
 
 
 
 
 
 
+여기까지가 댓글의 내용
+-----------------------------------------------------------------------
+
+여기서부터는 day 61로
+
+
+이번에는 페이징이라는것을 만들 것이다.
+
+페이징은, 한 페이지에 몇개 이상의 게시물이 보이면 나머지를 두번째, 세번째 페이지로 넘기는 뭐 그런거임...
+
+한 페이지에 10개의 게시물만 보이도록 만드는것이 목표이다.
+
+
+※ 실습을 위해 sql 파일을 이용하여 100개가 넘는 게시물을 만들자!
+
+
+- util 패키지에 Paging 이라는 클래스를 만든다.
+※ 여기에 페이지 표시 예 에 대한 주석이 있다.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+우선 필요한 변수들과 getter setter를 만들고 끝!
 
 
 

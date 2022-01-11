@@ -26,6 +26,42 @@
 <input type="button" value="리스트" onClick="location.href='board.do?command=main'">
 <input type="button" value="수정" onClick="open_win('${board.num}', 'update');">
 <input type="button" value="삭제" onClick="open_win('${board.num}', 'delete');">
+
+<br><br><!-- 여기서부터 댓글 작성 영역 -->
+<c:set var="now" value="<%=new java.util.Date() %>"></c:set>	<!-- 화면에 표시할 현재시각 -->
+<form action="board.do" method="post" name="frm_reply">	<!-- 위에 frm이라는 form 태그와 겹치면 안된다. -->
+	<input type="hidden" name="command" value="addReply">
+	<input type="hidden" name="boardnum" value="${board.num}">
+	<table>
+		<tr>
+			<th width="100">작성자</th>
+			<th width="100">작성일지</th>
+			<th>내용</th>
+			<th width="100">추가/삭제</th>
+		</tr>
+		<tr align="center">
+			<td>${loginUser.userid}
+				<input type="hidden" name="userid" value="${loginUser.userid}"></td>
+			<td><fmt:formatDate value="${now}" pattern="MM/dd HH:mm"/></td>
+			<td><input type="text" name="reply" size="80"></td>
+			<td><input type="submit" value="답글작성" onclick="return reply_check();"></td>
+		</tr><!-- 작성자, 날짜시간, 작성란, 버튼 제작! -->
+		
+		<!-- 달린 댓글이 출력되는 공간 -->
+		<c:forEach items="${replyList}" var="reply">
+			<tr align="center">
+				<td>${reply.userid}</td>
+				<td><fmt:formatDate value="${reply.writedate}" pattern="MM/dd HH:mm"/></td>
+				<td>${reply.content}</td>
+				<td>
+					<c:if test="${reply.userid == loginUser.userid}" >		<!-- 로그인된 사람과 댓글 쓴 사람이 같다면 -->
+						<input type="button" value="삭제" onClick="location.href='board.do?command=deleteReply&num=${reply.replynum}&boardnum=${reply.boardnum}'">
+					</c:if>&nbsp;
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+</form>
 </div>
 </body>
 </html>

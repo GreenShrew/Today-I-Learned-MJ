@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezen.board.dto.BoardDto;
+import com.ezen.board.dto.ReplyDto;
 import com.ezen.board.util.Dbman;
 
 public class BoardDao {
@@ -133,6 +134,67 @@ public class BoardDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public void insertReply(ReplyDto rdto) {
+		String sql = "insert into reply(replynum, boardnum, userid, content) "
+				+ " values(reply_seq.nextVal, ?, ?, ?)";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, rdto.getBoardnum());
+			pstmt.setString(2, rdto.getUserid());
+			pstmt.setString(3, rdto.getContent());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
+
+	public ArrayList<ReplyDto> selectReply(int num) {
+		ArrayList<ReplyDto> list = new ArrayList<ReplyDto>();
+		String sql = "select * from reply where boardnum=? order by replynum desc";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReplyDto rdto = new ReplyDto();
+				rdto.setReplynum(rs.getInt("replynum"));
+				rdto.setBoardnum(rs.getInt("boardnum"));
+				rdto.setUserid(rs.getString("userid"));
+				rdto.setWritedate(rs.getTimestamp("writedate"));
+				rdto.setContent(rs.getString("content"));
+				list.add(rdto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+
+	public void deleteReply(String replynum) {
+		String sql = "delete from reply where replynum=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(replynum));
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
