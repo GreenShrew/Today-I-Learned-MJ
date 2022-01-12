@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.ezen.board.dto.BoardDto;
 import com.ezen.board.dto.ReplyDto;
 import com.ezen.board.util.Dbman;
+import com.ezen.board.util.Paging;
 
 public class BoardDao {
 
@@ -20,12 +21,24 @@ public class BoardDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public ArrayList<BoardDto> selectBoard() {
+	public ArrayList<BoardDto> selectBoard(Paging paging) {
 		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
-		String sql = "select * from board order by num desc";
+		
+		// String sql = "select * from board order by num desc";  DB 전체를 긁어오는 sql 명령
+		
+		// DB에서 접속한 페이지에 맞는 게시물만 긁어오는 sql 명령.
+		// 자세한 설명은 sql.sql 파일로 가서 확인하자.
+		String sql = "select * from ( "		// 주의! 띄어쓰기를 꼭 해주어야 한다! 엔터를 치고 띄어쓰기를 안 해주면 명령문이 붙어버린다!
+				+ "select * from ( "
+				+ "select rownum as rn, b.* from (select * from board order by num desc) b "
+				+ ")where rn>=? "
+				+ ")where rn<=?";
+		
 		con = Dbman.getConnection();
 		try {
-			pstmt = con.prepareStatement(sql);		
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, paging.getStartNum());
+			pstmt.setInt(2, paging.getEndNum());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDto bdto = new BoardDto();
@@ -145,7 +158,7 @@ public class BoardDao {
 
 	public void insertReply(ReplyDto rdto) {
 		String sql = "insert into reply(replynum, boardnum, userid, content) "
-				+ " values(reply_seq.nextVal, ?, ?, ?)";
+				+ "values(reply_seq.nextVal, ?, ?, ?)";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -202,6 +215,44 @@ public class BoardDao {
 			Dbman.close(con, pstmt, rs);
 		}
 		
+	}
+
+	public int getAllCount() {
+		int count = 0;
+		String sql = "select count(*) as cnt from board";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("cnt");		// 이러기 위해서 cnt라는 별칭을 붙였다.
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		return count;
+	}
+
+	public int getReplycnt(int num) {
+		int cnt = 0;
+		String sql = "select count(*) as cnt from reply where boardnum=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return cnt;
 	}
 	
 	

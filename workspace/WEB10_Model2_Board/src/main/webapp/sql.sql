@@ -77,6 +77,56 @@ create table reply(
 
 drop sequence reply_seq;	-- 만약 있다면..
 create sequence reply_seq start with 1 increment by 1;
-
+select * from user_sequences;
+SELECT reply_seq.CURRVAL FROM DUAL;
 
 select * from reply;
+
+
+
+select count(*) from board;	-- 레코드 갯수를 알려주는 명령
+
+
+
+-- 예를 들어, 현재 보고자 하는 페이지의 번호가 2 페이지다.
+-- 그럼 게시물의 번호는 11번부터 20번까지의 게시물이 화면에 표시되게 한다.
+-- 또한 게시판 특성상 나중에 생긴 게시물이 위로 올라온다.
+
+select rownum, num, title, content from board order by num desc;
+
+-- select rownum, * from board order by num desc;		X
+
+-- rownum과 *를 모두 사용하기 위해 서브쿼리를 사용한다!
+select rownum as rn, b.* from (select * from board order by num desc) b
+-- b : 서브쿼리로 조회된 결과 테이블을 지칭하는 별칭이다.
+
+select * from (select rownum as rn, b.* from (select * from board order by num desc) b) where rn>=11 and rn<=20;
+
+
+-- 다만, rn>=11 and rn<=20 과 같은 복합연산을 수행하면 시간이 오래 걸린다.
+-- 게시물의 100개 200개면 몰라도, 100000000개가 있으면...
+-- 게시물 갯수가 많아질수록 위의 명령의 실행속도가 느려진다. 그를 해결하기 위해 아래의 방법을 사용한다.
+select * from (
+select * from (
+select rownum as rn, b.* from (select * from board order by num desc) b
+)where rn>=? 
+)where rn<=?
+
+-- 이 sql 문을 BoardDao의 selectBoard 메소드에서 sql문으로 쓰인다!
+
+select * from (
+select * from (
+select rownum as rn, b.* from (select * from board order by num desc) b
+)where rn>=? 
+)where rn<=?
+
+
+
+-- 테이블에 댓글의 갯수를 셀 replycnt 필드 추가
+alter table board add replycnt number(3) default 0;
+
+
+
+
+
+

@@ -1,0 +1,312 @@
+day 61
+
+
+ 오늘은 페이징 처리를 만들었다.
+ 훗날 페이징 처리를 해야하는 경우가 온다면 이를 가져와 요소를 바꾸어 사용할 수도 있다!
+
+
+
+
+※ 다시 공부해야 할 내용
+ - 서브쿼리
+
+
+※ 확인할것
+01_Upload
+saveDirectory cannot be null
+uploadFilePath가 null이 된다.
+--> 해결! 폴더 이름 제대로 했음
+
+- 01_Upload
+ 사진이 안 생긴다...왜지?
+--> 해결! 톰캣 문제로 이상해졌었던 것. 직접 거기에 폴더 만들고...
+근데 소스코드 한번 다시 보자!
+내가 폴더를 만드는 코드를 안 만들어두었나 싶다..
+
+
+--------------------------------------------페이징 처리
+
+
+---------------- util 패키지에서 Paging 클래스로
+
+- 해당 클래스에서 beginPage, endPage .... 등등등을 계산하는 paging 메소드를 만든다.
+--> beginPage, endPage 등등을 계산하기 위해서는 현재 웹 사이트에 게시물이 총 몇개인지(totalCount)를 알아야하며, 총 게시물의 갯수가 바뀔때마다 이를 다시 계산해야한다.
+ 따라서, setTotalCount 에 paging 메소드를 호출함으로서 totalCount가 새로 지정될 때마다 계산할 수 있도록 만든다.
+
+
+----> paging 메소드에서 해야할 일. (이 메소드는 Paging.java에서만 사용할 예정이기 떄문에 private을 걸어도 상관 없다.)
+
+
+#1. 각 멤버변수 값을 셋팅한다.
+private int page = 1;
+private int totalCount;
+... 
+
+#2. beginPage 와 endPage 계산
+--> endPage 계산하기
+ 1. 현재 보고있는 페이지를 10으로 나눈다.
+ 2. 나눈 값을 소숫점 첫자리 올림연산을 한다.
+ 3. 이를 소수점 절사 후 화면에 표시할 페이지 숫자를 곱셈(10개의 게시물을 나타내고싶다면 10을 곱한다. 이미 displayPage로 정해놓았으므로 이를 곱한다.)
+
+--> beginPage 계산하기
+ 1. 계산한 endpage에 displayPage를 빼고 +1을 하면 된다.
+
+
+#3. 총 페이지의 갯수 totalPage 계산
+
+
+#4. next, prev가 보일지 말지 여부를 제작
+-->next는 총 페이지(totalPage)가 끝 페이지(endPage)보다 작다면, endPage를 총 페이지수로 대체하고, next 버튼이 사라지도록 false를 넣는다.
+
+--> prev는 시작 페이지가 1인 경우에만 false를 준다.
+
+
+#5. startNum, endNum 계산
+--> 시작번호는 현재 페이지에 -1 연산 후 한 페이지에 나타낼 게시물 수(displayRow)를 곱하고 +1을 한다.
+--> 끝 번호는 현재 페이지에 displayRow를 곱하면 된다.
+
+
+
+------------------------- 페이징을 화면으로 적용하기 위해 계산하기
+
+- 페이징은 main 화면에서 효과를 낼 것이다.
+ 그렇기에 MainAction에서 페이징에 필요한 변수들을 paging이라는 객체로 만들어 main.jsp로 데이터를 넘긴다.
+
+
+- 현재 페이지 정보 넘기기
+--> 처음 페이지에 접속시 1 페이지로 가도록 한다.
+----> 만약 외부에서 page라는 이름으로 오는 'page'가 null이 아니라면...즉, 다른 페이지 버튼을 누르거나, 다른 페이지에 있다던가
+
+
+- 총 게시물 갯수 계산하기
+--> DB에서 레코드의 갯수를 계산해주기 위해 BoardDao에서 getAllCount 메소드를 만든다
+----> 계산한 값을 setTotalCount로 넘긴다. 그러면 게시물의 총 갯수와 각 멤버변수의 계산이 일어난다.
+
+※ 레코드의 갯수를 세어주는 sql 문은 'select count(*) as 별칭 from 테이블이름' 이다. 
+
+
+
+여기까지가 멤버변수를 계산하는 과정이다.
+
+---------------------------
+
+
+
+
+
+※ sql 파일에 아래 조건에 맞는 게시물을 긁어오는 명령에 대한 내용이 있다.
+ § 페이지에 맞는 게시물을 긁어오는 방법.
+ 예를 들어, 현재 보고자 하는 페이지의 번호가 2 페이지다.
+ 그럼 게시물의 번호는 11번부터 20번까지의 게시물이 화면에 표시되게 해야한다.
+
+--> 그걸 위해 사용할 수 있는 것이 rownum이다.
+select rownum, num, title, content from board order by num desc;
+--> rownum은 게시물에 순차적으로 숫자를 붙여준다. 중간에 레코드가 삭제되면 알아서 밀려 올라갈 것.
+
+----> 다만 rownum을 사용하면 * 표시를 못 해서 필드명을 전부 적어주어야한다.
+ 이를 해결하기 위해서 서브쿼리를 활용한다.
+select rownum as rn, b.* from (select * from board order by num desc) b
+※ rownum의 별칭을 rn이라고 지정했다.
+
+------> 이제 이를 활용해서 11번째 게시물부터 20번쨰 게시물을 골라내면?
+select * from (select rownum as rn, b.* from (select * from board order by num desc) b) where rn>=11 and rn<=20;
+
+--------> 다만 게시물의 갯수가 수억개가 될 정도로 많다면 where rn>=11 and rn<=20 과 같은 복합연산은 실행속도가 느려진다.
+따라서 서브쿼리를 또 서브쿼리로 만든다.
+select * from (
+select * from (
+select * from (select rownum as rn, b.* from (select * from board order by num desc) b)
+where rn>=11)
+where rn<=20);
+
+
+
+- 페이지에 맞는 게시물만 DB에 긁어오도록 만든다.
+--> ArrayList<BoardDto> list = bdao.selectBoard(paging); 의 위치를 아래로 내린다.
+ selectBoard 메소드를 전달인수로 paging을 주도록 변경한다. 그리고 전체 레코드를 긁는 sql 명령을 주석처리하고, 위에서 만든 새로운 명령을 이용한다!
+rn>=? , rn<=? 이렇게 만들고 ?에 값을 넣는다.
+
+
+
+위 작업까지가 현재 페이지에 맞는 레코드만을 DB에서 가져와서 main 화면으로 넘겨주는 과정이다.
+
+
+
+
+------------------- main.jsp 화면에서 표시하기
+
+- 메인 페이지에서 실제로 페이지 버튼을 표시하도록 만든다.
+
+--> 페이지 버튼을 누르면 해당 페이지 번호에 맞는 게시물이 나열되는 '페이지'로 돌아온다. 즉, 링크의 기본 경로는 command main이다.
+
+----> 실제 페이지들의 표시를 반복문을 사용해 나타낸다.
+현재 페이지는 링크 없는 붉은 글씨로, 나머지 페이지들은 해당 페이지로 가는 링크를 달아준다.
+
+
+
+
+
+=====================================
+
+
+여기부터는 게시물 제목 옆에 댓글이 몇개 있는지 나타낼 것이다.
+
+
+- 우선 sql 파일을 통해 테이블에 댓글의 갯수를 셀 replycnt 필드를 추가한다.
+alter table board add replycnt number(3) default 0;
+
+--> 그리고 boardDto에 replycnt 변수를 추가하고 getter setter 를 만든다.
+
+
+
+---- 게시글 제목 옆에 댓글 숫자를 표시하는 방법
+#1. 댓글이 쓰일때마다 replycnt를 +1 하는 것.
+--> 다만 기존에 쓰여있던 댓글들에는 적용을 할 수 없다!
+
+#2. 댓글을 쓸 때마다 새롭게 조회하는 방법!
+
+#2 의 방법을 사용할 것이다.
+
+
+
+--------- 게시글 제목 옆에 댓글 숫자 표시하기
+
+- mainAction으로 간다.
+list에는 10개의 게시글이 저장되어있을 것이다.
+
+--> 게시물 번호로 댓글의 갯수를 세고 와서 그 갯수를 현재 게시물의 댓글 갯수로 저장해준다. 이걸 반복문으로 페이지에 나타나는 게시글의 횟수만큼 적용.
+--> 특정 게시물의 댓글 갯수를 세주는 getReplycnt 메소드 제작
+
+----> 화면에 표시될 게시글 갯수만큼 게시글의 각 게시글의 댓글 갯수를 불러왔다.
+
+
+------> 이제 main.jsp로 돌아가서 제목 옆에 댓글 갯수를 넣도록 만든다.
+다만, 댓글이 0개면 안 쓰도록 만든다.
+
+
+
+여기까지가 게시글 제목 옆 댓글 갯수 표기
+
+
+
+여기까지 해서 게시판 만들기 완료
+
+===============================
+
+
+
+이제부터는 게시글에 문서가 아닌 파일을 업로드 하는 방법에 대하여 다룰 것이다.
+
+
+※ 시작하기전에 받아서 lib에 넣을 자료!
+
+--> jstl.jar, ojdbc.jar 처럼 파일 업로드를 위해서는 또 그에 맞는 파일이 필요하다.
+----> 인터넷에 http://www.servlets.com/ 검색.
+------> 좌측의 COS File Upload Library 클릭
+--------> 하단의 cos-20.08.zip 클릭해서 다운로드
+----------> 압축 풀면 lib 폴더 안에 cos.jar 파일이 있다. 이걸 web-inf 폴더 아래 lib 폴더 안에 넣는다.
+
+
+
+
+
+새로운 Dynamic web project 를 생성한다.
+이름은 WEB11_FileUpload
+
+--> lib 폴더에 jar 파일 3개 붙여넣고
+--> 프로젝트 properties 에서 project Facets, 알맞은 자파 버전을 선택한다.(8 버전 선택) 그리고 톰캣 연결
+
+----> 인터넷에 http://www.servlets.com/ 검색.
+----> 파일 업로드를 위해서는 또 그에 맞는 파일이 필요하다.
+
+
+--> 츄리닝 카페에서 days61의 실습 이미지 파일을 받아둔다.
+----> 프로젝트 안에 넣지 마!
+------> webapp 폴더에 Upload 폴더를 만든다.
+
+
+webapp 폴더 안에 01_Upload.jsp 파일을 생성한다.
+
+01_Upload
+
+- 파일을 업로드 하기 위해 필요한것들!
+
+
+파일 업로드 기능이 포함된 form은 반드시 enctype="multipart/form-data" 옵션을 추가해주어야 한다. 또한, method는 반드시 post여야 한다.
+
+<form action="upload.do" method="post" enctype="multipart/form-data">
+
+반드시 이런 방식이어야 하고, enctype="multipart/form-data" 이건 외워두어야 한다!
+
+----> 만약 post가 아니거나 enctype을 빼먹으면 에러가 나온다!
+
+
+<input type="file" name="uploadFile">
+type="file"을 이용해 
+
+
+
+src/main/java에 패키지를 하나 만든다.
+이름은 com.ezen.upload
+그 안에 UploadServlet.servlet 파일을 만든다. mapping은 upload.do
+
+- 여기에서도 파일 업로드를 하기 위한 작업을 할 것이다.
+
+doGet 메소드를 이용.
+
+UploadServlet.servlet 에서 해야 할 일들
+
+1. 파일이 업로드 될 타겟 폴더 이름을 String 변수에 저장해둔다.
+
+2. 업로드될 파일의 용량을 제한하기 위한 용량값을 int 변수에 저장해둔다.
+
+3. 인코딩 방식을 String 변수에 저장해둔다.
+
+4. 업로드될 서버의 실제 저장장소를 설정하여 String 변수에 저장해둔다.
+ServerContext형 변수를 사용! import가 필요하다.
+
+
+
+※ 사진 : day 61 업로드 여기의 클래스가 업로드에 핵심적인 역할을 하는 클래스이다!
+
+
+
+업로드에 필요한 MultipartRequest 클래스를 사용한다.
+해당 클래스의 전달인자로 여러가지를 넣는다.
+
+--> request : enctype="multipart/form-data"로 보낸 데이터들은 일반 request로 받을 수 없다. 따라서 MultipartRequest에 request를 넣어서 복합사용되게 설정한다.
+
+--> uploadFilePath : 서버상의 실제 디렉토리
+
+--> uploadFileSizeLimit : 최대 업로드 파일 크기
+
+--> encType :인코딩 방법
+
+--> new DefaultFileRenamePolicy() : 업로드 파일과 동일 이름이 이미 존재하면 새 이름을 부여하는 역할을 한다.
+
+
+
+
+----> 이제 multi 객체를 이용해서 name, title, uploadFile(전달된 파일 이름을 추출하는 getFilesystemName 이용) 을 사용해 각각의 변수에 담는다.
+------> 담은 변수들을 request에 싣는다.
+--------> 01_result.jsp로 Forwarding 한다.
+
+
+
+----------- webapp 폴더에 01_result.jsp 파일을 만든다.
+
+- 전달된 내용을 토대로 화면에 출력하는 동작을 하도록 만든다.
+
+
+
+동작을 시키면 이미지는 나오지만, upload 폴더에 파일은 없다!
+Servlet에서
+context.getRealPath(savePath); 
+이를 이용해서 깊은 곳에 사진을 저장해두었기 떄문이다.
+
+
+
+
+
+
+

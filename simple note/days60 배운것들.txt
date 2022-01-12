@@ -17,7 +17,7 @@ day 60
 --> java.sql.SQLSyntaxErrorException: ORA-00917: missing comma
 콤마를 어디서 빼먹었지?
 spl 문이 잘못된 것 같은데..?
-----> sql 문은 해결했는데 또다른 문제가 생김!
+----> 해결! sql 문은 해결했는데 또다른 문제가 생김!
 
 - 위에서 이어지는 에러
 boardView의 58번째 줄에 문제가 생겼다.
@@ -28,6 +28,10 @@ boardView의 58번째 줄에 문제가 생겼다.
 - 삭제 버튼을 누르면 java.lang.NumberFormatException: Cannot parse null string 에러가 나온다.
 --> 뭐 어디 형태가 틀린 것 같은데...
 DeleteReplyAction과 BoardDao의 deleteReply 메소드 확인
+----> 형태가 문제가 아니라 replynum 자체에 값이 안 들어오는 것 같다. Cannot parse null string.
+ 그럼 AddReply를 의심해봐야할듯?
+------> sequence에 값이 문제인가?
+
 
 
 
