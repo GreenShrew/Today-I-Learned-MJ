@@ -1,9 +1,11 @@
 package com.ezen.controller;
 
 import com.ezen.controller.action.Action;
+import com.ezen.controller.action.DeleteFormAction;
 import com.ezen.controller.action.ProductViewAction;
 import com.ezen.controller.action.ProductWriteAction;
 import com.ezen.controller.action.ProductWriteFormAction;
+import com.ezen.controller.action.UpdateAction;
 import com.ezen.controller.action.UpdateFormAction;
 
 public class ActionFactory {
@@ -20,6 +22,7 @@ public class ActionFactory {
 		else if(command.equals("productWrite")) ac = new ProductWriteAction();
 		else if(command.equals("updateForm")) ac = new UpdateFormAction();
 		else if(command.equals("update")) ac = new UpdateAction();
+		else if(command.equals("deleteForm")) ac = new DeleteFormAction();
 		
 		
 		return ac;

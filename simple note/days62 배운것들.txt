@@ -1,0 +1,221 @@
+day 62
+
+
+※ 한번 보고 가
+--- 만약 사진이 안 나오거나 하면 파일 이름이 맞는지, 혹은 파일을 업로드 했는지를 확인하자!
+
+--- 파일을 업로드할땐 반드시 form 태그에 enctype="multipart/form-data" 속성을 붙여야한다!
+꼭이다 꼭!
+안 그러면 아래의 에러가 나온다!
+java.io.IOException: Posted content type isn't multipart/form-data
+
+--- Dao의 메소드를 사용하기 전에 Dto에 데이터를 넣는 작업을 하기도 한다! 인지하자!
+
+
+※ 의문!
+MultipartRequest 이것은 무엇인가? 왜 사용해야하는가?
+
+
+
+※ 다시 한번 봐야할거
+
+updateForm에 아랫부분 다 못 썼다!
+이거 오늘 추가하자.
+
+
+
+
+
+02_Upload
+
+- 여러 파일 한꺼번에 업로드하기
+
+이름이 multiFileUpload인 Servlet을 만든다. mapping은 upload2.do 이다.
+
+
+--> form 안에 있던 <input type="file">의 파일들은 MultipartRequest 객체 생성시 한번에 업로드 된다.
+
+----> 한번에 전달된 파일 이름들은 Enumeration을 사용하여 전달받고, 하나씩 꺼내서 사용한다.
+
+------> 업로드된 파일의 이름, 그리고 이미 파일이 생겼을 때 policy에 의해 새로 구분되었을 때 원래 파일의 이름을 추출하여 request.setAttribute에 담는다.
+
+
+
+※ .hasMoreElements() : 다음 데이터가 있으면 true, 없으면 false를 리턴하는 메소드
+
+https://byungmin.tistory.com/13 여기 가봐
+Enumeration 인터페이스에 대하여 나온다!
+Enumeration 의 3번 항목 가보면 hasMoreElements와 nextElement를 사용하는 예시가 있다.
+
+
+02_Request
+
+- 저장된 파일의 이름을 확인하며 이미지를 띄우는 결과창을 만든다.
+--> 같은 파일을 세번 집어넣어보고 결과를 확인해본다.
+
+
+
+--------------------------------------
+
+이제 파일 업로드 하는 기능을 실제 게시판에 추가할것이다.
+
+
+우선 상품 목록을 보여주는 게시판을 제작한다.
+
+
+
+※ sql 파일을 만들어서 책의 코드, 이름, 가격, 사진, 설명 컬럼을 가지는 테이블을 생성한다. + 시퀸스도 추가
+
+--> 그리고 레코드 몇개를 삽입하였다.
+
+----> 테이블의 name에는 파일의 이름만 저장된다. 파일 자체가 테이블에 저장되는것이 아니다.
+----> 또한, 변경된 파일의 이름이 저장된다.
+
+
+※ Dao, Dto 파일을 만든다.
+--> com.ezen.dto 패키지에 ProductVO 클래스를 만들고, 테이블의 변수들에 대한 getter setter 만든다.
+
+--> com.ezen.dao 패키지에 ProductDao 클래스를 만든다. sql 을 이용해 db에 접근하는 모든 역할을 Dao가 할 것이다.
+--> Dao는 싱글톤으로!
+
+
+※ DB와 연결해줄 코드를 메소드로 불러오기 위한 파일을 만든다.
+--> com.ezen.util 패키지에 Dbman 클래스를 만든다. 근데 이 파일은 이전에 사용했던 파일을 복사-붙여넣기 해도 된다!
+
+
+
+- 파일의 시작점 index를 만든다.
+이후에 만드는 servlet에 보낼 command는 index이다.
+
+
+
+
+com.ezen.controller 패키지에 ProductServlet 파일을 생성한다. mapping은 product.do
+ProductServlet은 게시판의 기능을 수행하는 클래스들로 보내는 역할을 한다.
+
+com.ezen.controller.action 패키지에...
+--> Action이라는 이름의 인터페이스를 만들어서 각 기능을 수행할 클래스들이 강제적으로 execute 메소드를 overriding 하도록 만든다.
+
+
+com.ezen.controller 패키지에...
+--> 그리고 ActionFactory를 만들어서 ProductServlet이 기능하기 위해 명령어를 조립해주는 역할을 하도록 한다.
+----> 싱글톤방식으로 만든다.
+------> getAction 메소드까지 만들었다면, 이후에는 if ~ else if 를 계속 추가하는 방식으로 기능이 추가될 때마다 간단하게 기능을 수행할 클래스를 만들 수 있다.
+
+--------> Action을 미리 만들어둠으로서 자동으로 implements하고 overriding도 자동으로 만들어준다!
+
+
+
+-------- IndexAction 클래스 생성
+- servlet에서 넘어왔다.
+--> Dao의 selectAll 메소드를 이용해서 Dto의 객체 list에 DB에 저장된 내용들을 차곡차곡 넣는다.
+
+----> 이를 
+
+
+-------- product 폴더 생성
+-------- product 폴더 안에 productList.jsp 생성
+
+- 관리자가 상품을 등록하고 삭제하고 수정할 수 있는 페이지를 만든다.
+--> css 적용된다!
+
+
+
+-------- css 폴더 생성
+-------- css 폴더 안에 product.css 생성
+
+- 적용할 css 작성
+
+
+
+-------- 상품을 보여주는 페이지 만들기
+
+- productList 페이지에서 command productView 로 넘어가고 ProductViewAction 클래스 파일로 넘어간다.
+
+--> ProductViewAction에서는 전달된 상품번호로 상품을 검색하고 해당 데이터를 가지고 productView.jsp로 이동시킨다.
+----> 상품 검색은 Dao의 getProduct 메소드를 이용한다.
+
+
+
+
+------- product 폴더에 productView.jsp 생성
+
+- productList에서 제목을 누르면 해당 상품의 사진, 상품명, 가격, 설명이 나오는 페이지
+하단에는 다시 목록으로 돌아가는 버튼을 만들었다.
+
+
+
+
+
+-------- 상품 등록 페이지를 만들기
+
+- productList에 command productWriteForm로 ProductWriteFormAction 클래스로 이동 시킨다.
+
+
+--> ProductWriteFormAction 에서는 productWrite.jsp 페이지로 이동시키는 역할만 한다.
+
+
+--------- product 폴더에 productWrite.jsp 파일
+
+- 관리자가 상품을 등록하는 페이지를 만든다.
+--> 등록 버튼을 누르면 상품을 등록하는 기능을 하는 클래스로 보내도록 만든다.
+
+----> 다만 이번에는 비어있는거 체크하는건 생략했다.
+
+
+
+-------- 상품 등록하기
+
+- productWrite에서 command productWrite로 ProductWriteAction 클래스로 간다.
+
+--> ProductWriteAction 에서는 productWrite에서 보내진 데이터의 request를 전달받아 DB에 저장하도록 Dao의 insertProduct 메소드를 이용한다.
+
+※ 주의 : ServletContext, MultipartRequest 필요!
+
+----> 추가가 끝났다면 처음 페이지로 다시 이동
+
+
+
+
+
+
+---------- 상품 수정 페이지 만들기
+
+- 관리자가 등록된 상품을 수정하는 페이지를 만든다.
+
+- productList에 command updateForm로 UpdateFormAction 클래스로 이동 시킨다.
+
+--> UpdateFormAction에서 해야할 일
+--> 전달된 상품 번호로 상품을 조회하고, request에 담아서 updateForm.jsp로 이동한다.
+
+
+----> updateForm.jsp 에서는 상품의 정보를 수정할 수 있는 페이지를 제작한다.
+
+※ name="oldPicture" 라는 이름의 input 태그를 넣은 이유는?
+form 태그의 action에 command까지 다 넣은 이유는?
+
+
+
+
+
+------> updateForm의 command update를 통해 UpdateAction 클래스를 만든다.
+
+- UpdateAction 에서는 Update에서 사용자가 입력한 파라미터를 전달받아 이를 Dao의 updateProduct 메소드를 이용해서 수정하는 역할을 한다.
+
+
+--> updateProduct 메소드에서는 만약 넘어온 pictureurl이 null이라면, 테이블의 name에 null 대신 함께 건너온 oldPicture를 넣는다. 
+이럴려고 oldPicture을 hidden 태그로 따로 만들어둔 것이다.
+
+
+
+------------------------오늘은 여기까지
+아래는 한번 혼자 만들어보는 10분의 시간
+
+
+-------- 상품 삭제 페이지 만들기
+
+- productView 의 command deleteForm으로 DeleteFormAction으로 간다...
+
+
+
+

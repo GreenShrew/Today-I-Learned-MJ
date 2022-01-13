@@ -35,7 +35,10 @@
 		<tr><th>사 진</th><td><input type="file" name="pictureurl"><br>
 			(주의사항 : 이미지를 변경하고자 할때만 선택하시오)</td></tr>
 		<tr><th>설 명</th><td><textarea cols="90" rows="10" name="description">${product.description}</textarea></td></tr>
-</table>
+		</table>
+	</td></tr>
+</table><br>
+<input type="submit" value="수정"><input 
 </form>
 </div>
 </body>
