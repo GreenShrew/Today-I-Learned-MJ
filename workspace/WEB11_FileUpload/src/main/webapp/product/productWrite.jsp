@@ -10,7 +10,7 @@
 <body>
 <div id="wrap" align="center">
 <h1>상품 등록 - 관리자 페이지</h1>
-<form method="post" enctype="multipart.form-data" action="product.do?command=productWrite">
+<form method="post" enctype="multipart/form-data"  action="product.do?command=productWrite">
 <table>
 	<tr><th>상 품 명</th><td><input type="text" name="name" size="80"></td></tr>
 	<tr><th>가 격</th><td><input type="text" name="price"> 원</td></tr>

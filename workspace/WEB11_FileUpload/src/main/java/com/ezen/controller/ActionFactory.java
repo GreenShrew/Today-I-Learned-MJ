@@ -4,6 +4,7 @@ import com.ezen.controller.action.Action;
 import com.ezen.controller.action.ProductViewAction;
 import com.ezen.controller.action.ProductWriteAction;
 import com.ezen.controller.action.ProductWriteFormAction;
+import com.ezen.controller.action.UpdateFormAction;
 
 public class ActionFactory {
 	private ActionFactory() {}
@@ -17,6 +18,8 @@ public class ActionFactory {
 		else if(command.equals("productView")) ac = new ProductViewAction();
 		else if(command.equals("productWriteForm")) ac = new ProductWriteFormAction();
 		else if(command.equals("productWrite")) ac = new ProductWriteAction();
+		else if(command.equals("updateForm")) ac = new UpdateFormAction();
+		else if(command.equals("update")) ac = new UpdateAction();
 		
 		
 		return ac;

@@ -67,6 +67,24 @@ public class ProductDao {
 		}
 		return pvo;
 	}
+
+	public void insertProduct(ProductVO pvo) {
+		String sql = "insert into bookproduct(code, name, price, pictureurl, description) values(bookproduct_seq.nextVal, ?, ?, ?, ?)";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pvo.getName());
+			pstmt.setInt(2, pvo.getPrice());
+			pstmt.setString(3, pvo.getPictureurl());
+			pstmt.setString(4, pvo.getDescription());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
 	
 	
 }
