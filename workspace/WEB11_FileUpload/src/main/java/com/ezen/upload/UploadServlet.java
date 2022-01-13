@@ -45,7 +45,7 @@ public class UploadServlet extends HttpServlet {
 		
 		// 4. 업로드될 서버의 실제 저장장소를 설정하여 String 변수에 저장해둔다.
 		ServletContext context = getServletContext();
-		String uploadFilePath = context.getRealPath(savePath);	// 1번에서 저장해둔 업로드될 폴더 이름
+		String uploadFilePath = context.getRealPath(savePath);	// 1번에서 저장해둔 업로드될 폴더 이름, savePath 대신 "upload"를 써도 된다.
 		
 		System.out.println(uploadFilePath);	// 파일이 업로드될 폴더의 위치
 		
@@ -54,14 +54,15 @@ public class UploadServlet extends HttpServlet {
 			// 따라서 MultipartRequest에 request를 넣어서 복합사용되게 설정한다.
 			// 아래에 println으로 비교하였다.
 			uploadFilePath,	// 서버상의 실제 디렉토리
-			uploadFileSizeLimit,	// 최대 업로드 파일 크기
-			encType,	//인코딩 방법
+			1024*1024*5,		// uploadFileSizeLimit,	// 최대 업로드 파일 크기
+			"UTF-8",		//encType,	//인코딩 방법
 			new DefaultFileRenamePolicy()
 			// 업로드 파일과 동일 이름이 이미 존재하면 새 이름을 부여하는 역할을 한다.
-		);
+		);	// 객체가 생성되는 순간 파일이 저 깊숙한 폴더에 업로드 된다.
 		
 		// 01_Upload에서 받은 name을 일반 request와 MultipartRequest로 받은 결과는?
-		// System.out.println("request 로 처리 : " + request.getParameter("name"));		// null값이 나온다.
+		// System.out.println("request 로 처리 : " + request.getParameter("name"));
+		// request는 multipart/form-data로 전달된 파라미터를 모두 null로 수신하여 null값이 나온다.
 		// System.out.println("multi 로 처리 : " + multi.getParameter("name"));		// 전송 누르기 전에 넣은 내용이 나온다.
 		
 		// MultipartRequest 객체가 생성되는 순간 업로드 되는 파일은 해당 경로에 업로드를 완료합니다.

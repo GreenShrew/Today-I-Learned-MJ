@@ -242,7 +242,7 @@ webapp 폴더 안에 01_Upload.jsp 파일을 생성한다.
 
 
 <input type="file" name="uploadFile">
-type="file"을 이용해 
+type="file"을 이용해 파일을 업로드한다.
 
 
 
