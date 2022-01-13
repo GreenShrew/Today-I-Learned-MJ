@@ -65,7 +65,6 @@ public class ProductDao {
 		} finally {
 			Dbman.close(con, pstmt, rs);
 		}
-		
 		return pvo;
 	}
 	

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ezen.dao.ProductDao;
+import com.ezen.dto.ProductVO;
 
 public class ProductViewAction implements Action {
 
@@ -17,10 +18,10 @@ public class ProductViewAction implements Action {
 		// 전달된 상품번호로 상품 검색하여
 		String code = request.getParameter("code");
 		ProductDao pdao = ProductDao.getInstance();
-		Product VO pvo =
+		ProductVO pvo = pdao.getProduct(code);
 		
-		request.setAttribute(code, VO);
-		//productView.jsp로 이동
+		request.setAttribute("product", pvo);
+		// productView.jsp로 이동
 		RequestDispatcher rd = request.getRequestDispatcher("product/productView.jsp");
 		rd.forward(request, response);
 	}
