@@ -38,7 +38,8 @@
 		</table>
 	</td></tr>
 </table><br>
-<input type="submit" value="수정"><input 
+<input type="submit" value="수정"><input type="reset" value="다시작성">
+<input type="button" value="목록" onclick="location.href='product.do?command=index'">
 </form>
 </div>
 </body>

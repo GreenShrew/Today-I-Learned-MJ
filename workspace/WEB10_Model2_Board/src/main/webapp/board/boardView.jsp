@@ -16,12 +16,26 @@
 <div id="wrap" align="center">
 <h1>게시글 상세보기</h1>
 <table>
-	<tr><th>작성자</th><td>${board.userid}</td>
-		<th>이메일</th><td>${board.email}</td></tr>
-	<tr><th>작성일</th><td><fmt:formatDate value="${board.writedate}"/></td>
+	<tr><th width="100">작성자</th><td>${board.userid}</td>
+		<th width="100">이메일</th><td>${board.email}</td></tr>
+	<tr><th width="100">작성일</th><td><fmt:formatDate value="${board.writedate}"/></td>
 		<th>조회수</th><td>${board.readcount}</td></tr>
-	<tr><th>제목</th><td colspan="3">${board.title}</td></tr>
-	<tr><th>내용</th><td colspan="3"><pre>${board.content}</pre></td></tr>
+	<tr><th width="100">제목</th><td colspan="3">${board.title}</td></tr>
+	<tr>
+		<th width="100">내용</th>
+		<td><pre>${board.content}</pre></td>
+		<th width="100">이미지</th>
+		<td width="220" align="center">
+			<c:choose>
+				<c:when test="${empty board.imgfilename}">	<!-- 비어있는 경우 noname.jpg 파일 출력 -->
+					<img src="images/noname.jpg" width="200"/>
+				</c:when>
+				<c:otherwise>
+					<img src="images/${board.imgfilename}" width="200"/>
+				</c:otherwise>
+			</c:choose>
+		</td>
+	</tr>
 </table><br><br>
 <input type="button" value="리스트" onClick="location.href='board.do?command=main'">
 <input type="button" value="수정" onClick="open_win('${board.num}', 'update');">

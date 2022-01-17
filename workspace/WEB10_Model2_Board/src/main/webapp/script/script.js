@@ -17,7 +17,7 @@ function idCheck(){
 	if(document.frm.userid.value == ""){
 		alert("아이디를 입력해주세요");
 		document.frm.userid.focus();
-		return;
+		return false;
 	}
 	var inputid = document.frm.userid.value;
 	var opt = "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=200";

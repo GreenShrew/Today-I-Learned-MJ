@@ -127,6 +127,7 @@ alter table board add replycnt number(3) default 0;
 
 
 
-
+-- 이미지 파일의 이름을 저장할 컬럼
+alter table board add imgfilename varchar2(50);
 
 

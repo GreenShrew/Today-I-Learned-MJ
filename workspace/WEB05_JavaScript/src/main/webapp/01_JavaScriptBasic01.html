@@ -41,7 +41,7 @@
     // 큰 따옴표나 작은 따옴표로만 인용구문을 표기 하고 싶다면 이스케이프 문자 \" 을 사용한다.("Hello, \"JavaScript\"...")
     // 이스케이프 문자들: \n, \', \t, \\
 //    alert('Hello, JavaScript ...\n작은 따옴표');
-//    alert("Hello, JavaScript ...\n큰 따옴표");
+//    alert("Hello, JavaScript ...\n큰 따옴표\" ");
 //    alert("Hello, 'JavaScript' ...\n혼합된 사용 1");
 //    alert('Hello, "JavaScript" ...\n혼합된 사용 2');
 //    alert("Hello, \"JavaScript\" ...\n이스케이프 문자 사용");
@@ -99,7 +99,7 @@
 //    var radius = 10;    // 정수
 //    var pi = 3.14;  // 실수
 //    alert(pi);
-//    alert(2 * pi * radius;) // 원의 둘레의 길이
+//    alert(2 * pi * radius); // 원의 둘레의 길이
 //    var varChar = "Hello World..."; // 문자
 //    var booleanType = true; // boolean
 //    pi = "Hello World..."   // 실수가 저장되었던 변수에 다시 문자 저장
@@ -154,12 +154,12 @@
 /*  11. 자료형 검사 */
     // 문자열
 //    alert(typeof('홍길동'));    // String - char 자료 string으로 통합
-    // 숫자
+//     숫자
 //    alert(typeof(150));     // number - 정수 실수도 number로 통합
 //    alert(typeof(3.14));    // number
-    // boolean
+//     boolean
 //    alert(typeof(true));    // boolean
-    // 함수
+//     함수
 //    alert(typeof(function(){})); // function
     // 객체
     // 자바스크립트에도 객체가 존재한다. 하나의 변수 안에 여러 속성(멤버변수) & 멤버 메소드들을 생성해놓고 객체지향 프로그래밍을 할 수 있다.
@@ -195,16 +195,16 @@
     a = Number('123') */
 
 
-    var kor = prompt('국어 점수를 입력하세요.', '100');
-    var eng = prompt('국어 점수를 입력하세요.', '100');
-    var mat = prompt('국어 점수를 입력하세요.', '100');
-    kor = Number(kor);
-    eng = Number(eng);
-    mat = Number(mat);
+    // var kor = prompt('국어 점수를 입력하세요.', '100');
+    // var eng = prompt('국어 점수를 입력하세요.', '100');
+    // var mat = prompt('국어 점수를 입력하세요.', '100');
+    // kor = Number(kor);
+    // eng = Number(eng);
+    // mat = Number(mat);
 
-    var tot = kor+eng+mat;
-    var ave = tot/3;
-    alert("입력한 점수 국어 : " + kor + ", 영어 : " + eng + ", 수학 : " + mat + "\n총점 : " + tot + "\n평균 : " + ave)
+    // var tot = kor+eng+mat;
+    // var ave = tot/3;
+    // alert("입력한 점수 국어 : " + kor + ", 영어 : " + eng + ", 수학 : " + mat + "\n총점 : " + tot + "\n평균 : " + ave)
 </script>
 </head>
 <body>

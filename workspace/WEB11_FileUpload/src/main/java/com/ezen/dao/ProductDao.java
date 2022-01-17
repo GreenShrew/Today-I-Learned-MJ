@@ -111,6 +111,7 @@ public class ProductDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(code));
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

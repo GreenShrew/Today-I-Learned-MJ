@@ -22,7 +22,7 @@ if(age<=19){
 	// 이름으로 "홍길동"을 저장해두고 083_ForwardResult.jsp로 이동(forward)한다.
 	// 083_ForwardResult.jsp에서는 이전 페이지에서 보내준 request와 response를 이용해서
 	// 저장해둔 name 값을 꺼내 사용할수가 있다.
-	// 저장 메소드 : setAttribute()	추출 메소드 : getAttribute()
+	// 저장 메소드 : setAttribute()	 추출 메소드 : getAttribute()
 	
 	// 파라미터 저장
 	request.setAttribute("name", "홍길동");
