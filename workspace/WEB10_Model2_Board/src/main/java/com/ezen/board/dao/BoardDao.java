@@ -50,6 +50,7 @@ public class BoardDao {
 				bdto.setContent( rs.getString("content") );
 				bdto.setReadcount( rs.getInt("readcount") );
 				bdto.setWritedate( rs.getTimestamp("writedate") );
+				bdto.setImgfilename(rs.getString("imgfilename"));
 				list.add(bdto);
 			}
 		} catch (SQLException e) { e.printStackTrace();
@@ -90,6 +91,7 @@ public class BoardDao {
 				bdto.setContent(rs.getString("content"));
 				bdto.setWritedate(rs.getTimestamp("writedate"));
 				bdto.setReadcount(rs.getInt("readcount"));
+				bdto.setImgfilename(rs.getString("imgfilename"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,7 +103,7 @@ public class BoardDao {
 	}
 
 	public void insertBoard(BoardDto bdto) {
-		String sql = "insert into board(num, userid, pass, email, title, content) values(board_seq.nextVal, ?, ?, ?, ?, ?)";
+		String sql = "insert into board(num, userid, pass, email, title, content, imgfilename) values(board_seq.nextVal, ?, ?, ?, ?, ?, ?)";
 		
 		con = Dbman.getConnection();
 		try {
@@ -111,6 +113,7 @@ public class BoardDao {
 			pstmt.setString(3, bdto.getEmail());
 			pstmt.setString(4, bdto.getTitle());
 			pstmt.setString(5, bdto.getContent());
+			pstmt.setString(6, bdto.getImgfilename());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,8 +123,7 @@ public class BoardDao {
 	}
 
 	public void updateBoard(BoardDto bdto) {
-		String sql = "update board set userid=?, pass=?, email=?, title=?, content=? "
-				+ " where num=?";
+		String sql = "update board set userid=?, pass=?, email=?, title=?, content=? imgfilename=? where num=?";
 		
 		con = Dbman.getConnection();
 		try {
@@ -131,7 +133,8 @@ public class BoardDao {
 			pstmt.setString(3, bdto.getEmail());
 			pstmt.setString(4, bdto.getTitle());
 			pstmt.setString(5, bdto.getContent());
-			pstmt.setInt(6, bdto.getNum());
+			pstmt.setString(6, bdto.getImgfilename());
+			pstmt.setInt(7, bdto.getNum());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

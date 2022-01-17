@@ -1,9 +1,26 @@
 day 63
 
-
-
-
 오늘은 WEB10 프로젝트에 파일 업로드 기능을 추가했다.
+
+
+
+
+
+※ 확인할거
+
+- WEB10에서 게시글 등록 페이지 가운데 정렬 안 되어있고, 등록 후 메인 페이지로 돌아가지 않는다.
+--> 다만 글의 등록과 이미지는 잘 추가된다.
+----> 해결! 메인 페이지로 돌아가는건 순전히 렉 때문이었다!
+------> 정렬 문제는 어떻게 해결하지?
+
+
+
+- 게시글의 수정시 사진이 수정되지 않는다!
+--> dao의 updateBoard 메소드의 sql 문제인 것 같다.
+--> java.sql.SQLSyntaxErrorException: ORA-00933: SQL command not properly ended
+
+
+
 
 
 
@@ -50,19 +67,34 @@ day 63
 
 ----> 실제 이미지 업로드를 하는 내용은 Action 패키지 폴더의 BoardWriteAction을 통해 작동하도록 만든다.
 
+------> 파일이 저장될 서버 내의 경로(이미지의 실제 경로)를 얻는 동작이 필요하다.
+
+--------> request로 처리하던걸 MultipartRequest로 만든 객체 multi로 처리한다.
 
 
 
 
+----- BoardDao의 메소드들 수정
+
+-(필수) BoardDao의 insertBoard 메소드를 수정한다.
+--> sql문에 ?를 하나 더 추가하고 필드명을 늘린다. 추가한 자리에는 getImgfilename을 넣을 수 있도록 한다.
 
 
+-(필수) getBoard로 데이터를 가져올때도 이미지파일의 제목을 가져오도록 해야하기 때문에 이 또한 수정한다.
 
 
+- selectBoard에도 getBoard와 같이 데이터를 가져올 수 있도록 수정한다.
+ 다만 굳이 없어도 될 수 있다.
 
 
+------- boardUpdate 수정
 
+※ form 태그에 enctype="multipart/form-data" 필수로 추가!
 
+- 게시글을 수정할때도 사진을 업로드할 수 있도록 만든다.
+--> 내용 아래 이미지 파일을 업로드 할 수 있는 공간을 만든다.
 
+----> BoardViewAction 클래스 수정
 
 
 

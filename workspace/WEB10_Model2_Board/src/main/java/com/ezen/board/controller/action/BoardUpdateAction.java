@@ -3,12 +3,16 @@ package com.ezen.board.controller.action;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ezen.board.dao.BoardDao;
 import com.ezen.board.dto.BoardDto;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class BoardUpdateAction implements Action {
 
@@ -17,14 +21,27 @@ public class BoardUpdateAction implements Action {
 		// 전달된 값을을 bto에 넣고
 		BoardDao bdao = BoardDao.getInstance();
 		BoardDto bdto = new BoardDto();
+		
+		// 파일이 저장될 서버 내의 경로(이미지의 실제 경로)를 얻는 동작
+		HttpSession session = request.getSession();
+		ServletContext context = session.getServletContext();
+		String path = context.getRealPath("images");
+		
+		MultipartRequest multi = new MultipartRequest(request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 
-		bdto.setUserid(request.getParameter("userid"));
-		bdto.setPass(request.getParameter("pass"));
-		bdto.setEmail(request.getParameter("email"));
-		bdto.setTitle(request.getParameter("title"));
-		bdto.setContent(request.getParameter("content"));
-		int num = Integer.parseInt(request.getParameter("num"));	// 이걸 한번 더 써야해서 이렇게 만들어둔다.
+		bdto.setUserid(multi.getParameter("userid"));
+		bdto.setPass(multi.getParameter("pass"));
+		bdto.setEmail(multi.getParameter("email"));
+		bdto.setTitle(multi.getParameter("title"));
+		bdto.setContent(multi.getParameter("content"));
+		int num = Integer.parseInt(multi.getParameter("num"));	// 이걸 한번 더 써야해서 이렇게 만들어둔다.
 		bdto.setNum(num);
+		
+		String filename = multi.getFilesystemName("imgfilename");
+		if(filename==null) {
+			filename = multi.getParameter("oldfilename");
+		}
+		bdto.setImgfilename(filename);
 		
 		// bao의 메소드를 이용해서 table 수정을 하고
 		bdao.updateBoard(bdto);
