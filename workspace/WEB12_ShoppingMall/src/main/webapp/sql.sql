@@ -210,6 +210,125 @@ insert into cart(cseq, id, pseq, quantity) values(cart_seq.nextval, 'two', 2, 1)
 
 
 
+-- orders와 order_detail 추가
+insert into orders(oseq, id) values(orders_seq.nextval, 'one');
+select * from orders;
+select max(oseq) from orders;	-- 추가되다보면 oseq가 어디까지 늘어있을지 모른다. 그때 사용하는 조회 방법.
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 1, 1, 1);
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 1, 2, 2);
+
+
+insert into orders(oseq, id) values(orders_seq.nextval, 'two');
+select max(oseq) from orders;
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 2, 4, 3);
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 2, 5, 2);
+
+insert into orders(oseq, id) values(orders_seq.nextval, 'one');
+select max(oseq) from orders;
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 3, 3, 1);
+insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextval, 3, 2, 1);
+
+
+
+
+
+-- QnA 추가
+insert into qna (qseq, subject, content, id)
+values(qna_seq.nextval, '배송관련 문의입니다', '현재 배송상태와 예상 배송일을 답변 부탁합니다.', 'one');
+insert into qna (qseq, subject, content, id)
+values(qna_seq.nextval, '환불관련', '환불절차 안내부탁드립니다. 배송사 선택은 어떻게 하는지도 부탁드립니다.', 'one');
+insert into qna (qseq, subject, content, id)
+values(qna_seq.nextval, '사이즈 교환 하고 싶어요', '사이즈가 예상보다 작습니다. 교환절차가 어떻게 되나요?', 'two');
+insert into qna (qseq, subject, content, id)
+values(qna_seq.nextval, '배송이 많이 지연대고 있습니다', '언제 받을 수 있나요.', 'scott');
+insert into qna (qseq, subject, content, id)
+values(qna_seq.nextval, '불량품 교환 문의', '교환 또는 환불이 필요합니다. 유선안내 부탁드려요.', 'scott');
+
+
+
+-- (참고)view를 케이크자르듯 만드는 방법
+create or replace view 이름	-- view의 이름
+as
+select 컬럼들		-- 보여질 컬럼들
+from 테이블들		-- 보여질 컬럼들의 데이터를 가지는 테이블들 '테이블 as 별칭' 으로 별칭을 붙일 수 있다. 
+where 조건;		-- 보여질 컬럼들의 조건
+-- order by ~~ desc; 를 붙일 수 있다.
+
+
+
+
+
+
+
+-- cart 안의 상품번호와 사용자 아이디로 상품의 이름과 사용자 이름을 함께 조회하는 view를 생성한다.
+-- 나중에 장바구니 페이지에 cart의 내용을 보여주기 위해 만드는 것이다.
+select * from cart;	-- 이 안에는 주문 번호나 수량만 담겨있다..
+
+create or replace view cart_view
+as
+select c.cseq, c.id, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
+from cart c, product p, member m
+where c.pseq = p.pseq and c.id = m.id
+
+select * from cart_view;	-- 이제 누가 어떤 상품을 얼마나 샀고 카트에 담겨있는지 등등을 나타낸다
+
+
+
+
+-- orders와 order_detail 의 join 으로...
+-- 1. 주문번호(oseq)에 따른 주문 상품들의 표시를 위해 만든다.
+-- 2. 상품 번호에 따른 상품 이름과 가격 등의 정보 표시를 위해 만든다.
+-- 3. 아이디에 따른 고객 이름과 배송주소 등의 정보 표시를 위해 만든다.
+create or replace view order_view
+as
+select d.odseq, o.oseq, o.id, m.name as mname, m.zip_num, m.address, m.phone,
+d.pseq, p.name as pname, d.quantity, d.result
+from orders o, order_detail d, member m, product p
+where o.oseq = d.oseq and o.id = m.id and d.pseq = p.pseq
+
+select * from order_view;
+
+
+
+
+
+
+
+-- 신상품 view 생성
+create or replace view new_pro_view
+as
+select * from
+(select rownum, pseq, name, price2, image
+from product
+where useyn='y'
+order by indate desc )
+where rownum <= 4;
+
+select * from new_pro_view;
+select * from product;
+
+
+
+update product set bestyn='y' where pseq=11;		-- bestyn 값이 y인 제품을 하나 더 추가
+update product set bestyn='y' where pseq=4;	
+
+-- 베스트 상품 view 생성
+create or replace view best_pro_view
+as
+select * from
+(select rownum, pseq, name, price2, image
+from product
+where bestyn='y'
+order by indate desc)
+where rownum <=4;
+
+select * from best_pro_view;
+
+
+
+
+
+
 
 
 
