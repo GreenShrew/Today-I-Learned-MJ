@@ -176,6 +176,78 @@ footer와 include에 대해 다시 한번 보자!
 
 --------------------------------------------------
 
+하지만 아직 DB 설정은 끝나지 않았어.
+
+
+
+- 주소명(구 주소) 데이터 얻기
+
+ 츄리닝 카페에서 '주소 목록'이라는 게시물의 zip.sql을 다운로드 받는다. 다운로드 받은 파일은
+--> 학원에서는 d 드라이브에 넣는다.
+--> 내 컴퓨터에는 바탕화면에 넣는다. (아래 cmd에서 명령이 안 먹혀서 d 드라이브에 넣어서 진행했다.)
+----> 참고로 이 파일의 내용은 죄다 insert 문이다!
+----> 이걸 이클립스에서 열어서 적용하면 하루죙일 걸린다! 따라서 cmd를 이용한다.
+
+
+
+- cmd창 오픈 - sqlplus - scott -tiger - (여기는 저장한 드라이브에 따라 다르다) @d:\zip.sql
+
+--> 이 후에 select * from address; 명령을 이용해 결과를 보면 500개의 레코드를 볼 수 있다. 이클립스의 SQL Results가 나타낼 수 있는 Result의 갯수는 500개이다.
+----> select count(*) from address; 명령을 사용해서 확인하면 26455개의 레코드를 가지고 있다고 나온다.
+
+
+
+
+-----------------------------------------------------
+
+※ 앞선 예제에서는 Dbman이라는 클래스를 만들고 로그인을 하거나 글을 수정하거나 등등의 메소드를 작동시킬때마다 DB에 연결하고 끊고 동작을 반복했다.
+ 한사람만 이 동작을 하면 무리가 없지만, 여러명이 동시에 DB에 연결하고 끊고를 반복하면 DB에 과부하가 생긴다!
+
+--> 따라서 이를 가볍게 만들어보자! 명령은 줄일 수 없다! 차라리 미리 일정 갯수의 연결 객체를 만들어놓고 가져다가 쓰도록 한다!
+----> 연결 객체는 서버에 저장한다! 
+
+
+- 서버에 미리 연결 객체 만들기
+
+ Server 폴더 - Tomcat v9.0 Server at.... 폴더 - server.xml 파일 오픈 - 하단에 Design, Source 탭에서 Source를 선택
+
+--> 소스코드의 맨 아래로 가면 현재 tomcat이 운영하는 서버들이 나온다. 여기서 WEB12의 정보가 담긴 Context 태그를 수정한다.
+
+----> Context태그의 닫힘 태그를 수정한다.
+----><Context .... /> 에서 / 삭제 후 </Context> 생성
+------> 츄리닝 카페에서 하단의 코드를 Context 태그 안에 넣는다.
+------> day 64 의 게시글 이름 'DBCP Resource 내용' 이다.
+
+<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:xe" username="scott" />
+
+--------> 이 안에 속성 'maxTotal="20" ' 는 20개의 객체를 미리 만들겠다는 의미! 이걸 수정하면 미리 만들 객체의 갯수를 수정하는 것이다!
+
+※ 참고 : Ctrl + shift + f : 이클립스 자동줄바꿈 단축키
+
+
+server.xml은 닫기.
+
+------------------------------
+
+
+
+이번에는 페이지의 시작(index)를 html으로 만들 것이다.
+
+그런데 html은 jsp가 아니므로 request를 보낼 수 없는데?
+--> meta 태그를 추가함으로서 이를 해결한다.
+
+※ 예전에 html4 에서 사용한 방식이다. 다만 요즘에는 그냥 jsp파일을 만들어 sendRedirect로 보내주는게 더 좋긴 하다.
+
+
+
+
+---------------------------------- 이런저런 패키지와 서블릿 생성
+
+
+
+src/main/java에 com.ezenac.controller 패키지 생성
+--> 패키지 안에 ShoppingMallServlet 서블릿 생성. mapping은 shop.do
+
 
 
 

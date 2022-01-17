@@ -326,7 +326,9 @@ select * from best_pro_view;
 
 
 
-
+-- cmd로 주소(구 주소)를 추가하고 address 테이블을 조회
+select * from address;	-- 이클립스의 SQL Results가 나타낼 수 있는 Result의 갯수는 500개이다.
+select count(*) from address;	-- 26455 개의 레코드를 가지고 있다!
 
 
 
