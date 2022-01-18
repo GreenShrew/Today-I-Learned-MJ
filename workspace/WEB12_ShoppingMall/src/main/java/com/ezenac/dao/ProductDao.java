@@ -31,7 +31,7 @@ public class ProductDao {
 				// 베스트 상품의 이름, 가격, 이미지만 현재 필요하기 때문에 필요한 필드만 dto에 담는다.
 				pvo.setPseq(rs.getInt("pseq"));
 				pvo.setName(rs.getString("name"));
-				pvo.setPrice2(rs.getInt("price"));
+				pvo.setPrice2(rs.getInt("price2"));
 				pvo.setImage(rs.getString("image"));
 				list.add(pvo);
 			}
@@ -57,7 +57,7 @@ public class ProductDao {
 				// 신상품의 이름, 가격, 이미지만 현재 필요하기 때문에 필요한 필드만 dto에 담는다.
 				pvo.setPseq(rs.getInt("pseq"));
 				pvo.setName(rs.getString("name"));
-				pvo.setPrice2(rs.getInt("price"));
+				pvo.setPrice2(rs.getInt("price2"));
 				pvo.setImage(rs.getString("image"));
 				list.add(pvo);
 			}

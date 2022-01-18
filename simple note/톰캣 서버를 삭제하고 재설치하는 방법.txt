@@ -1,0 +1,15 @@
+톰캣 서버를 삭제하고 다시 하는 방법
+
+- 서버 삭제하는 방법!
+1. 하단 Server 창에서 Tomcat 우클릭 후 delete 버튼 클릭
+2. 좌측 ProjectExplorer 에서 Servers 폴더를 삭제
+3. 상단 window 탭의 preferences 에서 Server 항목의 Runtime Environments에서 tomcat 삭제
+
+- 서버 설치하는 방법!
+1. 하단 Server 창에 링크 클릭
+2. C드라이브 - program files - apache software foundation -Tomcat 9.0 폴더 선택
+3. finish를 누르면 완료
+
+--> 하단 Server창에서 연결된 Tomcat 더블클릭하고 Port Name을 바꾸어준다(실습에는 9005). 저장 후 닫기.
+
+- 프로젝트의 자바 버전과 톰캣 버전을 properties의 project facets에서 맞쳐줘야한다.

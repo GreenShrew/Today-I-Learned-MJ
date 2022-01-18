@@ -23,3 +23,38 @@ footer #copy{margin:5px 0 0 300px; width:600px;}
 #bestProduct{border:solid 3px #FFFFFF; border-radius:10px; width:910px; min-height:260px; background:#F4CBFA; padding:10px; text-align:center; margin:0 auto;}
 #item{width:200px; float:left; margin:0 13px; text-align:center;}
 #item img{width:190px; height:200px; border-radius:20px 20px 20px 20px; overflow:hidden; border:3px solid gray;}
+
+#main_img{text-align:center;}
+#main_img img{margin:9px 0 0 0;}
+
+article h2, div h2{font-family:Verdana; font-size:30px; color:#6F0C78; padding-bottom:15px; border-bottom:1px dotted #666;}
+a{color:#F00; text-decoration:none;}
+a:hover{color:#F90; text-decoration:underline;}
+
+#sub_img{text-align:center;}
+#sub_img img{margin:9px 0 0 0;}
+
+#sub_menu{width:250px; float:left; margin:20px 0;}
+#sub_menu ul{margin:20px 0 0 16px; list-style:none;}
+
+#sub_menu a{text-decoration:none; color:#6F0C78; font-family:Verdana; font-weight:bold; font-size:16px; display:block;
+height:15px; width:160px; padding:7px; border-bottom:1px dotted #999; background-image:url(../images/bullet.gif);
+background-repeat:no-repeat; background-position:right center;}
+#sub_menu a:hover{background-image:url(../images/bullet_orange.gif); background-repeat:no-repeat;
+background-position:right center; color:#F90; font-weight:bold; font-size:16px; font-family:Arial, Helvetica, sans-serif;}
+
+article h1, div h1{font-family:Verdana; font-size:45px; color:#6F0C78; margin:20px 0; font-weight:normal;}
+article{float:right; width:680px; padding-right:10px; font-family:Verdana; font-size:1em; line-height:1.5em;}
+
+form{margin:10px 0 0 0; width:670px;}
+form fieldset{padding:10px 0 20px 5px; border:none;}
+form fieldset legend{font-size:20px; border-bottom:1px dotted #666; width:600px; padding:5px 0;}
+
+form label{width:140px; float:left; margin:5px 0;}
+form input{margin:5px 0; border:1px solid #999; background-color:#FCFDEA;}
+
+form #buttons{margin:20px 0 0 0;}
+form .submit, form .cancel{height:30px; width:150px; border:1px solid #666; border-radius:10px; box-shadow:3px 3px 2px #ccc;
+font-size:14px; background-repeat:repeat-x; background-position:center center; color:#fff; margin: 0 0 0 20px;}
+form .submit{background-image:url(../images/submit_back.jpg);}
+form .submit{background-image:url(../images/cancel_back.jpg);}
