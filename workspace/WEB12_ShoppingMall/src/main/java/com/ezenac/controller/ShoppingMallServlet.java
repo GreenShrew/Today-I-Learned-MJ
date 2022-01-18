@@ -34,12 +34,12 @@ public class ShoppingMallServlet extends HttpServlet {
 		
 		ActionFactory af = ActionFactory.getInstance();
 		Action ac = af.getAction(command);
-//		
-//		if(ac != null) {
-//			ac.execute(request, response);
-//		} else {
-//			System.out.println("ac가 null입니다. command 값을 확인하세요.");
-//		}
+		
+		if(ac != null) {
+			ac.execute(request, response);
+		} else {
+			System.out.println("ac가 null입니다. command 값을 확인하세요.");
+		}
 	}
 
 	/**
