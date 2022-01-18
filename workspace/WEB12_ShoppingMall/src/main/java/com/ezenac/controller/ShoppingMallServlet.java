@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ezenac.controller.action.Action;
+
 /**
  * Servlet implementation class ShoppingMallServlet
  */
@@ -30,8 +32,8 @@ public class ShoppingMallServlet extends HttpServlet {
 		
 		String command = request.getParameter("command");
 		
-//		ActionFactory af = ActionFactory.getInstance();
-//		Action ac = af.getAction(command);
+		ActionFactory af = ActionFactory.getInstance();
+		Action ac = af.getAction(command);
 //		
 //		if(ac != null) {
 //			ac.execute(request, response);

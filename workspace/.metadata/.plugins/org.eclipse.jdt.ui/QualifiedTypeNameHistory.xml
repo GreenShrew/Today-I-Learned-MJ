@@ -43,7 +43,6 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="javax.naming.spi.DirStateFactory.Result"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
@@ -53,5 +52,10 @@
     <fullyQualifiedTypeName name="com.ezen.board.dao.BoardDao"/>
     <fullyQualifiedTypeName name="com.ezen.board.controller.action.AddReplyAction"/>
     <fullyQualifiedTypeName name="com.ezen.board.util.Paging"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>

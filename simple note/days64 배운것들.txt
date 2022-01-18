@@ -1,0 +1,117 @@
+day 64
+
+
+
+ 오늘은 쇼핑몰 계속
+
+
+※ 궁금한것
+- nav 태그는 뭐였지?
+
+
+
+
+
+------------------------------------- 서블릿 제작
+
+- ShoppingMallServlet 내용 제작
+예전에 했던것처럼 ActionFactory 만들어서 객체를 조합하고, Action(인터페이스) 만들어서 execute 메소드 제작.
+
+
+--> com.ezenac.controller.action 패키지에 Action 인터페이스 제작. 추상 메소드 execute를 만든다.
+
+--> com.ezenac.controller 패키지에 ActionFactory 클래스 제작. 싱글톤으로 만들어 getInstance() 메소드 제작.
+그리고 Servlet에서부터 command를 받아 알맞은 동작을 시켜주기 위한 getAction() 메소드 제작.
+
+----> IndexAction 클래스 제작.
+ index.jsp로 이동시키는 동작. 신상품과 베스트상품 4개씩을 조회하고, 이를 request에 담아서 index.jsp로 이동시킨다.
+
+
+------> index.jsp 제작 (day63에서 만들었던 index는 html이다.)
+웹 페이지의 상단에는 내용이, 아랫쪽에는 사업자등록번호라던지 회사 전화번호라던지의 footer가 들어간다.
+------> 따라서 모든 태그를 지우고 include를 이용하여 제작한다.
+
+
+--------> index.jsp의 상단 메뉴를 구성할 header.jsp와 하단의 회사정보를 구성할 footer.jsp 제작
+
+--------> header.jsp는 하단의 </body></html> 태그 삭제
+--------> index.jsp는 모든 태그를 삭제
+--------> footer.jsp는 하단의 </body></html>를 제외한 모든 태그 삭제
+세 파일이 한몸인 것 처럼 생각해보자.
+
+
+
+※ 즉, header.jsp와 index.jsp, footer.jsp 셋을 위에서부터 순서대로 쭈루룩 이어보면 <html>....</html> 태그로 둘러싸인 하나의 HTML 문서가 완성된다!
+--> header에서 시작한 div 태그를 footer에서 닫을 수 있다!
+
+
+
+※ include를 쓰면 좋은점
+1. 무언가 메뉴판을 바꿀 때 header.jsp 파일만 바꾸면 싹 바꿀 수 있다.
+2. 매번 상단에 써야했던 taglib이나 head 태그 사이의 script, link 태그를 상단에 붙일 header.jsp에 단 한번만 쓰면 include를 했을 때 전부 적용된다!
+3. 웹 페이지에 같은 내용이 반복되는 경우, 이를 이용하면 매번 해당 동작을 하도록 코딩하지 않아도 된다!
+
+
+
+------------> header.jsp 에서 taglib과 script, link 태그를 추가한다.
+
+--------------> wepapp 폴더에 css, member, mypage 폴더를 만들고 각각 shopping.css, member.js, mypage.js 를 만든다.(js 파일을 File을 선택하여 만든다)
+
+
+
+---------------------- 페이지에 언제나 들어가는 상단메뉴 만들기
+
+- header.jsp에 만들어서 모든 페이지에 include 시킬 예정이다.
+
+--> 웹 페이지의 상단에는 로고, 주상단메뉴, 카테고리 메뉴 등이 표시된다.
+
+※ 츄리닝 카페에 [days 64] 쇼핑몰 이미지의 두 폴더를 다운로드 받아서 webapp에 각각 폴더를 붙여넣는다.
+
+----> 상단메뉴에서 LOGIN과 JOIN 버튼은 회원이 로그인 했다면 보일 필요가 없는 메뉴이다. 따라서 if문으로 세션이 없으면 보이고, 세션이 있으면 정보수정, LOGOUT 메뉴가 보이도록 한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

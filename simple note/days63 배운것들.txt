@@ -248,7 +248,7 @@ server.xml은 닫기.
 src/main/java에 com.ezenac.controller 패키지 생성
 --> 패키지 안에 ShoppingMallServlet 서블릿 생성. mapping은 shop.do
 
-
+----> ShoppingMallServlet에서는 각 페이지, 파일 등에서 command 값을 받아 이에 맞는 동작을 시키기 위한 준비를 한다!
 
 
 
