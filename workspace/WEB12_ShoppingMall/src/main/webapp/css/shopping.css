@@ -57,4 +57,4 @@ form #buttons{margin:20px 0 0 0;}
 form .submit, form .cancel{height:30px; width:150px; border:1px solid #666; border-radius:10px; box-shadow:3px 3px 2px #ccc;
 font-size:14px; background-repeat:repeat-x; background-position:center center; color:#fff; margin: 0 0 0 20px;}
 form .submit{background-image:url(../images/submit_back.jpg);}
-form .submit{background-image:url(../images/cancel_back.jpg);}
+form .cancel{background-image:url(../images/cancel_back.jpg);}
