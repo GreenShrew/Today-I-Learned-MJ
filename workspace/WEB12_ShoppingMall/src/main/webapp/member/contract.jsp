@@ -336,7 +336,7 @@ Shoes Shop의 회원가입은 무료이며, 회원님의 개인신상에 관한 
 	<input type="radio" name="okon" checked> 동의안함
 </div>
 
-<input type="button" value="Next" class="submit" onClick="go_next();" style="float:right;">
+<input type="button" value="Next" class="submit" onclick="go_next()" style="float:right;">
 </form>
 </article>
 

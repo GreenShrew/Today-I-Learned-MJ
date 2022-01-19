@@ -2,7 +2,9 @@ package com.ezenac.controller;
 
 import com.ezenac.controller.action.Action;
 import com.ezenac.controller.action.ContractAction;
+import com.ezenac.controller.action.IdCheckFormAction;
 import com.ezenac.controller.action.IndexAction;
+import com.ezenac.controller.action.JoinFormAction;
 import com.ezenac.controller.action.LoginAction;
 import com.ezenac.controller.action.LoginFormAction;
 import com.ezenac.controller.action.LogoutAction;
@@ -21,6 +23,9 @@ public class ActionFactory {
 		else if(command.equals("login")) ac = new LoginAction();
 		else if(command.equals("logout")) ac = new LogoutAction();
 		else if(command.equals("contract")) ac = new ContractAction();
+		else if(command.equals("joinForm")) ac = new JoinFormAction();
+		else if(command.equals("idCheckForm")) ac = new IdCheckFormAction();
+		else if(command.equals("findZipNum")) ac = new FindZipNumAction();
 		
 		return ac;
 	}
