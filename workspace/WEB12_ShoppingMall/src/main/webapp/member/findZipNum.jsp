@@ -19,11 +19,11 @@
 	<!-- 검색된 우편번호와 동이 표시되는 곳 -->
 	<table id="zipcode">
 		<tr><th width="100">우편번호</th><th>주소</th></tr>
-		<c:forEach items="${addressList}" var="addressVo">
+		<c:forEach items="${addressList}" var="addressVO">
 			<tr>
-				<td>${addressVo.zip_num}</td><!-- onClick="result(우편번호, 시도, 구군, 동);" -->
-				<td><a href="#" onClick="result('${addressVo.zip_num}', '${addressVo.sido}', '${addressVo.gugun}', '${addressVo.dong}');">
-				${addressVo.zip_num} ${addressVo.sido} ${addressVo.gugun} ${addressVo.dong}</a></td>
+				<td>${addressVO.zip_num}</td><!-- onClick="result(우편번호, 시도, 구군, 동);" -->
+				<td><a href="#" onClick="result('${addressVO.zip_num}', '${addressVO.sido}', '${addressVO.gugun}', '${addressVO.dong}');">
+				${addressVO.zip_num} ${addressVO.sido} ${addressVO.gugun} ${addressVO.dong}</a></td>
 			</tr>
 		</c:forEach>
 	</table>

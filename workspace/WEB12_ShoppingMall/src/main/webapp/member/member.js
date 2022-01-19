@@ -22,8 +22,8 @@ function go_next(){
 		alert("회원 약관에 동의하셔야 회원가입이 가능합니다.")
 	} else{
 		// contractFrm 폼에 action도 없고 submit 버튼도 없는 것을 스크립트 명령으로 설정하고 submit까지 실행시킨다.
-		document.contractFrm.action = "shop.do?command=joinFrom";
-		document.contractFrm.submiit();
+		document.contractFrm.action = "shop.do?command=joinForm";
+		document.contractFrm.submit();
 	}
 }
 

@@ -2,6 +2,7 @@ package com.ezenac.controller;
 
 import com.ezenac.controller.action.Action;
 import com.ezenac.controller.action.ContractAction;
+import com.ezenac.controller.action.FindZipNumAction;
 import com.ezenac.controller.action.IdCheckFormAction;
 import com.ezenac.controller.action.IndexAction;
 import com.ezenac.controller.action.JoinFormAction;
