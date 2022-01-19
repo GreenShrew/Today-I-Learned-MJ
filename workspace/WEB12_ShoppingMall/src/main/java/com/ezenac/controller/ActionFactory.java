@@ -2,6 +2,7 @@ package com.ezenac.controller;
 
 import com.ezenac.controller.action.Action;
 import com.ezenac.controller.action.ContractAction;
+import com.ezenac.controller.action.EditFormAction;
 import com.ezenac.controller.action.FindZipNumAction;
 import com.ezenac.controller.action.IdCheckFormAction;
 import com.ezenac.controller.action.IndexAction;
@@ -29,6 +30,7 @@ public class ActionFactory {
 		else if(command.equals("idCheckForm")) ac = new IdCheckFormAction();
 		else if(command.equals("findZipNum")) ac = new FindZipNumAction();
 		else if(command.equals("join")) ac = new JoinAction();
+		else if(command.equals("editForm")) ac = new EditFormAction();
 		
 		return ac;
 	}

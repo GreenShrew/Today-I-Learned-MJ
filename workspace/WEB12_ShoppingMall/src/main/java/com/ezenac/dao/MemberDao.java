@@ -81,7 +81,8 @@ public class MemberDao {
 		return list;
 	}
 
-	public void insertMember(MemberVO mvo) {
+	public int insertMember(MemberVO mvo) {
+		int result = 0;
 		String sql = "insert into member(id, pwd, name, zip_num, address, email, phone) "
 				+ " values(?, ?, ?, ?, ?, ?, ?)";
 		con = Dbman.getConnection();
@@ -94,12 +95,13 @@ public class MemberDao {
 			pstmt.setString(5, mvo.getAddress());
 			pstmt.setString(6, mvo.getEmail());
 			pstmt.setString(7, mvo.getPhone());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();		// DB에 데이터가 잘 들어가면 1, 아니면 0이 return된다.
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			Dbman.close(con, pstmt, rs);
 		}
+		return result;
 	}
 	
 	
