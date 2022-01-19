@@ -51,3 +51,37 @@ function post_zip(){
 	var opt = "toolbar=no, menubar=no, resizable=no, width=550, height=300, top=300, left=300, scrollbars=no";
 	window.open(url, "우편번호 찾기", opt);
 }
+
+
+
+
+function result(zipNum, sido, gugun, dong){
+	opener.document.joinForm.zip_num.value=zipNum;
+	opener.document.joinForm.addr1.value=sido+" "+gugun+" "+dong;		/* 회원가입 페이지의 addr1 자리에 넣을 내용 */
+	self.close();
+}
+
+function go_save(){
+	if(document.joinForm.id.value == ""){
+		alert("아이디를 입력해주세요.");
+		document.joinForm.id.focus();
+	} else if(document.joinForm.reid.value != document.joinForm.id.value){
+		alert("아이디 중복확인을 하지 않았습니다.");
+		document.joinForm.id.focus();
+	} else if(document.joinForm.pwd.value == ""){
+		alert("비밀번호를 입력해주세요.");
+		document.joinForm.pwd.focus();
+	} else if(document.joinForm.pwd.value != document.joinForm.pwdCheck.value){
+		alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		document.joinForm.pwd.focus();
+	} else if(document.joinForm.name.value == ""){
+		alert("이름을 입력해주세요.");
+		document.joinForm.name.focus();
+	} else if(document.joinForm.email.value == ""){
+		alert("이메일을 입력해주세요.");
+		document.joinForm.email.focus();
+	} else{
+		document.joinForm.action = "shop.do";
+		document.joinForm.submit();
+	}
+}
