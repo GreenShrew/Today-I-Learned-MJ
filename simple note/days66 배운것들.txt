@@ -92,7 +92,7 @@ day 66
 
 ----> 장바구니 정보를 저장하기 위한 Dto 파일을 만들어야한다!
 ----> Dto 패키지에 CartVO를 만든다!
-※ 단, cart 테이블이 아니라 cart_view 테이블을 기준으로 변수를 지정해야한다!
+※ 단, cart 테이블이 아니라 cart_view 테이블을 기준으로 변수를 지정해야한다! cart_view에는 cart 테이블에 있는 변수들도 포함하므로 문제 없다!
 
 ----> 또한, 장바구니 페이지에서 필요한 동작들을 제작하기 위한 Dao도 생성한다.
 
@@ -107,17 +107,28 @@ day 66
 
 장바구니 추가 버튼을 누를때와, 내 장바구니 보기 버튼을 누를 때 장바구니 페이지로 이동할 수 있도록 만든다.
 
+------> insertCart 메소드를 이용해 CartInsertAction에서 보내진 카트 리스트 페이지에 보여줄 내용을 DB에 저장한다.
+
+
+--------> 그리고 shop.do에 command cartList 로 CartListAction클래스로 보낸다.
+
+--------> CartListAction 클래스 제작
+ 역할은 로그인 유저의 아이디로 미처리된 카트 테이블의 내용을 조회해서 리퀘스트에 담고 cartList.jsp로 forwarding한다.
+
+--------> Dao의 selectCart 메소드를 이용하여 id로 조회하여 해당 회원이 미처리한 장바구니 내용을 조회해 가져온다.
+
+----------> cartList.jsp로 가져갈 내용은 유저의 카트 물건들과 이것들을 모두 구매했을 때 총 구매 금액이다.
 
 
 
+§ 사진 16
 
+--> mypage 폴더에 cartList.jsp 제작
+--> mypage 폴더 안에 들어갈 웹 페이지에 include 될 새로운 sub_img.html과 sub_menu.jsp를 만든다.
+--> sub_menu.jsp로 만든 이유는, 내용에 한글이 들어가 meta태그를 이용해 인코딩을 해야하기 때문이다.
+----> sub_menu.jsp 에 <meta charset="UTF-8"> 를 사용한다.
 
-
-
-
-
-
-
+------> cartList.jsp에 
 
 
 
