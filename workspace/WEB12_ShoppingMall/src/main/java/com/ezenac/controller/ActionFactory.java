@@ -11,6 +11,8 @@ import com.ezenac.controller.action.JoinFormAction;
 import com.ezenac.controller.action.LoginAction;
 import com.ezenac.controller.action.LoginFormAction;
 import com.ezenac.controller.action.LogoutAction;
+import com.ezenac.controller.action.MemberUpdateAction;
+import com.ezenac.controller.action.ProductDetailAction;
 
 public class ActionFactory {
 
@@ -31,6 +33,8 @@ public class ActionFactory {
 		else if(command.equals("findZipNum")) ac = new FindZipNumAction();
 		else if(command.equals("join")) ac = new JoinAction();
 		else if(command.equals("editForm")) ac = new EditFormAction();
+		else if(command.equals("memberUpdate")) ac = new MemberUpdateAction();
+		else if(command.equals("productDetail")) ac = new ProductDetailAction();
 		
 		return ac;
 	}

@@ -103,6 +103,26 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	public void updateMember(MemberVO mvo) {
+		String sql = "update member set pwd=?, name=?, zip_num=?, address=?, email=?, phone=? where id=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mvo.getPwd());
+			pstmt.setString(2, mvo.getName());
+			pstmt.setString(3, mvo.getZip_num());
+			pstmt.setString(4, mvo.getAddress());
+			pstmt.setString(5, mvo.getEmail());
+			pstmt.setString(6, mvo.getPhone());
+			pstmt.setString(7, mvo.getId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 	
 	
 }

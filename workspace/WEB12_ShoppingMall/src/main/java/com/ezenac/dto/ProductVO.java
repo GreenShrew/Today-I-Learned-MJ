@@ -9,7 +9,7 @@ public class ProductVO {
 	private Integer price1;
 	private Integer price2;
 	private Integer price3;
-	private String conten;
+	private String content;
 	private String image;
 	private String useyn;
 	private String bestyn;
@@ -51,11 +51,11 @@ public class ProductVO {
 	public void setPrice3(Integer price3) {
 		this.price3 = price3;
 	}
-	public String getConten() {
-		return conten;
+	public String getContent() {
+		return content;
 	}
 	public void setConten(String conten) {
-		this.conten = conten;
+		this.content = content;
 	}
 	public String getImage() {
 		return image;

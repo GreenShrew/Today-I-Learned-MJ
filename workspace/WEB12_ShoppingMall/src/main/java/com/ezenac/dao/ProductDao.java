@@ -67,5 +67,39 @@ public class ProductDao {
 		}
 		return list;
 	}
+
+
+
+	public ProductVO getProduct(int pseq) {
+		ProductVO pvo = new ProductVO();		// 어차피 null값은 넘어오지 않기 떄문이 일찌감치 객체를 생성한다.
+		String sql = "select * from member where pseq=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pseq);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pvo.setPseq(pseq);
+				pvo.setName(rs.getString("name"));
+				pvo.setKind(rs.getString("kind"));
+				pvo.setPrice1(rs.getInt("price1"));
+				pvo.setPrice2(rs.getInt("price2"));
+				pvo.setPrice3(rs.getInt("price3"));
+				pvo.setContent(rs.getString("conten"));
+				pvo.setImage(rs.getString("image"));
+				pvo.setUseyn(rs.getString("useyn"));
+				pvo.setBestyn(rs.getString("Bestyn"));
+				pvo.setIndate(rs.getTimestamp("indate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return pvo;
+	}
 	
 }
