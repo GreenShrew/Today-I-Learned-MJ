@@ -82,3 +82,12 @@ table#zipcode th, table#zipcode td{text-align:center; border-bottom:1px dotted #
 table th, td{padding:10px;}
 table#zipcode a{display:block; height:20px; text-decoration:none; padding:10px;}
 table#zipcode a:hover{font-weight:bold;}
+
+
+
+#itemdetail img{width:300px; margin-right:20px;}
+
+table#cartList{border-collapse:collapse; border-top:2px solid #333; border-bottom:1px solid #333; width:100%; margin-bottom:20px;}
+table#cartList th, td{border-bottom:1px dotted #333; text-align:center;}
+
+#kindProduct{border:solid 1px #FFFFFF; border-radius:10px; width:610px; min-height:900px; background:#ebebeb; padding:10px; text-align:center;}

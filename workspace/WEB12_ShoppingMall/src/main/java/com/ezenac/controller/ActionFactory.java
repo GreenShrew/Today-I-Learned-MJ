@@ -1,6 +1,7 @@
 package com.ezenac.controller;
 
 import com.ezenac.controller.action.Action;
+import com.ezenac.controller.action.CategoryAction;
 import com.ezenac.controller.action.ContractAction;
 import com.ezenac.controller.action.EditFormAction;
 import com.ezenac.controller.action.FindZipNumAction;
@@ -35,6 +36,7 @@ public class ActionFactory {
 		else if(command.equals("editForm")) ac = new EditFormAction();
 		else if(command.equals("memberUpdate")) ac = new MemberUpdateAction();
 		else if(command.equals("productDetail")) ac = new ProductDetailAction();
+		else if(command.equals("category")) ac = new CategoryAction();
 		
 		return ac;
 	}

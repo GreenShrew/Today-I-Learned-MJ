@@ -81,13 +81,13 @@ public class ProductDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				pvo.setPseq(pseq);
+				pvo.setPseq(rs.getInt("pseq"));
 				pvo.setName(rs.getString("name"));
 				pvo.setKind(rs.getString("kind"));
 				pvo.setPrice1(rs.getInt("price1"));
 				pvo.setPrice2(rs.getInt("price2"));
 				pvo.setPrice3(rs.getInt("price3"));
-				pvo.setContent(rs.getString("conten"));
+				pvo.setContent(rs.getString("content"));
 				pvo.setImage(rs.getString("image"));
 				pvo.setUseyn(rs.getString("useyn"));
 				pvo.setBestyn(rs.getString("Bestyn"));

@@ -54,7 +54,7 @@ public class ProductVO {
 	public String getContent() {
 		return content;
 	}
-	public void setConten(String conten) {
+	public void setContent(String conten) {
 		this.content = content;
 	}
 	public String getImage() {

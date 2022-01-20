@@ -20,9 +20,11 @@ public class ProductDetailAction implements Action {
 		ProductVO pvo = pdao.getProduct(pseq);	// 상품번호로 상품 하나의 정보를 가져온다.
 		
 		// 조회된 상품 정보를 request에 담고, productDetail.jsp로 이동시킨다.
-		request.setAttribute("product", pvo);
-		RequestDispatcher dp = request.getRequestDispatcher("product/productDetail.jsp");
-		dp.forward(request, response);
+		request.setAttribute("productVO", pvo);
+//		RequestDispatcher dp = request.getRequestDispatcher("product/productDetail.jsp");
+//		dp.forward(request, response);
+		// 이제 이런식으로 1줄로 줄여쓰자.
+		request.getRequestDispatcher("product/productDetail.jsp").forward(request, response);
 	}
 
 }
