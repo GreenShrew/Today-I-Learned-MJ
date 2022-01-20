@@ -19,8 +19,9 @@ public class CartDeleteAction implements Action {
 		CartDao cdao = CartDao.getInstance();
 		
 		for(String cseq : cseqArr) {	// 한꺼번에 삭제하는게 아니라 cseqArr의 내용을 하나하나 집어넣으며 하나씩 삭제한다.
-			
+			cdao.deleteCart(Integer.parseInt(cseq));		// 삭제할 상품의 번호 전송
 		}
+		response.sendRedirect("shop.do?command=cartList");	// 포워딩하면 문제가 생길 것 같아 sendRedirect 이용.
 	}
 
 }

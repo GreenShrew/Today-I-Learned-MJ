@@ -43,3 +43,11 @@ function go_cart_delete(){
 		document.formm.submit();
 	}
 }
+
+
+function go_order_insert(){
+	
+	document.formm.action = "shop.do?command=orderInsert";
+	document.formm.submit();
+	
+}
