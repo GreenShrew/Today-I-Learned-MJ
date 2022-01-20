@@ -72,7 +72,7 @@ public class ProductDao {
 
 	public ProductVO getProduct(int pseq) {
 		ProductVO pvo = new ProductVO();		// 어차피 null값은 넘어오지 않기 떄문이 일찌감치 객체를 생성한다.
-		String sql = "select * from member where pseq=?";
+		String sql = "select * from product where pseq=?";
 		
 		con = Dbman.getConnection();
 		try {
@@ -81,7 +81,7 @@ public class ProductDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				pvo.setPseq(rs.getInt("pseq"));
+				pvo.setPseq(pseq);
 				pvo.setName(rs.getString("name"));
 				pvo.setKind(rs.getString("kind"));
 				pvo.setPrice1(rs.getInt("price1"));
@@ -100,6 +100,35 @@ public class ProductDao {
 		}
 		
 		return pvo;
+	}
+
+
+
+	public ArrayList<ProductVO> selectKindProductList(String kind) {
+		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+		String sql = "select * from product where kind=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, kind);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ProductVO pvo = new ProductVO();
+				pvo.setPseq(rs.getInt("pseq"));
+				pvo.setName(rs.getString("name"));
+				pvo.setPrice2(rs.getInt("price2"));
+				pvo.setImage(rs.getString("image"));
+				list.add(pvo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return list;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.ezenac.controller;
 
 import com.ezenac.controller.action.Action;
+import com.ezenac.controller.action.CartInsertAction;
 import com.ezenac.controller.action.CategoryAction;
 import com.ezenac.controller.action.ContractAction;
 import com.ezenac.controller.action.EditFormAction;
@@ -37,6 +38,7 @@ public class ActionFactory {
 		else if(command.equals("memberUpdate")) ac = new MemberUpdateAction();
 		else if(command.equals("productDetail")) ac = new ProductDetailAction();
 		else if(command.equals("category")) ac = new CategoryAction();
+		else if(command.equals("cartInsert")) ac = new CartInsertAction();
 		
 		return ac;
 	}
