@@ -4,6 +4,11 @@ day 66
 오늘은 day 65에 이어 정보수정 파트부터 진행한다.
 
 
+※ 봐야할것
+ mypage 폴더의 mypage.js의 go_cart_delete() 함수
+--> 체크박스 처리하는 것 주석내용 봐!
+
+
 
 ※ 에러
 - 페이지 첫 시작시 New Item, Best Item 부분이 안 보인다.
@@ -14,6 +19,7 @@ day 66
 --> 해결! product 테이블을 조회해야 하는 데 member 테이블을 조회하고 있었다!
 
 - ProductDetail의 css가 좀 이상한 것 같은데? 사진이 너무 작게 나온다.
+--> 해결!
 
 
 - 메인 페이지에 New Item 부분 링크 안 걸려있다.
@@ -128,16 +134,21 @@ day 66
 --> sub_menu.jsp로 만든 이유는, 내용에 한글이 들어가 meta태그를 이용해 인코딩을 해야하기 때문이다.
 ----> sub_menu.jsp 에 <meta charset="UTF-8"> 를 사용한다.
 
-------> cartList.jsp에 
+------> cartList.jsp에 상품명, 수량 등의 내용이 나오도록 하고, 체크박스를 이용해 체크한 내용들을 삭제하거나 구매 가능하도록 만들게 한다.
+------> 장바구니에서 삭제하는 스크립트 : go_cart_delete()
+------> 장바구니 내용을 구매하는 스크립트 : go_order_insert()
+
+※ 체크박스에는 각 상품마다의 번호가 걸려있다. 삭제하기 버튼을 누르면 체크된 번호만 배열의 형태로 스크립트에 보내진다.
+자바스크립트에서 jsp 페이지 내에 있는 같은 name의 두개이상의 입력란들은 모두 배열로 인식된다.
+※ submit은 주문하기 버튼에 반응한다.
+
+
+--------> go_cart_delete() 체크박스 처리하는 것 주석내용 봐!
+--------> 스크립트에서 shop.do command cartDelete로 CartDeleteAction클래스로 보낸다.
 
 
 
-
-
-
-
-
-
+--> CartDeleteAction 클래스 제작
 
 
 

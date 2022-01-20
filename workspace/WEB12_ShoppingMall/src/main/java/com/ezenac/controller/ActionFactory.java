@@ -41,6 +41,7 @@ public class ActionFactory {
 		else if(command.equals("category")) ac = new CategoryAction();
 		else if(command.equals("cartInsert")) ac = new CartInsertAction();
 		else if(command.equals("cartList")) ac = new CartListAction();
+		else if(command.equals("cartDelete")) ac = new CartDeleteAction();
 		
 		return ac;
 	}
