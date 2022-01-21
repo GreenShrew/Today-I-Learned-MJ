@@ -58,16 +58,25 @@ shop.do command myPage 로 MyPageAction 로 이동시킨다.
 
 
 
+----------------------------- 총 주문내역 페이지 만들기
+§ 사진 15
+
+- sub_menu에서 총 주문내역 버튼을 누르면 나오는 페이지
+
+--> shop.do command orderAll 로 OrderAllAction 클래스 생성
+ MyPageAction에서 코드를 복사해서 넣고 주석만 뺐다.
+ 필요한 기능과 역할이 똑같기 때문이다!
+
+----> Dao에 selectOseqOrderAll 메소드 생성
 
 
 
 
 
+------------------------------- 상품 상세 페이지의 즉시구매 기능을 만들기
 
-
-
-
-
+ - 상품보기 페이지에서 즉시구매 버튼을 누르면 go_order() 스크립트가 작동한다.
+--> go_order() 함수의 역할은 물건 1개를 구매하는 페이지로 넘겨주는 shop.do command orderOne의 OrderOneAction으로 이동하게 해준다.
 
 
 

@@ -124,6 +124,25 @@ public class OrderDao {
 		
 		return list;
 	}
+
+	public ArrayList<Integer> selectOseqOrderAll(String id) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		String sql = "select distinct oseq, result from order_view where id=? order by result, oseq desc";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		return list;
+	}
 	
 	
 }

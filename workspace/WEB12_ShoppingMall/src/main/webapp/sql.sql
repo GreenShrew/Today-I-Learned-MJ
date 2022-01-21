@@ -336,3 +336,14 @@ select count(*) from address;	-- 26455 개의 레코드를 가지고 있다!
 
 -- 장바구니 내용을 주문내역이 안 나오거나 할 때 확인용
 select * from order_view;
+
+
+
+
+-- 주문한 내역이 처리된것과 미처리된것을 위아래로 분류하고, 미처리는 미처리끼리 내림차순, 처리는 처리끼리 내림차순 시키는 명령
+-- 서브쿼리를 쓰지 않은 명령!
+
+select distinct oseq, result from order_view where id='scott' order by result, oseq desc;
+
+
+
