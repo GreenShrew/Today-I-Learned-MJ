@@ -11,8 +11,10 @@
 <div id="bestProduct"><!-- css 적용시 이름을 같게 해서 똑같이 만들기 위해 -->
 	<c:forEach items="${newList}" var="productVO">
 		<div id="item"><!-- 상품 한개에 한칸 -->
-			<img src="product_images/${productVO.image}"/>
-			<h3>${productVO.name} - <fmt:formatNumber value="${productVO.price2}" type="currency"/></h3>
+			<a href="shop.do?command=productDetail&pseq=${productVO.pseq}">
+				<img src="product_images/${productVO.image}"/>
+				<h3>${productVO.name} - <fmt:formatNumber value="${productVO.price2}" type="currency"/></h3>
+			</a>
 		</div>
 	</c:forEach>
 </div>

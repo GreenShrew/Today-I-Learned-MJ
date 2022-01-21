@@ -43,7 +43,7 @@ public class OrderDao {
 			// 3. list의 카트 목록들을 Orders에서 얻은 max_oseq와 함께 order_detail에 추가
 			for(CartVO cvo : list) {
 				// 카트 목록을 하나씩 꺼내서 oseq와 함께 order_detail 테이블에 추가하고
-				sql = "insert into order detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextVal, ?, ?, ?)";
+				sql = "insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextVal, ?, ?, ?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, oseq);
 				pstmt.setInt(2, cvo.getPseq());
@@ -101,6 +101,26 @@ public class OrderDao {
 			Dbman.close(con, pstmt, rs);
 		}
 		
+		
+		return list;
+	}
+
+	public ArrayList<Integer> selectOseqOrderIng(String id) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		String sql = "select distinct oseq from order_view where id=? and result='1' order by oseq desc";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt(1));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
 		
 		return list;
 	}

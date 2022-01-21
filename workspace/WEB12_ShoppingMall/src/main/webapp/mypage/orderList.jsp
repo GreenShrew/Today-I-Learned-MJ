@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%@ include file="sub_img.html" %>
-<%@ include file="sub_menu.html" %>
+<%@ include file="sub_menu.jsp" %>
 <!-- 방금 주문한 주문 목록만 보여주고, 같은 화면이 다시 나타나지 않는다. 이후 해당 내용은 주문내역에서 다른 주문들과 함께 볼 수 있다. -->
 <article>
 <form>

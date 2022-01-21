@@ -1,0 +1,196 @@
+day 67
+
+
+오늘은 OrderDao insertOrder 메소드부터 시작
+
+
+※ 에러
+- insertOrder 메소드에서 Syntax 에러가 나왔다.
+java.sql.SQLSyntaxErrorException: ORA-00903: invalid table name
+--> 해결! 했는데 이번엔 부적합한 열 이름 문제가 나왔다
+listOrderByOseq 메소드이다.
+----> 내 order_view 뷰를 확인해보니 indate 가 없다!
+ sql 파일에서 해당 테이블 확인하고 다시 만들어야할듯
+------> 해결! sql에서 뷰 제작 명령에 해당 컬럼이 빠져있던것을 추가했음
+
+
+
+
+
+- OrderDao insertOrder 메소드는 내용이 많다! 생각할것도 많다!
+
+--> Dao에서 처리를 끝내면 OrderInsertAction에서 주문번호를 가지고 command orderList로 OrderListAction 클래스로 이동한다
+
+
+----> OrderListAction 클래스 제작
+여기서는 보내진 주문번호와 로그인된 아이디로 order_view에서 주문을 검색한다.
+그리고 조회된 주문의 총 결제 금액도 계산하여 주문 내역과 총금액을 orderList.jsp로 보낸다.
+
+
+------> orderList.jsp 제작
+ 여기서는 주문이 완료되었을때의 화면을 보여준다.
+
+§ 주문 완료 화면 17
+
+
+
+
+
+------------------------------------
+
+※ 주석이 많다!
+ - 이제 주문한 내역을 확인하는 페이지를 만든다
+shop.do command myPage 로 MyPageAction 로 이동시킨다.
+
+--> 역할은 진행중인 주문내역의 정보를 조회해서 mypage/mypage.jsp로 가져간다.
+
+----> 중복을 제거하며 조회하는 방법에 대해 나온다!
+
+
+------> Dao에서 selectOseqOrderIng 메소드는 해당 id의 주문번호 리스트를 중복을 없애고 검색하여 리턴한다.
+
+
+
+
+--------> mypage.jsp 생성
+ 조회한 내용을 가지고 웹 페이지에 표시해주는 페이지.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

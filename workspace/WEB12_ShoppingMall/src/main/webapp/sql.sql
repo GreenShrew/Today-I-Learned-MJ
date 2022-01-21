@@ -279,12 +279,13 @@ select * from cart_view;	-- 이제 누가 어떤 상품을 얼마나 샀고 카�
 -- 1. 주문번호(oseq)에 따른 주문 상품들의 표시를 위해 만든다.
 -- 2. 상품 번호에 따른 상품 이름과 가격 등의 정보 표시를 위해 만든다.
 -- 3. 아이디에 따른 고객 이름과 배송주소 등의 정보 표시를 위해 만든다.
+DROP VIEW order_view;
 create or replace view order_view
 as
-select d.odseq, o.oseq, o.id, m.name as mname, m.zip_num, m.address, m.phone,
-d.pseq, p.name as pname, d.quantity, d.result
+select d.odseq, o.oseq, o.indate, o.id, m.name as mname, m.zip_num, m.address, m.phone,
+d.pseq, p.name as pname, p.price2, d.quantity, d.result
 from orders o, order_detail d, member m, product p
-where o.oseq = d.oseq and o.id = m.id and d.pseq = p.pseq
+where o.oseq = d.oseq and o.id = m.id and d.pseq = p.pseq;
 
 select * from order_view;
 

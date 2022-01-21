@@ -16,6 +16,7 @@ import com.ezenac.controller.action.LoginAction;
 import com.ezenac.controller.action.LoginFormAction;
 import com.ezenac.controller.action.LogoutAction;
 import com.ezenac.controller.action.MemberUpdateAction;
+import com.ezenac.controller.action.MyPageAction;
 import com.ezenac.controller.action.OrderInsertAction;
 import com.ezenac.controller.action.OrderListAction;
 import com.ezenac.controller.action.ProductDetailAction;
@@ -47,6 +48,7 @@ public class ActionFactory {
 		else if(command.equals("cartDelete")) ac = new CartDeleteAction();
 		else if(command.equals("orderInsert")) ac = new OrderInsertAction();
 		else if(command.equals("orderList")) ac = new OrderListAction();
+		else if(command.equals("myPage")) ac = new MyPageAction();
 		
 		return ac;
 	}
