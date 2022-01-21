@@ -46,6 +46,34 @@ public class QnaDao {
 		}
 		return list;
 	}
+
+
+	public QnaVO getQna(int qseq) {
+		QnaVO qvo = new QnaVO();	// 없는걸 가져올 이유가 없으므로 처음부터 객체생성
+		String sql = "select * from qna where qseq=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qseq);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				qvo.setQseq(qseq);
+				qvo.setSubject(rs.getString("subject"));
+				qvo.setContent(rs.getString("content"));
+				qvo.setId(rs.getString("id"));
+				qvo.setIndate(rs.getTimestamp("indate"));
+				qvo.setReply(rs.getString("reply"));
+				qvo.setRep(rs.getString("rep"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return qvo;
+	}
 	
 	
 }

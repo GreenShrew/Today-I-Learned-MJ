@@ -22,6 +22,15 @@ listOrderByOseq 메소드이다.
 ※ 확인할거 
  OrderDao에서 insertOrder 메소드 2번에 pstmt.close(); 있나 없나 체크좀 해
 
+ - qnaView 에 form 태그에 속성 있나없나 검사
+
+
+ - qnaWrite.jsp 긁어와...
+
+
+
+
+
 - OrderDao insertOrder 메소드는 내용이 많다! 생각할것도 많다!
 
 --> Dao에서 처리를 끝내면 OrderInsertAction에서 주문번호를 가지고 command orderList로 OrderListAction 클래스로 이동한다
@@ -99,6 +108,8 @@ insertOrderOne 제작
 
 -------------------------------------------- qna창 만들기
 
+§ 사진 19
+
  - QnA 도 Dto, Dao 클래스가 필요하다.
 
 QnaDao, QnaVo 제작
@@ -115,107 +126,34 @@ QnaDao, QnaVo 제작
 
 
 
+------------------------------------------------ qna 상세정보
 
+§ 사진 20
 
+- qnaList에서 qna 항목의 제목을 누르면 command qnaView로 QnaViewAction 클래스로 이동한다.
 
 
 
+--> QnaViewAction 클래스 제작
 
 
 
+----> qnaView.jsp
+ 화면에 답변글 나오는 웹 페이지
 
 
 
 
 
+------------------------------- qna 작성하기
 
+§ 사진 21
 
 
+- command qnaWriteForm 으로 클래스 QnaWriteFormAction 제작
 
+QnaWriteFormAction 클래스에서는 로그인 체크만 하고 로그인 되어있다면 바로 qnaWrite.jsp로 넘어가게 만든다.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+----> qnaWrite.jsp 제작
 
