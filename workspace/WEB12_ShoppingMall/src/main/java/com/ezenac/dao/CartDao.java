@@ -66,7 +66,7 @@ public class CartDao {
 	}
 
 	public void deleteCart(int cseq) {
-		String sql = "delete form cart where cseq=?";
+		String sql = "delete from cart where cseq=?";
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);

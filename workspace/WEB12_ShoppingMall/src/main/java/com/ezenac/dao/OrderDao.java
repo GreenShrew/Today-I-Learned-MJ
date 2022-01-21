@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezenac.dto.CartVO;
+import com.ezenac.dto.OrderVO;
 import com.ezenac.util.Dbman;
 
 public class OrderDao {
@@ -31,6 +32,7 @@ public class OrderDao {
 			// 2. Orders 테이블에 시퀸스로 입력된 가장 마지막(방금 추가한) 주문 번호 조회
 			pstmt.close();
 			// pstmt를 닫고 새로운 명령을 보낼것이다.
+			// 어차피 oseq는 방금 추가된 가장 큰 시퀀스이므로, 가장 큰 oseq를 불러오는것이다.
 			sql = "select max(oseq) as max_oseq from orders";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -56,17 +58,51 @@ public class OrderDao {
 				pstmt.setInt(1, cvo.getCseq());
 				pstmt.executeUpdate();
 			}
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			Dbman.close(con, pstmt, rs);
 		}
-
 		
 		// 5. 주문번호 oseq를 return.
 		return oseq;
+	}
+
+	public ArrayList<OrderVO> listOrderByOseq(int oseq) {
+		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
+		String sql = "select * from order_view where oseq=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				OrderVO ovo = new OrderVO();
+				ovo.setOdseq(rs.getInt("odseq"));
+				ovo.setOseq(rs.getInt("oseq"));
+				ovo.setId(rs.getString("id"));
+				ovo.setIndate(rs.getTimestamp("indate"));
+				ovo.setMname(rs.getString("mname"));
+				ovo.setZip_num(rs.getString("zip_num"));
+				ovo.setAddress(rs.getString("address"));
+				ovo.setPhone(rs.getString("phone"));
+				ovo.setPname(rs.getString("pname"));
+				ovo.setPrice2(rs.getInt("price2"));
+				ovo.setPseq(rs.getInt("pseq"));
+				ovo.setQuantity(rs.getInt("quantity"));
+				ovo.setResult(rs.getString("result"));
+				list.add(ovo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		
+		return list;
 	}
 	
 	

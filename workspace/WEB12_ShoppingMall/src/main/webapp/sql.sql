@@ -333,4 +333,5 @@ select count(*) from address;	-- 26455 개의 레코드를 가지고 있다!
 
 
 
-
+-- 장바구니 내용을 주문내역이 안 나오거나 할 때 확인용
+select * from order_view;
