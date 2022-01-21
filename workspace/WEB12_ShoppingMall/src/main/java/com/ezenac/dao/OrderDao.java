@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.ezenac.dto.CartVO;
 import com.ezenac.dto.OrderVO;
+import com.ezenac.dto.ProductVO;
 import com.ezenac.util.Dbman;
 
 public class OrderDao {
@@ -142,6 +143,41 @@ public class OrderDao {
 			Dbman.close(con, pstmt, rs);
 		}
 		return list;
+	}
+
+	public int insertOrderOne(ProductVO pvo, String id, int quantity) {	// 위의 insertOrder 메소드를 일부 긁어옴
+		int oseq = 0;
+		con = Dbman.getConnection();
+		String sql = "insert into orders(oseq, id) values(orders_seq.nextVal, ?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			pstmt.close();
+
+			sql = "select max(oseq) as max_oseq from orders";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				oseq = rs.getInt("max_oseq");
+			}
+			pstmt.close();
+			
+			sql = "insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextVal, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			pstmt.setInt(2, pvo.getPseq());
+			pstmt.setInt(3, quantity);
+			pstmt.executeUpdate();
+				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+		return oseq;
 	}
 	
 	

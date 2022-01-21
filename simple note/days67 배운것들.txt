@@ -14,8 +14,13 @@ listOrderByOseq 메소드이다.
 ------> 해결! sql에서 뷰 제작 명령에 해당 컬럼이 빠져있던것을 추가했음
 
 
+- 물건 하나 구매하기 문제있음
+--> 일단 OrderOneAction 부분 제대로 썼는지 확인해봐
 
 
+
+※ 확인할거 
+ OrderDao에서 insertOrder 메소드 2번에 pstmt.close(); 있나 없나 체크좀 해
 
 - OrderDao insertOrder 메소드는 내용이 많다! 생각할것도 많다!
 
@@ -75,9 +80,16 @@ shop.do command myPage 로 MyPageAction 로 이동시킨다.
 
 ------------------------------- 상품 상세 페이지의 즉시구매 기능을 만들기
 
+§ 사진 16
+
  - 상품보기 페이지에서 즉시구매 버튼을 누르면 go_order() 스크립트가 작동한다.
 --> go_order() 함수의 역할은 물건 1개를 구매하는 페이지로 넘겨주는 shop.do command orderOne의 OrderOneAction으로 이동하게 해준다.
 
+----> OrderOneAction 클래스 제작
+역할은 건너온 상품번호와 세션의 id를 이용하여 ProductDao에 있는 getProduct()로 상품을 조회하고, OrderDao에 OrderInsertOne 메소드를 만들어서 잉 메소드에 아이디와 상품 객체를 보내 주문을 완료시킨다.
+그리고 이 내역을 리턴받아 orderList.jsp로 가서 주문내역을 화면에 표시하도록 한다.
+
+insertOrderOne 제작
 
 
 
@@ -85,14 +97,18 @@ shop.do command myPage 로 MyPageAction 로 이동시킨다.
 
 
 
+-------------------------------------------- qna창 만들기
+
+ - QnA 도 Dto, Dao 클래스가 필요하다.
+
+QnaDao, QnaVo 제작
+
+- wepapp 폴더에 qna 폴더를 만들고 그 안에 sub_menu.jsp, sub_img.html을 만든다.
 
 
+ - header에서 Q&A 버튼을 누르면 command qnaList 로 QnaListAction으로 간다.
 
-
-
-
-
-
+--> 역할은 id를 조회해서 해당 회원의 qna 리스트를 조회하고(listQna 메소드) 이를 request에 담아 qnaList.jsp로 보내는 것.
 
 
 

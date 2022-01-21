@@ -22,6 +22,7 @@ import com.ezenac.controller.action.OrderInsertAction;
 import com.ezenac.controller.action.OrderListAction;
 import com.ezenac.controller.action.OrderOneAction;
 import com.ezenac.controller.action.ProductDetailAction;
+import com.ezenac.controller.action.QnaListAction;
 
 public class ActionFactory {
 
@@ -53,6 +54,7 @@ public class ActionFactory {
 		else if(command.equals("myPage")) ac = new MyPageAction();
 		else if(command.equals("orderAll")) ac = new OrderAllAction();
 		else if(command.equals("orderOne")) ac = new OrderOneAction();
+		else if(command.equals("qnaList")) ac = new QnaListAction();
 		
 		return ac;
 	}
