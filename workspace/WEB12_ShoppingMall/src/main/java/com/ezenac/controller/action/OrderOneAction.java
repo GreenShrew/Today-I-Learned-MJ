@@ -17,7 +17,7 @@ public class OrderOneAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "";
-		int pseq = Integer.parseInt(request.getParameter("pesq"));
+		int pseq = Integer.parseInt(request.getParameter("pseq"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		// 로그인 조회
 		HttpSession session = request.getSession();

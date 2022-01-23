@@ -42,6 +42,7 @@ public class OrderDao {
 			}
 			
 			// 3. list의 카트 목록들을 Orders에서 얻은 max_oseq와 함께 order_detail에 추가
+			pstmt.close();
 			for(CartVO cvo : list) {
 				// 카트 목록을 하나씩 꺼내서 oseq와 함께 order_detail 테이블에 추가하고
 				sql = "insert into order_detail(odseq, oseq, pseq, quantity) values(order_detail_seq.nextVal, ?, ?, ?)";

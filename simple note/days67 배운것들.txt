@@ -16,16 +16,12 @@ listOrderByOseq 메소드이다.
 
 - 물건 하나 구매하기 문제있음
 --> 일단 OrderOneAction 부분 제대로 썼는지 확인해봐
-
+----> 해결! pseq 를 pesq 로 썼다
 
 
 ※ 확인할거 
  OrderDao에서 insertOrder 메소드 2번에 pstmt.close(); 있나 없나 체크좀 해
 
- - qnaView 에 form 태그에 속성 있나없나 검사
-
-
- - qnaWrite.jsp 긁어와...
 
 
 
