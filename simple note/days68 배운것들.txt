@@ -11,6 +11,13 @@ findIdconfirmNumber
 
 
 resetPw.jsp 다 못썼다!
+--> 다 썼다!
+
+
+admin의 sub_menu.jsp 한번 확인해!
+
+
+productList.jsp 아랫부분 긁어
 
 
 
@@ -158,12 +165,55 @@ command admin을 통해 서블릿으로 접근할 수 있는 클래스로 만든
 - 아이디 비밀번호를 넣고 로그인 버튼을 누르면
 command adminLogin으로 AdminLoginAction 클래스로 보낸다.
 
-역할은 로그인 성공시 세션에 ID만 저장하고 페이지를 넘긴다.
+ 역할은 DB에서 id로 관리자의 정보를 긁어오고, adminLogin.jsp 에서 전달된 정보와 일치하면 로그인 성공.
+ 로그인 성공시 세션에 관리자의 정보를 저장하고 상품 리스트 페이지(adminProductList)로 넘긴다.
+--> 관리자 id에 맞는 정보를 긁어오는 역할은 workerCheck() 메소드를 이용한다.
 
 
 
 
+--------------------------------- 상품 화면 만들기
+(검색창도 만든다.)
+§ 사진 25
 
+
+※ 관리자 페이지에도 include를 이용하요 header, footer, sub_menu를 만든다.
+
+header : 상단 구성, 로고, 로그아웃 등의 버튼 위치
+sub_menu : 상품리스트, 주문리스트, 회원리스트, QnA리스트 버튼
+
+
+
+- AdminLoginAction 클래스에서 command adminProductList 로 AdminProductListAction 클래스로 이동한다.
+
+ 역할은 상품을 조회하고, 조회한 정보를 화면에 출력하는 페이지(admin/product/productList.jsp)로 이동시킨다.
+
+--> listProduct 메소드를 이용해서 상품을 조회한다.
+
+----> 조회한 내용을 가지고 productList.jsp 로 이동
+ 상품을 나타내는 페이지이다.
+
+
+
+--------------------------- 리스트에 페이징 처리하기
+
+§ 사진 26
+
+※ 설명은 Model2의 Paging에!
+
+productList.jsp에 나오는 리스트들에 이전에 했었던 페이징 기능을 만들것이다.
+
+- util 패키지에 Paging.java 클래스를 생성
+
+
+--> Paging 기능을 만들었다면 이를 productList에 적용할것이다.
+----> AdminProductListAction 클래스에서 처음 
+
+
+--------> 테이블의 레코드의 갯수를 세어주는 getAllCount() 메소드
+ 레코드의 갯수를 세고 paging의 setTotalCount에 넣으면 Paging.java의 paging() 메소드가 작동하여 변수들이 셋팅된다.
+
+----------> Dao의 listProduct 메소드도 수정한다!
 
 
 

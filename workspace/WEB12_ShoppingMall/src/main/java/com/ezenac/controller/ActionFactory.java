@@ -35,6 +35,8 @@ import com.ezenac.controller.action.QnaWriteAction;
 import com.ezenac.controller.action.QnaWriteFormAction;
 import com.ezenac.controller.action.ResetPwAction;
 import com.ezenac.controller.admin.action.AdminAction;
+import com.ezenac.controller.admin.action.AdminLoginAction;
+import com.ezenac.controller.admin.action.AdminProductListAction;
 
 public class ActionFactory {
 
@@ -78,7 +80,10 @@ public class ActionFactory {
 		else if(command.equals("findPwStep1")) ac = new FindPwStep1Action();
 		else if(command.equals("findPwStep2")) ac = new FindPwStep2Action();
 		else if(command.equals("resetPw")) ac = new ResetPwAction();
+
 		else if(command.equals("admin")) ac = new AdminAction();
+		else if(command.equals("adminLogin")) ac = new AdminLoginAction();
+		else if(command.equals("adminProductList")) ac = new AdminProductListAction();
 		
 		return ac;
 	}
