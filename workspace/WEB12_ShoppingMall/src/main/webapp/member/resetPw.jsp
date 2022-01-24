@@ -30,6 +30,7 @@ function resetPw{
 		<tr align="center" bgcolor="#FDE8FF"><td width="430"><h3>비밀번호<input type="password" name="pwd"></h3></td></tr>
 		<tr align="center" bgcolor="#FDE8FF"><td width="430"><h3>비밀번호확인<input type="password" name="pwd_chk"></h3></td></tr>
 		<tr align="center" bgcolor="#FDE8FF"><td width="430">
+			<h3><input type="submit" value="비밀번호 재설정" onClick="return resetPw();"></h3></td></tr>
 	</table>
 </form>
 </body>
