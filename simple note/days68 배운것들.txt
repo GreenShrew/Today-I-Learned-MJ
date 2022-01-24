@@ -6,7 +6,8 @@ day 68
 findIdForm.jsp 하단 다 못씀
 --> 다 썼나?
 
-
+findIdconfirmNumber
+--> 다 쓴거 맞나?
 
 
 
@@ -50,17 +51,20 @@ findIdForm.jsp 하단 다 못씀
 -- 같다면, 저장해둔 mvo를 request에 담아 findIdconfirmNumber.jsp로 보낸다. 
 
 
+------> findIdconfirmNumber.jsp 제작
+ 전화번호로 날아가는 인증번호를 입력하는 Form이다. (여기서는 인증번호 날려보내는건 생략한다.)
 
 
 
+--------> command findIdStep2로 FindIdStep2Action 클래스로 보낸다.
+ 역할은 findIdconfirmNumber.jsp 에서 전달된 id, name, phone을 Dto에 저장하고, 이를 member/viewId.jsp 로 전달한다.
+ 다만, 전달된 인증번호가 틀리다면 위의 저장 내용을 가지고 다시 findIdconfirmNumber.jsp 로 돌아가게 만든다.
 
 
-
-
-
-
-
-
+-------------> viewId.jsp 제작
+ 이름과 전화번호, 조회한 id를 팝업창에 보여준다
+ 그리고 move_login 스크립트를 이용해 command loginForm으로 보내고 팝업창을 닫도록 만든다.
+ 비밀번호찾기를 누르면 command findPwForm FindPwFormAction 으로 보낸다.
 
 
 

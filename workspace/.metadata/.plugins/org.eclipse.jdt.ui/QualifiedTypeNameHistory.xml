@@ -51,7 +51,6 @@
     <fullyQualifiedTypeName name="com.ezenac.dto.ProductVO"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
     <fullyQualifiedTypeName name="com.ezenac.dto.MemberVO"/>
-    <fullyQualifiedTypeName name="com.ezenac.dao.MemberDao"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.ProductDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.CartDao"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="com.ezenac.util.Dbman"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.QnaDao"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.ezenac.dao.MemberDao"/>
 </qualifiedTypeNameHistroy>

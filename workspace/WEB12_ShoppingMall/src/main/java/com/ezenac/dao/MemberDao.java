@@ -124,14 +124,15 @@ public class MemberDao {
 		}
 	}
 
-	public MemberVO getMemberByname(String name) {	// getMember 메소드를 긁어다가 id를 member로 바꿈
+	public MemberVO getMemberByname(String name, String phone) {	// getMember 메소드를 긁어다가 id를 member로 바꿈
 		MemberVO mvo = null;
-		String sql = "select * from member where name=?";
+		String sql = "select * from member where name=? and phone=?";
 		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
 			rs = pstmt.executeQuery();
 			
 			// 이름, 전화번호, id만 긁어가면 된다!
