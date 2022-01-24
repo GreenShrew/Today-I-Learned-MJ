@@ -1,0 +1,112 @@
+day 68
+
+
+※ 볼것
+
+findIdForm.jsp 하단 다 못씀
+--> 다 썼나?
+
+
+
+
+
+
+
+
+
+--------------------------------- 아이디 비밀번호 찾기
+
+§ 사진 22
+
+- login.jsp에 보면 아이디 비번착지가 onclick find_account()로 스크립트로 보내게 되어있다.
+
+--> 또한, sub_menu.html에도 onclick으로 스크립트에 연결한다.
+
+----> 팝업창이 열리게 만들어 여기서 해결할 생각임.
+ find_account() 스크립트에서는 command findAccount 로 FindAccountAction 클래스로 보낸다.
+
+------> FindAccountAction 클래스 제작
+ 역할은 member/findAccount.jsp 로 forwarding하는 것 뿐이다.
+
+
+--------> findAccount.jsp 사진 22
+ 팝업창을 띄우고 아이디찾기, 비밀번호 찾기 버튼을 누르면 각각 해당 기능을 가진 페이지를 팝업창에 표시한다.
+
+
+
+-> FindIdFormAction 
+ 역할은 member/findIdForm.jsp으로 이동시켜주는 것 뿐이다.
+
+
+--> findIdForm 사진
+ 팝업창에 이름, 전화번호 입력란과 전송 버튼을 만든다. 전송버튼을 누를시 command findIdStep1 FindIdStep1Action 으로 보낸다.
+
+
+----> findIdSteq1Action 클래스
+ 역할은 보내진 이름과 전화번호를 이용해 정보를 받고, 받은 결과에 따라 
+
+- 이름과 전화번호를 전달받아서 저장 ( getMemberByname 메소드 이용)
+-- mvo가 null이라던가 mvo.getphone이 사용자가 작성한 phone값과 다르다면 findIdForm.jsp로 보낸다.
+-- 같다면, 저장해둔 mvo를 request에 담아 findIdconfirmNumber.jsp로 보낸다. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

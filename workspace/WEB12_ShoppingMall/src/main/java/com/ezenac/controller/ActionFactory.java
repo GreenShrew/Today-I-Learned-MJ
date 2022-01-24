@@ -7,6 +7,9 @@ import com.ezenac.controller.action.CartListAction;
 import com.ezenac.controller.action.CategoryAction;
 import com.ezenac.controller.action.ContractAction;
 import com.ezenac.controller.action.EditFormAction;
+import com.ezenac.controller.action.FindAccountAction;
+import com.ezenac.controller.action.FindIdFormAction;
+import com.ezenac.controller.action.FindIdStep1Action;
 import com.ezenac.controller.action.FindZipNumAction;
 import com.ezenac.controller.action.IdCheckFormAction;
 import com.ezenac.controller.action.IndexAction;
@@ -61,6 +64,9 @@ public class ActionFactory {
 		else if(command.equals("qnaView")) ac = new QnaViewAction();
 		else if(command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
 		else if(command.equals("qnaWrite")) ac = new QnaWriteAction();
+		else if(command.equals("findAccount")) ac = new FindAccountAction();
+		else if(command.equals("findIdForm")) ac = new FindIdFormAction();
+		else if(command.equals("findIdStep1")) ac = new FindIdStep1Action();
 		
 		return ac;
 	}
