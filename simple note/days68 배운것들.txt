@@ -10,7 +10,11 @@ findIdconfirmNumber
 --> 다 쓴거 맞나?
 
 
+resetPw.jsp 다 못썼다!
 
+
+
+※ 에러
 
 
 
@@ -67,21 +71,42 @@ findIdconfirmNumber
  비밀번호찾기를 누르면 command findPwForm FindPwFormAction 으로 보낸다.
 
 
+------ 이젠 비밀번호를 찾는다.
+§ 사진 23
+
+순서
+
+ FindPwdFormAction -> findPwForm.jsp -> FindPwStep1Action
+
+findPwForm.jsp 에서는 아이디 이름 전화번호 작성
+
+FindPwStep1Action 클래스에서는 전달받은 id, name, phone을 저장하고, id를 이용해 getMember 메소드로 회원정보를 불러온다.
+ 그리고 불러온 정보와 findPwForm.jsp 에서 가져온 정보와 비교하고 일치하면 findPwconfirmNumber.jsp로 보낸다.
 
 
 
+--> findPwconfirmNumber.jsp 제작
+ - 
+
+
+----> FindPwStep2Action 클래스 제작
+역할은 인증번호가 맞다면 비밀번호를 알려주는 페이지로 이동하고, 아니라면 다시 되돌아간다.
+
+findPwconfirmNumber.jsp 에서 전송된 인증번호, id, pwd, phone을 저장
+인증번호가 0000(이건 임의로 정한 숫자)가 맞다면 비밀번호를 바꿀 수 있는 resetPw.jsp 페이지로 보낸다.
+--> id, name, phone을 request에 담아 전송한다.
 
 
 
+--------> resetPw.jsp 제작
+비밀번호를 재설정하는 페이지이다.
+
+command resetPw로 ResetPwAction 클래스로 이동한다.
 
 
-
-
-
-
-
-
-
+----------> ResetPwAction 클래스 제작
+역할은 아이디와 패스워드를 전달받아서 패스워드를 수정하고(resetPw 메소드 Dao에 제작) 패스워드 리셋 완료 페이지로 이동한다.
+resetPwComplete.jsp로 이동
 
 
 

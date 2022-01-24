@@ -10,6 +10,9 @@ import com.ezenac.controller.action.EditFormAction;
 import com.ezenac.controller.action.FindAccountAction;
 import com.ezenac.controller.action.FindIdFormAction;
 import com.ezenac.controller.action.FindIdStep1Action;
+import com.ezenac.controller.action.FindIdStep2Action;
+import com.ezenac.controller.action.FindPwStep1Action;
+import com.ezenac.controller.action.FindPwStep2Action;
 import com.ezenac.controller.action.FindPwdFormAction;
 import com.ezenac.controller.action.FindZipNumAction;
 import com.ezenac.controller.action.IdCheckFormAction;
@@ -30,7 +33,6 @@ import com.ezenac.controller.action.QnaListAction;
 import com.ezenac.controller.action.QnaViewAction;
 import com.ezenac.controller.action.QnaWriteAction;
 import com.ezenac.controller.action.QnaWriteFormAction;
-import com.ezenac.controller.ㅁ.FindIdStep2Action;
 
 public class ActionFactory {
 
@@ -71,6 +73,9 @@ public class ActionFactory {
 		else if(command.equals("findIdStep1")) ac = new FindIdStep1Action();
 		else if(command.equals("findIdStep2")) ac = new FindIdStep2Action();
 		else if(command.equals("findPwdForm")) ac = new FindPwdFormAction();
+		else if(command.equals("findPwStep1")) ac = new FindPwStep1Action();
+		else if(command.equals("findPwStep2")) ac = new FindPwStep2Action();
+		else if(command.equals("resetPw")) ac = new ResetPwAction();
 		
 		return ac;
 	}
