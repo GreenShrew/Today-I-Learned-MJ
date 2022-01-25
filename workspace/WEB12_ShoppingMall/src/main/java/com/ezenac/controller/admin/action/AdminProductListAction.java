@@ -35,8 +35,15 @@ public class AdminProductListAction implements Action {
 			paging.setPage(page);
 			
 			AdminDao adao = AdminDao.getInstance();
+
 			
-			int count = adao.getAllCount();
+			String key = "";
+			if(request.getParameter("key") != null) {		// 검색어가 없을경우
+				key = request.getParameter("key");
+			}
+			
+			// 검색어는 레코드 갯수를 세는 동작부터 영향을 미친다.
+			int count = adao.getAllCount(key);		// 검색어를 적용할 시작 위치!
 			paging.setTotalCount(count);
 			request.setAttribute("paging", paging);
 			

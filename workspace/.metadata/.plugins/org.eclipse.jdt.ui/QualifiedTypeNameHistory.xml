@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="java.awt.Container"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -50,14 +47,17 @@
     <fullyQualifiedTypeName name="com.ezenac.dto.ProductVo"/>
     <fullyQualifiedTypeName name="com.ezenac.dto.ProductVO"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
-    <fullyQualifiedTypeName name="com.ezenac.dto.MemberVO"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.ProductDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.CartDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.OrderDao"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
-    <fullyQualifiedTypeName name="com.ezenac.util.Dbman"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.QnaDao"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.ezenac.dto.MemberVO"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.ezenac.util.Dbman"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Executable"/>
+    <fullyQualifiedTypeName name="com.ezenac.dao.AdminDao"/>
+    <fullyQualifiedTypeName name="com.mboard.action.Action"/>
 </qualifiedTypeNameHistroy>

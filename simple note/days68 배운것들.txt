@@ -17,9 +17,6 @@ resetPw.jsp 다 못썼다!
 admin의 sub_menu.jsp 한번 확인해!
 
 
-productList.jsp 아랫부분 긁어
-
-
 
 ※ 에러
 
