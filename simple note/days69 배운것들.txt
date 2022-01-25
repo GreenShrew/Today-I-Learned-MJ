@@ -18,6 +18,17 @@ Cannot invoke "String.equals(Object)" because "command" is null
 
 
 
+- 상품 상세보기 누르면 에러가 나온다.
+For input string: ""
+--> 해결! pseq 를 보내는 EL문의 오타
+
+
+
+- 상품 수정하기 누르면 안 먹힌다.
+Cannot parse null string
+--> 숫자가 아닌 녀석을 숫자로 바꾸려고 할 때...
+
+
 ※ 확인할거
 admin header 부분에 뭐 부실하게 넣었나?
 
@@ -130,14 +141,18 @@ go_detail 스크립트에서는 command=adminProductDetail AdminProductDetailAct
 그리고 pvo에 받은 정보를 가지고 productDetail.jsp로 이동한다.
 
 
-
+§ 사진 29
 ---> 웹 페이지상에 상품 상세 내역을 나타낼 productDetail.jsp 제작
+종류, 이름, 사진, 가격, 내용이 나오도록 만든다.
+----> 수정 버튼을 누르면 물품 번호 pseq를 가지고 가서 DB에 insert를 하는 동작을 수행하는 클래스로 넘기는 go_mod 스크립트로 이동한다.
+----> 목록 버튼을 누르면 목록으로 되돌려보내는 go_mov 스크립트로 이동한다.
 
 
+-----> go_mod 스크립트에서 command adminProductUpdateForm로 AdminProductUpdateFormAction 클래스로 이동한다.
 
-
-
-
+-----> AdminProductUpdateFormAction 클래스에서는
+전달받은 상품번호 pseq를 이용하여 하나의 상품 내역을 조회하고 리퀘스트에 저장해서 보낸다.
+-----> productUpdate.jsp로 보낸다.
 
 
 

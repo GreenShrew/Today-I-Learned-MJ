@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="java.awt.Container"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="days20.JBorderLayout"/>
@@ -46,7 +45,6 @@
     <fullyQualifiedTypeName name="com.ezenac.dto.ProductVO"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-    <fullyQualifiedTypeName name="com.ezenac.dao.ProductDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.CartDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.OrderDao"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
@@ -55,9 +53,11 @@
     <fullyQualifiedTypeName name="com.ezenac.dao.MemberDao"/>
     <fullyQualifiedTypeName name="com.ezenac.util.Dbman"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Executable"/>
-    <fullyQualifiedTypeName name="com.ezenac.dao.AdminDao"/>
     <fullyQualifiedTypeName name="com.mboard.action.Action"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+    <fullyQualifiedTypeName name="com.ezenac.dao.AdminDao"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.ezenac.dao.ProductDao"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

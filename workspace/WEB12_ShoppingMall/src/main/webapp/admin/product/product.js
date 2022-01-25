@@ -75,3 +75,47 @@ function go_detail(pseq){
 	document.frm.action = url;
 	document.frm.submit();
 }
+
+
+
+function go_mov(){
+	location.href = "shop.do?command=adminProductList";
+}
+
+
+function go_mod(pseq){
+	var url = "shop.do?command=adminProductUpdateForm&pseq = "+pseq;
+	location.href = url;
+	// document.frm.action = url;
+	// document.frm.submit();
+	// submit을 사용할 필요가 없다. 왜냐하면 상품을 수정하고자 할 때는 수정할 상품의 번호만 가져가서 이걸 DB에서 조회해다가 쓰면 되기 때문이다.
+	// 따라서 그냥 form 안의 모든 내용을 가져가는 submit이 아니라 가져온 pseq만 보내는 location.href를 사용한다.
+}
+
+
+
+
+
+function go_mod_save(){
+	if(document.frm.kind.value == ''){
+		alert('상품분류를 선택하세요.');
+		document.frm.kind.focus();
+	}else if(document.frm.name.value == ''){
+		alert('상품명을 입력하세요.');
+		document.frm.name.focus();
+	}else if(document.frm.price1.value == ''){
+		alert('원가를 입력하세요.');
+		document.frm.price1.focus();
+	}else if(document.frm.price2.value == ''){
+		alert('판매가를 입력하세요.');
+		document.frm.price2.focus();
+	}else if(document.frm.content.value == ''){
+		alert('상품상세를 입력하세요.');
+		document.frm.content.focus();
+	}else{
+		if(confirm('수정하시겠습니까?')){	// confirm() : 괄호
+			document.frm.action = "shop.do?command=adminProductUpdate";
+			document.frm.submit();
+		}
+	}
+}
