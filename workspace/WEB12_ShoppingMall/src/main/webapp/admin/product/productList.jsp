@@ -43,7 +43,7 @@
 					<span style="color:red">${index}&nbsp;</span>
 				</c:when>
 				<c:otherwise>
-					<a href="${action}&page=${index}">${index}</a>&nbsp;
+					<a href="${action}&page=${index}&key=${key}">${index}</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

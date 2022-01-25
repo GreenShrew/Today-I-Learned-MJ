@@ -34,8 +34,6 @@
     <fullyQualifiedTypeName name="com.ezen.board.controller.action.AddReplyAction"/>
     <fullyQualifiedTypeName name="com.ezen.board.util.Paging"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
-    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
-    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
     <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
     <fullyQualifiedTypeName name="javax.naming.Context"/>
@@ -55,9 +53,11 @@
     <fullyQualifiedTypeName name="com.ezenac.dao.QnaDao"/>
     <fullyQualifiedTypeName name="com.ezenac.dto.MemberVO"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.MemberDao"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="com.ezenac.util.Dbman"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Executable"/>
     <fullyQualifiedTypeName name="com.ezenac.dao.AdminDao"/>
     <fullyQualifiedTypeName name="com.mboard.action.Action"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 </qualifiedTypeNameHistroy>

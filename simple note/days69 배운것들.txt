@@ -14,7 +14,7 @@ Cannot invoke "String.equals(Object)" because "command" is null
 ----> 해결! 버튼이 '검색', '전체보기', '상품등록' 세개가 있는데, 엔터를 누를 때 어떤 버튼을 실행할지 정하지 않았기 떄문이다.
 
 2. 검색 버튼을 눌러도 검색 기능이 실행되지 않는다
-
+--> 해결! 스크립트 submit에 ()을 넣지 않았었다.
 
 
 
@@ -58,31 +58,58 @@ listProduct의 기존의 sql 명령
 이 된다.
 
 
+------문제 1 - 여기까지 했다면 검색 버튼을 눌렀을때는 검색이 기능하지만, 하단의 페이지 숫자를 누르면 전체 페이지로 넘어가버린다!
+
+--> 원인!
+ 검색 버튼을 누르면 go_search 스크립트를 실행시켜 submit()을 실행시킨다. submit은 모든 내용을 가지고 가기 때문에 검색어로 사용한 key 를 가져간다.
+ 하지만 페이지 버튼은 key 값이 같이 넘어가지 않아 검색어가 없는 상태가 된다!
+
+----> 해결방법!
+key를 넣어준다!
+<c:otherwise>
+	<a href="${action}&page=${index}&key=${key}">${index}</a>&nbsp;
+</c:otherwise>
+
+
+------문제 2 - 빈칸에 검색 버튼을 누르면 아무것도 일어나지 않는다! (문제는 아니다..)
+--> 원인!
+ go_search() 스크립트를 짤때 빈칸이 들어가면 그냥 return 되도록 만들었기 때문이다!
+
+--> alert를 만들어서 빈칸검색시 경고를 하도록 만들었다.
 
 
 
 
+--------------- 전체보기 버튼 기능 만들기
+
+- go_total() 스크립트를 제작한다.
+--> 버튼을 누르면 key의 value를 빈칸으로 만들고 command를  adminProductList&page=1로 보낸다.
 
 
 
 
+--------------- 상품등록 버튼 기능 만들기
+※ 참고로 무언가 업로드하기 위해서는 library에(WEB-INF 폴더에) cos.jar 파일이 있어야 한다.
+
+- go_wrt() 스크립트를 제작한다. 스크립트는 command를 submit해  AdminProductWriteFormAction 클래스로 이동하게 한다.
+
+AdminProductWriteFormAction 클래스에서는 로그인 체크부터 하고 productWrite.jsp 페이지로 이동
+--> 이동할땐 kindList라는 배열에 카테고리 이름들을 가져간다! 드롭다운 박스를 만들 예정!
 
 
+----> productWrite.jsp	§ 사진 28
+ 관리자가 상품을 등록하는 페이지를 만든다. 반복문을 이용하여 드롭다운 박스를 만드는 방법을 보자.
+----> 기능은 상품을 등록하는 등록버튼(go_save)과 목록으로 돌아가는 목록버튼(go_move)이 있다. 스크립트를 동작시킨다.
 
+------> go_save 스크립트를 만든다. 안 쓴 내용이 있는지 체크하도록 하고, 전부 통과하면 submit을 통해 command adminProductWrite로 AdminProductWriteAction 클래스로 입력한것들을 가지고 보낸다.
 
+--------> AdminProductWriteAction 클래스
+할 일은 보내진 데이터를 DB에 저장하고 adminProductList로 돌아가는 것.
 
+※ 파일 업로드를 위해서는 ServletContext, MultipartRequest가 필요하다!
 
-
-
-
-
-
-
-
-
-
-
-
+-> ProductVO 객체에 보내진 데이터를 담는다
+--> Dao의 insertProduct(pvo) 메소드를 이용해서 DB에 저장한다. 메소드에는 정보가 담긴 pvo를 전달인자로 보낸다.
 
 
 
