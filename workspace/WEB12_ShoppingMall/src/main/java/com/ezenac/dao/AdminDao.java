@@ -44,20 +44,23 @@ public class AdminDao {
 		return avo;
 	}
 
-	public ArrayList<ProductVO> listProduct(Paging paging) {
+	public ArrayList<ProductVO> listProduct(Paging paging, String key) {
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
 //		String sql = "select * from product order by pseq desc";
 		// 기존에 썼던 핵심 sql문을 별칭 q로 설정하고, 이 sql문을 서브쿼리로 만든다.
 		String sql = "select * from ("
-				+ "select rownum as rn, p.* from ((select * from product order by pseq desc) p)"
-				+ ") where rs>=?"
-				+ ") where rn<=?";	
+				+ " select * from ("
+				+ " select rownum as rn, p.* from "
+				+ " ((select * from product where name like '%'||?||'%' order by pseq desc) p)"
+				+ " ) where rn>=?"
+				+ " ) where rn<=?";	
 		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, paging.getStartNum());
-			pstmt.setInt(2, paging.getEndNum());
+			pstmt.setString(1, key);
+			pstmt.setInt(2, paging.getStartNum());
+			pstmt.setInt(3, paging.getEndNum());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -81,12 +84,18 @@ public class AdminDao {
 		return list;
 	}
 
-	public int getAllCount() {
+	public int getAllCount(String tablename, String fieldname, String key) {
 		int count = 0;
-		String sql = "select count(*) as cnt from product";
+		String sql = "select count(*) as cnt from " + tablename + " where " + fieldname + " like '%'||?||'%'";
+//		매개변수가 product, name, 바보 라면
+//		select count(*) as cnt from product where name like '%'||바보||'%'";
+//		가 된다!
+//		위의 명령을 수행하면 product 테이블에서 name에 '바보' 라는 글자가 포함된 결과물을 긁어오고,
+//		아래 cnt에는 그 결과물의 갯수를 저장하게 된다.
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt("cnt");		// 레코드의 갯수를 세고 그 값을 cnt라는 별칭으로 저장하고, 이를 count에 저장한다.

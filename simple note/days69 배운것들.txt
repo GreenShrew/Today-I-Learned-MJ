@@ -1,9 +1,31 @@
 day 69
 
 
+※ 에러
+- admin 페이지에 게시글 목록이 싹 안 보인다.
+-> AdminDao의 listProduct메소드가 문제인듯?
+--> 해결! sql 문을 또 잘못 썼다.
+
+- 검색을 누르면 에러가 나온다.
+1. 로그인 후 첫 화면에서 검색창 커서 후 엔터를 누르면 에러 발생
+Cannot invoke "String.equals(Object)" because "command" is null
+검색 버튼을 누르고 나서야 진행된다.
+--> 로그인 후에 주소가 shop.do로 command가 없는데 혹시?
+----> 해결! 버튼이 '검색', '전체보기', '상품등록' 세개가 있는데, 엔터를 누를 때 어떤 버튼을 실행할지 정하지 않았기 떄문이다.
+
+2. 검색 버튼을 눌러도 검색 기능이 실행되지 않는다
+
+
+
+
+※ 확인할거
+admin header 부분에 뭐 부실하게 넣었나?
+
 
 
 ------------ 리스트 검색하는 기능 만들기
+
+§ 사진 27
 
  productList.jsp의 <input type="text" name="key" value="${key}">
 
@@ -19,14 +41,21 @@ day 69
 검색어는 레코드 갯수를 세는 동작부터 영향을 미친다.
 검색어로 검색 결과를 가져와서 이것의 총 갯수를 세고, 이걸 페이징에 totalCount에 셋팅해야한다.
 
+----> AdminDao의 getAllCount 메소드에 key값을 전달인자로 넣는데, key값은 상품리스트, qna리스트 등등 여러 경우가 있기에 "product", "name", key를 전달인자로 만든다.
+
+-----> getAllCount 메소드를 수정한다.
+ sql문은 기존의 'select count(*) as cnt from product' 에서
+select count(*) as cnt from " + tablename + " where " + fieldname + " like '%'||?||'%'" 로 바꾸어야 한다.
 
 
 
+------> listProduct 메소드에도 전달인자로 key를 추가해야한다.
+listProduct의 기존의 sql 명령 
+... (select * from product order by pseq desc) p) ...
+에서 
 
-
-
-
-
+... (select * from product where name like '%'||?||'%' order by pseq desc) p) ...
+이 된다.
 
 
 

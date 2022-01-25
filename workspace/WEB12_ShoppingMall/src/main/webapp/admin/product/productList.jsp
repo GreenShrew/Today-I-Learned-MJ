@@ -5,7 +5,7 @@
 <article>
 <h1>상품 리스트</h1>
 <form name="frm" method="post"><!-- 검색창과 상품 등록버튼 -->
-<table>
+	<table>
 		<tr><td width="642">상품명<input type="text" name="key" value="${key}">
 			<input class="btn" type="button" name="btn_search" value="검색" onClick="go_search();">
 			<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total();">

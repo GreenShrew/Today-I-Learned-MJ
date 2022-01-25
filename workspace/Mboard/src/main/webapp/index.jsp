@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%response.sendRedirect("mboard.do?command=list"); %>
+<%response.sendRedirect("mboard.do?command=main"); %>
 </body>
 </html>

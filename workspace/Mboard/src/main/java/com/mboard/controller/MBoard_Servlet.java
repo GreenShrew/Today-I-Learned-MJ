@@ -14,13 +14,13 @@ import com.mboard.controller.action.Action;
  * Servlet implementation class MboardServlet
  */
 @WebServlet("/mboard.do")
-public class MboardServlet extends HttpServlet {
+public class MBoard_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MboardServlet() {
+    public MBoard_Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }

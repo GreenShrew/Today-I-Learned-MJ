@@ -43,12 +43,15 @@ public class AdminProductListAction implements Action {
 			}
 			
 			// 검색어는 레코드 갯수를 세는 동작부터 영향을 미친다.
-			int count = adao.getAllCount(key);		// 검색어를 적용할 시작 위치!
+			int count = adao.getAllCount("product", "name", key);		// 검색어를 적용할 시작 위치!
+			// 주의! key는 변수라서 따옴표를 붙이지 않는다. product와 name은 필드명이기 때문에 따옴표를 사용한다.
+			
 			paging.setTotalCount(count);
 			request.setAttribute("paging", paging);
 			
-			ArrayList<ProductVO> productList = adao.listProduct(paging);
+			ArrayList<ProductVO> productList = adao.listProduct(paging, key);
 			request.setAttribute("productList", productList);
+			request.setAttribute("key", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
