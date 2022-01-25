@@ -84,7 +84,7 @@ function go_mov(){
 
 
 function go_mod(pseq){
-	var url = "shop.do?command=adminProductUpdateForm&pseq = "+pseq;
+	var url = "shop.do?command=adminProductUpdateForm&pseq="+pseq;
 	location.href = url;
 	// document.frm.action = url;
 	// document.frm.submit();
@@ -113,7 +113,7 @@ function go_mod_save(){
 		alert('상품상세를 입력하세요.');
 		document.frm.content.focus();
 	}else{
-		if(confirm('수정하시겠습니까?')){	// confirm() : 괄호
+		if(confirm('수정하시겠습니까?')){	// confirm() : 괄호 안의 내용을 경고로 알리고, 예 아니오 버튼에서 예를 누르면 true를 반환
 			document.frm.action = "shop.do?command=adminProductUpdate";
 			document.frm.submit();
 		}

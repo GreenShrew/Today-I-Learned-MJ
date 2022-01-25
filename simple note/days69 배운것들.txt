@@ -26,7 +26,18 @@ For input string: ""
 
 - 상품 수정하기 누르면 안 먹힌다.
 Cannot parse null string
---> 숫자가 아닌 녀석을 숫자로 바꾸려고 할 때...
+--> 숫자가 아닌 녀석을 숫자로 바꾸려고 할 때 생긴다고 하는 에러
+
+productDetail에서 수정 버튼을 눌러서 넘어온 pseq에 문제가 있나?
+go_mod 스크립트에 문제가 있나?
+
+----> 그럼 왜 똑같이 상품번호를 보내서 int로 형변환 시키는 ProductList에는 문제가 없었지?
+
+AdminProductUpdateFormAction 이걸 잘못 썼나?
+
+------> 해결! 주석처리하고 AdminProductDetailAction에서 썼던 방식대로 쓰니 잘 된다!
+근데 주석대로 쓰면 왜 문제가 생긴걸까? 한번 해당 소스코드 확인해야한다!
+
 
 
 ※ 확인할거
@@ -155,11 +166,25 @@ go_detail 스크립트에서는 command=adminProductDetail AdminProductDetailAct
 -----> productUpdate.jsp로 보낸다.
 
 
+- productUpdate.jsp 에서는 상품 정보를 변경하는 웹을 만들고, 수정 버튼을 누르면 go_mod_save 스크립트로 이동시킨다.
+
+go_mod_save는 command=adminProductUpdate로 AdminProductUpdateAction 클래스로 이동시킨다.
+
+AdminProductUpdateAction 클래스에서는 productUpdate.jsp에서 전달되는 수정 데이터들을 받아 pvo에 저장한다.(사진의 경우 안 바꿨다면 oldImage로 저장한 데이터를 받는다.)
+-> 그리고 AdminDao의 updateProduct() 메소드로 update 동작을 한다.
+--> 그리고 제품 상세보기로 돌아가되, 해당 상품의 상세보기로 돌아가도록 url을 작성한다.
 
 
 
 
 
+---------- 제품 상세보기에서 목록 버튼
+ 현재 목록 버튼을 누르면 몇페이지의 상품이던간에 1페이지로 가버린다!
+ 이를 해결할 방법은, AdminProductListAction 클래스에서 page를 받고나서 page 값을 session에 저장한다.
+session.setAttribute("page", page);
 
 
+
+그런데 위의 방법은 검색어에도 해당된다!
+물건을 보고 목록으로 나오면 key 값을 잊어버리는데, 이를 session에 넣고 저장한 다음에 목록 버튼을 눌렀을 때 이를 가져와서 사용하는 방식으로!
 

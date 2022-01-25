@@ -29,6 +29,12 @@ public class AdminProductListAction implements Action {
 			int page = 1;	// 처음 접속시 page는 1페이지라고 설정
 			if(request.getParameter("page") != null) {	// 만약 이전 페이지에서 넘어온 page값이 null이 아니라면, 즉 첫 방문이 아니라면
 				page = Integer.parseInt(request.getParameter("page"));	// 넘어온 page 값을 page로 설정한다.
+				session.setAttribute("page", page);			// 세션에 page를 저장한다.
+			}else if(session.getAttribute("page") != null) {		// 세션에 page가 저장되어 있다면 현재 페이지로 session을 저장.
+				page = (int) session.getAttribute("page");
+			}else {
+				page = 1;
+				session.removeAttribute("page");
 			}
 			
 			Paging paging = new Paging();
@@ -40,6 +46,12 @@ public class AdminProductListAction implements Action {
 			String key = "";
 			if(request.getParameter("key") != null) {		// 검색어가 없을경우
 				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			}else if(session.getAttribute("key") != null) {
+				key = (String) session.getAttribute("key");
+			}else {
+				session.removeAttribute("key");
+				key="";
 			}
 			
 			// 검색어는 레코드 갯수를 세는 동작부터 영향을 미친다.

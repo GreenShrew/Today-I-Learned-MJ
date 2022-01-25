@@ -24,9 +24,11 @@ public class AdminProductUpdateFormAction implements Action {
 			url = "shop.do?command=admin";
 		}else {
 			// 전달된 상품번호로 상품의 상세내역을 조회하고 리퀘스트에 저장한다.
-			int pseq = Integer.parseInt(request.getParameter("pseq"));
+			String pseq = request.getParameter("pseq");
+			// int pseq = Integer.parseInt(request.getParameter("pseq"));
 			ProductDao pdao = ProductDao.getInstance();
-			ProductVO pvo = pdao.getProduct(pseq);
+			ProductVO pvo = pdao.getProduct(Integer.parseInt(pseq));
+			// ProductVO pvo = pdao.getProduct(pseq);
 			request.setAttribute("productVO", pvo);
 
 			// 현재 상품의 카테고리(kind) 값을 상품 종류로 변환하여 리퀘스트에 저장한다.

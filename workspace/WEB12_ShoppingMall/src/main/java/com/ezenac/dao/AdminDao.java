@@ -130,4 +130,29 @@ public class AdminDao {
 		}
 		
 	}
+
+	public void updateProduct(ProductVO pvo) {
+		String sql = "update product set kind=?, useyn=?, name=?, price1=?, price2=?, price3=?, "
+				+ " content=?, image=?, bestyn=?, where pseq=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pvo.getKind());
+			pstmt.setString(2, pvo.getUseyn());
+			pstmt.setString(3, pvo.getName());
+			pstmt.setInt(4, pvo.getPrice1());
+			pstmt.setInt(5, pvo.getPrice2());
+			pstmt.setInt(6, pvo.getPrice3());
+			pstmt.setString(7, pvo.getContent());
+			pstmt.setString(8, pvo.getImage());
+			pstmt.setString(9, pvo.getBestyn());
+			pstmt.setInt(10, pvo.getPseq());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 }
