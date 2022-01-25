@@ -48,6 +48,7 @@ public class AdminProductWriteAction implements Action {
 			AdminDao adao = AdminDao.getInstance();
 			adao.insertProduct(pvo);
 		}
+		response.sendRedirect(url);
 	}
 
 }

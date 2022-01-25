@@ -98,6 +98,8 @@ AdminProductWriteFormAction 클래스에서는 로그인 체크부터 하고 pro
 
 
 ----> productWrite.jsp	§ 사진 28
+※ input에 onkeyup이라는 처음보는 속성이 있다! 무엇일까.
+
  관리자가 상품을 등록하는 페이지를 만든다. 반복문을 이용하여 드롭다운 박스를 만드는 방법을 보자.
 ----> 기능은 상품을 등록하는 등록버튼(go_save)과 목록으로 돌아가는 목록버튼(go_move)이 있다. 스크립트를 동작시킨다.
 
@@ -111,28 +113,25 @@ AdminProductWriteFormAction 클래스에서는 로그인 체크부터 하고 pro
 -> ProductVO 객체에 보내진 데이터를 담는다
 --> Dao의 insertProduct(pvo) 메소드를 이용해서 DB에 저장한다. 메소드에는 정보가 담긴 pvo를 전달인자로 보낸다.
 
+----> insertProduct 메소드 제작. insert 명령으로 DB에 레코드를 저장한다.
+
+
+※ 스크립트에 cal() 함수를 만든다! onkeyup이라는 속성을 사용하여 이 함수가 작동된다!
+ 원가/판매가의 input 태그에 onkeyup="cal()"을 넣고, cal() 함수에서는 둘 다 쓰였을 경우 작동하도록 조건을 달아둔다.
 
 
 
+------------------ 상품 상세내역 보는 기능 만들기
+
+- 메인 페이지(productList.jsp)에서 상품의 이름을 누르면 go_detail() 스크립트가 실행된다.
+go_detail 스크립트에서는 command=adminProductDetail AdminProductDetailAction 클래스로 보내는데, 해당 물품의 번호인 pseq 값 또한 같이 가져간다.
+
+--> AdminProductDetailAction 클래스에서는 이미 만들어져있는 메소드를 이용한다. 상품 정보로 해당 상품의 정보를 조회해오는 ProductDao의 getProduct 메소드를 이용한다. 
+그리고 pvo에 받은 정보를 가지고 productDetail.jsp로 이동한다.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---> 웹 페이지상에 상품 상세 내역을 나타낼 productDetail.jsp 제작
 
 
 

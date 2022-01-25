@@ -36,6 +36,7 @@ import com.ezenac.controller.action.QnaWriteFormAction;
 import com.ezenac.controller.action.ResetPwAction;
 import com.ezenac.controller.admin.action.AdminAction;
 import com.ezenac.controller.admin.action.AdminLoginAction;
+import com.ezenac.controller.admin.action.AdminProductDetailAction;
 import com.ezenac.controller.admin.action.AdminProductListAction;
 import com.ezenac.controller.admin.action.AdminProductWriteAction;
 import com.ezenac.controller.admin.action.AdminProductWriteFormAction;
@@ -88,7 +89,7 @@ public class ActionFactory {
 		else if(command.equals("adminProductList")) ac = new AdminProductListAction();
 		else if(command.equals("adminProductWriteForm")) ac = new AdminProductWriteFormAction();
 		else if(command.equals("adminProductWrite")) ac = new AdminProductWriteAction();
-		
+		else if(command.equals("adminProductDetail")) ac = new AdminProductDetailAction();
 		return ac;
 	}
 }

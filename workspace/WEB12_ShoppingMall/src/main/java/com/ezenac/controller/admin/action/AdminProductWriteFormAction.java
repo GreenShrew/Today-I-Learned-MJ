@@ -17,7 +17,7 @@ public class AdminProductWriteFormAction implements Action {
 		// 로그인 체크부터 하고 해당 페이지로 이동
 		String url = "admin/product/productWrite.jsp";
 		HttpSession session = request.getSession();
-		AdminVO avo = (AdminVO) session.getAttribute("loginUser");
+		AdminVO avo = (AdminVO) session.getAttribute("loginAdmin");
 		
 		if(avo == null) {
 			url = "shop.do?command=admin";

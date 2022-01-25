@@ -107,4 +107,27 @@ public class AdminDao {
 		}
 		return count;
 	}
+
+	public void insertProduct(ProductVO pvo) {
+		String sql = "insert into product(pseq, kind, name, price1, price2, price3, content, image) "
+				+ " values(product_seq.nextVal, ?, ?, ?, ?, ?, ? ,?)";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pvo.getKind());
+			pstmt.setString(2, pvo.getName());
+			pstmt.setInt(3, pvo.getPrice1());
+			pstmt.setInt(4, pvo.getPrice2());
+			pstmt.setInt(5, pvo.getPrice3());
+			pstmt.setString(6, pvo.getContent());
+			pstmt.setString(7, pvo.getImage());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		
+	}
 }

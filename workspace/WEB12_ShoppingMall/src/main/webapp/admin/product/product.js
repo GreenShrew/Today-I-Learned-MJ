@@ -52,3 +52,26 @@ function go_save(){
 		theForm.submit();
 	}
 }
+
+
+
+
+
+function cal(){
+	if(document.frm.price2.value == "" || document.frm.price1.value == ""){
+		return;
+	}
+	document.frm.price3.value = document.frm.price2.value - document.frm.price1.value;
+}
+
+
+
+
+
+
+
+function go_detail(pseq){
+	var url = "shop.do?command=adminProductDetail&pseq=" + pseq;
+	document.frm.action = url;
+	document.frm.submit();
+}
