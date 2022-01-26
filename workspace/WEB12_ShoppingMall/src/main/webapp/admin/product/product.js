@@ -138,3 +138,39 @@ function go_mod_save(){
 		}
 	}
 }
+
+
+
+function go_order_save(){
+	// 해야할것들
+	// #1. 현재 화면에 보여지고 있는 주문들의 체크박스들이 몇개 체크되어 있는지 갯수를 count한다.
+	// cart에 담긴 상품들을 지울 떄 count를 사용했다! mypage/mypage.js 참고
+	
+	// #2. count 값이 0이면 더 진행하지 않고 orderList.jsp로 되돌아가도록 한다.
+	
+	// #2-1. count 값이 1 이상이라면, 현재 폼안에 있는 체크박스의 벨류값들을 가지고,
+	// 처리완료로 처리하기 위해 command=adminOrderSave로 이동시켜 처리한다.
+	// 배열로 전송될것이다.
+	// (주문의 result 값을 '1' -> '2'로 변경)
+	
+	// #3. 처리한 뒤에는 orderList.jsp로 되돌아오게 한다.
+	
+	
+	var count = 0;
+	if(document.frm.result.checked == true){	// 화면에 표시된 체크박스가 1개일 경우! 체크박스가 1개인데 length를 쓰면 undefine이 된다.
+		count++;
+	}else{	// 회면에 표시된 체크박스가 2개 이상인 경우
+		for(var i=0; i<document.frm.result.length;i++){
+			if(document.frm.result[i].checked == true)
+			count++;
+		}
+	}
+	
+	if(count==0){
+		document.frm.action = "shop.do?command=adminOrderList";
+		document.frm.submit();
+	}else{
+		document.frm.action = "shop.do?command=adminOrderSave";
+		document.frm.submit();
+	}
+}

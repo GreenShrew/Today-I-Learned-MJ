@@ -25,6 +25,13 @@ public class AdminProductListAction implements Action {
 		if(avo==null) {
 			url = "shop.do?command=admin";
 		}else {
+			
+			String sub = request.getParameter("sub");
+			if(sub != null) {		// sub_menu의 버튼을 누르면 sub에 y값이 들어있으므로, null이 아니게 되어 if문이 실행된다!
+				session.removeAttribute("key");
+				session.removeAttribute("page");
+			}
+			
 			int page = 1;	// 처음 접속시 page는 1페이지라고 설정
 			if(request.getParameter("page") != null) {	// 만약 이전 페이지에서 넘어온 page값이 null이 아니라면, 즉 첫 방문이 아니라면
 				page = Integer.parseInt(request.getParameter("page"));	// 넘어온 page 값을 page로 설정한다.

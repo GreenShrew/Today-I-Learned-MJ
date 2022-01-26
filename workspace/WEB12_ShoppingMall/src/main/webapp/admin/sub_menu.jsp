@@ -5,9 +5,9 @@
 <nav id="sub_menu">
 <h1>Admin Setting</h1>
 <ul>
-	<li><a href='shop.do?command=adminProductList'>상품리스트</a></li>
-	<li><a href='shop.do?command=adminOrderList'>주문리스트</a></li>
-	<li><a href='shop.do?command=adminMemberList'>회원리스트</a></li>
-	<li><a href='shop.do?command=adminQnaList'>Q&amp;A리스트</a></li>
+	<li><a href='shop.do?command=adminProductList&sub=y'>상품리스트</a></li>
+	<li><a href='shop.do?command=adminOrderList&sub=y'>주문리스트</a></li>
+	<li><a href='shop.do?command=adminMemberList&sub=y'>회원리스트</a></li>
+	<li><a href='shop.do?command=adminQnaList&sub=y'>Q&amp;A리스트</a></li>
 </ul>
 </nav>

@@ -204,4 +204,18 @@ public class AdminDao {
 		}
 		return list;
 	}
+
+	public void orderResult(int odseq) {
+		String sql = "update order_detail set result=2 where odseq=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, odseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 }

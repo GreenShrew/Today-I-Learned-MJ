@@ -25,6 +25,14 @@ public class AdminOrderListAction implements Action {
 		if(avo==null) {
 			url = "shop.do?command=admin";
 		}else {
+			
+			// sub_menu에서 눌렀는지 확인용!
+			String sub = request.getParameter("sub");
+			if(sub != null) {		// sub_menu의 버튼을 누르면 sub에 y값이 들어있으므로, null이 아니게 되어 if문이 실행된다!
+				session.removeAttribute("key");
+				session.removeAttribute("page");
+			}
+			
 			// 현재 화면에 표시될 페이지 설정
 			int page = 1;
 			if(request.getParameter("page") != null) {		// 보려는 페이지가 파라미터로 전달될때
