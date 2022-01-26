@@ -166,6 +166,12 @@ public class AdminDao {
 				+ " ((select * from order_view where mname like '%'||?||'%' order by result, odseq desc) m)"
 				+ " ) where rn>=?"
 				+ " ) where rn<=?";
+//		String sql = "select * from ("
+//				+ " select rownum as rn, m.* from "
+//				+ " ((select * from order_view where mname like '%'||?||'%' order by result, odseq desc) m)"
+//				+ " ) where rn>=? and rn<=?";
+		// 이런식으로 select * from 구문을 하나 뺴고 and로 조건을 걸어도 되지만, 이 경우 게시물이 엄청 많아지면 검색에 시간이 엄청 소요된다.
+		
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);

@@ -6,8 +6,8 @@
 <form name="frm" method="post">
 <table style="float:right;">
 	<tr><td>주문자 이름<input type="text" name="key" value="${key}">
-		<input class="btn" type="button" value="검색" onClick="go_search_order();">
-		<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total_order();"></td></tr>
+		<input class="btn" type="button" value="검색" onClick="go_search('adminOrderList');">
+		<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total('adminOrderList');"></td></tr>
 </table>
 <table id="orderList">
 	<tr><th>주문번호(처리)</th><th>주문자</th><th>상품명</th><th>수량</th><th>우편</th><th>주소</th><th>전화</th><th>주문일</th></tr>

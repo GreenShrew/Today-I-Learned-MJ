@@ -1,21 +1,40 @@
-function go_search(){
+function go_search(comm){
 	if(document.frm.key.value == ""){
 		alert("검색버튼 사용에는 검색어 입력이 필수입니다.");
 		return;
 	}
-	var url = "shop.do?command=adminProductList&page=1";	// 검색어로 검색한 결과의 1페이지로 이동한다.
+	var url = "shop.do?command=" + comm + "&page=1";	// 검색어로 검색한 결과의 1페이지로 이동한다.
 	document.frm.action = url;
 	document.frm.submit();
 }
 
-
-
-function go_total(){
-	document.frm.key.value = "";
-	document.frm.action = "shop.do?command=adminProductList&page=1";
+/*
+function go_search_order(){
+	if(document.frm.key.value == ""){
+		alert("검색어를 입력해주세요.");
+		return;
+	}
+	var url = "shop.do?command=adminOrderList&page=1";
+	document.frm.action = url;
 	document.frm.submit();
 }
+*/
 
+
+
+
+function go_total(comm){
+	document.frm.key.value = "";
+	document.frm.action = "shop.do?command=" + comm + "&page=1";
+	document.frm.submit();
+}
+/*
+function go_total_order(){
+	document.frm.key.value = "";
+	document.frm.action = "shop.do?command=adminOrderList&page=1";
+	document.frm.submit();
+}
+*/
 
 
 
