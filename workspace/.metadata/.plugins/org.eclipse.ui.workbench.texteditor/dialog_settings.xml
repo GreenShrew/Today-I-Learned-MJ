@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="pseq"/>
+		<item key="selection" value="odseq"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="true"/>
 		<list key="findhistory">
+			<item value="odseq"/>
+			<item value="rownum"/>
+			<item value="paging"/>
+			<item value="table order"/>
+			<item value="count"/>
+			<item value="page"/>
 			<item value="pseq"/>
 			<item value="pesq"/>
 			<item value="action"/>
@@ -17,12 +23,6 @@
 			<item value="add"/>
 			<item value="관리자"/>
 			<item value="관맂"/>
-			<item value="order_view"/>
-			<item value="indate"/>
-			<item value="cart_view"/>
-			<item value="cseq"/>
-			<item value="price2"/>
-			<item value="addr"/>
 		</list>
 		<list key="replacehistory">
 			<item value="VO"/>

@@ -25,7 +25,6 @@ public class AdminProductListAction implements Action {
 		if(avo==null) {
 			url = "shop.do?command=admin";
 		}else {
-			
 			int page = 1;	// 처음 접속시 page는 1페이지라고 설정
 			if(request.getParameter("page") != null) {	// 만약 이전 페이지에서 넘어온 page값이 null이 아니라면, 즉 첫 방문이 아니라면
 				page = Integer.parseInt(request.getParameter("page"));	// 넘어온 page 값을 page로 설정한다.
@@ -40,7 +39,7 @@ public class AdminProductListAction implements Action {
 			}
 			
 			Paging paging = new Paging();
-			paging.setPage(page);
+			paging.setPage(page);	// 페이지를 현재 페이지로 셋팅
 			
 			AdminDao adao = AdminDao.getInstance();
 
@@ -60,8 +59,8 @@ public class AdminProductListAction implements Action {
 			int count = adao.getAllCount("product", "name", key);		// 검색어를 적용할 시작 위치!
 			// 주의! key는 변수라서 따옴표를 붙이지 않는다. product와 name은 필드명이기 때문에 따옴표를 사용한다.
 			
-			paging.setTotalCount(count);
-			request.setAttribute("paging", paging);
+			paging.setTotalCount(count);	// 검색한 내용의 총 갯수를 보내 paging의 모든 변수를 계산하도록 한다.
+			request.setAttribute("paging", paging);	// paging.jsp에서 쓰게된다.
 			
 			ArrayList<ProductVO> productList = adao.listProduct(paging, key);
 			request.setAttribute("productList", productList);

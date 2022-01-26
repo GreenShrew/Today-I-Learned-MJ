@@ -157,12 +157,20 @@ public class AdminDao {
 		}
 	}
 
-	public ArrayList<OrderVO> listOrder() {
+	public ArrayList<OrderVO> listOrder(Paging paging, String key) {
 		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
-		String sql = "select * from order_view order by result, odseq desc";
+		String sql = "select * from ("
+				+ " select * from ("
+				+ " select rownum as rn, p.* from "
+				+ " ((select * from order_view where name like '%'||?||'%' order by odseq desc) p)"
+				+ " ) where rn>=?"
+				+ " ) where rn<=?";	
 		con = Dbman.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,key);
+			pstmt.setInt(2, paging.getStartNum());
+			pstmt.setInt(3, paging.getEndNum());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {	// 리스트의 내용을 소진할때까지
