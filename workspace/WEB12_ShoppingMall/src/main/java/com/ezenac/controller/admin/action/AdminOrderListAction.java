@@ -27,13 +27,12 @@ public class AdminOrderListAction implements Action {
 		}else {
 			// 현재 화면에 표시될 페이지 설정
 			int page = 1;
-			if(request.getParameter("page") != null) {
+			if(request.getParameter("page") != null) {		// 보려는 페이지가 파라미터로 전달될때
 				page = Integer.parseInt(request.getParameter("page"));
 				session.setAttribute("page", page);
-			}else if(session.getAttribute("page") != null){
+			}else if(session.getAttribute("page") != null){		// 돌아갈 페이지 값을 잃어버렸을 경우
 				page = (int) session.getAttribute("page");
-			}else {
-				page = 1;
+			}else {		// 처음 리스트에 진입해서 1페이지를 봐야할때
 				session.removeAttribute("page");
 			}
 			
@@ -50,16 +49,17 @@ public class AdminOrderListAction implements Action {
 			}
 			
 			Paging paging = new Paging();
-			paging.setPage(page);
+			paging.setPage(page);	// 현재 page 셋팅
 			
 			AdminDao adao = AdminDao.getInstance();
-			int count = adao.getAllCount("order_view", "oseq", key);
+			int count = adao.getAllCount("order_view", "mname", key);
 			
 			paging.setTotalCount(count);
-			request.setAttribute("paging", paging);
 			
 			ArrayList<OrderVO> orderList = adao.listOrder(paging, key);
 			request.setAttribute("orderList", orderList);
+			request.setAttribute("paging", paging);	// paging.jsp에서 쓸 수 있도록 request에 담아 보낸다.
+			request.setAttribute("key", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

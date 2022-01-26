@@ -6,6 +6,14 @@ day 70
 --> 절반 해결! 액션 태그에 잘못된 주석 들어가있었던듯
 --> 근데 이젠 paging.jsp에 문제가 생겼다.
 ----> 해결! param. 이라고 써야할걸 paging으로 써버렸다!
+------> 해결! listOrder sql문도 문제가 있었다! 또한 Dao의 getAllCount,
+
+
+
+※ 다시 한번 봐야할것들
+- 회원중에 주소를 입력하지 않았던 사람이 정보를 수정하려고 하면 에러가 날 수 있다.
+ 따라서 action 패키지의 EditFormAction.java를 수정하자.
+
 
 
 
@@ -52,7 +60,7 @@ day 70
 
 ----> 이제 페이징 처리 및 목록으로 돌아갈 때 페이지와 검색어를 잊게되는 문제를 해결한다. (사진4 - AdminOrderListAction, 사진5 - listOrder 메소드)
 
-
+----> 그리고 orderList.jsp의 하단에 액션태그와 include를 이용하여 paging을 include한다. (사진6)
 
 
 

@@ -28,6 +28,14 @@
 	</c:forEach>
 </table>
 <input type="button" class="btn" style="width:200px" value="주문처리(입금확인)" onClick="go_order_save()">
+
+<br><br>
+
+<jsp:include page="/admin/paging/paging.jsp">
+	<jsp:param name="command" value="shop.do?command=adminOrderList"/>
+</jsp:include>
+
+<br><br>
 </form>
 </article>
 <%@ include file="/admin/footer.jsp"%>
