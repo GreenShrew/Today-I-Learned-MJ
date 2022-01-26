@@ -205,7 +205,7 @@ public class AdminDao {
 		return list;
 	}
 
-	public void orderResult(int odseq) {
+	public void updateOrderResult	(int odseq) {
 		String sql = "update order_detail set result=2 where odseq=?";
 		con = Dbman.getConnection();
 		try {

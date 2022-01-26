@@ -157,8 +157,11 @@ function go_order_save(){
 	
 	
 	var count = 0;
-	if(document.frm.result.checked == true){	// 화면에 표시된 체크박스가 1개일 경우! 체크박스가 1개인데 length를 쓰면 undefine이 된다.
-		count++;
+	if(document.frm.result.length == undefined){	// 화면에 표시된 체크박스가 1개일 경우! 
+		// 체크박스가 1개인데 length를 쓰면 undefine이 된다. 따라서 위의 조건을 사용하면 1개 체크되어있을 때를 걸러낼 수 있다.
+		if(document.frm.result.checked == true){
+			count++;
+		}
 	}else{	// 회면에 표시된 체크박스가 2개 이상인 경우
 		for(var i=0; i<document.frm.result.length;i++){
 			if(document.frm.result[i].checked == true)
@@ -166,10 +169,11 @@ function go_order_save(){
 		}
 	}
 	
+	// count값이 0이면, 더이상 진행하지 않고 orderList.jsp로 되돌아간다.
 	if(count==0){
-		document.frm.action = "shop.do?command=adminOrderList";
-		document.frm.submit();
-	}else{
+		alert("주문처리할 항목을 선택해주세요.");
+		return;	// 어차피 if문은 윗 코드에서 끝나므로 return; 을 쓸 필요는 없다.
+	}else{	// count 값이 1 이상이면 현재 폼안에 있는 체크박스 벨류값들을 가지고, 처리완료로 처리하러 command=adminOrderSave로 간다.
 		document.frm.action = "shop.do?command=adminOrderSave";
 		document.frm.submit();
 	}
