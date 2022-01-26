@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezenac.dto.AdminVO;
+import com.ezenac.dto.OrderVO;
 import com.ezenac.dto.ProductVO;
 import com.ezenac.util.Dbman;
 import com.ezenac.util.Paging;
@@ -154,5 +155,38 @@ public class AdminDao {
 		}finally {
 			Dbman.close(con, pstmt, rs);
 		}
+	}
+
+	public ArrayList<OrderVO> listOrder() {
+		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
+		String sql = "select * from order_view order by result, odseq desc";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {	// 리스트의 내용을 소진할때까지
+				OrderVO ovo = new OrderVO();
+				ovo.setOdseq(rs.getInt("odseq"));
+				ovo.setOseq(rs.getInt("oseq"));
+				ovo.setId(rs.getString("id"));
+				ovo.setIndate(rs.getTimestamp("indate"));
+				ovo.setMname(rs.getString("mname"));
+				ovo.setZip_num(rs.getString("zip_num"));
+				ovo.setAddress(rs.getString("address"));
+				ovo.setPhone(rs.getString("phone"));
+				ovo.setPseq(rs.getInt("pseq"));
+				ovo.setQuantity(rs.getInt("quantity"));
+				ovo.setPname(rs.getString("pname"));
+				ovo.setPrice2(rs.getInt("price2"));
+				ovo.setResult(rs.getString("result"));
+				list.add(ovo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		return list;
 	}
 }

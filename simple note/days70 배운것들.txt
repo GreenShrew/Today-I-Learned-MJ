@@ -1,0 +1,188 @@
+day 70
+오늘은 Shoppingmall 마무리일듯
+
+※ 에러 발생
+- productList의 paging을 인클루드 하자마자 에러가 나오기 시작했다.
+--> 절반 해결! 액션 태그에 잘못된 주석 들어가있었던듯
+--> 근데 이젠 paging.jsp에 문제가 생겼다.
+----> 해결! param. 이라고 써야할걸 paging으로 써버렸다!
+
+
+
+
+
+------------------- 페이지 표시 인클루드 하기
+
+
+ productList 아래에 있던 페이지 표시는 물품list, 주문list, qnalist 등에서 계속 쓰이게 된다.
+-> 그러므로 이 부분을 인클루드로 만들고, url 태그의 value값 command만 바꾸는 식으로 바꾼다!
+
+--> admin 폴더에 paging 폴더를 만들고, 그 안에 paging.jsp 파일을 만든다. 그리고 productList.jsp의 페이지 부분을 잘라다가 붙여넣는다.
+
+---> 그리고 productList.jsp의 기존 페이지 코드가 있던 부분에는 액션 태그로 가능한 include를 사용한다.
+
+----> 다만 문제가 있는데, paging.jsp의 페이지 표시 내용이 Product의 내용을 가지고 오기 떄문에 value값을 수정해야한다.
+
+-----> 따라서 command 값만 해당하는 페이지(productList.jsp) 에서 그에 맞는 command를 액션태그로 Parameter를 보내준다. 
+<jsp:param name="command" value="shop.do?command=adminProductList">
+
+-----> 그리고 paging.jsp에서 EL문법으로 전달된 파라미터를 받는다.
+ <c:url var="action" value="${param.command}" />
+
+
+
+
+----------------------------- 주문 리스트 만들기
+
+§ 사진으로 차근차근 만든다.
+폴더 따로
+
+- sub_menu의 주문리스트는 command adminOrderList가 걸려있다.
+
+--> AdminOrderListAction 클래스 생성
+ 우선 주문내역을 DB에서 긁어서 orderList.jsp 로 보낼 수 있도록 만든다. (사진1)
+--> order_view 뷰의 레코드를 모두 긁어서 다시 orderList.jsp로 보내는 Dao의 listOrder() 메소드를 만든다. (사진2)
+
+---> admin 폴더에 order 폴더를 만들고, 그 안에 orderList.jsp 파일을 만든다. (사진3)
+---> AdminOrderListAction 클래스에서 받은 데이터들을 웹 페이지에 표시한다.
+여기서 key 값은 나중에 검색했을 때 검색창에 검색했던 내용을 남기기 위해 다시 key값으로 받도록 만든다.
+---> '검색', '전체보기', '주문확인(입금확인)' 버튼에 각각 스크립트로 이동하는 onClick 속성이 있다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

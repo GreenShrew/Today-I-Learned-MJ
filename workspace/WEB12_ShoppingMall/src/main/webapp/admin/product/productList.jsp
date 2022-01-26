@@ -30,28 +30,13 @@
 	</c:forEach>
 </table>
 
-<br/><br/>	<!-- 아래는 페이지 숫자들 -->
-	<div id="paging" align="center" style="font-size:110%; font-weight:bold;">
-		<c:url var="action" value="shop.do?command=adminProductList" />
-		<c:if test="${paging.prev}">
-			<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;
-		</c:if>
-		
-		<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-			<c:choose>
-				<c:when test="${paging.page==index}">
-					<span style="color:red">${index}&nbsp;</span>
-				</c:when>
-				<c:otherwise>
-					<a href="${action}&page=${index}&key=${key}">${index}</a>&nbsp;
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		
-		<c:if test="${paging.next}">
-			<a href="${action}&page=${paging.endPage+1}">▶</a>&nbsp;
-		</c:if>
-	</div>
+<br/><br/>	<!-- 아래는 페이지 숫자들을 표시하는 코드...였으나 따로 빼서 인클루드 함. -->
+
+<jsp:include page="/admin/paging/paging.jsp">
+	<jsp:param name="command" value="shop.do?command=adminProductList"/>
+</jsp:include>
+<!-- include로 paging.jsp 를 불러오면서 그 페이지 안에 command 값으로 파라미터를 보내준다. -->
+<br><br/>
 </article>
 
 <%@ include file="/admin/footer.jsp"%>

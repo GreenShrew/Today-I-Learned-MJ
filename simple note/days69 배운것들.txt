@@ -43,6 +43,9 @@ AdminProductUpdateFormAction 이걸 잘못 썼나?
 ※ 확인할거
 admin header 부분에 뭐 부실하게 넣었나?
 
+AdminProductListAction 의 session에 page 값을 저장하고 삭제하는 과정이 이해가 잘 안된다.
+
+
 
 
 ------------ 리스트 검색하는 기능 만들기
