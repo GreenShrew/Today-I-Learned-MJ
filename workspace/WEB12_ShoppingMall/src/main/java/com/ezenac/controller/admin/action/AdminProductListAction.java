@@ -27,7 +27,7 @@ public class AdminProductListAction implements Action {
 		}else {
 			
 			String sub = request.getParameter("sub");
-			if(sub != null) {		// sub_menu의 버튼을 누르면 sub에 y값이 들어있으므로, null이 아니게 되어 if문이 실행된다!
+			if(sub != null && sub.equals("y")) {		// sub_menu의 버튼을 누르면 sub에 y값이 들어있으므로, null이 아니게 되어 if문이 실행된다!
 				session.removeAttribute("key");
 				session.removeAttribute("page");
 			}
@@ -39,7 +39,7 @@ public class AdminProductListAction implements Action {
 				// 위에건 특정 페이지를 보는 경우에 실행
 				// 아래는 페이지에 대한 정보를 잃어버릴 것 같은 경우에 실행
 			}else if(session.getAttribute("page") != null) {		// 세션에 page가 저장되어 있다면 현재 페이지로 session을 저장.
-				page = (int) session.getAttribute("page");
+				page = (int) session.getAttribute("page");		// 위의 if문이 걸러진 내용...즉, 페이지 이동이 아니라 게시물을 눌렀을 경우.
 			}else {		// 
 				page = 1;
 				session.removeAttribute("page");

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezenac.dto.AdminVO;
+import com.ezenac.dto.MemberVO;
 import com.ezenac.dto.OrderVO;
 import com.ezenac.dto.ProductVO;
 import com.ezenac.util.Dbman;
@@ -217,5 +218,44 @@ public class AdminDao {
 		}finally {
 			Dbman.close(con, pstmt, rs);
 		}
+	}
+
+	public ArrayList<MemberVO> listMember(Paging paging, String key) {
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+//		String sql = "select * from member order by name desc";
+		String sql = "select * from ("
+				+ " select * from ("
+				+ " select rownum as rn, m.* from "
+				+ " ((select * from member where name like '%'||?||'%' order by indate desc) m)"	// m은 핵심 sql문의 결과에 별칭 m을 붙이는 것이다.
+				+ " ) where rn>=?"
+				+ " ) where rn<=?";		
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
+			pstmt.setInt(2, paging.getStartNum());
+			pstmt.setInt(3, paging.getEndNum());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString("id"));
+				mvo.setPwd(rs.getString("pwd"));
+				mvo.setName(rs.getString("name"));
+				mvo.setEmail(rs.getString("email"));
+				mvo.setZip_num(rs.getString("zip_num"));
+				mvo.setAddress(rs.getString("address"));
+				mvo.setPhone(rs.getString("phone"));
+				mvo.setUseyn(rs.getString("useyn"));
+				mvo.setIndate(rs.getTimestamp("indate"));
+				list.add(mvo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		return list;
 	}
 }

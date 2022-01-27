@@ -9,20 +9,20 @@
 		<item key="isRegEx" value="true"/>
 		<list key="findhistory">
 			<item value="odseq"/>
+			<item value="alter"/>
+			<item value="cseq"/>
+			<item value="go_search_order"/>
+			<item value="order_view"/>
+			<item value="mname"/>
+			<item value="jsp"/>
+			<item value="productLi"/>
+			<item value="._jspService(productLi"/>
+			<item value="._jspService(productList_jsp.java:208)"/>
+			<item value="at"/>
 			<item value="rownum"/>
 			<item value="paging"/>
 			<item value="table order"/>
 			<item value="count"/>
-			<item value="page"/>
-			<item value="pseq"/>
-			<item value="pesq"/>
-			<item value="action"/>
-			<item value="true"/>
-			<item value="check"/>
-			<item value="제약"/>
-			<item value="add"/>
-			<item value="관리자"/>
-			<item value="관맂"/>
 		</list>
 		<list key="replacehistory">
 			<item value="VO"/>
