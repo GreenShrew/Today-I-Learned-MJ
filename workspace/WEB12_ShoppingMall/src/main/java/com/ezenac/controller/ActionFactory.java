@@ -46,7 +46,9 @@ import com.ezenac.controller.admin.action.AdminProductUpdateAction;
 import com.ezenac.controller.admin.action.AdminProductUpdateFormAction;
 import com.ezenac.controller.admin.action.AdminProductWriteAction;
 import com.ezenac.controller.admin.action.AdminProductWriteFormAction;
+import com.ezenac.controller.admin.action.AdminQnaDetailAction;
 import com.ezenac.controller.admin.action.AdminQnaListAction;
+import com.ezenac.controller.admin.action.AdminQnaReqSaveAction;
 
 public class ActionFactory {
 
@@ -104,6 +106,8 @@ public class ActionFactory {
 		else if(command.equals("adminMemberList")) ac = new AdminMemberListAction();
 		else if(command.equals("Withrawal")) ac = new WithrawalAction();
 		else if(command.equals("adminQnaList")) ac = new AdminQnaListAction();
+		else if(command.equals("adminQnaDetail")) ac = new AdminQnaDetailAction();
+		else if(command.equals("adminQnaReqSave")) ac = new AdminQnaReqSaveAction();
 		
 		
 		return ac;

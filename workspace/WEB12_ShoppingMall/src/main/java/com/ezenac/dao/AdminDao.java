@@ -10,6 +10,7 @@ import com.ezenac.dto.AdminVO;
 import com.ezenac.dto.MemberVO;
 import com.ezenac.dto.OrderVO;
 import com.ezenac.dto.ProductVO;
+import com.ezenac.dto.QnaVO;
 import com.ezenac.util.Dbman;
 import com.ezenac.util.Paging;
 
@@ -267,7 +268,7 @@ public class AdminDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, key);
 			pstmt.setString(2, key);
-			pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt("cnt");
 			}
@@ -277,5 +278,55 @@ public class AdminDao {
 			Dbman.close(con, pstmt, rs);
 		}
 		return count;
+	}
+
+	public ArrayList<QnaVO> listQna(Paging paging, String key) {
+		 ArrayList<QnaVO> list = new  ArrayList<QnaVO>();
+		 String sql = "select * from ( "
+		 		+ " select * from ( "
+		 		+ " select rownum as rn, q.* from "
+		 		+ " ((select * from qna where subject like '%'||?||'%' or content like '%'||?||'%' order by qseq desc)q) "
+		 		+ " ) where rn>=? "
+		 		+ " ) where rn<=?";
+		 con = Dbman.getConnection();
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, key);
+				pstmt.setString(2, key);
+				pstmt.setInt(3, paging.getStartNum());
+				pstmt.setInt(4, paging.getEndNum());
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					QnaVO qvo = new QnaVO();
+					qvo.setQseq(rs.getInt("qseq"));
+					qvo.setSubject(rs.getString("subject"));
+					qvo.setContent(rs.getString("content"));
+					qvo.setId(rs.getString("id"));
+					qvo.setIndate(rs.getTimestamp("indate"));
+					qvo.setReply(rs.getString("reply"));
+					qvo.setRep(rs.getString("rep"));
+					list.add(qvo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				Dbman.close(con, pstmt, rs);
+			}
+		return list;
+	}
+
+	public void updateQna(QnaVO qvo) {
+		String sql = "update qna set reply=?, rep='2' where qseq=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qvo.getReply());
+			pstmt.setInt(2, qvo.getQseq());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
 	}
 }

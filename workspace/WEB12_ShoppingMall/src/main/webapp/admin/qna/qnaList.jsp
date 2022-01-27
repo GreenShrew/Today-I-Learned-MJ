@@ -3,7 +3,7 @@
 <%@ include file="/admin/sub_menu.jsp"%>
 <article>
 <h1>Q&amp;A 게시글 리스트</h1>
-<form name="frm">
+<form name="frm" method="post">
 <table style="float:right;">
 	<tr><td>제목 + 내용 검색
 		<input type="text" name="key" value="${key}">

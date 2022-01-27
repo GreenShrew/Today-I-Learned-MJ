@@ -178,3 +178,17 @@ function go_order_save(){
 		document.frm.submit();
 	}
 }
+
+
+
+function go_view(qseq){
+	location.href="shop.do?command=adminQnaDetail&qseq=" + qseq;
+}
+
+
+
+function go_rep(qseq){
+	document.frm.action="shop.do?command=adminQnaReqSave";
+	document.frm.submit();
+	// 답변 글 등록 & rep 필드를 1에서 2로 업데이트 하는 동작
+}
