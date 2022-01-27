@@ -30,7 +30,9 @@ public class LoginAction implements Action {
 			request.setAttribute("message", "회원정보 오류. 관리자에게 문의하세요.");
 		} else if(!mvo.getPwd().equals(pwd)) {
 			request.setAttribute("message", "비밀번호가 틀려요.");
-		} else if(mvo.getPwd().equals(pwd)) {		// 로그인 성공시 session에 해당 회원의 정보를 저장하여 창이 닫힐때까지 보관한다.
+		}else if(mvo.getPwd().equals(pwd) && !mvo.getUseyn().equals("y")){	// 비밀번호는 맞는데 회원탈퇴한 사람이다.
+			request.setAttribute("message", "탈퇴하거나 휴면중인 계정입니다.");
+		}else if(mvo.getPwd().equals(pwd)) {		// 로그인 성공시 session에 해당 회원의 정보를 저장하여 창이 닫힐때까지 보관한다.
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", mvo);
 			url = "shop.do?command=index";

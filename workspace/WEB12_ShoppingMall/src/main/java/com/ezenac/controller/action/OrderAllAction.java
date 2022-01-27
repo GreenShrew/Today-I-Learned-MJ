@@ -28,7 +28,7 @@ public class OrderAllAction implements Action {
 		}else {
 			OrderDao odao = OrderDao.getInstance();
 			ArrayList<OrderVO> finalList = new ArrayList<OrderVO>();
-			ArrayList<Integer> oseqList = odao.selectOseqOrderAll(mvo.getId());	// 여기가 바뀌었다.
+			ArrayList<Integer> oseqList = odao.selectOseqOrderAll(mvo.getId());	// id로 주문번호를 모두 조회하는 메소드
 			for(Integer i : oseqList) System.out.println(i);
 			for(Integer oseq : oseqList) {
 				ArrayList<OrderVO> orderListByOseq = odao.listOrderByOseq(oseq);

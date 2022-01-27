@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezenac.dto.CartVO;
+import com.ezenac.dto.MemberVO;
 import com.ezenac.util.Dbman;
 
 public class CartDao {
@@ -71,6 +72,20 @@ public class CartDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
+
+	public void deleteCart(String id) {
+		String sql ="delete from cart where id=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -6,5 +6,6 @@
 		<li><a href="shop.do?command=cartList">장바구니(cart)내역</a></li>
 		<li><a href="shop.do?command=myPage">진행중인 주문내역</a></li>
 		<li><a href="shop.do?command=orderAll">총 주문내역</a></li>
+		<li><a href="#" onclick="withdrawalConfirm();">탈퇴</a></li>
 	</ul>
 </nav>

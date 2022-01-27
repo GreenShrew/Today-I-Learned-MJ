@@ -165,6 +165,20 @@ public class MemberDao {
 			Dbman.close(con, pstmt, rs);
 		}
 	}
+
+	public void updateUseyn(String id) {
+		String sql = "update member set useyn='x' where id=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 	
 	
 }

@@ -77,9 +77,12 @@ function go_save(){
 	} else if(document.joinForm.name.value == ""){
 		alert("이름을 입력해주세요.");
 		document.joinForm.name.focus();
-	} else if(document.joinForm.email.value == ""){
-		alert("이메일을 입력해주세요.");
-		document.joinForm.email.focus();
+	} else if(document.joinForm.email.value == "") {
+	    alert("이메일을 입력해 주세요.");	   
+	   	document.joinForm.email.focus();
+	} else if(document.joinForm.phone.value == "") {
+	    alert("전화번호를 입력해 주세요.");	   
+	   	document.joinForm.phone.focus();
 	} else{
 		document.joinForm.action = "shop.do";
 		document.joinForm.submit();

@@ -180,6 +180,34 @@ public class OrderDao {
 		
 		return oseq;
 	}
+
+	public void deleteOrders(Integer oseq) {
+		String sql = "delete from orders where oseq=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
+
+	public void deleteOrder_detail(Integer oseq) {
+		String sql = "delete from order_detail where oseq=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Dbman.close(con, pstmt, rs);
+		}
+	}
 	
 	
 }

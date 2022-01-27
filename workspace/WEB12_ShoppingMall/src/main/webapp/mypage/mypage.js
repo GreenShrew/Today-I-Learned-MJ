@@ -59,3 +59,16 @@ function go_order(){
 	document.formm.action = "shop.do?command=orderOne";
 	document.formm.submit();
 }
+
+
+
+
+
+
+
+function withdrawalConfirm(){
+	var answer = confirm("회원탈퇴를 하면 지금까지의 이용내역이 모두 사라집니다. 탈퇴하시겠습니까?");
+	if (answer){	// confirm()가 그 자체로 true/false를 반환한다.
+		location.href="shop.do?command=Withrawal";
+	}
+}

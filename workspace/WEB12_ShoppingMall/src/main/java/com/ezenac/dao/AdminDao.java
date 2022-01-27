@@ -258,4 +258,24 @@ public class AdminDao {
 		}
 		return list;
 	}
+
+	public int getAllCountForQna(String key) {
+		int count = 0;
+		String sql = "select count(*) as cnt from qna where subject like '%'||?||'%' or content like '%'||?||'%'";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, key);
+			pstmt.setString(2, key);
+			pstmt.executeUpdate();
+			if(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Dbman.close(con, pstmt, rs);
+		}
+		return count;
+	}
 }
