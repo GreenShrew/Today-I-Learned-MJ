@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 현재 폴더는 스프링 컨테이너로 사용되고 있음을 알리고 있는 태그 : beans -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		<!-- 현재 위치에 스피링 컨테이너에 담아 사용하고 싶은 클래스를 bean이라는 태그로 등록 - 담아둔다. -->		
+		<bean class="com.ezen.sp03.WalkClass"  id="cWalk"></bean>	<!-- 해당 클래스를 앞으로 cWalk라고 부르겠다는 의미. -->
+		
+</beans>
