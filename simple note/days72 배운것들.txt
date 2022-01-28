@@ -16,6 +16,12 @@ ShoppingMall은 MVC패턴, Model2 방식이였다.
 ※ 에러
 Sp05 에러난다!
 
+StudentInsertService, StudentSelectService 다 못썼다!
+-> 쓰긴 썼는데 맞는지 확인해
+
+
+
+
 
 
 
@@ -247,9 +253,179 @@ pom.xml 에 repository를 모를 때 어떻게 해야하는가?
 
 
 
-##### 오라클 DB에 테이블 만들기
+##### 오라클 DB에 테이블 만들기 (일반적인 방법 - java 프로그래밍)
+프로젝트명 : Sp05
+§ 사진 7
 
-- 실습에 사용할 student 테이블을 만든다.
+
+- src 폴더에 sql.sql 파일을 만들고 실습에 사용할 student 테이블을 만든다.
+ 
+--> 이전에 인스턴스를 미리 만들어서 필요할때마다 컨테이너에서 꺼내 쓸 수 있도록 만든 applicationContext.xml를 이용해서 DB 또한 다룰 수 있도록 만들 것이다.
+
+
+-> com.ezen.member, com.ezen.member.dao, com.ezen.member.dto, com.ezen.member.main, com.ezen.member.service 5개의 패키지를 생성
+
+--> dto 패키지에 Student 클래스 생성
+ 각 변수에 대한 getter, setter 를 만들고, 마우스 우클릭 Source - Generate Constructor using Field를 눌러 클래스 내의 모든 변수를 매개변수로 가지는 생성자를 만든다.
+
+
+--> dao 패키지에 StudentDao 클래스 생성
+ DB 연결정보를 적고 DB에 연결하는 메소드 getConnection과 끊는 객체 close 를 만든다.
+ 어차피 한번 쓰고 말거 이전처럼 Dbman 클래스를 따로 만들던가 그런 작업은 안 한다.
+
+
+--> service 패키지에 StudentInsertService 클래스 생성
+StudentDao의 메소드 insertStudent를 실행하는 insertStudent(Student std) 메소드를 제작한다.
+이 메소드는 MainClass에서 사용할것이다.
+
+
+--> main 패키지에 MainClass 클래스 생성
+ StudentInsertService의 객체 sis를 만들고, Student 클래스의 객체 std를 만들며 내용을 저장한뒤, sis에 있는 메소드 insertStudent(std);로 DB에 내용을 저장한다.
+
+
+--> Dao 에서 DB에 데이터를 insert하는 insertStudent 메소드를 제작한다.
+
+※ 거꾸로 만들었지만, 어쨌든 일반적으로는 이런식이다.
+
+
+
+---> MainClass.java 를 실행하면 두 학생이 DB에 저장되게 된다.
+(한번 실행하고 나면 학생 추가하는 코드는 주석처리 해놓자... 또 실행하면 중복으로 DB에 들어가게 된다.)
+
+
+----> 이제 DB에 저장된 학생들의 정보를 전부 출력하는 코드를 만든다.
+
+----> service 패키지에 StudentSelectService 클래스를 만든다.
+----> 그리고 MainClass.java에 만들어두었던 selectStudent() 메소드를 StudentSelectService에 만든다.
+----> StudentSelectService 클래스에서는 Dao에 있는 selectStudent 메소드를 사용한다. 따라서 Dao에 학생들의 정보를 조회하는 selectStudent 메소드를 만든다.
+
+
+이게 일반적인 java 프로그래밍 방법으로 만든 DB 사용법이다.
+
+이제 SpringFramework으로 위의 동작을 어떻게 만드는지 배울것이다.
+
+
+
+
+※ 여기 복습 다시 꼭!!!!
+##### 오라클 DB에 테이블 만들기 (SpringFramework)
+
+
+- 우선 StudentSelectService sss = new StudentSelectService(); 를 호출하지 않을것이다!
+
+- service 패키지에 SpringContainerClass 클래스를 만든
+여기에 모든 클래스의 객체가 하나씩 담길것이다!
+
+--> SpringContainerClass에 StudentSelectService, StudentInsertService의 객체를 만들고, 해당 클래스들의 new 인스턴스를 생성하는 기능을 가지는 SpringContainerClass 생성자를 만든다.
+그리고 각 객체의 getter를 만들어주면 끝!(setter는 만들 필요가 없다!)
+
+※ 이게 뭔 소리지?
+--> StudentSelectService와 StudentInsertService 에서는 기존에 new 로 인스턴스를 만들던 것을 생성자를 이용하여 만든다...
+
+
+--> 이제 MainClass.java에서 SpringContainerClass 객체를 만든 뒤 이 객체를 이용해서 StudentSelectService, StudentInsertService의 객체를 만들 수 있다!
+--> SpringContainerClass scc = new SpringContainerClass();
+--> StudentInsertService sis = scc.getIs();
+
+
+
+
+----> 한명의 학생의 정보를 가져오는 클래스를 예시로 만들어본다.
+StudentSelectOneService
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
