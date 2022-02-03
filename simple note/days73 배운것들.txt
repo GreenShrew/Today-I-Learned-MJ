@@ -23,6 +23,13 @@ xml 파일에 윗쪽 DB 연결하는 bean 태그 확인해...
 
 
 
+Sp07의 DataBaseManager 에서 close() 메소드에 문제 생긴다.
+그냥 Sp07 부분을 전부 한번씩 확인하자.
+
+
+
+
+
 ※ 의문! Service 단계를 왜 넣는가? 이유는 나중에 나올 것이다.
 
 
@@ -170,9 +177,11 @@ wordset 테이블을 만든다.
 --> WordInsertService 클래스 생성
 --> Dao 파일은 WordDao 클래스 생성. 다만 이번에는 driver나 url 같은 정보는 쓰지 않는다. DataBaseManager 라는 클래스를 만들면서 이 안에다가 적을것이고, 이전에 만들었던 getConnection, close 메소드 또한 여기에다가 만들 것이다.
 
+---> util 패키지에 DataBaseManager 클래스 생성.
+---> 여기서는 또 DataBaseUserinfo라는 클래스를 만들어서, 이 클래스 형태의 변수 dbi를 만들고, 이 클래스에서 db에 연결할 정보를 가져오도록 만든다.
+---> 그리고 util 패키지에 DataBaseUserinfo 클래스를 생성한다.
 
-
-
+---> 의존하고 의존하고 의존하는 형태를 만들었다.
 
 
 
