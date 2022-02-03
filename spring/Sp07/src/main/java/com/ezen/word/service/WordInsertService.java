@@ -5,13 +5,13 @@ import com.ezen.word.dto.WordSet;
 
 public class WordInsertService {
 
-	private WordDao wdao;
+	private WordDao worddao;
 	
-	public WordInsertService(WordDao wdao) {
-		this.wdao = wdao;
+	public WordInsertService(WordDao worddao) {
+		this.worddao = worddao;
 	}
 	
 	public void insert(WordSet wordSet) {
-		wdao.insert(wordSet);
+		worddao.insert(wordSet);
 	}
 }

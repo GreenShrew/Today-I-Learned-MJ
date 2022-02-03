@@ -20,7 +20,7 @@ Dao의 selectOneStudent 메소드에 문제가 있는듯.
 
 xml 파일에 윗쪽 DB 연결하는 bean 태그 확인해...
 뭘 바꾸셨는데 내가 확인을 못 했다..
-
+--> 해결! name을 내가 이상하게 썼었다!
 
 
 Sp07의 DataBaseManager 에서 close() 메소드에 문제 생긴다.

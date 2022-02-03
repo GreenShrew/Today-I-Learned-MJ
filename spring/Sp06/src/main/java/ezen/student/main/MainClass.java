@@ -43,8 +43,7 @@ public class MainClass {
 		}
 		*/
 		
-		
-		/* EMS 하는동안 잠시 주석처리
+
 		
 		// 9명의 데이터를 모두 조회해서 출력하기.
 		// new SelectAllService가 아니라 ctx로 bean을 불러온다.
@@ -129,8 +128,7 @@ public class MainClass {
 		System.out.print("| sAge : " + std.getsAge() + "\n");
 		System.out.print("| sGender : " + std.getsGender() + "\n");
 		System.out.print("| sMajor : " + std.getsMajor() + "\n\n");
-		
-		46번째 코드부터 잠시 주석처리*/
+
 		
 		EMSInformationService eis = ctx.getBean("informationService", EMSInformationService.class);
 		eis.outputEMSInformation();

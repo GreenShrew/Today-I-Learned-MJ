@@ -12,7 +12,7 @@ public class WordDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	DataBaseManager dbm = new DataBaseManager();
+	DataBaseManager dbm;
 	
 	public WordDao(DataBaseManager dbm) {
 		this.dbm = dbm;
@@ -20,7 +20,6 @@ public class WordDao {
 
 	public void insert(WordSet wordSet) {
 		con = dbm.getConnection();
-		
-		
+		dbm.close(con, pstmt, rs);
 	}
 }

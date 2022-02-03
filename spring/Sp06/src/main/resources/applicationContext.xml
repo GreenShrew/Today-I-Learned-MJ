@@ -5,22 +5,22 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans.xsd">
        
-       <bean class="ezen.student.dto.DataBaseConnectionInfo" id="dbconinfo1">
-       		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-       		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-       		<property name="id" value="scott"/>
-       		<property name="pw" value="tiger"/>
-       </bean>
+       <bean class="ezen.student.dto.DataBaseConnectionInfo"  id="dbconinfo1" >
+ 			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	 		<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+	 		<property name="id" value="scott" />
+	 		<property name="pw" value="tiger" />
+ 		</bean>
        <!-- 스프링 컨테이너의 Bean 태그에 property 태그를 이용하여 각 멤버변수의 초기값을 넣어줄 수 있다 -->
        <!-- 위와 같이 property 태그로 멤버변수에 값을 초기화하려면 각 변수의 getter/setter 가 필수로 존재해야한다. -->
        
        <!-- 스프링 컨테이너에 저장되는 Bean은 한개의 객체이므로, 다른 내용의 객체가 필요하다면 초기값을 달리해서 또 하나의 Bean을 생성한다. -->
-       <bean class="ezen.student.dto.DataBaseConnectionInfo" id="dbconinfo2">
-       		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-       		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-       		<property name="userId" value="system"/>
-       		<property name="userPw" value="adminuser"/>
-       </bean>
+       <bean class="ezen.student.dto.DataBaseConnectionInfo"  id="dbconinfo2" >
+			<property name="url"	value="jdbc:oracle:thin:@localhost:1521:xe" />
+	 		<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+	 		<property name="id" value="system" />
+	 		<property name="pw" value="adminuser" />
+		</bean>
        
        
        
