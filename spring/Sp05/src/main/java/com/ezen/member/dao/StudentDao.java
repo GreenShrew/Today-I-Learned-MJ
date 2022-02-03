@@ -114,4 +114,25 @@ public class StudentDao {
 		}
 		return std;
 	}
+
+	public void updateStudent(Student std) {
+		String sql = "update student set sId=?, sPw=?, sName=?, sAge=?, sGender=?, sMajor=? where sNum=?";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, std.getsId());
+			pstmt.setString(2, std.getsPw());
+			pstmt.setString(3, std.getsName());
+			pstmt.setInt(4, std.getsAge());
+			pstmt.setString(5, std.getsGender());
+			pstmt.setString(6, std.getsMajor());
+			pstmt.setString(7, std.getsNum());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
 }

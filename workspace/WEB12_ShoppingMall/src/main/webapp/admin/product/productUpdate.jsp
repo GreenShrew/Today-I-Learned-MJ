@@ -2,7 +2,7 @@
 <%@ include file="/admin/header.jsp"%>
 <%@ include file="/admin/sub_menu.jsp"%>
 <article>
-<h1>상품수정${productVO.kind}</h1>
+<h1>상품수정 - ${productVO.kind}</h1>
 <form name="frm" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="pseq" value="${productVO.pseq}">
 	<input type="hidden" name="oldImage" value="${productVO.image}"><!-- 이미지 안 바꿀것을 대비해서 옛 사진도 보낸다. -->

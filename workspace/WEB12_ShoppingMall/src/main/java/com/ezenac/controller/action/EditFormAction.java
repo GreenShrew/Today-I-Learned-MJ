@@ -30,7 +30,7 @@ public class EditFormAction implements Action {
 		String addr1 = addr.substring(0, k3);
 		
 		// 세번째 공백 뒷글자부터 맨 끝까지가 주소의 뒷부분이 된다.
-		String addr2 = addr.substring(k3+1);
+		String addr2 = addr.substring(k3+1);	// 문자열 자르기 substring
 
 		request.setAttribute("addr1", addr1);
 		request.setAttribute("addr2", addr2);

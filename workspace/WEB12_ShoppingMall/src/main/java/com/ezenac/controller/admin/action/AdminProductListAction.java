@@ -52,7 +52,7 @@ public class AdminProductListAction implements Action {
 
 			
 			String key = "";
-			if(request.getParameter("key") != null) {		// 검색어가 없을경우
+			if(request.getParameter("key") != null) {		// 검색어가 있을 경우
 				key = request.getParameter("key");
 				session.setAttribute("key", key);
 			}else if(session.getAttribute("key") != null) {

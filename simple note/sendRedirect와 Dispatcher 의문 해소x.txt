@@ -1,0 +1,1 @@
+sendRedirect와 Dispatcher의 차이와 쓰는 이유 등등
