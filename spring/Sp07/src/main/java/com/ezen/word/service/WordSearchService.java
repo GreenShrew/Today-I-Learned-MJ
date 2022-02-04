@@ -5,16 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ezen.word.dao.WordDao;
 import com.ezen.word.dto.WordSet;
 
-public class WordInsertService {
+public class WordSearchService {
 
 	@Autowired
 	private WordDao worddao;
 	
-//	public WordInsertService(WordDao worddao) {
-//		this.worddao = worddao;
+//	public WordSearchService(WordDao wdao) {
+//		this.worddao = wdao;
 //	}
 	
-	public void insert(WordSet wordSet) {
-		worddao.insert(wordSet);
+	public WordSet searchWord(String kw) {
+		WordSet ws = worddao.search(kw);
+		return ws;
 	}
 }

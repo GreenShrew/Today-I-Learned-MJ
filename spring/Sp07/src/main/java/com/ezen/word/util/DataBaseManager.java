@@ -6,13 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class DataBaseManager {
 	
+	@Autowired	// 해당 클래스의 bean을 스프링 컨테이너에서 검색하여, 꺼내다가 자동주입을 진행한다. - 자동주입
+	// bean을 꺼내와서 dbi에 주입해준다!
 	private DataBaseUserinfo dbi;
 	
-	public DataBaseManager(DataBaseUserinfo dbi) {
-		this.dbi = dbi;
-	}
+//	public DataBaseManager(DataBaseUserinfo dbi) {
+//		this.dbi = dbi;
+//	}
 	
 	public Connection getConnection() {
 		Connection con = null;

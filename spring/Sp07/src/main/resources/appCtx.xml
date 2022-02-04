@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+		<context:annotation-config/>
+		
+		<bean id="dbuserinfo" class="com.ezen.word.util.DataBaseUserinfo">
+			<property name="url"  value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+			<property name="id"  value="scott"></property>
+			<property name="pw"  value="tiger"></property>
+			<property name="driver"  value="oracle.jdbc.driver.OracleDriver"></property>
+		</bean>
+		
+		<bean id="dbmanager" class="com.ezen.word.util.DataBaseManager">
+			<!-- <constructor-arg ref="dbuserinfo"></constructor-arg> -->
+		</bean>
+		
+		<bean id="worddao" class="com.ezen.word.dao.WordDao">
+			<!-- <constructor-arg ref="dbmanager"></constructor-arg> -->
+		</bean>
+		
+		<bean id="insertService" class="com.ezen.word.service.WordInsertService">
+			<!-- <constructor-arg ref="worddao"></constructor-arg> -->
+		</bean>
+		
+		<bean id="searchService" class="com.ezen.word.service.WordSearchService">
+			<!-- <constructor-arg ref="worddao"></constructor-arg> -->
+		</bean>
+</beans>
