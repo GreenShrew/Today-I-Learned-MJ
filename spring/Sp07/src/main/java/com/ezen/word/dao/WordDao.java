@@ -24,7 +24,7 @@ public class WordDao {
 
 	public void insert(WordSet wordSet) {
 		
-		String sql = "insert into wordset value(?, ?)";
+		String sql = "insert into wordset values(?, ?)";
 		con = dbm.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -40,7 +40,24 @@ public class WordDao {
 	}
 
 	public WordSet search(String kw) {
-		
-		return null;
+		WordSet ws = null;
+		String sql = "select * from wordset where wordkey=?";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, kw);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ws = new WordSet(
+						rs.getString("wordkey"),
+						rs.getString("wordvalue")
+				);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+		return ws;
 	}
 }

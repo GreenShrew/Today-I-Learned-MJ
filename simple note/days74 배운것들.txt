@@ -57,7 +57,9 @@ Bean이란 무엇인가?
 
 
 
-=========
+
+annotation 을 이용한 bean 자동주입!
+==================================================
 
 
 § 이번에는 생성자에 자동주입을 시켜주는 constructor-arg 태그를 쓰지 않는다!
@@ -83,6 +85,15 @@ Bean이란 무엇인가?
 ====== 이제 이를 사용해보자!
 - com.ezen.word 패키지에 MainClass 클래스를 생성한다.
 
+레코드 삽입 동작
+-> 배열을 작성하고, 이를 wordset 테이블에 넣는 insert 동작을 시킨다. 그리고 이를 주석처리한다.
+
+레코드 검색 동작
+--> insert된 레코드를 검색해서 해당하는 정보를 출력한다.
+
+
+
+★ 여기까지가 annotation 을 이용한 bean 자동주입 방법이였다.
 
 
 
@@ -91,16 +102,29 @@ Bean이란 무엇인가?
 
 
 
+Spring을 이용한 Web 만들기
+================================
+ 이제부터는 Spring을 이용하여 Web 페이지를 만들것이다!
+
+- TIL 폴더에 springweb 폴더를 만든다. 그리고 이클립스 workspace를 springweb 폴더로 옮긴다.
+
+-> 다만, 이번에는 이클립스 버전을 좀 낮출것이다. 왜냐하면 예전에 사용된 '레거시 스프링?' 을 사용하면서 문제가 생긴다. 따라서 이클립스를 삭제하고 2020년 이클립스를 재설치할 예정이다.
+
+--> 이전에 사용했던 프로젝트의 workspace를 보호하기 위해 이클립스를 삭제하기 전에 workspace를 바꾸었다.
+
+
+☆ 삭제 순서
+
+c드라이브 - 사용자 - 사용자이름(Onion) - .eclipse, .m2, .p2, eclipse, eclipse-workspace 폴더를 지운다! 다만, 이중에 하나는 없을 수는 있어도 eclipse 폴더가 없을수는 없다! 아마 다른데에 설치되어있을 확률이 높다.
 
 
 
+☆ 다운로드 순서
+
+https://www.eclipse.org/ 접속 - download 버튼 클릭 - 나오는 페이지에서 Download Packages 버튼 클릭 - MORE DOWNLOADS 항목에서 Older Versions 클릭 - 2020-03 클릭 - R Packages 클릭 - Windows x86_64 다운로드
 
 
-
-
-
-
-
+eclipse-inst-win64.exe 실행 - Eclipse IDE for Enterprise Java and Web Developers - install 클릭
 
 
 
