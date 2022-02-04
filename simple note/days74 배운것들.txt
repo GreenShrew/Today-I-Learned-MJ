@@ -14,6 +14,10 @@ SpringFramework를 사용하는 이유?
 
 
 
+※ 다시 볼것!
+SpringWeb_Board 프로젝트의 DataBaseManager를 긁자...
+
+
 
 ========================= Sp07 계속
 
@@ -293,5 +297,37 @@ member의 테이블을 만든다! (기존에 있던 테이블이 있다.)
 
 
 
+### 로그인 기능 만들기
+loginForm에서 action을 보면 action="login" 이다. 이는 MemberController 클래스의 @RequestMapping의 value값이 "login"이라는 의미이다.
+
+- MemberController 에서 value="/login"인 @RequestMapping를 만든다. 목적지는 board/main.jsp
+-> loginForm.jsp에서 전달되는 값은 name이 id, pwd인 값이 전달된다.
+
+--> 이 동작을 위해서는 dao, dto, service 파일이 필요하다.
+--> com.ezen.board.service 패키지에 MemberService 클래스 생성
+--> com.ezen.board.dao 패키지에 MemberDao 클래스 생성
+--> com.ezen.board.dto 패키지에 MemberDto 클래스 생성
+
+---> Dto부터 제작한다.
+
+
+
+
+- 이제 MemberController에서 MemberDao를 호출해야하는데...인스턴스를 만드는게 아니라 MemberService를 거쳐서 Dao를 호출할 것이다.
+-> 그럼 MemberService도 new MemberService(); 로 호출하는가? 아니다! annotation인 @Autowired를 붙이고 import 한다!
+--> 하지만 에러가 나온다. 왜냐하면 @Autowired를 쓰기 위해서는 Spring Container에 MemberService 클래스의 bean이 담겨있어야 하기 때문이다.
+---> 그럼 Spring Container에 MemberService의 bean을 담으러 갈 것인가? 아니다! 가장 위에 annotation @Controller를 붙여준다!
+---> 그리고 MemberService 클래스의 상단에 annotation @Service를 붙여주면, 내가 보지 못하는 어딘가에서 저절로 Spring Container에 MemberService bean이 추가된다!
+---> 다만 Dao에는 상단에 @Repository를 붙인다! (왜지?)
+
+
+
+
+
+★ DB에 연결을 관리하는 클래스를 만든다.
+- com.ezen.board.util 패키지에 DataBaseManager 클래스를 만든다.
+-> 여기에도 @Repository를 넣는다.
+
+- com.ezen.board.util 패키지에 DataBaseUserInfo 클래스를 만든다.
 
 

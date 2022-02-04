@@ -19,7 +19,7 @@
 	</div>
 	<div class="box2">
 		<div class="attr1">비밀번호</div>
-		<div class="attr2">&nbsp;&nbsp;<input type="password" size="20" name="pw" style="width:200px; height:20px;"></div>
+		<div class="attr2">&nbsp;&nbsp;<input type="password" size="20" name="pwd" style="width:200px; height:20px;"></div>
 	</div>
 	<div class="box2">
 		<div id="footer"><input type="submit" value="로그인" onClick="return loginCheck();"/>
