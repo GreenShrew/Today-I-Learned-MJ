@@ -47,3 +47,103 @@ where emp.deptno = dept.deptno and dept.dname = 'Douglas Grant'
 select ename, emp.deptno, dept.dname, dept.loc from dept, emp
 where emp.deptno = dept.deptno and emp.ename='SCOOT'
 -- 필드명 앞에 테이블 이름을 기술하여 컬럼의 소속을 명확히 해주어야 오류가 없다.
+
+
+
+-- rentlist 의 booknum  에 해당하는 도서제목을 rentlist 의 rentdate, num, booknum 과 함께 출력하세요
+select * from rentlist;
+select * from rentlist, booklist;
+select * from rentlist, booklist where rentlist.booknum = booklist.num;
+select rentlist.rentdate, rentlist.num, rentlist.booknum, booklist.subject 
+from rentlist, booklist where rentlist.booknum = booklist.num;
+
+-- rentlist 의 membernum 에 해당하는 회원의 이름과 전화번호를  rentlist 의 rentdate, num, 
+-- membernum 과 함께 출력하세요
+select rentlist.rentdate, rentlist.num, rentlist.membernum, memberlist.name, 
+			memberlist.phone
+from rentlist, memberlist
+where rentlist.membernum = memberlist.num;
+
+
+
+--테이블 명에 별칭을 부여한 후 컬럼앞에 소속테이블을 지정  
+-- 테이블 명으로 소속을 기술할때는 한쪽에 만 있는 필드에 생략이 가능하지만 아래와 같이 
+-- 별칭 부여시에는 모든 필드 앞에 반드시 별칭을 기술해야함
+select a.ename, b.dname, b.loc, a.deptno  from emp a, dept b
+where a.deptno = b.deptno and a.ename='SCOTT';
+
+
+--non-equi join
+--동일 컬럼이 없어서  다른 조건을 사용하여 조인
+--조인 조건에 특정 범위내에 있는지를 조사하기 위해 조건절에 조인 조건을 '=' 연산자 이외의 비교
+select * from emp;
+select * from salgrade;
+
+--연산자를 이용
+select a.ename, a.sal, b.grade from emp a, salgrade b
+where a.sal>=b.losal and a.sal<=b.hisal;
+
+select a.ename, a.sal, b.grade from emp a, salgrade b
+where  a.sal between b.losal and b.hisal;
+
+
+
+
+--세개의 테이블을 하나로 JOIN(equi , nonequi 조인 의 조합)
+select a.ename, a.sal, c.grade, b.dname from emp a, dept b, salgrade c
+where a.deptno = b.deptno and  a.sal between c.losal and c.hisal;
+
+
+-- 연습 문제
+-- rentlist 테이블의 rentdate, booknum, membernum 을 조회하되,
+-- booklist 와 memebrlist 테이블을 조인해서   책제목과 대여가격, 회원 이름과 사은 포인트를 출력하세요
+-- 출력순서 -  대여일자, 도서제목,  회원이름, 포인트
+-- 테이블의 별칭은  a,b,c 로 하세요
+select a.rentdate as "대여 일자", b.subject as "도서 제목", c.name as "회원 성명", 
+		  c.bpoint as "사은포인트" 
+from rentlist a, booklist b, memberlist c
+where a.booknum = b.booknum and a.membernum = c.membernum;
+
+-- 조인된 테이블에 계산식으로 필드를 생성할수도 있습니다
+select a.rentdate as "대여 일자", b.subject as "도서 제목", c.name as "회원 성명", 
+		  c.bpoint as "사은포인트" , b.rentprice - a.discount  as "매출금액" 
+from rentlist a, booklist b, memberlist c
+where a.booknum = b.booknum and a.membernum = c.membernum;
+
+
+
+--outer join
+--조인 조건에 만족하지 못해서 해당 결과를 출력시에 누락이 되는 문제점이 발생할때 해당 레코드를출력하는 조인
+select a.num, a.subject, b.rentdate from booklist a, rentlist b 
+where a.num(+)=b.booknum;
+
+select * from emp a, dept b 
+where a.deptno(+)=b.deptno;
+
+
+
+
+
+--[3] ANSI join
+--   (1) Ansi Cross join
+select * from emp, dept  -- 일반크로스 조인 표현 
+select * from emp cross join dept     -- ansi Cross join -> 일반 크로스 조인과 같은 효과
+
+
+--  (2) Ansi inner join -- 일반 equi 조인과 같은 효과
+-- 일반 equi 조인 표현 방식
+select  ename, dname from emp a, dept b where a.deptno = b.deptno 
+-- Ansi 이너 조인의 표현 방식
+select  ename, dname from emp inner join dept on emp.deptno = dept.deptno;
+-- Ansi 이너 조인의  다른 표현 방식 : 두테이블의 조인 기준이 되는 필드명이 똑같을때만 사용가능
+select  ename, dname from emp inner join dept using (deptno); 
+
+
+
+-- (3) Ansi Outer Join  -- 기존 아우터 조인의 표현방식
+select * from emp, dept where emp.deptno = dept.deptno(+);
+select * from emp, dept where emp.deptno(+) = dept.deptno;
+-- Ansi Outer Join 표현방식
+select * from emp left outer join dept on  emp.deptno = dept.deptno;
+select * from emp right outer join dept on  emp.deptno = dept.deptno;
+-- 기준이 되는 필드명중 A 테이블의 필드에는 있으나 B테이블 필드에는 해당값이 없는 경우에 대한 표현여부결정

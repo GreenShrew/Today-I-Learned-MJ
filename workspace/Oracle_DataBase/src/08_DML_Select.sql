@@ -74,7 +74,7 @@ select * from memberlist where name like '%용';
 select * from booklist where subject like '%이%';
 --[15] memberlist 에서 성별이 NULL 이 아닌 회원의이름과 전화번호
 select * from memberlist where gender is not null
--- 성별이 널인것을 모두 M 으로 수정해주세요
+-- 성별이 널인것을 모두 M 으로 수정하였다.
 update memberlist set gender='M' where gender is null
 
 --[16] booklist 에서 도서 제목에 두번째 글자가 '것' 인 도서 정보
