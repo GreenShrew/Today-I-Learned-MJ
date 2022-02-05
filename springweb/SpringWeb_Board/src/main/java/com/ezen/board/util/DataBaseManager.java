@@ -12,34 +12,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DataBaseManager {
 	
-	@Autowired	// 해당 클래스의 bean을 스프링 컨테이너에서 검색하여, 꺼내다가 자동주입을 진행한다. - 자동주입
-	// bean을 꺼내와서 dbi에 주입해준다!
-	private DataBaseUserinfo dbi;
-	
-//	public DataBaseManager(DataBaseUserinfo dbi) {
-//		this.dbi = dbi;
-//	}
+	@Autowired
+	DataBaseUserInfo uif;
 	
 	public Connection getConnection() {
 		Connection con = null;
 		try {
-			Class.forName(dbi.getDriver());
-			con = DriverManager.getConnection(dbi.getUrl(), dbi.getId(), dbi.getPw());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			Class.forName(uif.getDriver());
+			con = DriverManager.getConnection(uif.getUrl(), uif.getId(), uif.getPw());
+		} catch (ClassNotFoundException e) {e.printStackTrace();
+		} catch (SQLException e) {e.printStackTrace(); 	}
 		return con;
 	}
-	
 	public void close(Connection con, PreparedStatement pstmt, ResultSet rs) {
-			try {
-				if(con!=null) con.close();
-				if(pstmt!=null) pstmt.close();
-				if(rs!=null) rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			if(con!=null)con.close();
+			if(pstmt!=null)pstmt.close();
+			if(rs!=null)rs.close();
+		} catch (SQLException e) {  e.printStackTrace();	}
 	}
 }

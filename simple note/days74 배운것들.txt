@@ -14,8 +14,6 @@ SpringFramework를 사용하는 이유?
 
 
 
-※ 다시 볼것!
-SpringWeb_Board 프로젝트의 DataBaseManager를 긁자...
 
 
 
