@@ -21,6 +21,11 @@ StudentInsertService, StudentSelectService 다 못썼다!
 
 
 
+※ 다운로드 툴
+이클립스 툴 마켓에서 sts 검색하면 나오는 Spring tool 3 를 받아서 썼다.
+3.9....
+
+
 
 
 

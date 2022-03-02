@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
-    <libraryInfo home="C:\Users\Onion\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059\jre" version="17"/>
-    <libraryInfo home="C:\Users\JAVA01\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059\jre" version="17"/>
-    <libraryInfo home="C:\Users\Onion\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059" version="17"/>
-    <libraryInfo home="C:\Users\JAVA01\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059" version="17"/>
+<libraryInfo home="C:\Users\Onion\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059\jre" version="17"/>
+<libraryInfo home="C:\Program Files\Java\jre1.8.0_301" version="1.8.0_301">
+<bootpath>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\resources.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\rt.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\sunrsasign.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\jsse.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\jce.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\charsets.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\jfr.jar"/>
+<entry path="C:\Program Files\Java\jre1.8.0_301\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Program Files\Java\jre1.8.0_301\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Users\JAVA01\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059\jre" version="17"/>
+<libraryInfo home="C:\Users\Onion\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059" version="17"/>
+<libraryInfo home="C:\Users\JAVA01\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.0.v20211012-1059" version="17"/>
 </libraryInfos>
