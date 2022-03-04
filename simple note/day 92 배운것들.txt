@@ -5,6 +5,9 @@ day 92 배운것들
 - 게시물의 댓글 기능이 안된다!
 --> 완료! 테이블 고치고 난리를 쳤다!
 
+- main.jsp에 페이징이 왜 안 나오지?
+-> paging.java 부터 뭔가 잘못되었나?
+
 
 
 ※ 참고!
@@ -108,6 +111,88 @@ day 92 배운것들
 
 
 -------> (§ 사진 14) 글 옆에 댓글 갯수와 게시글이 한 페이지에 10개만 나오는 것을 확인할 수 있다.
+
+
+
+
+
+여기까지 하면 게시판 기능의 구현이 완료된것이다.
+레거시 프로젝트는 여기까지...
+
+ 이 후 스프링부트나 전자정부 프레임워크를 쓸때도 Controller를 쓴다.
+ Service쪽만 조금 바뀌겠지만, 어쨌든 이전 model2에서와는 달리 Service를 이용하여 기능을 쪼개는 방식으로 유지보수와 코드 작성을 쉽게 만들었다!
+
+ 이후 프로젝트에서는 Dao에서의 DB 연결이 간결해질 예정이다!
+ShoppingMall을 다시 만들면서 이를 확인해보자!
+---------------------------------------------------------------------
+
+
+
+새로운 프로젝트를 시작하기 전에 이전 프로젝트에 우클릭 - close project를 눌러주자.
+-> 이러면 파일은 삭제되지 않지만, 이클립스에 걸리는 부하가 적어진다!
+
+
+
+
+
+
+
+새 프로젝트 생성 및 첫 페이지 제작
+==========================================
+Spring Legacy Project를 만든다.
+이름은 SpringWeb03_ShoppingMall, Spring MVC Project를 선택해준다.
+
+
+- pom.xml 수정
+-> properties 의 자바 버전 수정
+-> oracle repositories 태그 추가
+-> dependencies 에 DataBase와 fileUpload를 위한 dependency 태그 추가
+-> plugin 태그의 maven-compiler-plugin의 source와 target 을 1.8로 변경
+-> maven update
+
+
+
+- 프로젝트를 진행하며 필요한 것들을 만든다.
+-> HomeController.java 삭제
+-> controller, dao, dto, service 패키지 생성. (이번에는 util 패키지를 만들지 않는다.)
+-> ProductController, ProductDao, ProductVO, ProductService 클래스를 각각 패키지에 만들어준다.
+-> dao에 @Repository, Service에 @Service, controller에 @Controller 어노테이션을 추가해준다.
+
+--> resources 에 필요한 폴더들을 만든다.
+--> css, headerfooter, admin, images, product_images, sub01, sub02, sub03, sub04, script 폴더를 만들어준다. 10개의 폴더!
+
+
+
+
+- 첫 페이지 제작
+-> 우선 첫 페이지가 나오도록 만든다.
+-> @RequestMapping(value="/", method=RequestMethod.GET) 을 생성.
+
+--> views 폴더에 index.jsp 제작
+
+---> 이전에 했던 WEB12_ShoppingMall에서 css, header, footer, images, product_images, script(member.js, mypage.js) 를 복사 붙여넣기 한다.
+
+
+----> 복사해온 header에서 링크라던가 경로등을 고친다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

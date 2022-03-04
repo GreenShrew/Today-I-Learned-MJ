@@ -30,7 +30,7 @@ public class Paging {
 		}
 		startNum = (page-1)*displayRow+1;
 		endNum = page*displayRow;
-		System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum + " Paging 확인용");
+		System.out.println(page + " " + displayRow + " " + beginPage + " " + endPage + " " + startNum + " " + endNum + " Paging 확인용");
 	}
 	
 	public int getPage() {

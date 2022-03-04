@@ -17,7 +17,7 @@
 			<input type="button" value="정보수정" onClick="location.href='memberEditForm'"/>
 			<input type="button" value="로그아웃"	onClick="location.href='logout'"></div>
 		<div style="float:right;"><a href="boardWriteForm">게시글 등록</a></div>	</td></tr>
-	<tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>	<th>조회</th></tr>
+	<tr><th width="130">번호</th><th>제목</th><th width="130">작성자</th><th width="130">작성일</th><th width="130">조회</th></tr>
 		<c:forEach var="board" items="${boardList}">
 			<tr><td align="center">${board.num }</td>
 				<td>
