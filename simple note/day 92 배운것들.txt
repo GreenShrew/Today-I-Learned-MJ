@@ -171,21 +171,60 @@ Spring Legacy Project를 만든다.
 --> views 폴더에 index.jsp 제작
 
 ---> 이전에 했던 WEB12_ShoppingMall에서 css, header, footer, images, product_images, script(member.js, mypage.js) 를 복사 붙여넣기 한다.
+---> 또한, sql.sql을 views 폴더에 복사해온다.
 
 
 ----> 복사해온 header에서 링크라던가 경로등을 고친다.
+----> 복사해온 sql을 수정한다.
+select * from worker;
+select * from member;
+select * from product;
+select * from cart;
+select * from cart_view;
+select * from orders;
+select * from order_detail;
+select * from order_view;
+select * from qna;
+select * from best_pro_view;
+select * from new_pro_view;
+----> 이게 다 있는지 확인!
+
+
+----> ProductVO 제작
+
+
+-----> controller로 돌아와서, 메인페이지로 갈때 best 상품, new 상품 정보 가져가는 기능을 추가한다.
 
 
 
 
+Dao에서 DB에 연결하기 (어렵다! 이걸 잘 해둬야한다!)
+====================================
+- 지금까지 써왔던 서버에 의존하는 DB 접근 방법을 바꾼다.
+-> 이를 위해서 c3p0 와 mchange라는 jar 파일을 받았다. (pom.xml을 통해 받은것)
+--> 이젠 스프링 컨테이너에 넣고 이를 @Autowired로 꺼내 쓸 것이다!
 
+---> WEB-INF 폴더 안에 spring 폴더 안에 appServlet 폴더 안의 servlet-context.xml, 즉 스프링 컨테이너에 수동으로 연결 정보를 넣는다!
+---> 여기에 내가 사용할 bean을 추가할것이다! com.mchange.
 
+<beans:bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<beans:property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+	<beans:property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	<beans:property name="user" value="scott"/>
+	<beans:property name="password" value="tiger"/>
+	<beans:property name="maxPoolSize" value="200"/>
+	<beans:property name="checkoutTimeout" value="60000"/>
+	<beans:property name="maxIdleTime" value="1800"/>
+	<beans:property name="idleConnectionTestPeriod" value="600"/>
+</beans:bean>
 
+---> 이를 여기에 추가하고, 필요할때마다 이를 꺼내서 쓸 것이다!
+---> 참고로 ComboPooledDataSource 이게 연결들을 가지고 있는 클래스이다.
+---> 따라서 Dao에서 @Autowired를 할때 클래스로 ComboPooledDataSource를 쓰게 된다!
+----> 그리고 JdbcTemplate를 선언한다. 이 안에는 con, pstmt, rs가 모두 존재한다.
 
-
-
-
-
+-----> 이제 만들어둔 template를 이용하면 DB에 연결할 수 있게 되었다!
+-----> templat.query(); --> 템플릿을 이용해 sql 문을 작동시킬 수 있다!
 
 
 
