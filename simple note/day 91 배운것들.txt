@@ -1,0 +1,161 @@
+day 91 배운것들
+
+※ 레거시 프로젝트 또한 공부하는 이유
+-> 이미 옛 프로젝트로 만들어진 웹들이 많기 때문에!
+
+※ 게시글 불러오는 과정에서 서비스단이 왜 필요한지 나온다!
+-> 서비스단에서 게시물 내용을 긁어오는 동작, 게시물의 조회수를 하나 늘려주는 동작을 따로 만들어낼 수 있다.
+-> 이전에는 조회수 1을 올려주면서 게시물 내용을 긁어오는 메소드 하나, 조회수를 늘리지 않으면서 게시물을 긁어오는 메소드를 하나 이런식으로 만들어야 했다.
+-> 하지만 이런식으로 따로 떼어두어 훗날 다시 쓰기도 쉽고 수정도 쉽게 만들 수 있다!
+
+
+
+※ 다시 볼것들
+-> 회원가입 아이디 확인창의 self.close() 가 안먹힌다.
+-> 인터넷 기록 삭제도 했는데 안 된다.
+-> 해결
+
+--> 정보수정이 안된다...
+--> 컬럼 이름이 문제!
+
+---> BoardController의 boardViewWithoutCount 미완성
+---> BoardService의 boardViewWithoutCount ? 이게 맞나 확인좀
+---> 확인 완료
+
+회원가입 기능 만들기 (§ 사진 07, § 사진 08)
+====================================
+- 회원가입은 멤버와 관련되어있으므로 membercontroller에 제작할것이다.
+
+onClick="location.href='memberJoinForm'"
+
+이런식으로 requestmapping에 직접 요청할 수 있다.
+
+
+- Membercontroller에 어노테이션 @RequestMapping("/memberJoinForm") 을 추가한다.
+-> 어차피 전달될 뭐 그런게 필요 없기 때문에 매개변수 없이 그냥 리턴값만 넣으면 된다.
+--> member 폴더에 memberJoinForm.jsp 를 만든다.
+---> jsp를 만들고 실행시키면 (§ 사진 07) 이 나온다. 버튼이 두개인 이유는 방법 두가지를 보여주려고 만들었다.
+
+----> 아이디 중복체크를 해주는 함수를 board.js에 만든다.
+----> idCheck() 함수에서 아이디 중복을 확인하는 기능을 하는 매핑으로 보냈다.
+-----> Membercontroller에 @RequestMapping("/idcheck") 를 추가한다.
+-----> 이전에 사용했던 getMember 메소드를 사용하면 될 것이다.
+
+------> member 폴더에 idcheck.jsp 파일을 만든다. 함수 등을 추가하면 (§ 사진 07)이 나온다.
+
+
+- 이제 '등록' 버튼을 누르면 회원가입이 되는 기능을 만든다.
+
+-> Membercontroller에 @RequestMapping(value="/memberJoin", method=RequestMethod.POST)를 만든다.
+-> 암호와 같은 민감한 정보가 있으므로 post로 보내 파라미터를 숨긴다!
+
+--> 전달된 값들을 Dto에 넣고 이를 DB에 insert해줄 insertMember 메소드에 넘겨준다---> insertMember 역시 service를 거쳐 Dao로 갈 수 있도록 만든다.
+
+
+
+
+
+회원 정보 수정 기능 만들기 (§ 사진 09)
+========================================
+- main 페이지에서 '정보수정' 버튼을 누르면 memberEditForm으로 넘어가게 만든다.
+-> membercontroller에 @RequestMapping("/memberEditForm") 를 추가한다.
+
+--> member 폴더에 memberEditForm.jsp를 만든다. (§ 사진 09) 를 볼 수 있다.
+
+---> 그리고 memberEdit로 보내서 회원 정보를 수정하도록 만든다.
+---> Membercontroller에 @RequestMapping(value="/memberEdit", method=RequestMethod.POST)를 만든다.
+---> 전달된 값들을 Dto에 넣고, 이를 이용해 DB의 내용을 update 해줄 updateMember 메소드를 만든다.
+----> updateMember 역시 service를 거쳐 Dao로 갈 수 있도록 만든다.
+
+
+
+
+로그아웃 기능
+=============================================
+- @RequestMapping("/logout") 를 만들면 끝이다.
+
+
+
+
+
+
+게시글 쓰기 페이지&기능 만들기 (§ 사진 10)
+==============================================
+- 게시글을 쓰는 화면을 만들것이다.
+-> BoardController.java에 @RequestMapping("/boardWriteForm")를 추가한다.
+
+--> board 폴더에 boardWriteForm.jsp를 만든다. 다 만들면 (§ 사진 10) 이 나온다.
+---> boardCheck() 함수도 제작한다.
+
+
+
+
+
+- 게시글 쓰는 기능을 만든다.
+-> boardWriteForm에 post 방식으로 action이 boardWrite으로 제작했다.
+--> BoardController에 @RequestMapping(value="/boardWrite", method=RequestMethod.POST)를 추가한다.
+---> 파일 업로드에는 ServletContext 클래스를 써야하는데, 스프링 프레임워크에서는 이를 스프링 컨테이너에 넣고 @Autowired로 사용한다.
+---> 그런데 스프링 프레임워크에는 ServletContext 을 컨테이너에 기본적으로 넣고 서비스를 제공한다!
+
+----> insertBoard 메소드 제작. 다만, 서비스로 넘어갈땐 insertBoard, 서비스에서 Dao로 넘어갈땐 insert로 이름을 지었다.
+
+-----> 사진을 업로드할 폴더를 만들어두어야한다. resources 폴더 아래에 upload 폴더를 만든다.
+
+------> (§ 사진 11) 처럼 글이 새롭게 작성되었음을 확인할 수 있다.
+
+
+
+
+
+게시글 조회 기능 만들기 (§ 사진 11, § 사진 12)
+※ 서비스단의 필요성!
+================================================
+- 게시글을 조회하는 기능을 만든다.
+-> 해야할 일이 많다. 게시글의 데이터를 가져와야하고, 댓글도 가져와야하고, 조회수도 하나 늘려야하고...
+-> model2에서는 위의 기능들을 하나의 Action으로 퉁쳤다. 하지만, 여기에는 서비스단이 있다.
+-> 따라서 하나씩 따로 서비스에다가 만들어서 동작시킬 수 있다! 결합도가 낮아지는건가..
+
+--> BoardController에 @RequestMapping("/boardView") 를 작성한다.
+---> 필요한것들 (ReplyVO) 을 만든다.
+
+
+
+
+- 게시글이 나오는 페이지를 만든다.
+-> board 폴더에 boardView.jsp 파일 생성
+--> (§ 사진 12) 의 결과가 나온다.
+
+
+
+해쉬맵을 사용해서 만들기!
+※ 장점! 서비스단에서 메소드 갯수가 줄어들고, 복잡도가 줄어든다..
+########################################
+HashMap은 여러 타입의 데이터를 한꺼번에 넣을 수 있는 리스트이다!
+-> 이를 이용하면 게시물 조회, 조회수+1, 댓글 조회 기능을 한번에 리턴받을 수 있다!
+
+--> 서비스단의 boardView 메소드와 getReplysOne 메소드를 한번에 만들어낼 수 있다!
+
+--> BoardController의 boardView에서 HashMap을 쓴다!
+--> BoardService에서 두 메소드를 하나로 묶어 만들 수 있다!
+---> 메소드를 여러개 만들어서 꺼내쓰는 것보다 이 방법이 더 편할것이다.
+---> 물론 지금은 잘 모르겠다만, 나중에 메소드가 많아지면...
+
+
+
+
+
+
+댓글 작성 기능 만들기
+=============================================
+댓글 작성하고 다시 페이지로 넘어갈땐 조회수가 늘면 안된다.
+
+-> BoardService의 boardView에서 // 조회수+1 부분만 빠진 새로운 메소드를 만들면 된다!
+--> 서비스단을 만들어서 이런식으로 편해짐!
+
+---> BoardController에 @RequestMapping(value="/addReply", method=RequestMethod.POST)를 추가
+
+----> 서비스단에 addReply 메소드 추가
+
+-----> BoardController에 @RequestMapping("/boardViewWithoutCount") 추가
+-----> 근데 이건 boardView의 내용을 가져와다가 주석만 날리고 일부를 수정한 내용이다!
+-----> 또한, 서비스단도 작성하는데, boardView에서 썼던 내용중에 조회수 +1 해주는 내용만 빼고 복사해오면 된다!

@@ -46,4 +46,47 @@ public class MemberDao {
 		return mdto;
 	}
 
+	public int insertMember(MemberDto mdto) {
+		int result = 0;
+		String sql = "insert into member(userid, pwd, name, phone, email) "
+				+ " values(?, ?, ?, ?, ?)";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, mdto.getUserid());
+			pstmt.setString(2, mdto.getPw());
+			pstmt.setString(3, mdto.getName());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getEmail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+		return result;
+	}
+
+	public int updateMember(MemberDto mdto) {
+		int result = 0;
+		String sql = "Update member set pwd=?, name=?, phone=?, email=?, where userid=?";
+		
+		try {
+			con = dbm.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getPw());
+			pstmt.setString(2, mdto.getName());
+			pstmt.setString(3, mdto.getPhone());
+			pstmt.setString(4, mdto.getEmail());
+			pstmt.setString(5, mdto.getUserid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+		return result;
+	}
+
 }

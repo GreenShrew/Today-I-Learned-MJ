@@ -29,7 +29,7 @@
 			<input type="reset" value="다시 작성"/>
 			<input type="button" value="회원가입" onClick="location.href='memberJoinForm'"/>
 		</div>
-		<div class="">${message}</div>
+		<div class="box"><div id="footer">${message}</div></div>
 	</div>
 </form>
 </body>

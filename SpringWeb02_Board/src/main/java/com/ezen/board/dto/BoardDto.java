@@ -13,7 +13,7 @@ public class BoardDto {
 	private int readcount;
 	private Timestamp writedate;
 	private int replycnt;
-	private String imagename;
+	private String imgfilename;
 	public int getNum() {
 		return num;
 	}
@@ -68,11 +68,12 @@ public class BoardDto {
 	public void setReplycnt(int replycnt) {
 		this.replycnt = replycnt;
 	}
-	public String getImagename() {
-		return imagename;
+	public String getImgfilename() {
+		return imgfilename;
 	}
-	public void setImagename(String imagename) {
-		this.imagename = imagename;
+	public void setImgfilename(String imgfilename) {
+		this.imgfilename = imgfilename;
 	}
+
 	
 }

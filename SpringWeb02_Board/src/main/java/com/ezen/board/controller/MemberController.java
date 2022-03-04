@@ -47,6 +47,7 @@ public class MemberController {
 			model.addAttribute("message", "DB 오류, 관리자에게 문의하세요.");
 		}else if(mdto.getPw().equals(pw)) {	// 정상로그인
 			url = "redirect:/boardList";
+			// redirect:/리퀘스트이름 -> 리퀘스트이름에 해당하는 매핑으로 이동한다.
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", mdto);
 		}else if(!mdto.getPw().equals(pw)) {	// 비번 틀림
@@ -56,5 +57,91 @@ public class MemberController {
 		}
 		
 		return url;
+	}
+	
+	
+	@RequestMapping("/memberJoinForm")
+	public String memberJoinForm() {
+		return "member/memberJoinForm";
+	}
+	
+	
+	@RequestMapping("/idcheck")
+	public String idcheck(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		MemberDto mdto = ms.getMember(id);	// 결과값 없으면 null 이 오도록 만들었었다.
+		if(mdto == null) {
+			model.addAttribute("result", -1);	// 사용가능
+		}else {
+			model.addAttribute("result", 1);		// 사용불가
+		}
+		model.addAttribute("id", id);
+		return "member/idcheck";
+	}
+	
+	
+	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
+	public String memberJoin(HttpServletRequest request, Model model) {
+		
+		MemberDto mdto = new MemberDto();
+		mdto.setUserid(request.getParameter("id"));
+		mdto.setPw(request.getParameter("pw"));
+		mdto.setName(request.getParameter("name"));
+		mdto.setPhone(request.getParameter("phone"));
+		mdto.setEmail(request.getParameter("email"));
+		
+		int result = ms.insertMember(mdto);
+		
+		if(result==1) {
+			model.addAttribute("message", "회원가입에 성공했습니다. 로그인해주세요.");
+		}else {
+			model.addAttribute("message", "회원가입에 실패했습니다. 다음에 다시 시도해주세요.");
+		}
+		
+		return "member/loginForm";
+	}
+	
+	
+	@RequestMapping("/memberEditForm")
+	public String memberEditForm(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) {
+			return "member/loginForm";
+		}
+		return "member/memberEditForm";
+	}
+	
+	
+	@RequestMapping(value="/memberEdit", method=RequestMethod.POST)
+	public String memberEdit(Model model, HttpServletRequest request) {
+		MemberDto mdto = new MemberDto();
+		mdto.setUserid(request.getParameter("id"));
+		mdto.setPw(request.getParameter("pw"));
+		mdto.setName(request.getParameter("name"));
+		mdto.setPhone(request.getParameter("phone"));
+		mdto.setEmail(request.getParameter("email"));
+		
+		int result = ms.updateMember(mdto);
+		
+		HttpSession session = request.getSession();
+		if(result == 1) {
+			session.setAttribute("loginUser", mdto);
+		}
+		
+		// redirect:/main으로 리턴
+		return "redirect:/boardList";
+	}
+	
+	
+	@RequestMapping("/logout")
+	public String logout(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		// 주석은 '이렇게도 쓸 수 있다' 라는 내용임.
+		session.invalidate();
+		// session.removeAttribute("loginUser");
+		
+		//return "member/loginform";
+		return "redirect:/";
 	}
 }
