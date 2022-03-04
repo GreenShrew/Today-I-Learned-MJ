@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ezen.board.dto.BoardDto;
 import com.ezen.board.dto.MemberDto;
+import com.ezen.board.dto.Paging;
 import com.ezen.board.dto.ReplyVO;
 import com.ezen.board.util.DataBaseManager;
 
@@ -24,12 +25,38 @@ public class BoardDao {
 	@Autowired
 	DataBaseManager dbm;
 	
-	public ArrayList<BoardDto> getBoardsMain() {
-		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
+	public int getAllCount() {
+		int count = 0;
+		String sql = "select count(*) as count from board";
 		con = dbm.getConnection();
-		String sql = "select * from board order by num desc";
 		try {
 			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+		return 0;
+	}
+	
+	
+	public ArrayList<BoardDto> getBoardsMain(Paging paging) {
+		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
+		con = dbm.getConnection();
+//		String sql = "select * from board order by num desc";
+		String sql = "select * from ("
+				+ " select * from ( "
+				+ "select rownum as rn, b.* from ((select * from board order by num desc) b) "
+				+ " ) where rn>=? "
+				+ " ) where rn<=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, paging.getStartNum());
+			pstmt.setInt(2, paging.getEndNum());
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				BoardDto bdto = new BoardDto();
@@ -192,5 +219,27 @@ public class BoardDao {
 			dbm.close(con, pstmt, rs);
 		}
 	}
+
+
+	public int replyCount(int num) {
+		int count = 0;
+		String sql = "select count(*) as cnt from reply where boardnum=?";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+		return count;
+	}
+
+	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.board.dao.BoardDao;
 import com.ezen.board.dto.BoardDto;
+import com.ezen.board.dto.Paging;
 import com.ezen.board.dto.ReplyVO;
 
 @Service
@@ -16,9 +17,37 @@ public class BoardService {
 	@Autowired
 	BoardDao bdao;
 
-	public ArrayList<BoardDto> getBoardsMain() {
-		ArrayList<BoardDto> list = bdao.getBoardsMain();
-		return list;
+//	public ArrayList<BoardDto> getBoardsMain() {	리턴값이 달라졌으므로 과거에 쓰던 이 메소드는 주석처리하고 아래 getBoardsMain을 쓴다.
+//		ArrayList<BoardDto> list = bdao.getBoardsMain();
+//		return list;
+//	}
+	
+	public HashMap<String, Object> getBoardsMain(int page){
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		// 1. 페이징 처리
+		Paging paging = new Paging();
+		paging.setPage(page);
+		int count = bdao.getAllCount();		// 총게시물 갯수 count
+		paging.setTotalCount(count);		// paging 객체의 각 변수 값 계산
+		resultMap.put("paging", paging);
+		
+		
+		// 2. paging 객체에 의한 게시물 조회
+		ArrayList<BoardDto> list = bdao.getBoardsMain(paging);
+		
+		
+		// 3. 댓글 갯수 조회
+		for(BoardDto bdto : list) {
+			int cnt = bdao.replyCount(bdto.getNum());	// 게시물 번호로 댓글 갯수 count
+			bdto.setReplycnt(cnt);
+		}
+		
+		resultMap.put("boardList", list);
+		
+		
+		
+		return resultMap;
 	}
 
 	public void insertBoard(BoardDto bdto) {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ezen.board.dto.BoardDto;
-import com.ezen.board.dto.MemberDto;
+import com.ezen.board.dto.Paging;
 import com.ezen.board.dto.ReplyVO;
 import com.ezen.board.service.BoardService;
 import com.oreilly.servlet.MultipartRequest;
@@ -37,7 +37,19 @@ public class BoardController {
 		if( session.getAttribute("loginUser") == null)	
 			return "member/loginform";
 		else {
-			HashMap<String, Object> resultMap = bs.getBoardsMain();
+			
+			int page = 1;
+			// 페이징 작업. 2페이지에서 게시물 보고 다시 메인으로 넘어갈 떄 다시 2페이지로 갈 수 있도록 하는 등등...
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			}else if(session.getAttribute("page") != null) {
+				page = (int) session.getAttribute("page");
+			}else {
+				session.removeAttribute("page");
+			}
+			
+			HashMap<String, Object> resultMap = bs.getBoardsMain(page);
 			ArrayList<BoardDto> list = (ArrayList<BoardDto>) resultMap.get("boardList");
 			Paging paging = (Paging) resultMap.get("paging");
 			
