@@ -81,4 +81,12 @@ public class BoardService {
 		BoardDto bdto = bdao.getBoard(num);
 		return bdto;
 	}
+
+	public void boardUpdate(BoardDto bdto) {
+		bdao.boardUpdate(bdto);
+	}
+
+	public void boardDelete(int num) {
+		bdao.boardDelete(num);
+	}
 }

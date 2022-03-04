@@ -30,18 +30,37 @@ public class BoardController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping("/boardList")
+	@RequestMapping("/boardList")		// 참고로 / 를 붙이지 않고 boardList만 써도 문제는 없다. 자동으로 /를 붙여준다!
 	public String main( HttpServletRequest request , Model model) {
 		
 		HttpSession session = request.getSession();
 		if( session.getAttribute("loginUser") == null)	
 			return "member/loginform";
 		else {
-			ArrayList<BoardDto> list = bs.getBoardsMain();
+			HashMap<String, Object> resultMap = bs.getBoardsMain();
+			ArrayList<BoardDto> list = (ArrayList<BoardDto>) resultMap.get("boardList");
+			Paging paging = (Paging) resultMap.get("paging");
+			
 			model.addAttribute("boardList", list);
+			model.addAttribute("paging", paging);
 		}		
-		return "board/main";
+		return "board/main";	// BoardList와 Paging 두가지의 정보를 리턴받아 main으로 보낸다.
 	}
+	
+	
+//	@RequestMapping("/boardList")		// 기존의 boardList
+//	public String main( HttpServletRequest request , Model model) {
+//		
+//		HttpSession session = request.getSession();
+//		if( session.getAttribute("loginUser") == null)	
+//			return "member/loginform";
+//		else {
+//			ArrayList<BoardDto> list = bs.getBoardsMain();
+//			model.addAttribute("boardList", list);
+//		}		
+//		return "board/main";
+//	}
+	
 	
 	
 	@RequestMapping("/boardWriteForm")
@@ -201,5 +220,58 @@ String path = context.getRealPath("resources/upload");
 		model.addAttribute("board", bdto);
 		
 		return "board/boardEditForm";
+	}
+	
+	
+	@RequestMapping(value="boardUpdate", method=RequestMethod.POST)
+	public String board_update(Model model, HttpServletRequest request) {
+		
+		String path = context.getRealPath("resources/upload");
+		
+		int num = 0;
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+			);
+			num = Integer.parseInt(multi.getParameter("num"));
+
+			BoardDto bdto = new BoardDto();
+			bdto.setNum(num);
+			bdto.setPass(multi.getParameter("pass"));
+			bdto.setUserid(multi.getParameter("userid"));
+			bdto.setEmail(multi.getParameter("email"));
+			bdto.setTitle(multi.getParameter("title"));
+			bdto.setContent(multi.getParameter("content"));
+			
+			String filename = multi.getFilesystemName("imgfilename");	// 수정하고자 하는 파일 이름
+			if(filename==null) {
+				filename = multi.getParameter("oldfilename");
+			}
+			bdto.setImgfilename(filename);
+			
+			bs.boardUpdate(bdto);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/boardViewWithoutCount?num="+num;
+	}
+	
+	
+	@RequestMapping("boardDeleteForm")
+	public String board_delete_form(Model model, HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		BoardDto bdto = bs.getBoardOne(num);
+		model.addAttribute("num", num);
+		model.addAttribute("board", bdto);
+		return "board/boardCheckPassForm";
+	}
+	
+	
+	@RequestMapping("boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		bs.boardDelete(num);
+		return "redirect:/boardList";
 	}
 }

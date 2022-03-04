@@ -3,11 +3,13 @@ day 92 배운것들
 ※ 봐야할것들
 
 - 게시물의 댓글 기능이 안된다!
+--> 완료! 테이블 고치고 난리를 쳤다!
 
 
 
-
-
+※ 참고!
+- @RequestMapping(" ??? ")의 ??? 부분에 /boardDelete와 같이 쓰는데, / 를 빼고 boardDelete만 써도 무방하다.
+ 자동으로 / 를 붙여준다!
 
 
 
@@ -33,12 +35,13 @@ day 92 배운것들
 
 
 
-게시글의 수정&삭제 기능 만들기 (§ 사진 13)
+게시글의 수정기능 만들기 (§ 사진 13)
 ====================================
-- BoardView에서 두 기능 모두 js의 open_win() 함수를 호출한다.
+- BoardView에서 js의 open_win() 함수를 호출한다.
+--> 'update' 가 함께 전달된다.
 
 
-# 수정하기 기능
+# 파일 수정하는 페이지를 만든다.
 -> @RequestMapping("/boardEditForm")를 제작한다.
 -> 번호를 가지고 boardCheckPassForm 로 넘기는 역할을 한다.
 
@@ -58,6 +61,24 @@ day 92 배운것들
 
 
 
+# 파일 수정하기 기능을 만든다.
+-> @RequestMapping(value="boardUpdate", method=RequestMethod.POST) 를 만든다.
+
+
+
+
+게시글 삭제기능 만들기
+==============================================
+- BoardView에서 js의 open_win() 함수를 호출한다.
+--> 'delete' 가 함께 전달된다.
+
+
+- @RequestMapping("boardDeleteForm")을 만든다.
+-> 기존에 만들어둔 게시글을 가져오는 메소드같은걸 다시 이용할 수 있다.
+
+
+--> @RequestMapping("boardDelete") 를 만든다.
+---> 이러면 삭제 기능도 완료된다.
 
 
 
@@ -65,23 +86,13 @@ day 92 배운것들
 
 
 
+==============================================
+-
+-> 기존의 @RequestMapping("/boardList") 에 내용을 추가한다.
+-> 다만, Controller에서 모든것을 하지 않을것이다. 이를 서비스에서 작업을 쪼개서 진행시켜 HashMap으로 받을것이다!
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--> @RequestMapping("/boardList") 수정 (기존의 것은 주석처리를 하고 위에 추가로 작성했다.)
 
 
 

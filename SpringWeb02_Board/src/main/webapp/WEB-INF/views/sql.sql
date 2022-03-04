@@ -33,7 +33,7 @@ select * from reply;
 
 drop table reply;
 create table reply(
-	num number(7) primary key,		-- 댓글 순번
+	replynum number(7) primary key,		-- 댓글 순번
 	boardnum number(5),					-- 댓글의 해당 게시물 번호
 	userid varchar2(20),					-- 댓글 글쓴이
 	writedate date default sysdate,	-- 작성일

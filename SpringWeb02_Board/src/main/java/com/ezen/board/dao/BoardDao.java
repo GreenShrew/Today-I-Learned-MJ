@@ -157,4 +157,40 @@ public class BoardDao {
 		}
 	}
 
+	public void boardUpdate(BoardDto bdto) {
+		String sql = "update board set pass=?, userid=?, email=?, title=?, content=?, imgfilename=? where num=?";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, bdto.getPass());
+			pstmt.setString(2, bdto.getUserid());
+			pstmt.setString(3, bdto.getEmail());
+			pstmt.setString(4, bdto.getTitle());
+			pstmt.setString(5, bdto.getContent());
+			pstmt.setString(6, bdto.getImgfilename());
+			pstmt.setInt(7, bdto.getNum());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+	}
+
+	public void boardDelete(int num) {
+		String sql = "delete from board where num=?";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.close(con, pstmt, rs);
+		}
+	}
+
 }

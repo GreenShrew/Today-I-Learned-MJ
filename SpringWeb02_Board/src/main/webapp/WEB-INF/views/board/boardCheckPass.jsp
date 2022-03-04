@@ -9,7 +9,10 @@
 if(window.name=="update"){
 	window.opener.location.href = "boardUpdateForm?num=${num}";
 }else if(window.name=="delete"){
-	window.opener.location.href = "boardDelete?num=${num}";
+	var ans = confirm("정말로 삭제하시겠습니까?");
+	if(ans){
+		window.opener.location.href = "boardDelete?num=${num}";
+	}
 }
 self.close();
 // 게시글 비밀번호가 맞다면 
