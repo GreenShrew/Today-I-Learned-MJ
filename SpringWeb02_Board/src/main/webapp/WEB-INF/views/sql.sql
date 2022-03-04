@@ -31,6 +31,7 @@ insert into member values('홍길동', 'scott', '1234', 'gmd@anver.com', '010-12
 
 select * from reply;
 
+drop table reply;
 create table reply(
 	num number(7) primary key,		-- 댓글 순번
 	boardnum number(5),					-- 댓글의 해당 게시물 번호

@@ -31,7 +31,7 @@ public class BoardDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
+			while( rs.next() ) {
 				BoardDto bdto = new BoardDto();
 				bdto.setNum(rs.getInt("num"));
 				bdto.setPass(rs.getString("pass"));
@@ -42,45 +42,40 @@ public class BoardDao {
 				bdto.setWritedate(rs.getTimestamp("writedate"));
 				bdto.setReadcount(rs.getInt("readcount"));
 				bdto.setImgfilename(rs.getString("imgfilename"));
-				list.add(bdto);
+				list.add( bdto );
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			dbm.close(con, pstmt, rs);
-		}
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {  dbm.close(con, pstmt, rs);    }
 		return list;
 	}
 
 	public void insert(BoardDto bdto) {
+		
 		String sql = "insert into board(num, pass, userid, email, title, content, imgfilename) "
-				+ " values(board_seq.nextVal, ?, ?, ?, ?, ?, ?)";
-		con = dbm.getConnection();
+				+ "values( board_seq.nextVal, ?,?,?,?,?,? )";
 		try {
+			con = dbm.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bdto.getPass());
-			pstmt.setString(2, bdto.getUserid());
-			pstmt.setString(3, bdto.getEmail());
-			pstmt.setString(4, bdto.getTitle());
-			pstmt.setString(5, bdto.getContent());
+			pstmt.setString( 1, bdto.getPass() );
+			pstmt.setString( 2, bdto.getUserid() );
+			pstmt.setString( 3, bdto.getEmail() );
+			pstmt.setString( 4, bdto.getTitle() );
+			pstmt.setString( 5, bdto.getContent() );
 			pstmt.setString(6, bdto.getImgfilename());
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			dbm.close(con, pstmt, rs);
-		}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally {	dbm.close(con, pstmt, rs); }
 	}
 
 	public BoardDto getBoard(int num) {
-		BoardDto bdto= new BoardDto();
-		String sql = "select * from board where num=?";
+		BoardDto bdto = new BoardDto();
+		String sql = "select * from board where num = ?";
 		con = dbm.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				bdto.setNum(rs.getInt("num"));
 				bdto.setUserid(rs.getString("userid"));
 				bdto.setPass(rs.getString("pass"));
@@ -91,27 +86,20 @@ public class BoardDao {
 				bdto.setReadcount(rs.getInt("readcount"));
 				bdto.setImgfilename(rs.getString("imgfilename"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			dbm.close(con, pstmt, rs);
-		}
-		
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {	dbm.close(con, pstmt, rs); }	
 		return bdto;
 	}
 
 	public void plusReadCount(int num) {
-		String sql = "update board set readcount = readcount +1 where num=?";
-		con = dbm.getConnection();
+		String sql="Update board set readcount = readcount +1 where num=?";
 		try {
+			con = dbm.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			dbm.close(con, pstmt, rs);
-		}
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {	dbm.close(con, pstmt, rs); }	
 		
 	}
 
@@ -141,13 +129,26 @@ public class BoardDao {
 	}
 
 	public void addReply(ReplyVO rvo) {
-		String sql = "insert into reply(replynum, boardnum, userid, content) values(reply_seq.nextVal, ?, ?, ?)";
+		String sql = "insert into reply(replynum, boardnum, userid, content) values( reply_seq.nextVal, ?, ?, ?)";
+		con = dbm.getConnection();
+		try {			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,  rvo.getBoardnum());
+			pstmt.setString(2, rvo.getUserid());
+			pstmt.setString(3, rvo.getContent());
+			pstmt.executeUpdate();
+		} catch (SQLException e) { 	e.printStackTrace();		
+		} finally {	dbm.close(con, pstmt, rs); }	
+		
+	}
+
+
+	public void deleteReply(int replynum) {
+		String sql = "delete from reply where replynum=?";
 		con = dbm.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rvo.getBoardnum());
-			pstmt.setString(2, rvo.getUserid());
-			pstmt.setString(3, rvo.getContent());
+			pstmt.setInt(1, replynum);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

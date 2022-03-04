@@ -31,65 +31,65 @@ public class BoardController {
 	ServletContext context;
 	
 	@RequestMapping("/boardList")
-	public String main(HttpServletRequest request, Model model) {
+	public String main( HttpServletRequest request , Model model) {
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser")==null) {
-			return "member/loginForm";
-		}else {
+		if( session.getAttribute("loginUser") == null)	
+			return "member/loginform";
+		else {
 			ArrayList<BoardDto> list = bs.getBoardsMain();
 			model.addAttribute("boardList", list);
-		}
+		}		
 		return "board/main";
 	}
 	
 	
 	@RequestMapping("/boardWriteForm")
-	public String write_form(Model model, HttpServletRequest request){
+	public String write_form(Model model, HttpServletRequest request) {
 		String url = "board/boardWriteForm";
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") == null) {
-			url="loginForm";
-		}
+		if( session.getAttribute("loginUser") == null)	
+			url="loginform";		
+		
 		return url;
 	}
 	
 	
-	@RequestMapping(value="/boardWrite", method=RequestMethod.POST)
+	@RequestMapping(value="boardWrite", method = RequestMethod.POST)
 	public String board_write(Model model, HttpServletRequest request) {
 		
 //		HttpSession session = request.getSession();
 //		ServletContext context = session.getServletContext();
 		// 기존에는 위의 방법으로 사진을 업로드 했으나, 스프링 프레임워크에서는 스프링 컨테이너에 ServletContext를 넣고 @Autowired로 쓴다.
 		// 그런데, 스프링 컨테이너에 ServletContext가 이미 들어가있다! 기본적으로 제공한다!
-		String path = context.getRealPath("resources/upload");
+String path = context.getRealPath("resources/upload");
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(
 					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
 			);
 			BoardDto bdto = new BoardDto();
-			bdto.setPass(multi.getParameter("pass"));
-			bdto.setUserid(multi.getParameter("userid"));
-			bdto.setEmail(multi.getParameter("email"));
-			bdto.setTitle(multi.getParameter("title"));
-			bdto.setContent(multi.getParameter("content"));
-			bdto.setImgfilename(multi.getFilesystemName("imgfilename"));
+			bdto.setPass( multi.getParameter("pass") );
+			bdto.setUserid( multi.getParameter("userid") );
+			bdto.setEmail( multi.getParameter("email") );
+			bdto.setTitle(  multi.getParameter("title") );
+			bdto.setContent( multi.getParameter("content") );
+			bdto.setImgfilename( multi.getFilesystemName("imgfilename") );
 			
-			bs.insertBoard(bdto);
+			bs.insertBoard( bdto );
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) { e.printStackTrace();
 		}
+		
 		return "redirect:/boardList";
 	}
 	
 	
 	@RequestMapping("/boardView")
-	public String boardView(Model model, HttpServletRequest request) {
-	
-		int num = Integer.parseInt(request.getParameter("num"));
+	public String boardView( Model model, HttpServletRequest request ) {
+		
+		int num = Integer.parseInt( request.getParameter("num") ); 
 		/*
 		BoardDto bdto = bs.boardView(num);
 		model.addAttribute("board", bdto);
@@ -118,7 +118,7 @@ public class BoardController {
 //		model.addAttribute("replyList", list);
 		
 		// 위 4줄을 두줄로 줄였다.
-		model.addAttribute("board", (BoardDto) paramMap.get("bdtd"));
+		model.addAttribute("board", (BoardDto) paramMap.get("bdto") );
 		model.addAttribute("replyList", (ArrayList<ReplyVO>) paramMap.get("replylist"));
 		
 		return "board/boardView";
@@ -130,13 +130,13 @@ public class BoardController {
 		
 		String boardnum = request.getParameter("boardnum");
 		ReplyVO rvo = new ReplyVO();
-
+		
 		rvo.setUserid(request.getParameter("userid"));
-		rvo.setContent(request.getParameter("content"));
-		rvo.setBoardnum(Integer.parseInt(boardnum));
+		rvo.setContent( request.getParameter("reply") );
+		rvo.setBoardnum( Integer.parseInt(boardnum) );
 		
 		bs.addReply(rvo);
-		return "redirect:/boardViewWithoutCount?num="+boardnum;
+		return "redirect:/boardViewWithoutCount?num=" + boardnum;
 	}
 	
 	
@@ -151,5 +151,55 @@ public class BoardController {
 		model.addAttribute("replyList", (ArrayList<ReplyVO>) paramMap.get("replylist"));
 		
 		return "board/boardView";
+	}
+	
+	
+	@RequestMapping("/deleteReply")
+	public String reply_delete(Model model, HttpServletRequest request) {
+		int replynum = Integer.parseInt(request.getParameter("replynum"));
+		String boardnum = request.getParameter("boardnum");
+		
+		bs.deleteReply(replynum);	// 댓글을 지우는 메소드
+		
+		return "redirect:/boardViewWithoutCount?num="+boardnum;
+	}
+	
+	
+	@RequestMapping("/boardEditForm")
+	public String board_edit_form(Model model, HttpServletRequest request) {
+		String num = request.getParameter("num");
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	
+	@RequestMapping("/boardEdit")
+	public String board_edit(Model model, HttpServletRequest request) {
+		String num = request.getParameter("num");
+		String pass = request.getParameter("pass");
+		
+		BoardDto bdto = bs.getBoardOne(Integer.parseInt(num));
+		
+		model.addAttribute("num", num);
+		
+		if(bdto.getPass().equals(pass)) {
+			return "board/boardCheckPass";
+		}else {
+			model.addAttribute("message", "비밀번호가 맞지 않습니다. 확인해주세요.");
+			return "board/boardCheckPassForm";
+		}
+	}
+	
+	
+	@RequestMapping("/boardUpdateForm")
+	public String board_update_form(Model model, HttpServletRequest request) {
+		
+		String num = request.getParameter("num");
+		
+		BoardDto bdto = bs.getBoardOne(Integer.parseInt(num));
+		model.addAttribute("num", num);
+		model.addAttribute("board", bdto);
+		
+		return "board/boardEditForm";
 	}
 }

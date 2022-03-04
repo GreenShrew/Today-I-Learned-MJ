@@ -1,0 +1,125 @@
+day 92 배운것들
+
+※ 봐야할것들
+
+- 게시물의 댓글 기능이 안된다!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+게시글 삭제하기 기능 만들기
+====================================
+
+-> @RequestMapping("/deleteReply") 제작
+--> 여기서는 받을 내용이 1개뿐이므로, 이전에 사용했던 HashMap을 사용하지는 않는다.
+---> 이것만 작성하면 댓글 삭제 기능은 완료
+
+
+
+
+
+게시글의 수정&삭제 기능 만들기 (§ 사진 13)
+====================================
+- BoardView에서 두 기능 모두 js의 open_win() 함수를 호출한다.
+
+
+# 수정하기 기능
+-> @RequestMapping("/boardEditForm")를 제작한다.
+-> 번호를 가지고 boardCheckPassForm 로 넘기는 역할을 한다.
+
+--> 게시글의 비밀번호를 확인하는 boardCheckPassForm.jsp 생성
+
+---> @RequestMapping("/boardEdit") 생성.
+---> 비밀번호가 맞는지 체크하고, 맞으면 boardCheckPass.jsp로 보낸다.
+
+----> boardCheckPass.jsp 제작
+----> 여기서는 이전 페이지에서 넘겨받은 name값이 update라면 RequestMapping이 boardUpdateForm로, delete라면 boardDelete로 넘어간다.
+
+-----> @RequestMapping("/boardUpdateForm") 생성
+-----> 게시글을 update하는 Form으로 해당 번호의 게시물 정보와 함께 보내는 역할을 한다.
+
+------> boardEditForm.jsp 생성
+------> 완성되면 (§ 사진 13) 이 나온다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

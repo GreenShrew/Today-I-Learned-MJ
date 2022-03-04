@@ -44,14 +44,16 @@ public class BoardService {
 	*/
 	public HashMap<String, Object> boardView(int num) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		
 		// 조회수 +1
 		bdao.plusReadCount(num);
 		
-		// 게시물 조회
+		// 게시글 조회
 		BoardDto bdto = bdao.getBoard(num);
 		paramMap.put("bdto", bdto);
 		
-		ArrayList<ReplyVO> list = bdao.getReply(num);
+		// 댓글 조회
+		ArrayList<ReplyVO> list = bdao.getReply( num );
 		paramMap.put("replylist", list);
 		
 		return paramMap;
@@ -59,8 +61,6 @@ public class BoardService {
 
 	public void addReply(ReplyVO rvo) {
 		bdao.addReply(rvo);
-		
-		
 	}
 
 	public HashMap<String, Object> boardViewWithoutCount(int num) {
@@ -71,5 +71,14 @@ public class BoardService {
 		ArrayList<ReplyVO> list = bdao.getReply( num );
 		paramMap.put("replylist", list);	
 		return paramMap;
+	}
+
+	public void deleteReply(int replynum) {
+		bdao.deleteReply(replynum);
+	}
+
+	public BoardDto getBoardOne(int num) {
+		BoardDto bdto = bdao.getBoard(num);
+		return bdto;
 	}
 }
