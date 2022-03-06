@@ -8,6 +8,9 @@ day 92 배운것들
 - main.jsp에 페이징이 왜 안 나오지?
 -> paging.java 부터 뭔가 잘못되었나?
 
+- run이 안 되는데?
+-> 어디 뭐 xml 문제인가?
+
 
 
 ※ 참고!
@@ -199,6 +202,7 @@ select * from new_pro_view;
 
 
 Dao에서 DB에 연결하기 (어렵다! 이걸 잘 해둬야한다!)
+※ 템플릿을 사용하는 순서는 이번 프로젝트에서 계속 보게 될 것이다.
 ====================================
 - 지금까지 써왔던 서버에 의존하는 DB 접근 방법을 바꾼다.
 -> 이를 위해서 c3p0 와 mchange라는 jar 파일을 받았다. (pom.xml을 통해 받은것)
@@ -229,17 +233,19 @@ Dao에서 DB에 연결하기 (어렵다! 이걸 잘 해둬야한다!)
 
 
 
+로그인 기능 만들기
+==============================================
+- 로그인은 member와 관련되어있다.
+-> MemberController, MemberDao, MemberVO, MemberService 클래스를 만든다.
 
+--> 어노테이션 추가하고, VO를 작성한다.
 
+---> views 폴더 안에 member 폴더를 만들고, login.jsp 페이지를 만든다.
 
+----> WEB12 프로젝트에서 sub_image, sub_menu, login.jsp 를 가져와서 넣는다.
 
-
-
-
-
-
-
-
+-----> @RequestMapping(value="/login", method=RequestMethod.POST)를 추가한다.
+-----> 로그인 여부를 정하는 기능이다.
 
 
 

@@ -1,0 +1,15 @@
+<nav id="sub_menu">
+    <ul>
+    		<c:choose>
+				<c:when test="${empty loginUser}">
+						<li><a href="loginForm">LOGIN</a></li>
+						<li><a href="contract">JOIN</a></li>
+						<li><a href="#" onClick="find_id_pw()">Find Id/Pw</a></li>
+				</c:when>
+		    	<c:otherwise>
+		       			<li><a href="memberEditForm">EDIT MEMBER</a></li>
+		      			<li><a href="logout">LOGOUT</a></li>
+				</c:otherwise>
+			</c:choose>
+    </ul>
+</nav>

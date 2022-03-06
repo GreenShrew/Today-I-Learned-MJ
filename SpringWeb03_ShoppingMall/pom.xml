@@ -17,10 +17,10 @@
 	
 	<repositories>
 		<repository>
-			<id>oracle</id>
-			<name>ORACLE JDBC Repository</name>
-			<url>http://maven.jahia.org/maven2</url>
-		</repository>
+	        <id>oracle</id>
+	        <name>ORACLE JDBC Repository</name>
+	        <url>http://maven.jahia.org/maven2</url>
+	    </repository>
 	</repositories>
 	
 	<dependencies>
@@ -125,34 +125,37 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>       
+		</dependency>
+		
+		
 		
 		<!-- DataBase -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>4.1.6.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>12.1.0.2</version>
-		</dependency>
+            <artifactId>ojdbc6</artifactId>
+            <version>12.1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5</version>
+        </dependency>
 		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        
+        <!-- fileUpload -->
+		<dependency> 
+			<groupId>servlets.com</groupId> 
+			<artifactId>cos</artifactId> 
+			<version>05Nov2002</version> 
 		</dependency>
 		
-		<!-- fileUpload -->
-		<dependency>
-			<groupId>servlets.com</groupId>
-			<artifactId>cos</artifactId>
-			<version>05Nov2002</version>
-		</dependency>
-		
-		 
+		      
 	</dependencies>
+
     <build>
         <plugins>
             <plugin>
