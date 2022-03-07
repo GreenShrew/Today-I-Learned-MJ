@@ -27,4 +27,8 @@ public class MemberService {
 	public void insertMember(MemberVO mvo) {
 		mdao.insert(mvo);
 	}
+
+	public void memberUpdate(MemberVO mvo) {
+		mdao.update(mvo);
+	}
 }

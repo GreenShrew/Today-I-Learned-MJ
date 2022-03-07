@@ -63,7 +63,7 @@ drop table cart purge;
 
 create table cart (
   cseq         number(10)    primary key,  -- 장바구니 일련번호
-  id             varchar2(16)   references member(id),   -- 주문자 아이디(FK :　member.id) 
+  userid             varchar2(16)   references member(userid),   -- 주문자 아이디(FK :　member.id) 
   pseq        number(5)     references product(pseq),  -- 주문 상품번호(FK :product.pseq) 
   quantity   number(5)     default 1,        -- 주문 수량
   result       char(1)       default '1',      -- 1:미처리(카트에 담김 상태, 주문전)   2:처리(주문완료)
@@ -257,12 +257,12 @@ values(qna_seq.nextval, '불량품 교환 문의', '교환 또는 환불 등의 
 
 -- cart 안의 상품번호와 사용자 아이디로  상품이름과 사용자 이름을 함꼐 조회하는  view를 생성합니다
 select * from cart
-
+drop view cart_view;
 create or replace view cart_view
 as
-select c.cseq, c.id, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
+select c.cseq, c.userid, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
 from cart c, product p, member m
-where c.pseq = p.pseq and c.id = m.id;
+where c.pseq = p.pseq and c.userid = m.userid;
 
 select * from cart_view;
 

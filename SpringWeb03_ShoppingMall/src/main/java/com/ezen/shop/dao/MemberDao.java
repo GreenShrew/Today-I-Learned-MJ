@@ -35,6 +35,7 @@ public class MemberDao {
 		        mvo.setEmail(rs.getString("email"));
 		        mvo.setZip_num(rs.getString("zip_num"));
 		        mvo.setAddress(rs.getString("address"));
+		        mvo.setAddress2(rs.getString("address2"));
 		        mvo.setPhone(rs.getString("phone"));
 //		        mvo.setUseyn(rs.getString("useyn"));
 //		        mvo.setIndate(rs.getTimestamp("indate"));
@@ -79,6 +80,14 @@ public class MemberDao {
 		// pstmt.setString(1, mvo.getUserid()) 이런식으로 안 써도 된다!
 		template.update(sql, mvo.getUserid(), mvo.getName(), mvo.getPwd(), mvo.getZip_num(), mvo.getAddress(), 
 				mvo.getAddress2(), mvo.getEmail(), mvo.getPhone());
+	}
+
+
+	public void update(MemberVO mvo) {
+		String sql = "update member set pwd=?, name=?, zip_num=?, address=?, address2=?, "
+				+ " email=?, phone=? where userid=?";
+		template.update(sql, mvo.getPwd(), mvo.getName(), mvo.getZip_num(), mvo.getAddress(),
+				mvo.getAddress2(), mvo.getEmail(), mvo.getPhone(), mvo.getUserid());
 	}
 
 }

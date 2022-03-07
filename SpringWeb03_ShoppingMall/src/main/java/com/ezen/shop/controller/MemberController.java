@@ -117,6 +117,26 @@ public class MemberController {
 	public String member_Edit_Form(Model model, HttpServletRequest request) {
 		return "member/memberUpdateForm";
 	}
+	
+	
+	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
+	public String member_Update(Model model, HttpServletRequest request) {
+		MemberVO mvo = new MemberVO();
+		mvo.setUserid(request.getParameter("userid"));
+		mvo.setPwd(request.getParameter("pwd"));
+		mvo.setName(request.getParameter("name"));
+		mvo.setEmail(request.getParameter("email"));
+		mvo.setPhone(request.getParameter("phone"));
+		mvo.setZip_num(request.getParameter("zip_num"));
+		mvo.setAddress(request.getParameter("addr1"));
+		mvo.setAddress2(request.getParameter("addr2"));
+		
+		ms.memberUpdate(mvo);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", mvo);
+		return "redirect:/";
+	}
 }
 
 

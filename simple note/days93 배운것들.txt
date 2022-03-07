@@ -37,12 +37,14 @@ web.xml 파일에 아래 코드를 추가해주자.
 
 ※ 확인할거
 - 아이디체크 팝업이 닫히면 User ID에 아이디가 사라진다..
+-> 해결!
 
 - findZipNum.jsp 확인해야 해.
 -> @RequestMapping("/findZipNum"), selectAddressByDong 메소드도 확인해
 -> 아마 Dao를 확인해야할거야...
 
-
+- 장바구니 안 들어간다?
+-> cartDao의 insert 메소드 문제
 
 
 
@@ -94,7 +96,12 @@ web.xml 파일에 아래 코드를 추가해주자.
 =====================================
 - 회원 정보수정 페이지로 보내는 @RequestMapping("/memberEditForm") 추가
 
--> memberUpdateForm.jsp 생성
+-> @RequestMapping("/memberEditForm"), memberUpdateForm.jsp 생성
+
+
+--> 수정한 내용을 DB에 적용시키는 기능을 하는 @RequestMapping(value="/memberUpdate", method=RequestMethod.POST) 추가
+
+---> 정보가 수정되었음을 알 수 있다.
 
 
 
@@ -102,52 +109,50 @@ web.xml 파일에 아래 코드를 추가해주자.
 
 
 
+카테고리 기능
+==================
+- 카테고리 기능을 만든다.
+-> productController 에 @RequestMapping("category") 추가
 
-4번 + 5장 = 30회 남음
-
-5번 + 5장 = 20회
-
-
-
-19번 남았음
-
+※ ModelAndView : model에 addAttribute로 저장할 내용과 이동할 jsp 파일의 이름을 동시에 저장하고 리턴하여 전달값과 이동 페이지를 한번에 다룰 수 있게 하는 클래스이다.
+=> 매개변수로 HttpServletRequest request, Model model 선언하지 않고 쓰는 방법!
 
 
+--> product 폴더 만들고, 그 안에 productKind.jsp 생성
 
-
-
+---> 옛 프로젝트에서 sub_menu.html, sub_image.html 복사해서 resources/sub02 폴더에 넣는다.
 
 
 
 
-
-
-
-
+상품 상세보기 기능
+==============================
+- @RequestMapping("/productDetail")을 추가한다.
+-> product 폴더에 productDetail.jsp 추가
 
 
 
 
 
 
+장바구니 담기 기능
+==================================
+- 우선 CartVO, CartDao, CartService, CartController를 제작
+
+-> 카트에 상품을 담는 기능인 @RequestMapping("cartInsert")을 만든다.
+--> Model이 필요한게 아니니깐 굳이 ModelAndView를 쓰지 않아도 된다.
+--> public String으로 만들었다.
+---> cartList.jsp로 보낸다.
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+장바구니 페이지 만들기
+=============================================
+- mypage 폴더 생성
+-> cartList.jsp 만들고 WEB12 프로젝트에서 sub_image.html, sub_menu.jsp 를 가져와서 sub03 폴더에 넣는다.
 
 
 
@@ -155,10 +160,10 @@ web.xml 파일에 아래 코드를 추가해주자.
 
 
 
-
-
-
-
+장바구니 삭제하기
+============================================
+- mypage.js 함수 수정
+-> @RequestMapping("cartDelete") 제작
 
 
 
