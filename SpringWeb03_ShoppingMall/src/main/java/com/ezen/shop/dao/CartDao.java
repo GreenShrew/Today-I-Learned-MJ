@@ -23,7 +23,7 @@ public class CartDao {
 	}
 
 	public void insert(CartVO cvo) {
-		String sql = "insert into cart(cseq, userid, pseq, quantity values(cart_seq.nextVal, ?, ?, ?)";
+		String sql = "insert into cart(cseq, userid, pseq, quantity) values(cart_seq.nextVal, ?, ?, ?)";
 		template.update(sql, cvo.getUserid(), cvo.getPseq(), cvo.getQuantity());
 	}
 
@@ -52,7 +52,7 @@ public class CartDao {
 	}
 
 	public void delete(String cseq) {
-		String sql = "delete * from cart_view where cseq=?";
+		String sql = "delete * from cart where cseq=?";
 		template.update(sql, cseq);
 	}
 	

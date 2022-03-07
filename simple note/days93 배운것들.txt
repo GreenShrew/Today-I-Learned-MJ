@@ -43,8 +43,8 @@ web.xml 파일에 아래 코드를 추가해주자.
 -> @RequestMapping("/findZipNum"), selectAddressByDong 메소드도 확인해
 -> 아마 Dao를 확인해야할거야...
 
-- 장바구니 안 들어간다?
--> cartDao의 insert 메소드 문제
+- 장바구니 삭제가 안된다?
+-> 이건 작성중이긴 한데...
 
 
 
