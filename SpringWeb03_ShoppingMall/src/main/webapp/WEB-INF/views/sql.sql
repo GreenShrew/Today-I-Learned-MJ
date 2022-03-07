@@ -4,7 +4,7 @@ DROP TABLE worker CASCADE CONSTRAINTS;
 
 -- member 테이블 : 상품을 구매하기위해서 회원으로 가입한 구매자들.
 CREATE TABLE member (
-	id varchar2(20) NOT NULL ,
+	userid varchar2(20) NOT NULL ,
 	pwd varchar2(20) NOT NULL,
 	name varchar2(20) NOT NULL,
 	email varchar2(40) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE member (
 	phone varchar2(20) NOT NULL,
 	useyn char(1) DEFAULT 'y',    -- 휴면 계정 여부
 	indate date DEFAULT sysdate,
-	PRIMARY KEY (id)
+	PRIMARY KEY (userid)
 );
 
 select * from member;
@@ -171,9 +171,9 @@ insert into worker values('scott', 'tiger', '홍길동', '010-6400-6068');
 
 
 -- 회원 입력
-insert into member(id, pwd, name, zip_num, address, phone, email) values
+insert into member(userid, pwd, name, zip_num, address, phone, email) values
 ('one', '1111', '김나리', '133-110', '서울시 성동구 성수동1가 1번지21호', '017-777-7777','acc@abc.com');
-insert into member(id, pwd, name, zip_num, address, phone, email)values
+insert into member(userid, pwd, name, zip_num, address, phone, email)values
 ('two', '2222', '김길동', '130-120', '서울시 송파구 잠실2동 리센츠 아파트 201동 505호', '011-123-4567','acc@abc.com');
 
 
@@ -359,14 +359,41 @@ select * from order_view;
 select * from qna;
 select * from best_pro_view;
 select * from new_pro_view;
+select * from address;
+
+
+
+-- member 테이블 address 필드 수정!
+-- add1, add2 를 address, address2 에 나누어 넣게 된다!
+alter table member add address2 varchar2(100);
 
 
 
 
+-- 상품 추가용
 
-
-
-
+insert into product(pseq, name, kind, price1, price2, price3, content, image)
+values(product_seq.nextval, '크로그다일부츠', '2', 40000, 50000, 10000, '오리지날 크로그다일부츠 입니다.', 'w2.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '롱부츠', '2', 40000, 50000, 10000, '따듯한 롱부츠 입니다.', 'w-28.jpg', 'n');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '힐', '1', 10000, 12000, 2000, '여성 전용 힐 입니다.', 'w-26.jpg', 'n');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '슬리퍼', '4', 5000, 5500, 500, '편안한 슬리퍼입니다.', 'w-25.jpg', 'y');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '회색힐', '1', 10000, 12000, 2000, '여성 전용 힐 입니다.', 'w9.jpg', 'n');
+insert into product(pseq, name, kind, price1, price2, price3, content, image)
+values(product_seq.nextval, '여성부츠', '2', 12000, 18000, 6000, '여성 전용 부츠 입니다.', 'w4.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '핑크샌달', '3', 5000, 5500, 500, '사계절용 샌달입니다.', 'w-10.jpg', 'y');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '슬리퍼', '3', 5000, 5500, 500, '편안한 슬리퍼입니다.', 'w11.jpg', 'y');
+insert into product(pseq, name, kind, price1, price2, price3, content, image)
+values(product_seq.nextval, '스니커즈', '4', 15000, 20000, 5000, '활동성이 좋은 스니커즈입니다.', 'w1.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '샌달', '3', 5000, 5500, 500, '사계절용 샌달입니다.', 'w-09.jpg', 'n');
+insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
+values(product_seq.nextval, '스니커즈', '5', 15000, 20000, 5000, '활동성이 좋은 스니커즈입니다.', 'w-05.jpg', 'n');
 
 
 

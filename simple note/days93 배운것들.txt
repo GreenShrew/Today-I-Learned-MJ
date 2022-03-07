@@ -1,0 +1,330 @@
+days93 배운것들
+
+
+※ 우선 (§ 사진 15)는 프로젝트 홈페이지 메인 화면이다.
+
+-> 근데 사진은 이제 작성 하면서 찍어넣을까 싶다..
+
+
+※ 참고로 예전의 WEB12 에서 복사 붙여넣기 하는 부분이 많다.
+다만, 링크라던가 form 태그의 id 값이 조금씩 다르니깐 js, jsp 파일 변경점을 유심히 보자!
+-> 또한, js 파일도 손볼게 많다!
+
+※ 한글이 깨졌었다.
+web.xml에서 한글 처리를 안 해주었다!
+web.xml 파일에 아래 코드를 추가해주자.
+
+<filter>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	<init-param>
+		<param-name>forceEncoding</param-name>
+		<param-value>true</param-value>
+	</init-param>
+</filter>
+<filter-mapping>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+
+
+
+※ 확인할거
+- 아이디체크 팝업이 닫히면 User ID에 아이디가 사라진다..
+
+- findZipNum.jsp 확인해야 해.
+-> @RequestMapping("/findZipNum"), selectAddressByDong 메소드도 확인해
+-> 아마 Dao를 확인해야할거야...
+
+
+
+
+
+
+
+
+
+
+
+어제는 로그인까지 했다..
+
+
+
+
+
+회원가입 기능 생성
+=================================================
+- membercontroller에 @RequestMapping("contract") 생성
+-> @RequestMapping("/logout") 로그아웃 기능도 만들어둔다.
+
+--> member 폴더에 contract.jsp 추가
+
+---> @RequestMapping(value="joinForm", method=RequestMethod.POST), joinForm.jsp 추가
+---> 이렇게 하면 회원가입 페이지까지 이동한다.
+
+
+----> 아이디 체크할 idcheck.jsp 만들기
+----> @RequestMapping("/idCheckForm") 도 제작한다.
+
+
+-----> 주소찾기 팝업을 나타낼 @RequestMapping("/findZipNum"), findZipNum.jsp 제작
+-----> AddressVO 생성
+-----> Dao에 selectAddressByDong 메소드 만드는데, 역시 templet을 이용하여 만든다.
+※ 참고 : member 테이블의 address 필드를 address, address2 필드로 나누었다!
+ 따라서 MemberVO에도 address2 변수를 하나 더 추가해주어야 한다.
+
+
+------> 회원가입을 처리할 @RequestMapping(value="/join", method=RequestMethod.POST) 추가
+
+------> MemberDao의 insert 메소드를 보자!
+------> template를 이용한 DB에 insert 방법이다.
+
+
+
+
+
+
+회원 정보수정 기능
+=====================================
+- 회원 정보수정 페이지로 보내는 @RequestMapping("/memberEditForm") 추가
+
+-> memberUpdateForm.jsp 생성
+
+
+
+
+
+
+
+
+4번 + 5장 = 30회 남음
+
+5번 + 5장 = 20회
+
+
+
+19번 남았음
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

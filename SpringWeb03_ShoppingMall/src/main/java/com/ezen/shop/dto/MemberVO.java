@@ -3,21 +3,29 @@ package com.ezen.shop.dto;
 import java.sql.Timestamp;
 
 public class MemberVO {
-	private String id;
+	private String userid;
     private String pwd;     
     private String name;
     private String email;
     private String zip_num;
     private String address;
+    private String address2;
     private String phone;
     private String useyn;
     private Timestamp indate;
     
-	public String getId() {
-		return id;
+	
+	public String getAddress2() {
+		return address2;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getPwd() {
 		return pwd;

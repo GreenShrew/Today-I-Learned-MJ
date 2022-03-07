@@ -48,7 +48,75 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("/logout")
+	public String logout(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginUser");
+		return "redirect:/";
+	}
 	
+	@RequestMapping("/contract")
+	public String contract(Model model, HttpServletRequest request) {
+		return "member/contract";
+	}
+
+	
+	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
+	public String join_form(Model model, HttpServletRequest request) {
+		return "member/joinForm";
+	}
+	
+	
+	@RequestMapping("/idCheckForm")
+	public String id_check_form(Model model, HttpServletRequest request) {
+		String userid = request.getParameter("userid");
+		MemberVO mvo = ms.getMember(userid);
+		if(mvo == null) {	 // 사용 가능한 id
+			model.addAttribute("result", -1);
+		}else {		// 사용 불가능한 id
+			model.addAttribute("result", 1);
+		}
+		model.addAttribute("userid", userid);
+		
+		return "member/idcheck";
+	}
+	
+	
+	@RequestMapping("/findZipNum")
+	public String find_zip(Model model, HttpServletRequest request) {
+		String dong = request.getParameter("dong");
+		
+		if(dong != null && dong.trim().equals("")==false) {
+			// List<AddressVO> addressList = ms.selectAddressByDong(dong);
+			// 아래 한줄로 끝
+			model.addAttribute("addressList", ms.selectAddressByDong(dong));
+		}
+		return "member/findZipNum";
+	}
+
+	
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String join(Model model, HttpServletRequest request) {
+		
+		MemberVO mvo = new MemberVO();
+		mvo.setUserid(request.getParameter("userid"));
+		mvo.setPwd(request.getParameter("pwd"));
+		mvo.setName(request.getParameter("name"));
+		mvo.setEmail(request.getParameter("email"));
+		mvo.setPhone(request.getParameter("phone"));
+		mvo.setZip_num(request.getParameter("zip_num"));
+		mvo.setAddress(request.getParameter("addr1"));
+		mvo.setAddress2(request.getParameter("addr2"));
+		ms.insertMember(mvo);
+		
+		return "member/login";
+	}
+
+	
+	@RequestMapping("/memberEditForm")
+	public String member_Edit_Form(Model model, HttpServletRequest request) {
+		return "member/memberUpdateForm";
+	}
 }
 
 
