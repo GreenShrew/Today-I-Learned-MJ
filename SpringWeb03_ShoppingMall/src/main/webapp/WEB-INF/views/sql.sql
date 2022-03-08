@@ -117,6 +117,7 @@ create table order_detail(
 );
 drop sequence order_detail_seq;
 create sequence order_detail_seq start with 1;
+create sequence odseq_seq start with 1;
 
 select * from order_detail;
 
@@ -256,7 +257,7 @@ values(qna_seq.nextval, '불량품 교환 문의', '교환 또는 환불 등의 
 
 
 -- cart 안의 상품번호와 사용자 아이디로  상품이름과 사용자 이름을 함꼐 조회하는  view를 생성합니다
-select * from cart
+select * from cart;
 drop view cart_view;
 create or replace view cart_view
 as
@@ -273,13 +274,14 @@ select * from cart_view;
 -- 1. 주문번호(oseq)에 따른 주문상품들의 표시 
 -- 2. 상품번호에 따른 상품 이름과 가격 등의 정보 표시
 -- 3. 아이디에 따른 고객 이름과 배송주소 등의 정보 표시
+drop view order_view;
 create or replace view order_view
 as
 select d.odseq, o.oseq, o.indate,  o.id, 
 			m.name as mname, m.zip_num, m.address, m.phone, 
 			d.pseq,  p.name as pname, p.price2,  d.quantity, d.result
 from orders o, order_detail d, member m, product p
-where o.oseq=d.oseq and o.id=m.id and d.pseq=p.pseq;
+where o.oseq=d.oseq and o.id=m.userid and d.pseq=p.pseq;
 
 select * from order_view;
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.shop.dao.OrderDao;
 import com.ezen.shop.dto.CartVO;
+import com.ezen.shop.dto.OrderVO;
 
 @Service
 public class OrderService {
@@ -25,6 +26,25 @@ public class OrderService {
 			odao.deleteCart(cvo.getCseq());	// 방금 추가한 주문에 해당되는 장바구니의 상품 삭제
 		}
 		return oseq;
-		return 0;
+	}
+
+	public List<OrderVO> listOrderByOseq(int oseq) {
+		
+		return odao.listOrderByOseq(oseq);
+	}
+
+	public int insertOrderOne(int pseq, int quantity, String userid) {
+		// 전달받은 id로 주문목록을 가져와서
+		odao.insertOrders(userid);
+		// 그 주문목록중 가장 최근 주문번호를 선택
+		int oseq = odao.lookupMaxOseq();
+		// 그 주문번호를 이용해 물건 하나만 저장하고
+		odao.insertOrderDetailOne(pseq, quantity, oseq);
+		// 사용한 주문번호를 보내서 화면에 해당 주문이 내역으로 나오도록 만든다.
+		return oseq;
+	}
+
+	public List<Integer> selectSeqOrderIng(String userid) {
+		return odao.selectSeqOrderIng(userid);
 	}
 }
