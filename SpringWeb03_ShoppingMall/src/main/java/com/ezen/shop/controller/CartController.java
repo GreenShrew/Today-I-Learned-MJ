@@ -72,12 +72,12 @@ public class CartController {
 	
 	
 	@RequestMapping("cartDelete")
-	public String cartDelete(@RequestParam("cseq") String [] cseqArr) {
-		// String[] cseqArr = request.getParameterValues("cseq");
+	public String cartDelete( @RequestParam("cseq") String [] cseqArr ) {
+		//String[] cseqArr = request.getParameterValues("cseq");
 		
-		for(String cseq : cseqArr) {
+		for( String cseq : cseqArr)
 			cs.deleteCart(cseq);
-		}
+		
 		return "redirect:/cartList";
 	}
 }
