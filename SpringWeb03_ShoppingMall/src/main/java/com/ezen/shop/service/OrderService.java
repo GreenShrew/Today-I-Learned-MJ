@@ -47,4 +47,8 @@ public class OrderService {
 	public List<Integer> selectSeqOrderIng(String userid) {
 		return odao.selectSeqOrderIng(userid);
 	}
+
+	public List<Integer> oseqListAll(String userid) {
+		return odao.oseqListAll(userid);
+	}
 }

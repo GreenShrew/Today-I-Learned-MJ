@@ -7,7 +7,7 @@ days94 배운것들
 
 - cart 테이블을 쓰는 기능들에 문제가 생긴다!
 
-
+- orderDetail.jsp 다시 한번 확인해
 
 
 
@@ -58,24 +58,31 @@ days94 배운것들
 마이 페이지 기능 만들기
 =========================
 - 얘도 해야할거, 가져가야할것이 많다.
--> 
+-> 주문내역을 만들 @RequestMapping("/myPage"), mypage.jsp를 만든다.
+
+
+--> 총 주문 내역을 알려줄 @RequestMapping("/orderAll") 를 만든다. 다만 위에서 만든 @RequestMapping("/myPage")와 같다!
+--> selectSeqOrderIng 메소드가 oseqListAll 로 바뀌는것 빼고는 모두 같다!
+
+---> dao에서도 insertOrderDetailOne 메소드를 그대로 복사 붙여넣기 하되 sql의 and result='1'  부분만 삭제한다.
+---> 총 주문내역에 나타낼 것이라 주문이 처리되지 않은 내역도 전부 긁어가기 때문이다.
+
+
+
+----> 주문내역의 주문 상세 정보를 조회하는 기능을 만든다. (x 포함 3건... 에 대한 상세한 내용을 보려고 한다.)
+----> @RequestMapping("/orderDetail") 을 만들면 되는데, 필요한 메소드들은 이미 앞서 다 만들어두었다!
+
+-----> 주문 상세 정보를 나타낼 orderDetail.jsp 를 만든다.
 
 
 
 
+qna 기능 만들기
+=============================
+- QnaController, QnaService, QnaDao, QnaVO 생성
 
-
-
-
-
-
-
-
-
-
-
-
-
+-> @RequestMapping("/qnaList") 제작
+-> qna 목록을 DB에서 긁어와서 qnaList.jsp로 넘어가는 동작을 한다.
 
 
 

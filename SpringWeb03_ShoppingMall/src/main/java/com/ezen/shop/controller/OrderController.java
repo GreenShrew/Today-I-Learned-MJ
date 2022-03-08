@@ -121,4 +121,62 @@ public class OrderController {
 		}
 		return mav;
 	}
+	
+	
+	@RequestMapping("/orderAll")
+	public ModelAndView orderAll(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		if(mvo==null) {
+			mav.setViewName("member/login");
+		}else {
+			ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();
+			
+			List<Integer> oseqList = os.oseqListAll(mvo.getUserid());
+			
+			for(int oseq : oseqList) {
+				List<OrderVO> orderListIng = os.listOrderByOseq(oseq);
+				
+				OrderVO ovo = orderListIng.get(0);	// 첫번째 상품 꺼냄
+				ovo.setPname(ovo.getPname() + " 포함 " + orderListIng.size() + " 건");	// 이름 변경
+				int totalPrice = 0;
+				for(OrderVO ovo1 : orderListIng) {
+					totalPrice += ovo1.getPrice2() * ovo1.getQuantity();
+					ovo.setPrice2(totalPrice);	// 가격 변경
+				}
+				
+				orderList.add(ovo);
+			}
+			mav.addObject("title", "총 주문 내역");
+			mav.addObject("orderList", orderList);
+			mav.setViewName("mypage/mypage");
+		}
+		return mav;
+	}
+	
+	
+	@RequestMapping("/orderDetail")
+	public ModelAndView orderDetail(HttpServletRequest request,
+			@RequestParam("oseq") int oseq) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		if(mvo==null) {
+			mav.setViewName("member/login");
+		}else {
+			List<OrderVO> orderList = os.listOrderByOseq(oseq);	// 주문번호로 주문 상품들의 리스트 리턴
+			int totalPrice = 0;
+			for(OrderVO ovo : orderList) {
+				totalPrice += ovo.getPrice2() * ovo.getQuantity();
+			}
+			mav.addObject("orderList", orderList);
+			mav.addObject("totalPrice", totalPrice);
+			mav.setViewName("mypage/orderDetail");
+			mav.addObject("orderList", orderList.get(0));
+		}
+		return mav;
+	}
 }

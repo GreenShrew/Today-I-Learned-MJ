@@ -99,4 +99,19 @@ public class OrderDao {
 		return list;
 	}
 
+	public List<Integer> oseqListAll(String userid) {
+		String sql = "select distinct oseq from order_view "
+				+ " where id=? order by oseq desc";
+		List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int oseq = rs.getInt("oseq");
+				return oseq;
+			}
+			
+		}, userid);
+		return list;
+	}
+
 }
