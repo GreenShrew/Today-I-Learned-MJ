@@ -22,56 +22,53 @@ public class CartController {
 	CartService cs;
 	
 	@RequestMapping("cartInsert")
-	public String cartInsert(HttpServletRequest request,	// 로그인 되어있는지 확인하기 위해 필요하다.
-			@RequestParam("pseq") int pseq,
-			@RequestParam("quantity") int quantity) {	// 매개변수가 여러개일땐 이렇게 쓴다.
+	public String cartInsert( 
+			HttpServletRequest  request,  
+			@RequestParam("pseq") int pseq , 
+			@RequestParam("quantity") int quantity ) {
 		
 		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		
-		if(mvo==null) {
+		if( mvo == null) {
 			return "member/login";
 		}else {
-			CartVO cvo = new CartVO();
-			cvo.setUserid(mvo.getUserid());
-			cvo.setPseq(pseq);
-			cvo.setQuantity(quantity);
 			
-			cs.inserCart(cvo);
-		}
-		
+			CartVO cvo = new CartVO();
+			cvo.setUserid( mvo.getUserid() );
+			cvo.setPseq( pseq );
+			cvo.setQuantity( quantity );
+			
+			cs.insertCart( cvo );
+		}		
 		return "redirect:/cartList";
 	}
 	
-	
-	@RequestMapping("cartList")
-	public ModelAndView cartList(HttpServletRequest request) {
+	@RequestMapping("/cartList")
+	public ModelAndView cartList( HttpServletRequest request ) {
 		ModelAndView mav = new ModelAndView();
-		
+	
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
 		
-		if(mvo==null) {
+		if( mvo == null) {
 			mav.setViewName("member/login");
 		}else {
-			List<CartVO> list = cs.listCart(mvo.getUserid());
+			List<CartVO> list = cs.listCart( mvo.getUserid() );
 			int totalPrice = 0;
-			for(CartVO cvo : list) {
+			for( CartVO cvo : list) 
 				totalPrice += cvo.getPrice2() * cvo.getQuantity();
-			}
-			// 조회하고 계산된 리스트와 총 금액을 mav에 넣고 cartList.jsp 로 이동.
-			// 저장 이름은 cartList, totalPrice
 			
-			mav.addObject("totalPrice", totalPrice);
-			mav.addObject("cartList", list);
-			mav.setViewName("mypage/cartList");
+				// 조회하고 계산된 리스트와 총금액을  mav 에 넣고 cartList.jsp  로 이동. 저장이름은  cartList, totalPrice
+				mav.addObject("totalPrice" , totalPrice);
+				mav.addObject("cartList" , list);
+				mav.setViewName("mypage/cartList");
 		}
-		
 		return mav;
 	}
 	
 	
-	@RequestMapping("cartDelete")
+	@RequestMapping("/cartDelete")
 	public String cartDelete( @RequestParam("cseq") String [] cseqArr ) {
 		//String[] cseqArr = request.getParameterValues("cseq");
 		
@@ -81,3 +78,14 @@ public class CartController {
 		return "redirect:/cartList";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

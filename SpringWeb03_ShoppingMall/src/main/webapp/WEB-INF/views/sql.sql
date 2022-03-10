@@ -4,7 +4,7 @@ DROP TABLE worker CASCADE CONSTRAINTS;
 
 -- member 테이블 : 상품을 구매하기위해서 회원으로 가입한 구매자들.
 CREATE TABLE member (
-	userid varchar2(20) NOT NULL ,
+	id varchar2(20) NOT NULL ,
 	pwd varchar2(20) NOT NULL,
 	name varchar2(20) NOT NULL,
 	email varchar2(40) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE member (
 	phone varchar2(20) NOT NULL,
 	useyn char(1) DEFAULT 'y',    -- 휴면 계정 여부
 	indate date DEFAULT sysdate,
-	PRIMARY KEY (userid)
+	PRIMARY KEY (id)
 );
 
 select * from member;
@@ -38,9 +38,11 @@ CREATE TABLE product(
 drop sequence product_seq;
 create sequence product_seq start with 1;
 
+
+
 select * from product;
-
-
+select * from product order by pseq desc
+update product set kind='2' where pseq=201;
 
 
 
@@ -63,7 +65,7 @@ drop table cart purge;
 
 create table cart (
   cseq         number(10)    primary key,  -- 장바구니 일련번호
-  userid             varchar2(16)   references member(userid),   -- 주문자 아이디(FK :　member.id) 
+  id             varchar2(16)   references member(id),   -- 주문자 아이디(FK :　member.id) 
   pseq        number(5)     references product(pseq),  -- 주문 상품번호(FK :product.pseq) 
   quantity   number(5)     default 1,        -- 주문 수량
   result       char(1)       default '1',      -- 1:미처리(카트에 담김 상태, 주문전)   2:처리(주문완료)
@@ -117,7 +119,6 @@ create table order_detail(
 );
 drop sequence order_detail_seq;
 create sequence order_detail_seq start with 1;
-create sequence odseq_seq start with 1;
 
 select * from order_detail;
 
@@ -172,9 +173,9 @@ insert into worker values('scott', 'tiger', '홍길동', '010-6400-6068');
 
 
 -- 회원 입력
-insert into member(userid, pwd, name, zip_num, address, phone, email) values
+insert into member(id, pwd, name, zip_num, address, phone, email) values
 ('one', '1111', '김나리', '133-110', '서울시 성동구 성수동1가 1번지21호', '017-777-7777','acc@abc.com');
-insert into member(userid, pwd, name, zip_num, address, phone, email)values
+insert into member(id, pwd, name, zip_num, address, phone, email)values
 ('two', '2222', '김길동', '130-120', '서울시 송파구 잠실2동 리센츠 아파트 201동 505호', '011-123-4567','acc@abc.com');
 
 
@@ -257,13 +258,13 @@ values(qna_seq.nextval, '불량품 교환 문의', '교환 또는 환불 등의 
 
 
 -- cart 안의 상품번호와 사용자 아이디로  상품이름과 사용자 이름을 함꼐 조회하는  view를 생성합니다
-select * from cart;
-drop view cart_view;
+select * from cart
+
 create or replace view cart_view
 as
-select c.cseq, c.userid, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
+select c.cseq, c.id, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
 from cart c, product p, member m
-where c.pseq = p.pseq and c.userid = m.userid;
+where c.pseq = p.pseq and c.id = m.id;
 
 select * from cart_view;
 
@@ -274,7 +275,6 @@ select * from cart_view;
 -- 1. 주문번호(oseq)에 따른 주문상품들의 표시 
 -- 2. 상품번호에 따른 상품 이름과 가격 등의 정보 표시
 -- 3. 아이디에 따른 고객 이름과 배송주소 등의 정보 표시
-drop view order_view;
 create or replace view order_view
 as
 select d.odseq, o.oseq, o.indate,  o.id, 
@@ -291,7 +291,6 @@ select * from order_view;
 
 
 -- 신상품  View 생성
-drop view new_pro_view;
 create or replace view new_pro_view
 as
 select * from
@@ -308,7 +307,6 @@ update product set bestyn='y' where pseq=11;
 
 
 -- 베스트 상품 view 생성
-drop view best_pro_view;
 create or replace view best_pro_view
 as
 select * from
@@ -365,37 +363,14 @@ select * from address;
 
 
 
--- member 테이블 address 필드 수정!
--- add1, add2 를 address, address2 에 나누어 넣게 된다!
 alter table member add address2 varchar2(100);
+delete from member where userid like '%hong%';
 
 
 
+update member set name='홍길원' , address='서울시 서대문구 대현동', address2='은하빌딩 1층' where userid='hong1';
 
--- 상품 추가용
 
-insert into product(pseq, name, kind, price1, price2, price3, content, image)
-values(product_seq.nextval, '크로그다일부츠', '2', 40000, 50000, 10000, '오리지날 크로그다일부츠 입니다.', 'w2.jpg');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '롱부츠', '2', 40000, 50000, 10000, '따듯한 롱부츠 입니다.', 'w-28.jpg', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '힐', '1', 10000, 12000, 2000, '여성 전용 힐 입니다.', 'w-26.jpg', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '슬리퍼', '4', 5000, 5500, 500, '편안한 슬리퍼입니다.', 'w-25.jpg', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '회색힐', '1', 10000, 12000, 2000, '여성 전용 힐 입니다.', 'w9.jpg', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, image)
-values(product_seq.nextval, '여성부츠', '2', 12000, 18000, 6000, '여성 전용 부츠 입니다.', 'w4.jpg');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '핑크샌달', '3', 5000, 5500, 500, '사계절용 샌달입니다.', 'w-10.jpg', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '슬리퍼', '3', 5000, 5500, 500, '편안한 슬리퍼입니다.', 'w11.jpg', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, image)
-values(product_seq.nextval, '스니커즈', '4', 15000, 20000, 5000, '활동성이 좋은 스니커즈입니다.', 'w1.jpg');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '샌달', '3', 5000, 5500, 500, '사계절용 샌달입니다.', 'w-09.jpg', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-values(product_seq.nextval, '스니커즈', '5', 15000, 20000, 5000, '활동성이 좋은 스니커즈입니다.', 'w-05.jpg', 'n');
 
 
 

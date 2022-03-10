@@ -32,3 +32,16 @@ public class MemberService {
 		mdao.update(mvo);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

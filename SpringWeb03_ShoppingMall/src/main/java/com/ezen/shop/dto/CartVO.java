@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 public class CartVO {
 
 	private Integer cseq;
-	private String userid;
-	private Integer pseq;
+	private String userid;  
+	private Integer pseq;  
 	private String mname;
 	private String pname;
 	private Integer quantity;
@@ -26,6 +26,7 @@ public class CartVO {
 	public void setCseq(Integer cseq) {
 		this.cseq = cseq;
 	}
+	
 	public Integer getPseq() {
 		return pseq;
 	}
@@ -68,5 +69,6 @@ public class CartVO {
 	public void setIndate(Timestamp indate) {
 		this.indate = indate;
 	}
+	
 	
 }

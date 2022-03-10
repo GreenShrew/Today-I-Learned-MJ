@@ -1,5 +1,7 @@
 package com.ezen.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -48,6 +50,8 @@ public class MemberController {
 	}
 	
 	
+	
+	
 	@RequestMapping("/logout")
 	public String logout(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -55,47 +59,51 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	
+	
 	@RequestMapping("/contract")
 	public String contract(Model model, HttpServletRequest request) {
 		return "member/contract";
 	}
-
 	
-	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
+	
+	
+	@RequestMapping(value="joinForm", method=RequestMethod.POST)
 	public String join_form(Model model, HttpServletRequest request) {
 		return "member/joinForm";
 	}
+
 	
 	
-	@RequestMapping("/idCheckForm")
+	
+	@RequestMapping("idCheckForm")
 	public String id_check_form(Model model, HttpServletRequest request) {
 		String userid = request.getParameter("userid");
 		MemberVO mvo = ms.getMember(userid);
-		if(mvo == null) {	 // 사용 가능한 id
-			model.addAttribute("result", -1);
-		}else {		// 사용 불가능한 id
-			model.addAttribute("result", 1);
-		}
+		if( mvo == null ) model.addAttribute("result", -1);
+		else model.addAttribute("result", 1);
+		
 		model.addAttribute("userid", userid);
 		
 		return "member/idcheck";
 	}
 	
 	
+	
+	
 	@RequestMapping("/findZipNum")
 	public String find_zip(Model model, HttpServletRequest request) {
-		String dong = request.getParameter("dong");
+		String dong=request.getParameter("dong");
 		
-		if(dong != null && dong.trim().equals("")==false) {
-			// List<AddressVO> addressList = ms.selectAddressByDong(dong);
-			// 아래 한줄로 끝
-			model.addAttribute("addressList", ms.selectAddressByDong(dong));
+		if(dong!=null && dong.trim().equals("")==false){
+			//List<AddressVO> addressList = ms.slelectAddressByDong(dong);
+			//model.addAttribute(  "addressList", addressList  );
+			model.addAttribute(  "addressList", ms.selectAddressByDong(dong)  );
 		}
 		return "member/findZipNum";
 	}
-
 	
-	@RequestMapping(value="/join", method=RequestMethod.POST)
+	@RequestMapping(value = "/join", method=RequestMethod.POST)
 	public String join(Model model, HttpServletRequest request) {
 		
 		MemberVO mvo = new MemberVO();
@@ -105,35 +113,37 @@ public class MemberController {
 		mvo.setEmail(request.getParameter("email"));
 		mvo.setPhone(request.getParameter("phone"));
 		mvo.setZip_num(request.getParameter("zip_num"));
-		mvo.setAddress(request.getParameter("addr1"));
-		mvo.setAddress2(request.getParameter("addr2"));
+		mvo.setAddress(request.getParameter("addr1") );
+		mvo.setAddress2( request.getParameter("addr2") );
 		ms.insertMember(mvo);
 		
 		return "member/login";
 	}
-
 	
-	@RequestMapping("/memberEditForm")
+	
+	@RequestMapping(value = "memberEditForm")
 	public String member_Edit_Form(Model model, HttpServletRequest request) {
+		
 		return "member/memberUpdateForm";
 	}
 	
 	
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
 	public String member_Update(Model model, HttpServletRequest request) {
 		MemberVO mvo = new MemberVO();
 		mvo.setUserid(request.getParameter("userid"));
 		mvo.setPwd(request.getParameter("pwd"));
 		mvo.setName(request.getParameter("name"));
 		mvo.setEmail(request.getParameter("email"));
-		mvo.setPhone(request.getParameter("phone"));
 		mvo.setZip_num(request.getParameter("zip_num"));
-		mvo.setAddress(request.getParameter("addr1"));
-		mvo.setAddress2(request.getParameter("addr2"));
+		mvo.setAddress(request.getParameter("addr1") );
+		mvo.setAddress2( request.getParameter("addr2") );		
+		mvo.setPhone(request.getParameter("phone"));
 		
 		ms.memberUpdate(mvo);
 		
-		HttpSession session = request.getSession();
+		HttpSession session=request.getSession();
 		session.setAttribute("loginUser", mvo);
 		return "redirect:/";
 	}

@@ -20,7 +20,7 @@ function go_next(){
 	 	/* 동의 안함 버튼이 선택된 상태  */
 		alert("회원약관에 동의하셔야 회원으로 가입이 가능합니다");
 	} else {
-		// frmm 폼에  action 도 없고 submit 버튼도 없는 것을 스크립트 명령으로 설정하고 submit 까지 실행합니다 
+		// formm 폼에  action 도 없고 submit 버튼도 없는 것을 스크립트 명령으로 설정하고 submit 까지 실행합니다 
 		document.formm.action = "joinForm";
 		document.formm.submit();
 	}
@@ -41,12 +41,17 @@ function idcheck(){
 
 
 
+
+
 function post_zip(){
 	var url = "findZipNum";
 	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=550,";
 	opt = opt + " height=300, top=300, left=300";
 	window.open( url, "우편번호 찾기", opt );
 }
+
+
+
 
 
 
@@ -62,7 +67,7 @@ function go_save(){
 	    document.formm.pwd.focus();
 	} else if(document.formm.pwd.value != document.formm.pwdCheck.value) {
 	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");	    
-	    document.formm.pwd.focus();
+	    document.joinformmForm.pwd.focus();
 	} else if(document.formm.name.value == "") {
 	    alert("이름을 입력해 주세요.");	    
 	    document.formm.name.focus();

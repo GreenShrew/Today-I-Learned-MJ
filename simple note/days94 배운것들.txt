@@ -9,7 +9,7 @@ days94 배운것들
 
 - orderDetail.jsp 다시 한번 확인해
 
-
+- qna Controller, Service, Dao 확인
 
 
 
@@ -84,10 +84,15 @@ qna 기능 만들기
 -> @RequestMapping("/qnaList") 제작
 -> qna 목록을 DB에서 긁어와서 qnaList.jsp로 넘어가는 동작을 한다.
 
+--> qna 폴더를 만들고 qnaList.jsp 를 만든다.
 
 
+qna 작성하는 기능 만들기
+=========================
+- @RequestMapping("/qnaWriteForm") 작성
 
 
+-> 작성한 qna를 db에 저장하는 @RequestMapping("/qnaWrite") 작성
 
 
 
@@ -99,161 +104,31 @@ qna 기능 만들기
 
 
 
+관리자 페이지 로그인 만들기
+===========================
+- AdminController, AdminService, AdminDao, AdminVO 를 생성
 
+-> 이미 만들어진 메소드들을 쓸 일이 있으므로 AdminController에 어노테이션으로 ProductService, QnaService, ServletContext 를 추가한다.
 
 
+--> 로그인할 페이지인 adminLoginForm를 만든다.
+--> resources admin 폴더 안에 bar_01.gif, text.gif, 헤더풋터, css 등등을 넣는다...
 
 
+---> 로그인 기능을 하는 @RequestMapping("/adminLogin")추가
+---> 로그인 성공시 productList.jsp로 보낸다.
 
 
 
 
 
+관리자 상품 페이지 작성
+=========================================
+- 해당 페이지로 보내는 기능인 @RequestMapping("/productList") 추가
+-> productList.jsp 제작
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+오늘은 여기까지

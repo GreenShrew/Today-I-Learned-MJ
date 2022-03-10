@@ -1,7 +1,6 @@
 package com.ezen.shop.dto;
 
 public class AddressVO {
-
 	private String zip_num;
 	private String sido;
 	private String gugun;
@@ -45,5 +44,6 @@ public class AddressVO {
 	public void setBunji(String bunji) {
 		this.bunji = bunji;
 	}
+	
 	
 }

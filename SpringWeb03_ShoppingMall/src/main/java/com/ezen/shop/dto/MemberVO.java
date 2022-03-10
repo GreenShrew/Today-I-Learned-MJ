@@ -14,13 +14,15 @@ public class MemberVO {
     private String useyn;
     private Timestamp indate;
     
-	
+    
+    
 	public String getAddress2() {
 		return address2;
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
+	
 	public String getUserid() {
 		return userid;
 	}

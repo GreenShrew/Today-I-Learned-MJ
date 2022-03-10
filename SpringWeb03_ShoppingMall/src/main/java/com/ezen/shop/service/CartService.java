@@ -14,8 +14,8 @@ public class CartService {
 	@Autowired
 	CartDao cdao;
 
-	public void inserCart(CartVO cvo) {
-		cdao.insert(cvo);
+	public void insertCart(CartVO cvo) {
+		cdao.insert(cvo);		
 	}
 
 	public List<CartVO> listCart(String userid) {
@@ -24,5 +24,6 @@ public class CartService {
 
 	public void deleteCart(String cseq) {
 		cdao.delete(cseq);
+		
 	}
 }

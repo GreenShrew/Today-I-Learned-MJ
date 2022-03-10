@@ -3,27 +3,21 @@ package com.ezen.shop.dto;
 import java.sql.Timestamp;
 
 public class OrderVO {
-
+	
 	private int odseq;
 	private int oseq;
-	private String id;
-	private Timestamp 	indate;
+	private String id; 
+	private Timestamp indate;
 	private String mname;
 	private String zipnum;
 	private String address;
-	private String phone;
+	private String phone;  
 	private int pseq;
 	private String pname;
-	private int price2;
 	private int quantity;
+	private int price2;  
 	private String result;
 	
-	public String getZipnum() {
-		return zipnum;
-	}
-	public void setZipnum(String zipnum) {
-		this.zipnum = zipnum;
-	}
 	public int getOdseq() {
 		return odseq;
 	}
@@ -54,6 +48,12 @@ public class OrderVO {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
+	public String getZipnum() {
+		return zipnum;
+	}
+	public void setZipnum(String zipnum) {
+		this.zipnum = zipnum;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -78,17 +78,17 @@ public class OrderVO {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public int getPrice2() {
-		return price2;
-	}
-	public void setPrice2(int price2) {
-		this.price2 = price2;
-	}
 	public int getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public int getPrice2() {
+		return price2;
+	}
+	public void setPrice2(int price2) {
+		this.price2 = price2;
 	}
 	public String getResult() {
 		return result;
@@ -96,5 +96,6 @@ public class OrderVO {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	
 	
 }

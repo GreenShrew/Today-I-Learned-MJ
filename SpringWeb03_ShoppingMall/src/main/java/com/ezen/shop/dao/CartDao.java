@@ -23,38 +23,52 @@ public class CartDao {
 	}
 
 	public void insert(CartVO cvo) {
-		String sql = "insert into cart(cseq, userid, pseq, quantity) values(cart_seq.nextVal, ?, ?, ?)";
-		template.update(sql, cvo.getUserid(), cvo.getPseq(), cvo.getQuantity());
+		String sql = "insert into cart( cseq, id, pseq, quantity) values( cart_seq.nextVal, ? , ? , ? )";
+		template.update(sql, cvo.getUserid(), cvo.getPseq(), cvo.getQuantity() );		
 	}
 
 	public List<CartVO> listCart(String userid) {
-		String sql = "select * from cart_view where userid=? and result='1'";
+		String sql = "select * from cart_view where id=? and result='1'";
 		List<CartVO> list = template.query(sql, new RowMapper<CartVO>() {
 
 			@Override
 			public CartVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				CartVO cvo = new CartVO();
-				cvo.setCseq(rs.getInt(1));
+				CartVO cvo = new CartVO();				
+				cvo.setCseq(rs.getInt(1));     
 				cvo.setUserid(rs.getString(2));
-				cvo.setMname(rs.getString(3));
+				cvo.setMname(rs.getString(3));     
 				cvo.setPseq(rs.getInt(4));
-				cvo.setPname(rs.getString(5));
+				cvo.setPname(rs.getString(5));     	
 				cvo.setQuantity(rs.getInt(6));
-				cvo.setPrice2(rs.getInt(7));
-				cvo.setResult(rs.getString(8));
+				cvo.setPrice2(rs.getInt(7));     
+				cvo.setResult(rs.getString(8));    
 				cvo.setIndate(rs.getTimestamp(9));
 				return cvo;
 			}
 			
-		}, userid);
-		
+		} , userid);
 		return list;
 	}
 
 	public void delete(String cseq) {
-		String sql = "delete * from cart where cseq=?";
+		String sql = "delete from cart where cseq=?";
 		template.update(sql, cseq);
+		
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
