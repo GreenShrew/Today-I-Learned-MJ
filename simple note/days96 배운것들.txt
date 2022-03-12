@@ -1,0 +1,381 @@
+day 96 배운것들
+
+-> day 95는 생략
+
+
+
+
+
+springboot 프로젝트 시작
+=========================
+- 프로젝트를 Springboot의 Spring Starter Project로 만든다. 
+ 이름은 SpringBoot_G01
+ type은 Gradle (Legacy 프로젝트에서는 maven을 써봤으니 이번엔 Gradle을 쓸 예정)
+ java version 은 8
+ Group은 com.ezen
+ Artifact는 Spg01
+ Package는 com.ezen.spg01
+
+-> next 누르면 Spring Boot Version 2.6.4
+-> available에 web 검색
+-> Gradle의 SpringFramework는 원래 모바일 프로그래밍을 위한 framework였다. 따라서 web 기능이 다 들어가있는게 아니다.
+-> 따라서 web 쪽에 Spring Web을 체크한다.
+-> 근데 이렇게 하면 다른 프로젝트 만들때 이걸 검색 안 하고도 체크할지 바로 보여준다!
+-> 이러고 next, finish!
+
+
+--> https://start.spring.io에 가면 지금 떠있는 창 처럼 프로젝트를 시작해서 압축파일을 받아 import 시킬 수 있기도 하다.
+
+
+※ 참고로 서버는 추가하지 않는다.
+SpringFramework에 톰캣서버가 내장되어있기 때문!
+DB는 추가한다.
+
+
+
+
+Springboot 개발 시작하기
+SpringBoot_G01
+===========================
+- 우선 매번 닫아왔던 outline 창을 닫지 않는다.
+ 또한, Boot Dashboard라는 창을 띄운다. <- 서버를 실행시키는 방법이라고 함
+
+(상단 Window - show view 에서 검색)
+
+
+
+-> 포트번호 바꾸기
+src/main/resources의 application.properties에 코드 추가
+
+
+
+--> 서버 시작 방법
+com.ezen.spg01 패키지의 SpringBootG01Application 클래스를 열고 run 시키면 서버가 동작한다!
+
+---> 이후 크롬창에 localhos:8070 (8070은 application.properties에 추가한 포트번호)를 쓰면 페이지에 접속된다.
+
+
+----> Html 파일은 따로 설정을 안 했다면 src/main/resources의 static 폴더에 만들어야 한다. 또한, 이미지 파일도 여기에 넣어서 사용이 가능하다.
+
+
+
+
+
+SpringBoot에서 JSP 파일 사용하기
+SpringBoot_G02
+==================================
+※ JSP 파일은 어떻게 해야하나?
+src main 아래에 wepapp 폴더가 없다!
+이를 사용할 수 있도록 설정하는 방법에 대해 알아본다.
+
+
+
+- build.gradle을 열어서 dependencies { } 안에 아래 두줄의 코드를 수동으로 추가해야한다.
+implementation 'javax.servlet:jstl'
+implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+이러면 JSP 파일을 사용할 수 있도록 만들었다.
+
+-> application.properties 에서 포트번호를 추가한다.
+
+
+JSP 파일을 화면에 나타내기 위해서는 이전과 같이 Controller를 이용한다.
+여기서부터는 이전의 Legacy project와 구조가 흡사하다.
+--> 그리고 com.ezen.spg02 패키지에 SpringBootController 클래스를 만든다.
+여기에도 @Controller 어노테이션을 붙인다!
+
+---> @RequestMapping("/")까지는 같다...다만 다음이 다르다.
+함수 이름에 @ResponseBody를 넣는다! 이러면 리턴되는 문자열이 웹 브라우저에 직접 쓰여진다. JSP 파일이 따로 없이 브라우저에 나타낼때 쓰인다!
+
+
+----> JSP 파일을 보려면? @RequestMapping("/test1") 를 쓴다. 다만 main.jsp도 없고 만들 폴더도 없다!
+
+-----> main 폴더에 webapp 폴더를 직접 만든다. 그리고 그 아래 WEB-INF폴더, 그 아래 views 폴더를 만들어야 한다. (매 프로젝트마다 만들어야함.)
+-----> 그리고 views 폴더 안에 main.jsp 파일을 만든다...
+
+------> 이전의 프로젝트에서의 servletcontext.xml의 String filename이 return됐을 때, 경로와 뒤에 확장자(.jsp)를 조립해주는 내용이 있었으나, 여긴 없다.
+------> application.properties에 
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+를 추가해준다!
+
+-------> views 안에 또다른 폴더를 만든 경우에도 return "sub/sub"; 와 같이 만들어 사용이 가능하다.
+
+
+
+
+
+
+Controller에서 JSP로 데이터 보내기, 각 request method 간의 데이터 전송
+SpringBoot_G03
+=====================================
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+
+- Controller 제작
+-> 맨 첫 페이지인 @RequestMapping("/") 추가
+--> test1.jsp 페이지로 보낼 @RequestMapping("/test1") 추가
+※ model과 request로 두 데이터를 보낼때의 차이를 알 수 있다.
+JSP로 리턴되면 model을 쓰던 request를 쓰던 상관이 없다. 다만 그게 아니라면?
+
+---> JSP로 보내지 않고 "test3"으로 redirect하는 @RequestMapping("/test2") 추가
+---> 그리고 test2.jsp로 보내는 @RequestMapping("/test3") 추가
+---> 이러면 데이터가 전달되지 않는다!
+
+※ model, request에 아무리 넣어서 보내도 다른 request method에 전달되지 않는다!
+따라서 전역변수(name4, name5)를 만들어서 저장해서 사용하는 방식으로..
+
+
+# ModelAndView 사용 방법도 썼다..
+
+
+
+
+
+
+
+
+
+JSP에서 Controller로 데이터 보내기
+SpringBoot_G04
+============================================
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+※ 전송방식
+기존(request.getParameter, requestParam)의 방식을 써볼 것이고, 새로운 방식도 쓸 것이다.
+
+
+
+- FormDataController 클래스를 만든다.
+
+-> 첫 페이지를 나타낼 @RequestMapping("/") 생성. testForm.jsp로 보낸다.
+-> testForm.jsp 는 아이디, 비밀번호를 쓰고 '전송' 버튼으로 전송시키는 페이지이다.
+-> 전송을 누르면 test1이라는 request에 전송이 된다.
+
+--> @RequestMapping("/test1") 여기로 전송된다. (기존의 방법! request.getParameter)
+--> 전송되는 내용은 test1.jsp 페이지로 가서 출력이 된다!
+
+---> 이번에는 @RequestParam으로 전송되는 @RequestMapping("/test2")를 만든다.
+---> 전송되는 내용은 test2.jsp 페이지로 가서 출력이 된다.
+
+
+### 새로운 방식!!!!
+
+----> com.ezen.spg04 패키지에 dto 파일 만든다. 이름은 Member.
+
+-----> 이번에는 @RequestMapping("/test3")을 만든다. 다만 매개변수가 Member.
+-----> testForm.jsp의 input 속성의 이름이 각각 id와 name이다. dto로 만든 Member 클래스 또한 id와 name을 가지고 있다.
+ 이 경우, 저절로 같은 이름을 가진 값들이 member에 저장된다! member.getId(); 를 하면 testForm.jsp에서 전송한 id를 출력한다!
+※ 주석 확인해...
+
+------> 이제 test3.jsp에 가면 mbr.id, mbr.name으로 전달된 데이터를 사용할 수 있다.
+
+
+
+※ 자주 쓰이지는 않지만...
+@RequestMapping("/test4/{studentId}/{name}")
+
+-> 매개변수로 사용되는 @PathVariable 어노테이션은, 말 그대로 주소속에 전달값이 있다는 내용이다.
+->public String getStudent(@PathVariable String studentId, @PathVariable String name,  Model model) 이런 상태에서...
+--> 'localhost:8070/test4/scott/홍길동' 이런식으로 주소에 쓰면, studentId는 scott, name은 홍길동이 된다!
+---> RequestMapping의 괄호 안의 대괄호 내용이 변수가 되는 것이다.
+
+
+
+
+
+
+
+
+
+
+
+lombok 설치
+==============================================
+- 여기서부터는 lombok을 쓸 것이다.
+ dto와 같은 클래스에 멤버변수를 만들고 getter setter 다 설정해뒀는데, 나중에 가서 멤버변수 이름이 중간에 바뀌면 이걸 다 지우고 다시 만들어야 하는 불편함이 있다.
+ 이를 해소해주는 도구.
+ 필요한 getter setter 메소드들을 자동으로 만들어준다.
+
+
+## 설치방법 (사실 설치하고 지울 예정이므로 경로는 쉬운곳에 해도 상관없다.)
+lombok download 검색 - 나오는 lombok 다운로드. - 다운로드 된 jar 파일을 JAVA01(내 컴퓨터에는 Today-I-Learned-MJ)에 넣기 - cmd 실행 - 해당 jar가 있는 경로로 이동한다 (바탕화면으로 가는 명령 cd %systemdrive%\users\%username%\desktop) - java -jar lombok.jar 명령 - 그럼 빨간 고추 그림을 가진 lombok 창이 실행되는데, 이클립스 설치 경로가 안 나오면 specify location 버튼으로 찾아야한다. - install 누르면 끝 - 이클립스 재실행
+
+
+
+
+lombok을 이용한 getter setter 자동 설정
+SpringBoot_G05
+=========================================
+- 이번에는 설치한 lombok을 적용해야한다.
+-> 프로젝트 생성시 두번째 설정에서 lombok을 검색하여 체크해준다.
+--> 이렇게 체크하면 build.gradle에 lombok 관련 내용이 자동으로 추가되어있다!
+
+
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+
+
+- com.ezen.spg05 패키지에 dto 파일인 Member 클래스를 만들고 멤버변수를 써준다.
+-> 그리고 getter setter는 직접 마우스로 만드는게 아니라 @Data 어노테이션을 import 해주면 getter setter를 만들지 않아도 getId(), getName(), setId(), setName() 등등 이용 가능한 메소드들이 자동으로 생긴다!
+--> outline 탭을 이용하면 확인할 수 있다!
+
+
+
+- com.ezen.spg05 패키지에 LombokController를 만든다.
+-> 첫 페이지 testForm.jsp로 보낼 @RequestMapping("/") 추가
+-> 그리고 testForm.jsp에서 넘어온 데이터를 받아서 test1.jsp로 보낼 @RequestMapping("/test1") 도 추가한다.
+
+--> 참고로 @ModelAttribute 어노테이션을 사용하지 않아도, 모델에 저장되는 이름 member 라는 이름으로 유지되어 모델에 저장된다.
+--> 다만 객체 이름은 반드시 클래스의 소문자여야한다.
+
+---> member.getId(), member.getName() 를 이용할 수 있음을 볼 수 있다.
+
+
+
+
+
+Springboot에서 제공해주는 Validation (혹시 입력되어있지 않은 칸이 있나? 검사하는걸 validation이라고 한다)
+SpringBoot_G06
+=======================================
+- SpringBoot에서도 js로 validation 기능을 수행할 수 있지만, SpringBoot 자체에서 해당 기능을 제공한다.
+
+※ 우선 수동으로 클래스를 가져와서 이용해본다.
+
+
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+
+- 우선 views에 startPage.jsp, DonePage.jsp 생성
+- com.ezen.spg06 패키지에 ValidController.java 생성.
+
+-> 첫 페이지로 보낼 @RequestMapping("/") 생성, startPage.jsp로 보낸다.
+
+--> startPage.jsp에서는 내용을 작성하고 '전송'을 누르면 requestMapping이 create로 간다.
+--> @RequestMapping("/create") 생성
+
+---> 주석의 내용은 옛 방식(request.getParameter, @RequestParam)이고, 여기서는 매개변수에 dto 객체를 변수로 넣을것이다. (@ModelAttribute("dto") 어노테이션을 이용하여 전달되는 값의 이름을 "dto" 로 만들 것이다.)
+---> 이러면 전달되는 파라미터들이 객체내의 동일한 이름의 멤버변수에 자동 대입된다.
+
+# 수동으로 만드는 validation(위의 것 보다 성능이 좋지는 않다.)
+----> 이제 validation 기능을 추가한다.
+----> 옛날에는 if( contentdto.getWriter().equals("") || contentdto.getContent().contentEquals("") ) 이런식으로 쓴 내용이 없는 경우를 걸러내는 if문을 만들었었다.
+
+
+#Springboot에서 제공하는 validation 중 가장 초보단계의 validation 기능
+- validation 기능을 가진 멤버 메소드를 가지고 있는 클래스를 제작한다.
+
+-> spg06 패키지에 ContentValidator.java 생성, 클래스 Validator 를 implements 한다.
+-> 그리고 마우스를 올려 Override 시킨다. 그러면 두개의 메소드가 오버라이드 된다!
+
+--> supports 메소드는 거의 안 사용하고, validate 메소드를 주로 쓴다.
+
+---> 여기서 에러 내용을 담아 보내는 errors를 쓰기 위해서 Controller의 매개변수로 BindingResult result를 추가해주어야 한다.
+
+----> 그렇다면, 위의 if문 조건을 지우고 if( result.hasErrors() ) 로 바꿀 수 있다. (result가 존재한다 = errors가 존재한다!)
+
+
+
+
+
+
+
+조금 더 개량된 Validation
+SpringBoot_G07
+======================================
+아직까지는 이전 프로젝트들과 똑같이 만든다.
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+
+
+- G06과 내용은 비슷하다.
+-> startPage.jsp, DonePage.jsp를 복사해온다.
+-> ContentDto도 복사해온다.
+
+-> spg07 패키지에 ContentValidator 클래스를 생성한다. 역시 Validator를 implements 하고 override.
+
+--> 다만 이번에는 validate 메소드가 간단해졌다.
+--> ValidationUtils.rejectIfEmptyOrWhitespace(errors, "writer", "writer is empty."); 로, 비어있거나 공백이면 errors에 writer로 writer is empty를 저장한다.
+
+---> 또한 글자수도 점검할 수 있다!
+
+
+----> Controller에서는 result.getFieldError를 이용하여 세부 내용을 파악할 수 있다.
+----> result.hasErrors()는 result에 담긴 값이 있는지 파악한다면, result.getFieldError("writer")는 result에 이름이 "writer"로 담긴게 있는지 확인한다.
+
+
+
+
+
+
+
+
+실제로 우리가 쓸 validation 방법!
+SpringBoot_G08
+==============================================
+※ 이전 validation은 잊어도 된다는 이야기를.....
+- 프로젝트를 만들며 Lombok, Spring Web에 체크하고, validation을 검색해 나오는 Validation을 체크한다.
+
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비 끝!
+
+
+
+- G06, G07과 내용은 비슷하다.
+-> startPage.jsp, DonePage.jsp를 복사해온다.
+-> ContentDto도 복사해온다.
+
+
+- 이번에는 ContentValidation을 만들지 않는다!
+
+-> ValidController 제작
+
+--> 첫번쨰 페이지로 갈 @RequestMapping("/"), 두번째 페이지로 갈 @RequestMapping("/create") 제작.
+
+---> 여기서 Validation을 하는 방법은?
+public String create( @ModelAttribute("dto") @Valid ContentDto contentdto
+			, BindingResult result , Model model)
+
+@Valid를 @ModelAttribute("dto") ContentDto contentdto 사이에 넣으면 된다!
+
+----> 이렇게만 쓰면 G07에서 ContentValidation에서 검사한것마냥 검사가 완료된다!
+----> 그리고 뒤에 BindingResult result 를 쓰면 result.hasErrors(), result.getFieldError("writer") 처럼 사용이 가능하다!
+
+-----> 또한, @Valid를 붙인 dto에 이것을 인식할 수 있도록 검사를 진행하는 각각의 멤버변수에 @NotNull, @NotEmpty 어노테이션을 붙여주어야 한다.
+-----> 어노테이션 옆 괄호 message는 기본 메세지가 된다.
+-----> @Size 를 쓰면 글자의 최소, 최대값을 지정할 수 있다.
+
+
+※ 반드시 뒤에 BindingResult 클래스가 따라붙는다!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
