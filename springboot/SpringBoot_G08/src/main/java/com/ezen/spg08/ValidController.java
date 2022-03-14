@@ -17,6 +17,8 @@ public class ValidController {
 	 }
 	
 	@RequestMapping("/create")
+	// 멤버변수가 비어있거나 null인지 확인해주는 @Valid.
+	// 아래는 contentdto의 값을 검사한다.
 	public String create( @ModelAttribute("dto") @Valid ContentDto contentdto
 			, BindingResult result , Model model) {
 		
