@@ -109,10 +109,18 @@ SpringBoot_G10
 
 
 
+-----> 게시글을 볼 수 있는 view 페이지로 넘기며 데이터를 가져가는 @RequestMapping("view") 추가
+-----> view() 메소드에서 '?' 에 내용을 넣어야한다.
+-----> template.queryForObject를 쓴다! 
+-----> BbsDto dto = template.queryForObject(sql, new BeanPropertyRowMapper<BbsDto>(BbsDto.class), id); 처럼 마지막에 컴마를 넣고 ?에 들어갈 내용을 쓰면 된다!
 
+------> view.jsp를 제작한다. 그러면 (§ 사진 03) 의 결과를 얻을 수 있다.
 
 
 
+-------> 게시글을 삭제하는 기능을 가진 @RequestMapping("delete") 추가
+--------> Dao에서 delete 기능을 하는 template.update를 return에 바로 꽃아넣었다.
+--------> (§ 사진 04)와 같이 삭제기능이 된다.
 
 
 
@@ -120,28 +128,63 @@ SpringBoot_G10
 
 
 
+MyBatis Framework 사용하기
+SpringBoot_G11
+===============================
+- 프로젝트를 만들 때 available에서 mybatis를 검색해 MyBatis Framework를 체크한다.
 
 
+- build.gradle, application.properties 수정, webapp 및 하위폴더 추가
+-> JSP 사용준비, oracle 사용준비 끝!
 
 
+# mybatis 적용하기
+- application.properties에 아래 코드를 추가한다.
+mybatis.mapper-locations=classpath:mybatis/mapper/**/**.xml
 
+-> src/main/resources의 templates에 mybatis 패키지를 만든다
+-> 그리고 그 아래에 또 mapper 패키지를 만든다.
+-> templates.mybatis.mapper 패키지가 만들어지는데, 이건 옛날 방식이다...(이건 지워버려)
 
+--> resources 아래에 mybatis.mapper 패키지를 만든다.
 
+---> 위에서 추가한 mybatis.mapper-locations=classpath:mybatis/mapper/**/**.xml 의 의미는, mybatis/mapper 경로에 **(어떤 이름이 올지 모름).xml 파일이 있다는 것을 의미한다.
 
+----> mybatis.mapper 패키지에 UserDao.xml 파일을 만든다.
 
+-----> xml 파일에
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 를 추가해야한다.
 
 
+------> com.ezen.spg11 패키지에 controller, dao, dto 패키지를 만든다.
 
+-------> UserController를 만들고 메인 페이지로 넘어가는 @RequestMapping("/") 제작
 
 
+--------> dto는 만든다, 다만 mybatis 에서는 앞서 만들었던 UserDao.xml 파일을 사용하게 된다.
+ 인터페이스에 추상메소드를 호출하면, 인터페이스가 해당 메소드를 xml에서 실행해주는 형식
 
 
 
+# dao 사용하기
+- dao 패키지에 IUserDao 인터페이스를 만든다.
+-> 그리고 UserController에서 @Autowired로 IUserDao를 가져다가 쓴다...
 
+--> IUserDao에는 mybatis에서 사용되는 어노테이션 @Mapper를 넣는다.
 
+---> UserController에서 list() 메소드를 만들면 IUserDao에 추상메소드가 만들어진다...
+---> 클래스를 안 만들건데 어디서 오버라이드되는가?
+---> UserDao.xml에서 쓸 것이다!
 
 
+----> UserDao.xml에서 mapper 태그를 이용하여 경로를 mapping한다.
+----> 그 안에 select 태그(sql이 select면 select 태그)를 쓰고, id 속성으로 추상메소드의 이름을 정확히 쓴다. 그리고 resultType으로 어느 경로의 어느 파일에 결과가 들어가는지 정확히 적는다.
+----> 그리고 select 태그 사이에 sql문을 쓴다.
 
+※ mapper에는 interface 이름을
+그 안의 id는 메소드 이름을
+resultType은 결과 자료형에 맟추어 쓴다.
 
 
 
@@ -149,42 +192,73 @@ SpringBoot_G10
 
 
 
+MyBatis Framework 사용하기 (2)
+SpringBoot_G12
+===============================
+- 지금까지 했던 기본셋팅을 한다.
 
 
 
+- com.ezen.spg12 패키지에 controller, dao, dto 패키지 제작
 
+-> BbsController 클래스, IBbsDao 인터페이스, BbsDto 클래스를 제작한다.
 
+--> list.jsp 페이지로 멤버 목록 정보를 긁어다가 가는 @RequestMapping("/") 추가
 
+---> resources 폴더 아래에 mybatis.mapper 패키지를 만들고 BbsDao.xml을 만든다.
 
+----> BbsDao.xml에서 mapper 추가하고 select 추가하면 (§사진 05) 가 나온다.
 
 
+# validation 연습
+- 글을 써서 DB에 저장하는 @RequestMapping(value="/write", method=RequestMethod.POST) 를 추가한다.
+-> writeForm.jsp에서 전달되는 내용은 BbsDto이므로 매개변수로 BbsDto 추가,
+validation을 위한 @Valid 추가, 
+여기에 따라붙는 BindingResult 추가, 
+뭔가 잘못되면 메세지를 전달하기 위한 Model 추가, 
+validation에 걸려서 다시 writeForm.jsp로 돌아갈 때 쓰던 데이터를 다시 화면에 표시하고자 @ModelAttribute("dto") 추가.
 
+--> (§ 사진 06) 이 나온다.
 
 
+---> 이제 validation을 통과하고 나온 하단 else 내용을 쓴다....(두가지 방법!)
 
+#1. 전달인자를 하나하나 따로 보내는 경우
+bdao.write(bbsdto.getWriter(), bbsdto.getTitle(), bbsdto.getContent());
 
+이를 write() 메소드를 만들면 매개변수가 있는 경우가 된다.
+- insert의 경우이므로 BbsDao.xml의 mapper 내 태그로 insert를 사용한다.
 
+-> write() 메소드는 return 값이 없는 메소드, 따라서 resultType 속성이 필요 없다.
 
+--> 정말 간단하게 메소드 이름을 id 에만 쓰고 태그를 닫고, 그 안에 sql문을 쓴다...
 
+---> String sql = "~~~~~ ?, ?"; 뭐 이런식으로 썼는데, 여기서는 ${param1}, ${param2} 이렇게 쓰기만 하면 된다.
 
+----> (§사진 07.1) 처럼 추가가 잘 된다.
 
 
+#2. 전달인자를 한꺼번에 보내는 경우
+bdao.write(bbsdto);
 
+이걸로 bbsdto 객체를 전달인자로 보낸다.
 
+-> BbsDao.xml의 mapper 태그 안에 insert 태그를 만드는건 같은데, 매개변수가 1개이므로 parameterType을 쓰게 된다.
 
+--> 또한, ${param1} 으로 썼던 내용에는 parameterType으로 지정했기 때문에 #{writer}, #{title}, #{content} 로 정확히 써주어야 한다.
 
+---> (§사진 07.2)처럼 이 방법으로도 추가가 잘 됨을 알 수 있다.
 
 
 
 
+- 하나의 글 내용을 보는 @RequestMapping("/view") 추가
+-> 매개변수가 int형인 view 메소드가 인터페이스에 만들어진다.
+--> 그렇다고 BbsDao.xml에 int를 쓰는것은 아니다.
+---> return이 있으니 resultType을 지정해주어야 한다!
+---> 그리고 where id=? 이 부분은 where id=${param1} 이렇게 첫번째 매개변수를 받을 수 있도록 하면 된다.
 
-
-
-
-
-
-
-
+---->(§사진 08)을 얻을 수 있다.
 
 
 

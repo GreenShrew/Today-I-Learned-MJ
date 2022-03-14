@@ -9,6 +9,6 @@ public interface IBbsDao {
 	public List<BbsDto> list();	// 게시물 전체조회 - 매개변수 없고, 리턴값은 List<BbsDto>
 	public int write(BbsDto bdto);		// 게시물 쓰기 - 매개변수 BbsDto형, 리턴 int
 	public int update(BbsDto bdto);	// 게시물 수정 - 매개변수 BbsDto형, 리턴 int
-	public int delete(String id);		// 게시물 삭제 - 매개변수 int, 리턴 int
-	public BbsDto view(String id);		// 게시물 하나 보기 - 매개변수 int, 리턴 BbsDto
+	public int delete(int id);		// 게시물 삭제 - 매개변수 int, 리턴 int
+	public BbsDto view(int id);		// 게시물 하나 보기 - 매개변수 int, 리턴 BbsDto
 }

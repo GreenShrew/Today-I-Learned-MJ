@@ -34,21 +34,25 @@ public class BbsDao implements IBbsDao {
 	}
 
 	@Override
-	public int update(BbsDto bdto) {
+	public int update(BbsDto bdto) {	// 따로 메뉴가 없어서 구현 x
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int delete(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(int id) {
+		String query = "delete from bbs where id=?";
+		return template.update(query,id);
 	}
 
 	@Override
-	public BbsDto view(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public BbsDto view(int id) {
+		
+		String sql = "select * from bbs where id=?";
+		BbsDto dto = template.queryForObject(
+				sql, new BeanPropertyRowMapper<BbsDto>(BbsDto.class), id
+		);
+		return dto;
 	}
 
 }
