@@ -21,4 +21,13 @@
 		<select id="view" resultType="com.ezen.spg12.dto.BbsDto">
 			select * from bbs where id=${param1}
 		</select>
+		
+		<update id="update" parameterType="com.ezen.spg12.dto.BbsDto">
+		update bbs set writer=#{writer}, title=#{title}, content=#{content}
+		where id=#{id}
+		</update>
+		
+		<delete id="delete">
+		delete from bbs where id=#{id}
+		</delete>
 </mapper>

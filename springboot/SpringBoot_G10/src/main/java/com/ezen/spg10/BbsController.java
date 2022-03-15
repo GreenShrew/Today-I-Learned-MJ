@@ -1,5 +1,8 @@
 package com.ezen.spg10;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ public class BbsController {
 	// 첫페이지는 리스트를 조회해서 list.jsp로 이동한다. 
 	@RequestMapping("/")
 	public String root(Model model) {
+//		List<BbsDto> list = bdao.list(); 생략하고 아래에 한꺼번에...
 		model.addAttribute("list", bdao.list());
 //		System.out.println(bdao.list().size()); 확인용...
 		return "list";

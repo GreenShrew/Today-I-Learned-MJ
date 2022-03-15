@@ -13,9 +13,13 @@ public interface IBbsDao {
 
 	public List<BbsDto> list();
 
-	public void write(@Valid BbsDto bbsdto);
+	public void write(BbsDto bbsdto);
 
 	public BbsDto view(int id);
+
+	public void update(BbsDto bbsdto);
+
+	public void delete(int id);
 
 //	public void write(String writer, String title, String content);
 

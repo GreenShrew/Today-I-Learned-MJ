@@ -1,0 +1,284 @@
+days98 배운것들
+
+
+※ 확인할것들
+1. list.jsp에 수정버튼이 없어보이는데 확인해..
+2. G12에 BbsDao.xml 한번 확인하자.
+
+
+
+
+
+
+
+
+SpringBoot_G12
+==================================
+- 수정기능 만들기
+
+-> 게시글의 id에 해당하는 게시글 내용을 긁어오는, @RequestMapping("/updateForm")를 만든다.
+기존에 만들어둔 view 메소드를 이용한다.
+(list.jsp에 글 수정 버튼이 없어보인다?)
+
+
+--> 그럼 게시판 수정버튼을 누르면 수정 페이지 updateForm.jsp로 간다.
+
+---> DB에 업데이트를 시켜주는 @RequestMapping(value="/update", method=RequestMethod.POST) 를 추가한다.
+---> validation 적용하고 update() 메소드 만들어서 적용
+
+
+
+
+
+- 삭제기능
+-> @RequestMapping("/delete") 추가
+-> delete() 메소드를 제작한다.
+
+--> BbsDao.xml을 작성하면 삭제가 잘 된다.
+
+
+
+
+
+
+
+
+
+
+
+트렌젝션으로 동작을 묶는 방법!
+트렌젝션이란 무엇인가!
+
+중간에 에러가 나면 이전에 실행한 내역도 취소시키는 방법을 다룬다!
+SpringBoot_G13
+==================================
+- 지금까지 했던 기본셋팅을 한다.
+
+※ 트렌젝션은 작업이 이루어지는 하나의 단위!
+
+
+- webapp 폴더 아래에 sql 파일 하나를 제작한다.
+-> transaction1, 2, 3 테이블을 제작한다.
+
+
+- views 폴더 안에 buy_ticket.jsp 제작
+- buy_ticket_end.jsp, buy_ticket_error.jsp 제작
+
+# 셋팅
+- com.ezen.spg13 에 controller, dao, dto, service 패키지를 만든다.
+-> MyController 클래스, ITransactionDao1 인터페이스, ITransactionDao2 인터페이스, MyService 클래스를 만든다.
+
+--> 그리고 resources 아래에 mybatis.mapper 패키지를 만들고, 그 아래에 TransactionDao1.xml, TransactionDao2.xml 를 만든다. 
+
+---> 이번에는 Dao 인터페이스가 두개이므로, 두개의 xml 파일을 만들게 되었다.
+
+----> MyService에 ITransactionDao1, ITransactionDao2 를 @Autowired 한다.
+----> MyController에는 MyService를 @Autowired 했다.
+
+
+
+# 시작
+- 첫 페이지는 buy_ticket.jsp로 갈 것이다.
+-> @RequestMapping("/") 추가
+
+--> buy_ticket.jsp에서는 구매를 누르면 request buyTicketCard로 간다.
+
+---> @RequestMapping("buyTicketCard") 추가
+
+----> 이제 buy() 메소드를 서비스단에 만들되, ITransactionDao1, ITransactionDao2 두군데에 똑같은 동작을 하도록 만든다.
+
+----> MyService 에서 DB에 저장하는 buy 메소드를 error가 1이면 td1의 buy는 실행되지만 td2의 buy는 실행되지 않고 예외처리를 하도록 만들었다.
+
+----> 이러면 transaction1 테이블에만 데이터가 들어가고 transaction2에는 들어가지 않는다!
+
+
+# 트랜젝션 취소하기 (옛 방식 - MyService.java에 통째로 주석처리 해두었다.)
+-----> 중간에 에러가 나면 이전에 실행한 내역도 취소시키는 방법을 다룬다!
+-----> 이를 위해서 중간에 취소되면 이전 작업도 모두 취소시킬 셋팅을 해야한다!
+	@Autowired
+	PlatformTransactionManager ptm;
+	
+	@Autowired
+	TransactionDefinition td;
+-----> 중간에 에러가 발생하여 트랜잭션을 취소하고자 한다면 rollback이라는 명령으로 취소
+-----> 트랜잭션 하나가 모두 다 실행이 되어 완료되면, commit이라는 명령으로 작업을 완료
+
+------> 트랜젝션의 시작은
+TransactionStatus status = ptm.getTransaction(td);
+이다.
+
+------> 트랜젝션의 끝은 영역 안의 모든 데이터베이스 작업의 실행을 적용하는 부분까지이다.
+ptm.commit(status); - 영역 안의 모든 데이터베이스 작업의 실행을 적용한다.
+
+------> ptm.rollback(status); - 영역 안의 모든 데이터베이스 작업의 취소
+
+
+-------> 이렇게 하면 아까전에는 1번 테이블에는 입력되고 2번 테이블에는 입력되지 않았으나, 이번에는 둘 다 입력되지 않는 결과를 볼 수 있다.
+
+
+
+
+# 트랜젝션 취소하기 (요즘 방식 - 다만 이것도 조금 옛 방식.. 더 최근 방식은 G14에서)
+
+- MyService.java에서 TransactionTemplate tt;를 @Autowired 한다.
+
+-> tt.execute(); 를 쓰고, execute의 괄호 안에 익명 클래스를 넣는다.
+tt.execute(new TransactionCallbackWithoutResult() { });
+
+--> 그러면 이를 오버라이딩 할 수 있게 된다.
+---> 오버라이딩하는 그 안에 DB에 접근하는 작업을 하게 된다!
+
+
+
+
+
+
+
+트랜젝션 계속해서!
+트랜젝션 commit rollback 작업 최신 방식!
+SpringBoot_G14
+=========================================
+- G13에서 썼던 views 내용물을 copy해서 온다.
+
+
+- com.ezen.spg14에 controller, dao, dto 패키지를 만든다.
+-> 해당 내용도 G13에서 카피해서 고침
+
+- mybatis.mapper 내용도 카피해서 내용 살짝 고쳤다.
+
+
+
+# 시작
+- Dao 패키지에 ITransactionDao3을 추가한다.
+- TransactionDao3.xml 도 만든다.
+
+-> MyService에 @Autowired ITransactionDao2 td3; 를 추가한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

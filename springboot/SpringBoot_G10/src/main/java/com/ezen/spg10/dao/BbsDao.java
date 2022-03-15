@@ -42,7 +42,7 @@ public class BbsDao implements IBbsDao {
 	@Override
 	public int delete(int id) {
 		String query = "delete from bbs where id=?";
-		return template.update(query,id);
+		return template.update(query, id);
 	}
 
 	@Override
