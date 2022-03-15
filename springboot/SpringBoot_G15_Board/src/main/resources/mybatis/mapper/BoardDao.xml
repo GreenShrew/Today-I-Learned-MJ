@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.spg15.dao.IBoardDao">
+
+	<select id="getAllCount" resultType="_int">
+		select count(*) from board
+	</select>
+	
+	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.IBoardVO"
+		parameterType="com.ezen.spg15.dto.Paging">
+		 <!-- parameter가 들어오는 경우 해당 파라메타 값을 저장하는 곳 mapping...
+		 여기서는 Pagind의 startNum, endNum을 썼으므로 Paging을 찾아간다. -->
+		select * from (
+		select * from (
+		select rownum rn, b.* from ((select * from board order by num desc) b)
+		) where rn &gt;=#{startNum}
+		) where rn &lt;=#{endNum}
+	</select>
+	
+</mapper>

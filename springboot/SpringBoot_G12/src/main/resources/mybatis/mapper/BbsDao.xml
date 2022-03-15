@@ -7,6 +7,7 @@
 	<select id="list" resultType="com.ezen.spg12.dto.BbsDto">
 		select * from bbs order by id desc
 	</select>
+	<!-- 결과가 한개이면 한개인데로, 여러개이면 리스트에 담아서 리턴합니다 -->
 	
 <!-- 	<insert id="write">
 		insert into bbs (id, writer, title, content)
@@ -28,6 +29,6 @@
 		</update>
 		
 		<delete id="delete">
-		delete from bbs where id=#{id}
+		delete from bbs where id=#{param1}
 		</delete>
 </mapper>

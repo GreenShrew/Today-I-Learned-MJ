@@ -2,9 +2,9 @@ days98 배운것들
 
 
 ※ 확인할것들
-1. list.jsp에 수정버튼이 없어보이는데 확인해..
-2. G12에 BbsDao.xml 한번 확인하자.
-
+1. list.jsp에 수정버튼이 없어보이는데 확인해.. (완)
+2. G12에 BbsDao.xml 한번 확인하자. (완)
+3. G15에서 IBoardDao, BoardService 확인 (완)
 
 
 
@@ -138,6 +138,9 @@ tt.execute(new TransactionCallbackWithoutResult() { });
 트랜젝션 commit rollback 작업 최신 방식!
 SpringBoot_G14
 =========================================
+※ 이번에는 service단에서도 에러가 나고, controller에서도 에러가 난다.
+
+
 - G13에서 썼던 views 내용물을 copy해서 온다.
 
 
@@ -155,8 +158,11 @@ SpringBoot_G14
 -> MyService에 @Autowired ITransactionDao2 td3; 를 추가한다.
 
 
+--> Controller의 @RequestMapping("/buyTicketCard") 에서 buy() 메소드를 Service에 만든다.
 
+---> buy 메소드에는 G13의 Service에서 넣었던 내용을 넣는다.
 
+----> buy 메소드에 @Transactional 어노테이션을 추가한다. 이게 끝이다.
 
 
 
@@ -164,121 +170,82 @@ SpringBoot_G14
 
 
 
+게시판 만들기
+SpringBoot_G15_Board
+==========================================
+- 지금까지 배운 validation, transaction, mybatis 등을 활용하여 게시판을 만들어본다.
 
 
+# cos.jar를 사용하기 위해 추가하는 내용 (파일 업로드 관련)
+- build.gradle의 dependencies에 아래의 코드를 넣는다.
+implementation fileTree(dir: 'libs', include: ['*.jar'])
+-> 프로젝트 바로 아래에 libs 폴더에 .jar 파일을 사용하겠다는 명령이다.
 
+--> 그리고 application.properties에 
+# multi-part Form
+spring.servlet.multipart.enabled=false
+ 이걸 추가한다.
 
 
 
+- controller, dao, dto, service 패키지 생성
+- mybatis.mapper 패키지 생성
+-> MemberDao.xml 생성
 
+--> IMemberDao 인터페이스 생성
+--> MemberService 클래스 생성
+--> MemberController 클래스 생성
 
 
 
+※ static 폴더 안에 css, script 폴더를 만들고, 그 안에 각각 board.css, board.js 파일을 만든다.
 
+## 로그인 (§ 사진 01)
+- 첫 페이지는 loginForm.jsp로 보내는 @RequestMapping("/") 제작
+-> loginForm.jsp 작성. 예전과는 달리 js로 보내서 validation 체크를 할 필요가 없다!
+-> (§ 사진 01)이 나온다.
 
+--> 아이디, 비밀번호 칸이 비어있는지 체크는 Controller에서 @Valid로 체크한다.
+--> @RequestMapping(value="login", method=RequestMethod.POST) 추가
 
+※ if(result.hasErrors()) 를 안 쓰는 이유는 userid나 pwd가 다 차 있어도 나머지 멤버변수가 비어있기 때문이다.
 
+---> Validation을 행해주고, getMember 메소드로 유저를 검색한 후 if ~ else 문으로 로그인 여부를 정한다.
 
+----> 서비스단에서는 IMemberDao로 추상 메소드 getMember를 만들게 한다.
 
+-----> 로그인에 성공했으면 session에 loginUser라는 이름으로 mvo에 담은 회원정보를 저장한다.
+-----> 그리고 게시판 리스트가 보이는 main.jsp 페이지로 넘어가야하기 때문에 게시판 리스트 정보를 긁어오는 request인 main으로 redirect 한다.
 
 
+------> 우선 BoardDao.xml, IBoardDao 인터페이스, BoardService, BoardController, BoardVO 클래스를 만든다.
 
+※ 만드는 김에 ReplyVO도 만들어두었다.
 
 
+### 페이징 기능 만들기
+- dto 패키지에 Paging 클래스를 만든다.
 
+- lombok으로 인해서 paging() 메소드를 자동으로 실행시킬 수 없다.
+-> 따라서 외부에서 paging() 메소드를 실행시킬 수 있도록 private를 public으로 바꾸어주어야 한다.
 
 
 
 
+## 메인 페이지
+- 메인페이지로 페이징 처리해서 해당 페이지의 리스트를 긁어가는 @RequestMapping("/main") 추가
 
+--> views에 board 폴더 생성, main.jsp 작성
 
+---> getAllCount() 메소드를 제작한다.
+---> BoardDao.xml에 만들어지게 되는데...resultType에 무엇을 써야하는가?
+---> return이 기본 자료형 int이다! Dto가 아니야!
+---> 기본 Integer 가 return된다는 의미로 _int 를 쓴다.
 
 
+----> 구해온 Paging을 전달인자로 가져가서 해당 Paging의 게시글 리스트를 긁어오는 selectBoardAll(paging) 메소드를 제작한다.
+----> 여러 리스트를 가지고 돌아와야 하므로 리턴값은 List<BoardVO>가 된다!
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+※ days98 기준 실행하면 에러가 나온다...어디가 잘못되었나?
+ day 99에 어디가 잘못되었는지 알려주겠다고 한다.
