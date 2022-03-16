@@ -73,7 +73,7 @@ MySQL Installer 실행
 
 
 MySQL Workbench 실행시 사용 가능한 1개의 root 계정이 보인다.
-스패너 모양 누르고 password 에 Stroe in Vault 눌러서 패스워드 넣고 test 해서 success 나오면 완료
+스패너 모양 누르고 password 에 Store in Vault 눌러서 패스워드 넣고 test 해서 success 나오면 완료
 
 
 

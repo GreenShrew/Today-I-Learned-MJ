@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/board.css" >
+<link rel="stylesheet" type="text/css" href="/css/board.css" >
 </head>
 <body>
 <div id="wrap" align="center">
 <h1>게시글 리스트</h1>
 <table class="list">
 	<tr><td colspan="5" style="border: white; text-align: right">
-		<div style="float:left;">${loginUser.userid}(${loginUser.name})님 로그인 
+		<div style="float:left;">${loginUser.name}(${loginUser.userid})님 로그인 
 			<input type="button" value="정보수정" onClick="location.href='memberEditForm'"/>
 			<input type="button" value="로그아웃"	onClick="location.href='logout'"></div>
 		<div style="float:right;"><a href="boardWriteForm">게시글 등록</a></div></td></tr>

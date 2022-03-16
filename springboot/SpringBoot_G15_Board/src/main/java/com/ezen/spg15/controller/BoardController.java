@@ -1,16 +1,28 @@
 package com.ezen.spg15.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.spg15.dto.BoardVO;
 import com.ezen.spg15.dto.Paging;
 import com.ezen.spg15.service.BoardService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class BoardController {
@@ -53,4 +65,188 @@ public class BoardController {
 		}
 		return mav;
 	}
+	
+	
+	@RequestMapping("/boardWriteForm")
+	public String write_form(HttpServletRequest request) {
+		
+		String url = "board/boardWriteForm";
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) {
+			url = "member/loginForm";
+		}
+		
+		return url;
+	}
+	
+	
+	@RequestMapping("/selectimg")
+	public String selectimg() {
+		return "board/selectimg";
+	}
+	
+	
+	@RequestMapping(value="/fileupload", method=RequestMethod.POST)
+	public String fileupload(Model model, HttpServletRequest request) {
+		
+		String path = context.getRealPath("/upload");
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, path, 5*1025*1024, "UTF-8", new DefaultFileRenamePolicy()
+			);
+			// 전송된 파일은 업로드 되고, 파일 이름은 모델에 저장한다.
+			model.addAttribute("image", multi.getFilesystemName("image"));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return "board/completupload";
+	}
+	
+	
+	@RequestMapping(value="boardWrite", method=RequestMethod.POST)
+	public String board_write(
+			@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, 
+			Model model, 
+			HttpServletRequest request) {
+		
+		String url="board/WriteForm";
+		if(result.getFieldError("pass")!=null) {
+			model.addAttribute("message", result.getFieldError("pass").getDefaultMessage());
+		}else if(result.getFieldError("title")!=null) {
+			model.addAttribute("message", result.getFieldError("title").getDefaultMessage());
+		}else if(result.getFieldError("content")!=null) {
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		}else {
+			url = "redirect:/main";
+		}
+		
+		bs.insertBoard(boardvo);
+		
+		return url;
+	}
+	
+	
+	@RequestMapping("/boardView")
+	public ModelAndView boareView(@RequestParam("num") int num,
+			HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		// 댓글도 받고 내용도 받기 때문에 HashMap을 사용한다.
+		// HashMap에는 뭐든 다 담을 수 있으니깐!
+		HashMap<String, Object> resultMap = bs.boardView(num);
+		// bs.boardView(num); 에서 조회수 늘리고, 게시물 조회하고, 댓글리스트 조회
+		
+		// resultMap에는 Service에서 전달된 게시물 내용과 댓글들 내용이 있다.
+		// 그것들을 각각 board와 replyList라는 이름으로 담는다.
+		
+		BoardVO bvo = (BoardVO)resultMap.get("board");
+		mav.addObject("board", bvo);
+		// 위의 형식으로 해서 BoardVO 형태를 살려도 되지만 아래처럼 해도 된다.
+		
+		mav.addObject("replyList", resultMap.get("replyList"));
+		
+		mav.setViewName("board/boardView");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/addReply")
+	public String addReply(@RequestParam("boardnum") int boardnum,
+			@RequestParam("userid") String userid,
+			@RequestParam("content") String content, HttpServletRequest request) {
+		
+		// 댓글을 추가
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser")==null) {
+			return "redirect:/";
+		}else {
+			bs.addReply(boardnum, userid, content);
+			return "redirect:/boardViewWithoutCount?num="+ boardnum;
+		}
+	}
+	
+	
+	@RequestMapping("/boardViewWithoutCount")
+	public ModelAndView boardViewWithoutCount(
+			@RequestParam("num") int num) {
+		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> resultMap = bs.boardViewWithoutCount(num);
+
+		mav.addObject("board", resultMap.get("board"));
+		mav.addObject("replyList", resultMap.get("replyList"));
+		
+		mav.setViewName("board/boardView");
+		return mav;
+	}
+	
+	
+	/*
+	@RequestMapping(value="boardWrite", method=RequestMethod.POST)
+	public String board_write(@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, Model model, HttpServletRequest request) {
+		
+		// HttpServletRequest로는 받을 수 없기에 null이 나온다.
+		System.out.println("pass : " + boardvo.getPass());
+		System.out.println("title : " + boardvo.getTitle());
+		System.out.println("content : " + boardvo.getContent());
+		
+		// null이기 때문에 내용을 넣던 넣지 않던 에러가 발생한다.
+		if(result.hasErrors()) {
+			System.out.println("pass :" + result.getFieldError("pass").getDefaultMessage());
+			System.out.println("title :" + result.getFieldError("title").getDefaultMessage());
+			System.out.println("content :" + result.getFieldError("content").getDefaultMessage());
+		}
+		
+		
+		
+		// @Valid, @ModelAttribute를 포기하고 쓰는 방식
+		// 예전 프로젝트에서는 이런식으로 파일 업로드를 진행했다.
+		// WEB12_ShoppingMall 에서 admin쪽 AdminProductWriteAction 확인해봐
+		String path = context.getRealPath("/upload");
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+			);
+			BoardVO dto = new BoardVO();
+			dto.setPass(multi.getParameter("pass"));
+			dto.setUserid(multi.getParameter("userid"));
+			dto.setEmail(multi.getParameter("email"));
+			dto.setTitle(multi.getParameter("title"));
+			dto.setContent(multi.getParameter("content"));
+			
+			model.addAttribute("dto", dto);	// 되돌아가서 dto에 입력값을 다시 전달
+			
+			// MultipartRequest로 전달인수를 모두 전달받은 후에, validation에 적용한다.
+			if(dto.getPass()==null || dto.getPass().equals("")) {
+				model.addAttribute("message", "비밀번호는 수정 삭제시 필요합니다.");
+				return "board/boardWriteForm";
+			}else if(dto.getTitle()==null || dto.getTitle().equals("")) {
+				model.addAttribute("message", "제목을 입력하세요.");
+				return "board/boardWriteForm";
+			}else if(dto.getContent()==null || dto.getContent().equals("")) {
+				model.addAttribute("message", "내용을 입력하세요.");
+				return "board/boardWriteForm";
+			}
+			
+			
+			if(multi.getFilesystemName("image")==null) {
+				dto.setImgfilename("");
+			}else {
+				dto.setImgfilename(multi.getFilesystemName("image"));
+			}
+			bs.insertBoard(dto);
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "board/boardWriteForm";
+	}
+*/
 }

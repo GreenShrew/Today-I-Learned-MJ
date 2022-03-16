@@ -9,4 +9,14 @@
 		select * from member where userid=#{param1}
 	</select>
 
+	<insert id="insertMember" parameterType="com.ezen.spg15.dto.MemberVO">
+		insert into member(userid, pwd, name, email, phone) 
+		values(#{userid}, #{pwd}, #{name}, #{email}, #{phone})
+	</insert>
+	
+	<update id="updateMember" parameterType="com.ezen.spg15.dto.MemberVO">
+		update member set pwd=#{pwd}, name=#{name},
+		email=#{email}, phone=#{phone} where userid=#{userid}
+	</update>
+	
 </mapper>

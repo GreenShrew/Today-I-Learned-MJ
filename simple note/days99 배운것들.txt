@@ -1,0 +1,293 @@
+days99 배운것들
+
+※ 안 되는 것들
+1. G15 아이디 중복체크 안된다...
+2. boardWriteForm.jsp 확인해... 이메일이 안 보이게 나온다.
+3. G15 boardView.jsp 내용 변경해
+4. 변경 후에 이미지 작성 및 출력, 댓글 작성 및 출력은 잘 되는지 확인.
+
+
+
+
+SpringBoot_G15_Board
+=============================
+## 회원가입 기능
+
+- memberJoinForm.jsp로 이동시키는 @RequestMapping("/memberJoinForm")
+-> 이동만 시키면 된다.
+
+
+- memberJoinForm.jsp 생성
+-> 이전과 다른 점은 아이디, 이름, 전화번호, 이메일을 적는 input 태그 내에 value="${dto.userid}"와 같이 속성이 들어갔다.
+--> validation을 통해 검사하고 다시 페이지로 되돌아왔을 때, 이전에 쓰던 내용을 날리지 않고 그대로 남기기 위한 조치이다.
+
+---> 아이디 중복체크에 대한 팝업창을 여는 스크립트 idCheck()를 제작한다.
+---->idCheck() 함수에서는 mapping이 idcheck인 request로 연결한다.
+
+----> @RequestMapping("/idcheck") 제작, 중복 아이디가 있는지 확인하고 보낸다.
+-----> 아이디 사용 여부를 알려주는 팝업창 idcheck.jsp를 제작한다.
+
+
+
+- 이제 DB에 저장해 회원가입을 시키는 기능을 만든다.
+-> 회원가입 버튼을 누르면 action이 memberJoin이므로...
+-> @RequestMapping(value="memberJoin", method=RequestMethod.POST)로 보낸다.
+--> 여기서는 validation을 하고, 모두 이상이 없다면 DB에 레코드를 insert하여 회원가입 시키고 회원가입 완료 메세지와 함께 loginForm.jsp로 보낸다.
+
+
+
+
+## 회원 정보 수정
+- 정보수정 버튼을 누르면 작동한다.
+-> @RequestMapping("/memberEditForm") 추가
+--> memberEditForm.jsp 제작
+--> 여기에 최초 데이터는 session에서 받아오는 식, ${loginUser.userid} 로 했으나, 
+--> validation을 적용하기 힘들어지므로 모두 ${dto.userid}로 바꾸었다.
+--> 따라서 초기 값은 session 값을 dto에 먼저 넣고 보내기로 한다.
+
+
+- 수정하기 버튼을 누르면 db에 수정된 내용을 update 해주는 mapping memberEdit로 간다.
+-> @RequestMapping(value="/memberEdit", method=RequestMethod.POST) 추가
+
+
+
+
+## 로그아웃 기능
+- 로그아웃 버튼을 누르면 mapping logout 으로 간다.
+-> @RequestMapping(value="/logout", method=RequestMethod.GET) 추가
+--> session을 session.invalidate();로 지우고 로그인 페이지로 넘어가기만 하면 끝!
+
+
+
+
+
+
+## 게시글 등록 기능 (이미지를 올리는 방법)
+※ multipart/form-data 를 사용하면 HttpServletRequest 으로 전달되는 전달값이 null이 되므로 @Valid, @ModelAttribute를 못 쓴다!
+
+- 게시글 등록 버튼을 누르면 boardWriteForm으로 넘어간다.
+-> @RequestMapping("/boardWriteForm") 제작
+--> boardWriteForm.jsp 제작
+
+
+- 작성 버튼을 누르면 DB에 저장하는 기능을 가진 @RequestMapping(value="boardWrite", method=RequestMethod.POST) 추가
+
+-> 근데 이미지를 올리기 때문에 enctype="multipart/form-data" 속성으로 넘어오고 있다.
+-> 그렇기에 HttpServletRequest request로 값을 받을 수 없다...
+-> boardvo.getPass(), boardvo.getTitle()와 같이 넘어온 값을 받으려고 하면 null값이 되어버린다..
+
+--> 그럼 multipartRequest를 사용하면 해결 가능하지만, 이 경우 @Valid를 사용할 수 없게된다. 또한 @ModelAttribute도 사용 못한다!
+
+---> 이 내용은 전부 주석처리를 시켜버렸다...(나중에 참고할만한 코드...)
+
+
+### 해결방법!
+- 팝업창을 하나 띄우고, 그 form에 multipart/form-data를 적용시켜 파일을 업로드 시키는 방법이 있다!
+
+-> boardWriteForm.jsp에서 form 태그를 바꾼다.
+<form name="frm" method="post" action="boardWrite" enctype="multipart/form-data"> 에서 enctype을 뺀
+<form name="frm" method="post" action="boardWrite"> 가 된다.
+
+--> 그리고 이미지를 직접 입력하는 <input type="file" name="image" /> 태그를 지우고
+<div id="image"></div>
+<input type="hidden" name="imgfilename">
+<img src="" id="previewimg" width="150" style="display:none"/>	<!-- 그림 선택되었을 때 미리보기 하는 그림 -->
+<input type="button" value="파일선택" onClick="selectimg();">
+ 로 만들어 넣는다.
+
+--> 파일선택 버튼을 누를시 selectimg() 자바스크립트가 작동할것이다.
+
+
+---> selectimg() 함수에서는 mapping selectimg를 request한다.
+
+
+----> board 폴더에 selectimg.jsp 생성
+
+-----> 여기서는 파일 업로드를 하면 selectedimage() 함수가 작동하도록 한다.
+-----> 속해있는 form이 submit 되도록 하는 함수이다. mapping fileupload가 작동한다.
+-----> @RequestMapping(value="/fileupload", method=RequestMethod.POST) 추가
+
+------> static 폴더 아래에 upload, webapp 폴더 아래에 upload를 하나씩 만든다.
+------> static 폴더의 upload에서 파일을 꺼내오고, webapp 폴더의 upload에 파일을 올린다.
+------> 둘은 경로가 같다고 취급되는데, 하나라도 없으면 업로드가 안 되거나 꺼내올 수 없다!
+
+------->@RequestMapping(value="/fileupload", method=RequestMethod.POST) 에서 이제 MultipartRequest를 사용한다!
+-------> 
+
+
+--------> 이제 mapping completupload 로 넘어간다.
+여기에서의 역할은 boardWriteForm.jsp에 속성이 hidden인 input 태그와 img 태그에 이름과 이미지를 넣어주는 역할을 한다!
+--------> board 폴더에 completupload.jsp 생성
+
+---------> completupload.jsp에서는 스크립트를 활용해 selectimg.jsp에서 업로드한 내용을 boardWriteForm.jsp에 나타내기 위한 함수를 만든다.
+
+
+----------> 이렇게 하면 파일 업로드는 업로드대로 되었으며, boardWriteForm.jsp에서는 이제 이미지의 제목을 포함한 게시글 비밀번호, 제목, 내용에 대한 validation을 @Valid로 진행할 수 있다!
+
+
+
+
+- 이제 다시 @RequestMapping(value="boardWrite", method=RequestMethod.POST) 를 제작한다
+-> 자료 업로드는 다른 jsp, 즉, 다른 form에서 multipartRequest로 했고, 여기서 올릴건 이미지의 이름이 DB에 저장된다!
+-> 따라서 @ModelAttribute, @Valid를 이용할 수 있다!
+
+--> 이제 insertBoard(boardvo); 메소드를 제작한다.
+
+---> 여기까지 하면 사진 업로드와 함께 게시글을 올릴 수 있다!
+
+
+
+
+
+## 게시글 보는 기능 (HashMap으로 여러 데이터 끌어오기!)
+- main.jsp에서 제목을 누르면 mapping boardView 로 번호와 함께 이동한다.
+-> @RequestMapping("/boardView") 제작
+
+--> 여기서는 HashMap을 사용하여 bs.boardView(num); 에서 조회수 늘리고, 게시물 조회하고, 댓글리스트 조회 한다!
+
+---> Service에 boardView를 만든다.
+
+
+
+
+
+
+## 댓글 작성 기능
+- boardView.jsp에서 답글작성을 누르면 자바 스크립트에서 reply_check(); 함수가 작동한다.
+
+-> 해당 함수에서 true가 return되면 mapping addReply로 boardView.jsp의 userid, content 가 간다.
+
+--> 댓글을 추가하는 @RequestMapping("/addReply") 추가
+--> 다만 이번에는 게시글로 다시 돌아갈때 조회수를 늘리지 말아야하므로 따로 mapping이 boardViewWithoutCount인 request로 보낸다.
+
+---> @RequestMapping("/boardViewWithoutCount")도 추가
+
+
+※ 해당 내용은 day 100에 마무리
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

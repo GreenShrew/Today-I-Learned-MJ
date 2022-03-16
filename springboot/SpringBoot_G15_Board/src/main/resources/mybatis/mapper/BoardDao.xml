@@ -9,15 +9,39 @@
 		select count(*) from board
 	</select>
 	
-	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.IBoardVO"
+	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.BoardVO"
 		parameterType="com.ezen.spg15.dto.Paging">
 		 <!-- parameter가 들어오는 경우 해당 파라메타 값을 저장하는 곳 mapping...
-		 여기서는 Pagind의 startNum, endNum을 썼으므로 Paging을 찾아간다. -->
+		 여기서는 Paging의 startNum, endNum을 썼으므로 Paging을 찾아온다. -->
 		select * from (
 		select * from (
 		select rownum rn, b.* from ((select * from board order by num desc) b)
 		) where rn &gt;=#{startNum}
 		) where rn &lt;=#{endNum}
 	</select>
+	
+	<insert id="insertBoard" parameterType="com.ezen.spg15.dto.BoardVO">
+		insert into board(num, userid, pass, email, title, content, imgfilename)
+		values(board_seq.nextVal, #{userid}, #{pass}, #{email}, #{title}, #{content}, #{imgfilename})
+	</insert>
+	
+	<update id="plusReadCount">
+		update board set readcount=readcount+1 where num=#{param1}
+	</update>
+	
+	<select id="getBoard" resultType="com.ezen.spg15.dto.BoardVO">
+		select * from board where num=#{param1}
+	</select>
+	
+	<select id="selectReply" resultType="com.ezen.spg15.dto.ReplyVO">
+		select * from reply where boardnum=#{param1}
+	</select>
+	
+	<insert id="addReply">
+		insert into reply(num, boardnum, userid, content)
+		values(reply_seq.nextVal, #{boardnum}, #{userid}, #{content})
+	</insert>
+	
+	
 	
 </mapper>
