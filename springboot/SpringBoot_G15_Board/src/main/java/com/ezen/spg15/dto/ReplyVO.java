@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ReplyVO {
 
-	private int num;
+	private int replynum;
 	private int boardnum;
 	private String userid;
 	private Timestamp writedate;

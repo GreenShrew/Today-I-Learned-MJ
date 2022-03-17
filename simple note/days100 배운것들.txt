@@ -1,0 +1,360 @@
+days100 배운것들
+
+오전에는 G15 게시판 제작을 마무리하였다.
+오후에는 G16 프로젝트, Gradle로 ShoppingMall을 다시 구현하는 작업을 하였다.
+
+
+
+※ 확인할것
+
+1. board.js의 open_win 함수 확인
+2. BoardController의 @RequestMapping("/boardEditForm") 확인
+3. 2교시에서 @RequestMapping("boardUpdateForm") 에서 이름을 dto로 만든 이유좀 들어봐...
+4. G15에 게시글 수정 버튼이 안 먹힌다...
+4-1. 4를 수정하고 게시글의 수정이 잘 되는지 확인한다.
+5. BoardDao.xml의 getCount 다 못 썼다.
+
+
+
+
+
+※ 기능 문제발생...
+1. 게시글 수정시에 비밀번호 안 쓴 상태에서 이미지 파일을 수정한 뒤 수정 버튼을 누르면 validation으로 인해 레코드의 수정은 이루어지지 않지만, 옛 파일 그림이 나오지 않고 수정하고자 선택한 그림이 미리보기로 나온다!
+ 이걸 해결하는 방법이 있을까?
+
+--> 힌트... 전달되었던 내용을 다시 돌려주는 과정에서 선택한 파일도 사라지지 않고 다시 돌아가는 것이다!
+ 이를 imgfilename만 oldfilename으로 바꾸는 방법이 있을까 고민해본다~
+
+
+
+
+
+
+
+댓글 기능 만들기
+SpringBoot_G15_Board
+=================================
+- 댓글을 추가하는 기능인 @RequestMapping("/addReply")를 추가한다.
+-> 페이지에서 가져온 정보를 ReplyVO에 담아서 이를 insertReply(); 메소드로 보낸다.
+
+- 그리고 댓글을 추가한 뒤에는 페이지로 다시 돌아오는데, 게시물의 조회수를 증가시키면 안된다.
+-> @RequestMapping("/boardViewWithoutCount") 를 만드는데, 기존의 mapping boardView와 비슷하다!
+--> Service단도 비슷하지만, 게시글 조회수를 증가시키는 메소드만 빼버리면 된다.
+
+
+- 댓글 삭제 기능을 추가한다.
+-> 댓글 옆 '삭제' 버튼을 누르면 request deleteReply로 댓글 번호와 게시판 번호를 가지고 간다. (게시글 번호는 다시 게시물로 돌아오는 역할이다)
+
+--> @RequestMapping("/deleteReply")을 제작한다.
+
+---> 삭제가 된 뒤에는 다시 게시글로 조회수 증가 없이 돌아온다. boardViewWithoutCount 로 보낸다...
+
+
+
+
+
+
+
+## 게시글 수정 기능
+- boardView.jsp에서 게시글 수정, 게시글 삭제 버튼을 누르면 open_win이라는 js 함수로 각각 mapping boardEditForm, boardDeleteForm 과 게시글번호를 가져간다.
+
+-> board.js의 open_win 함수에서는 팝업창 하나를 띄우고 mapping으로 보낸다.
+
+
+--> @RequestMapping("/boardEditForm") 제작
+--> 게시글의 비밀번호를 입력할 수 있는 팝업창으로 정보를 가져가도록 만드는 역할이다.
+ 여기서는 게시글번호 num값을 받아 model에 저장해주고, 이를 바탕으로 
+
+
+---> 팝업창에서 비밀번호를 적고 확인을 누르면 request boardEdit 로 보낸다.
+
+---> @RequestMapping("/boardEdit") 추가
+ 여기서는 해당 게시물 번호를 이용해 게시글의 내용과 비밀번호를 가져와 BoardVO에 저장한다.
+ 그리고 앞서 입력한 패스워드와 비교하여 틀리면 되돌아가고, 맞다면 boardCheckPass.jsp로 넘어가도록 만든다.
+
+
+----> boardCheckPass.jsp 제작
+ 이전에 boardView에서 open_win 함수를 통해 넘어온 name값이 update 인지 delete인지 확인하고 self.close() 하는 스크립트를 만든다.
+
+----> 게시글 수정이라면 mapping boardUpdateForm을 만든다.
+
+-----> @RequestMapping("boardUpdateForm") 추가
+여기서는 getBoard() 메소드로 게시글 내용을 긁어서 boardEditForm으로 넘어간다
+
+------> boardEditForm.jsp에서도 역시 사진을 새로 업로드할 수 있다.
+ 근데 @Valid 도 쓸 거니깐 앞서 만든 팝업창으로 하는 방법을 적용한다!(day 99)
+ 이미 만들어진걸 그대로 가져다가 쓸 수 있다.
+
+-------> 수정 버튼을 누르면 request boardUpdate 로 간다.
+
+-------> @RequestMapping(value="/boardUpdate", method=RequestMethod.POST)에서는...
+validation을 진행하고, 이미지를 교체하지 않았다면 옛 이미지를 쓰도록 만든다.
+
+--------> DB에 레코드를 업데이트 해줄 updateBoard() 메소드를 제작한다.
+
+※ 기능 문제발생...
+게시글 수정시에 비밀번호 안 쓴 상태에서 이미지 파일을 수정한 뒤 수정 버튼을 누르면 validation으로 인해 레코드의 수정은 이루어지지 않지만, 옛 파일 그림이 나오지 않고 수정하고자 선택한 그림이 미리보기로 나온다!
+ 이걸 해결하는 방법이 있을까?
+
+--> 힌트... 전달되었던 내용을 다시 돌려주는 과정에서 선택한 파일도 사라지지 않고 다시 돌아가는 것이다!
+ 이를 imgfilename만 oldfilename으로 바꾸는 방법이 있을까 고민해본다~
+
+
+
+## 게시글 삭제 기능
+- boardView에서 open_win 함수를 통해 request boardDeleteForm으로 이동한다.
+
+-> @RequestMapping("boardDeleteForm") 에서는...
+게시물 번호 num을 받아서 model에 넣고, boardCheckPassForm으로 넘겨서 게시물 비밀번호가 맞는지 체크하게 한다.
+
+--> 체크 완료되면 request boardDelete로 온다.
+
+
+
+## 게시물 목록에서 게시물 댓글 갯수 나타내는 기능
+- 이는 Service단에서 해결한다.
+-> selectBoardAll 메소드에서 board 내용을 긁어올때 board를 전부 긁어오는것만 하지 말고, 긁어온 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

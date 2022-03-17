@@ -19,12 +19,12 @@
 		<div style="float:right;"><a href="boardWriteForm">게시글 등록</a></div></td></tr>
 	<tr><th width="130">번호</th><th>제목</th><th width="130">작성자</th><th width="130">작성일</th><th width="130">조회</th></tr>
 		<c:forEach var="board" items="${boardList}">
-			<tr><td align="center">${board.num }</td>
+			<tr><td align="center">${board.num}</td>
 				<td>
 					<a href="boardView?num=${board.num}">${board.title}</a>
-<%-- 	임시로 주석처리				<c:if test="${board.replycnt>0}"> 
+					<c:if test="${board.replycnt>0}"> 
 						<span style="color:red; font-weight:bold;">[${board.replycnt}]</span>
-					</c:if>--%>
+					</c:if>
 				</td>
 				<td align="center">${board.userid}</td>
 				<td align="center"><fmt:formatDate value="${board.writedate }" /></td>

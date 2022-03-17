@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ezen.spg15.dao.IBoardDao;
 import com.ezen.spg15.dto.BoardVO;
 import com.ezen.spg15.dto.Paging;
+import com.ezen.spg15.dto.ReplyVO;
 
 @Service
 public class BoardService {
@@ -23,7 +24,14 @@ public class BoardService {
 	}
 
 	public List<BoardVO> selectBoardAll(Paging paging) {
-		return bdao.selectBoardAll(paging);
+		List<BoardVO> list = bdao.selectBoardAll(paging);
+		
+		for(BoardVO bvo : list) {
+			int count = bdao.getCount(bvo.getNum());
+			bvo.setReplycnt(count);
+		}
+		
+		return list;
 	}
 
 	public void insertBoard(@Valid BoardVO boardvo) {
@@ -47,9 +55,7 @@ public class BoardService {
 		return paramMap;
 	}
 
-	public void addReply(int boardnum, String userid, String content) {
-		bdao.addReply(boardnum, userid, content);
-	}
+
 
 	public HashMap<String, Object> boardViewWithoutCount(int num) {
 		// 위의 boardView의 조회수 증가 없는 버전!
@@ -62,5 +68,28 @@ public class BoardService {
 		paramMap.put("replyList", bdao.selectReply(num));
 		
 		return paramMap;
+	}
+
+	public void insertReply(ReplyVO rvo) {
+		bdao.insertReply(rvo);
+	}
+
+	public void deleteReply(int num) {
+		bdao.deleteReply(num);
+	}
+
+	public BoardVO getBoard(int num) {
+		return bdao.getBoard(num);
+	}
+
+	public void updateBoard(BoardVO boardvo) {
+		bdao.updateBoard(boardvo);
+	}
+
+	public void removeBoard(int num) {
+		// 게시글 삭제
+		bdao.deleteBoard(num);
+		// 해당 댓글 삭제
+		bdao.deleteReplyAll(num);
 	}
 }

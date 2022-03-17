@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.spg15.dto.BoardVO;
 import com.ezen.spg15.dto.Paging;
+import com.ezen.spg15.dto.ReplyVO;
 import com.ezen.spg15.service.BoardService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -156,21 +157,26 @@ public class BoardController {
 	
 	
 	@RequestMapping("/addReply")
-	public String addReply(@RequestParam("boardnum") int boardnum,
+	public String addReply(/* ReplyVo replyvo 이걸로 reply에 대한 정보를 전부 뭉쳐서 받을수도 있었다.*/
+			@RequestParam("boardnum") int boardnum,
 			@RequestParam("userid") String userid,
 			@RequestParam("content") String content, HttpServletRequest request) {
 		
 		// 댓글을 추가
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser")==null) {
-			return "redirect:/";
-		}else {
-			bs.addReply(boardnum, userid, content);
-			return "redirect:/boardViewWithoutCount?num="+ boardnum;
-		}
+		// 우선 전달된 정보를 ReplyVO에 담는다.
+		ReplyVO rvo = new ReplyVO();
+		rvo.setUserid(userid);
+		rvo.setContent(content);
+		rvo.setBoardnum(boardnum);
+		
+		bs.insertReply(rvo);
+		
+		return "redirect:/boardViewWithoutCount?num="+ boardnum;
+		
 	}
 	
 	
+	// 위의 mapping boardView와 거의 흡사하다.
 	@RequestMapping("/boardViewWithoutCount")
 	public ModelAndView boardViewWithoutCount(
 			@RequestParam("num") int num) {
@@ -184,6 +190,113 @@ public class BoardController {
 		mav.setViewName("board/boardView");
 		return mav;
 	}
+	
+	
+	@RequestMapping("/deleteReply")
+	public String reply_delete(@RequestParam("num") int num,
+			@RequestParam("boardnum") int boardnum,
+			HttpServletRequest request) {
+		bs.deleteReply(num);
+		return "redirect:/boardViewWithoutCount?num="+ boardnum;
+	}
+	
+	
+	
+	@RequestMapping("/boardEditForm")
+	public String board_edit_form(Model model, HttpServletRequest request) {
+		
+		String num = request.getParameter("num");
+		
+		model.addAttribute("num", num);
+		
+		return "board/boardCheckForm";
+	}
+	
+	
+	@RequestMapping("/boardEdit")
+	public String board_edit(@RequestParam("num") int num,
+			@RequestParam("pass") String pass,
+			Model model,
+			HttpServletRequest request) {
+		
+		BoardVO bvo = bs.getBoard(num);
+		// 비밀번호가 맞던 틀리던 양쪽 다 게시글번호 num은 필요하므로 model에 넣어두었다.
+		model.addAttribute("num", num);
+		
+		if(pass.equals(bvo.getPass())) {
+			return "board/boardCheckPass";
+		}else {
+			model.addAttribute("message", "비밀번호가 맞지 않습니다. 확인해주세요.");
+			return "board/boardCheckPassForm";
+		}
+	}
+	
+	
+	@RequestMapping("boardUpdateForm")
+	public String board_update_form(@RequestParam("num") int num,
+			Model model, HttpServletRequest request) {
+		
+		BoardVO bvo = bs.getBoard(num);
+		model.addAttribute("num", num);
+		// 이름을 일치시켜서 쓰기 위해 dto로 만들었다.
+		model.addAttribute("dto", bvo);
+		
+		return "board/boardEditForm";
+	}
+	
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
+	public String boardUpdate(
+			@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result,
+			@RequestParam("oldfilename") String oldfilename,
+			HttpServletRequest request, Model model) {
+		
+		String url = "board/boardEditForm";
+		if(result.getFieldError("pass")!=null) {
+			model.addAttribute("message", "비밀번호는 게시물 수정삭제시 필요합니다.");
+		}else if(result.getFieldError("title")!=null) {
+			model.addAttribute("message", "제목은 필수 입력사항입니다.");
+		}else if(result.getFieldError("content")!=null) {
+			model.addAttribute("message", "게시물 내용은 필수 입력사항입니다.");
+		}else {
+			if(boardvo.getImgfilename()==null || boardvo.getImgfilename().equals("")) {
+				// 이미지 교체를 하지 않을경우...
+				boardvo.setImgfilename(oldfilename);
+			}
+			
+			bs.updateBoard(boardvo);
+			url = "redirect:/boardViewWithoutCount?num="+ boardvo.getNum();
+		}
+		return url;
+	}
+	
+	
+	@RequestMapping("boardDeleteForm")
+	public String board_delete_form(@RequestParam("num") int num,
+			Model model, HttpServletRequest request) {
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	
+	@RequestMapping("boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {
+		// 이전 페이지에서 넘어온 num값 받기
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		// 게시글, 댓글 삭제 기능을 해야한다. 다만 두개는 Service에서 removeBoard 메소드에서 분리한다.
+//		bdao.deleteBoard(num);
+//		bdao.deleteReply(num);
+		bs.removeBoard(num);
+		
+		return "redirect:/main";
+	}
+	
+	
+	
+	
+	
 	
 	
 	/*

@@ -14,7 +14,7 @@ else
 	response.sendRedirect("071_loginForm.jsp");
 
 // jsp 파일에서 로그인 절차를 진행하면 안 좋은점 #1
-// 한글 전달값에 대한 인코딩이 UTR-8이 아니어서 한글이 깨진다.
+// 한글 전달값에 대한 인코딩이 UTL-8이 아니어서 한글이 깨진다.
 // 별도의 URLEncoding 객체를 사용해야한다.
 
 %>

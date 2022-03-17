@@ -37,11 +37,31 @@
 		select * from reply where boardnum=#{param1}
 	</select>
 	
-	<insert id="addReply">
-		insert into reply(num, boardnum, userid, content)
+	<insert id="insertReply" parameterType="com.ezen.spg15.dto.ReplyVO">
+		insert into reply(replynum, boardnum, userid, content)
 		values(reply_seq.nextVal, #{boardnum}, #{userid}, #{content})
 	</insert>
 	
+	<delete id="deleteReply">
+		delete from reply where replynum=#{param1}
+	</delete>
+	
+	<update id="updateBoard" parameterType="com.ezen.spg15.dto.BoardVO">
+		update board set pass=#{pass}, email=#{email}, title=#{title}, content=#{content},
+			imagefilename=#{imagefilename} where num=#{num}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from board where num=#{param1}
+	</delete>
+	
+	<delete id="deleteReplyAll">
+		delete from reply where boardnum=#{param1}
+	</delete>
+	
+	<select id="getCount" resultType="_int">
+		select * from 
+	</select>
 	
 	
 </mapper>

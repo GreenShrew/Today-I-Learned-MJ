@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/board.css" >
-<script src="static/script/board.js"></script>
+<script src="/script/board.js"></script>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
 			<td align="center">
 				<c:if test="${reply.userid==loginUser.userid}">
 					<input type="button" value="삭제" 
-				onclick="location.href='deleteReply?replynum=${reply.replynum}&boardnum=${reply.boardnum}'">
+				onclick="location.href='deleteReply?num=${reply.replynum}&boardnum=${reply.boardnum}'">
 				</c:if>&nbsp;</td>
 		</tr>
 	</c:forEach>
