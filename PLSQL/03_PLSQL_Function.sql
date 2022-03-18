@@ -67,7 +67,7 @@ select fn_getCountryName(52777), fn_getCountryName(10000) from dual;
 CREATE OR REPLACE FUNCTION fn_getCountryName( p_country_id NUMBER )
     RETURN VARCHAR2
 IS
-    vs_count NUMBER(10);
+    vs_count NUMBER(10);    -- 변수 추가
     vs_country_name COUNTRIES.COUNTRY_NAME%TYPE;    -- 나라 이름을 저장할 변수
 BEGIN
     -- 전달받은 아이디에 해당하는 국가의 갯수를 조회하고,
@@ -78,194 +78,58 @@ BEGIN
     from countries
     where country_id = p_country_id;
     
-    IF vs_count >=1 THEN
+    IF vs_count = 0 THEN
+        vs_country_name := '해당국가 없음';
+    ELSE
         select country_name
         into vs_country_name
         from countries
         where country_id = p_country_id;
-        
-        RETURN vs_country_name;
-    ELSE
-        RETURN '해당국가 없음';
+    END IF;    
+    RETURN vs_country_name;
 END;
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- 매개변수가 없는 함수
+
+CREATE OR REPLACE FUNCTION fn_get_user  -- 배개변수가 없는 함수는 괄호 없이 정의한다.
+    RETURN VARCHAR2 -- 반환 데이터타입은 varchar2
+IS
+    vs_user_name VARCHAR2(80);
+BEGIN
+    select USER
+    into vs_user_name
+    from DUAL;
+    
+    RETURN vs_user_name;    -- 사용자 이름 반환
+END;
+
+SELECT fn_get_user(), fn_get_user FROM dual;    -- 매개변수가 없는 함수는 괄호없이 호출한다.
+
+
+
+
+-- 연습문제
+-- employees 테이블에서 각 부서번호를 입력받아서 급여의 평균을 계산하는 함수를 생성하자.
+-- 부서의 인원이 없으면 평균값은 0으로 출력한다.
+-- 실행중 함수의 호출은 아래와 같다.
+select salAvgDept(10), salAvgDept(20), salAvgDept(30), salAvgDept(120) from dual;
+
+CREATE OR REPLACE FUNCTION salAvgDept(p_deptNo NUMBER)
+    RETURN NUMBER
+IS
+    vs_cnt NUMBER(10);
+    vs_avg NUMBER(10);
+BEGIN
+    select count(*) into vs_cnt from employees where department_id = p_deptNo;
+
+    if vs_cnt = 0 THEN
+        vs_avg := 0;
+    ELSE
+        select avg(salary) into vs_avg from employees where department_id = p_deptNo;
+    END IF;
+    
+    RETURN vs_avg;
+END;
