@@ -157,7 +157,7 @@ select * from jobs where job_id = 'SM_JOB1';
 
 -- 매개변수 인수 전달시, 순서 변경
 exec my_new_job_proc( p_min_sal => 5000, p_job_id => 'SM_JOB1', p_max_sal => 10000, p_job_title => 'Sample JOB1');
-select * from jobs where job_id = 'SM_JOB1';
+SELECT * FROM jobs WHERE job_id = 'SM_JOB1';
 
 
 
@@ -187,7 +187,10 @@ begin
     -- 변수가 저장한 값이 전달인수로 잘 전달될것 같지만, 프로시져의 OUT 변수(p_var2)에는 전달되지 않는다.
     my_parameter_test_proc (v_var1, v_var2, v_var3);
     
-    -- 프로시져에 OUT 변수로 전달된 변수는 프로시
+    -- 프로시져에 OUT 변수로 전달된 변수는 프로시져 실행후 프로시져 내에서 넣어준 값이 저장되어 있게 된다.
+    DBMS_OUTPUT.PUT_LINE('v_var1 value = ' || v_var1);
+    DBMS_OUTPUT.PUT_LINE('v_var2 value = ' || v_var2);
+    DBMS_OUTPUT.PUT_LINE('v_var3 value = ' || v_var3);
 end;
 
 
