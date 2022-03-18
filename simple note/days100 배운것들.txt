@@ -9,7 +9,10 @@ days100 배운것들
 
 1. board.js의 open_win 함수 확인
 2. BoardController의 @RequestMapping("/boardEditForm") 확인
+
 3. 2교시에서 @RequestMapping("boardUpdateForm") 에서 이름을 dto로 만든 이유좀 들어봐...
+-> validation에서 되돌아가는 이름과 현재 이름을 맞추기 위해..
+
 4. G15에 게시글 수정 버튼이 안 먹힌다...
 4-1. 4를 수정하고 게시글의 수정이 잘 되는지 확인한다.
 5. BoardDao.xml의 getCount 다 못 썼다.

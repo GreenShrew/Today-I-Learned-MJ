@@ -204,12 +204,11 @@ public class BoardController {
 	
 	@RequestMapping("/boardEditForm")
 	public String board_edit_form(Model model, HttpServletRequest request) {
-		
 		String num = request.getParameter("num");
 		
 		model.addAttribute("num", num);
 		
-		return "board/boardCheckForm";
+		return "board/boardCheckPassForm";
 	}
 	
 	
