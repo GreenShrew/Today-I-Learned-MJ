@@ -2,13 +2,17 @@ days102 배운것들 - 녹화 있다.
 
 ==> 오늘은 PL/SQL 의 05_CURSOR를 마무리하고 이전에 만들었던 ShoppingMall을 Spring Boot로 구현하기 시작했다. + PL/SQL에서 배운 프로시저를 사용할 것이다.
 
+====> xml의 mode=OUT 뒤에 붙는거 설명들좀 다시 들어보자...
+
+
 
 
 ※ 다시 볼것들
 - 조금 더 간결한 FOR 문과 커서의 사용 <- 여기 예시에서 선언부에 변수 없나 확인좀
 
-
-
+- BoardController의 @RequestMapping("/main") 재확인.. 게시판 리스트가 안 나온다.
+-> 아마 controller, service, dao, xml, 프로시져 까지 다 봐야할듯
+--> 해결! addObject에 list를 안 담았음...
 
 
 
@@ -138,7 +142,7 @@ days102 배운것들 - 녹화 있다.
 
 -> 기존에 id값을 받아 이를 DB에서 select하여 한 회원의 데이터를 받아오는 동작을 아래와 같이 바뀐 형식으로 한다.
 
---> 프로시져에 보낼 HashMap에 id 값을 넣어 보낼 것이다.
+--> 프로시져에 보낼 HashMap에 userid 값을 넣어 보낼 것이다.
 --> 프로시져에서 select 된 결과를 받아올 공간을 "ref_cursor"라는 이름으로 만든다. (어떤 형식을 받을지 모르므로 null을 넣는다.)
 --> return 값이 "ref_cursor"에 담기므로 getMember() 메소드는 mvo에 담기지 않으며, id 값도 HashMap에 넣어서 보내므로 paramMap을 전달인자로 사용한다.
 
@@ -150,58 +154,115 @@ days102 배운것들 - 녹화 있다.
 #1. 리스트부터 꺼낸다.
 #2. 리스트의 첫번째 항목을 mvo에 담는다.
 
+※ 프로시져 사용 방법!
+----> getMember 제작, 이전과는 다르게 리턴값이 없다!
+----> IMemberDao 에까지  getMember를 만들었다.
+
+-----> 이제 프로시져를 만들어야 한다.
+-----> Oracle developer 의 Board_Procedure.sql 에 프로시져 생성
+-----> 프로시져를 만들고 컴파일러 하면 된다.
+
+------>Oracle에서 프로시져를 만들면, 이를 어떻게 사용하는가?
+------> MemberDao.xml의 mapper 태그 안에 아래 코드를 작성
+<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
+결과로 얻어지는 값들을 해쉬맵 형태로 저장할 예정이며, 그 별칭을 memberMap 이라고 한다는 뜻이다.
+
+※ statementType="CALLABLE" <-- 프로시져를 사용하겠다는 의미.
+
+-------> xml 파일에서 사용했던 SQL문이 프로시져에 있다!
+아래의 코드를 이용해 불러올 수 있다...
+{ CALL getMember(  ) }
+프로시져의 in 변수는 mode=IN을 생략할 수 있지만, mode=OUT은 쓸게 많다..
+
+
+- 다시 MemberController로 돌아와서...
+-> 1. 리스트로부터 꺼낸다. 데이터는 HashMap 형태로 들어와있다.
+ 프로시져의 결과는 레코드의 리스트들인데, 각 레코드는 <필드명, 필드값> 형태의 해쉬맵이다.
+ 해쉬맵 하나가 하나의 레코드를 이루고, 그 안에는 각 필드명과 값들이 들어있다. 그 레코드들의 집합이 ref_cursor라는 키에 저장되어 돌아와있는 형태이다.
+
+--> 그리고 리스트의 결과가 아무것도 없는지 먼저 조사한다.
+--> 데이터가 없는데 get() 메소드를 써서 데이터를 넣으려 하면 에러가 나온다.
+
+---> 2. 리스트의 첫번째 항목을 mvo에 담는다. (이제는 MemberVO를 쓰지 않게 되었다)
+ 이렇게 담은 데이터는 get() 메소드로 사용 가능!
+mvo.get("USERID");
+mvo.get("NAME");
+단, 필드 명을 대문자로 써주어야 한다.
+
+
+## main 화면 (확인용)
+- 로그인 성공시 main.jsp 로 간다.
+-> member 폴더에 main.jsp 제작
+--> "loginUser"라는 이름으로 mvo에 저장되어있는데,  mvo는 HashMap이다...
+---> EL문을 이용하여 저장된 파라미터를 사용할 수 있는데, 사용할 필드명을 대문자로 써야한다.
+${loginUser.NAME} 이런식으로...
 
 
 
 
+## 진짜 main 화면 가는 기능 추가
+- @RequestMapping(value="login", method=RequestMethod.POST)에서 로그인에 성공하면 redirect:/main 로 가도록 만든다.
+
+-> mapper 패키지에 BoardDao.xml 생성, 여기에도 resultMap 태그를 넣어주는데, id가 다른것과 겹치면 안 된다! 따라서 id를 boardMap으로 설정한다.
+
+--> Dao 패키지에 IBoardDao 인터페이스를 만든다.
+--> Service 패키지에 BoardService 클래스를 만든다.
+--> Controller 패키지에 BoardController 클래스를 만든다.
+
+--> BoardVO는 필요 없다! HashMap에 전부 넣어서 가져갈 수 있기 때문이다!
+
+
+---> 게시글 리스트를 가져와서 main.jsp로 전달해주는 @RequestMapping("/main") 생성
+----> 앞선 getMember 메소드를 만들때와 비슷하다!
+1. HashMap 형태의 객체 paramMap을 만들고,
+2. 게시판 리스트가 모조리 들어올 "ref_cursor" 를 만들어놓고
+3. selectBoard(paramMap) 메소드를 만든다.
+3-1. BoardService, IBoardDao에도 메소드를 만든다.
+3-2. BoardDao.xml에서 selectBoard 프로시져를 사용하도록 만든다.
+3-3. SQL에서 Board_Procedure.sql에서 selectBoard 프로시져를 만들고 컴파일 한다.
+4. 이클립스로 돌아와서, views 폴더에 board 폴더를 만들고, main.jsp를 가져온다.
+
+
+# paging 기능 추가
+// 페이징 처리  이 부분을 복사 붙여넣기 해온다.
+- getAllCount() 메소드도 Hash에 넣어서 쓸 것이다...
+-> startNum, endNum을 꺼내서 paramMap 에 각각 넣어둔다. (selectBoard 메소드를 고치는데에 쓸 예정)
+
+--> getAllCount 메소드를 만들어야 한다.
+--> cnt 라는 이름으로 paramMap에 저장한다.
+--> 그리고 이를 사용한 메소드 bs.getAllCount(paramMap); 를 만든다
+
+---> 여기서 저장되어져 온 "cnt" 를 꺼내서 count 변수에 저장한다.
+
+----> SQL에서 getAllCount 프로시져를 만들어 컴파일 한다.
+
+
+-----> 이제 이전에 만든 selectBoard 메소드에서 startNum, endNum을 이용해서 해당하는 부분만 select 해오도록 만들것이다.
+
+------> BoardDao.xml 의 selectBoard에서 들어가는 값이 ref_cursor 말고도 startNum, endNum이 들어간다! (이만큼만 조회하도록 해야하니깐)
+------> 그리고 SQL의 selectBoard 프로시저 또한 startNum, endNum IN 매개변수를 추가하고, sql문을 수정해야한다.
+------> 그리고 selectBoard 프로시져를 다시 컴파일 시킨다.
+
+-------> Controller에서 mav.addObject("paging", paging); 로 paging 도 같이 보낸다.
+
+
+--------> 여기까지 하면 main.jsp 페이지에서 페이징 처리까지 완료된다.
 
 
 
+#게시글 제목 옆 댓글 갯수 표시하는 기능
+- 아직은 replycnt를 select 하지 않아서 데이터가 없다!
+-> 댓글 갯수의 조회는 selectBoard 프로시져에서 할 것이다!
 
+--> selectBoard 프로시져에서 중간결과 저장용 커서를 만들고, 게시물의 댓글 갯수 저장용 변수를 만든다.
+---> 그리고 중간 저장용 커서에 게시글의 게시글 번호와 페이징 할 게시글 정보를 긁어서 저장한다.
+----> LOOP 반복 실행문을 이용해 중간 저장용 커서를 FETCH로 게시글의 번호, 게시물의 행 번호 변수에 각각 저장한다.
 
+-----> 그리고 아래 두 sql 문을 이용해 게시물의 댓글 갯수를 검색하고 replycnt를 업데이트 하게 한다.
+select count(*) into vs_cnt from reply where boardnum = vs_num; -- 게시물 번호로 댓글 테이블에서 갯수 검색
+update board set replycnt = vs_cnt where num=vs_num;          -- 해당 게시물에 replycnt를 업데이트
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-----> 그리고 OUT 매개변수 p_curvar 에 페이징 처리를 할 수 있도록 startNum, endNum 조건에 맞는 게시물을 긁어다 저장한다.
 
 
 

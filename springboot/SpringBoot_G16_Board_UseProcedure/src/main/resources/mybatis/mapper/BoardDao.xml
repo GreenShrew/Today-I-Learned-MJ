@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="com.ezen.spg16.dao.IBoardDao">
+
+	<resultMap id="boardMap" type="java.util.HashMap"></resultMap>
+	
+	<!-- 전달인수 없고 resultType만 있다. -->
+	<!-- HashMap에 저장할거니깐 parameterType 작성 -->
+	<select id="selectBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL selectBoard(
+			#{startNum},
+			#{endNum},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap}
+		)}
+	</select>
+	
+	<!-- 자바타입 그런거 필요없이 Integer만 쓰면 된다! -->
+	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL getAllCount(
+			#{ cnt, mode=OUT, jdbcType=INTEGER }
+		) }
+	</select>
+	
+</mapper>
