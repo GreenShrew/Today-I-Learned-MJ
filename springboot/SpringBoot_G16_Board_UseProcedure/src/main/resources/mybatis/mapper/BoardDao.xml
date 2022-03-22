@@ -1,28 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 
 <mapper namespace="com.ezen.spg16.dao.IBoardDao">
 
-	<resultMap id="boardMap" type="java.util.HashMap"></resultMap>
+	<resultMap  id="boardMap" type="java.util.HashMap"></resultMap>
+	<resultMap  id="boardMap2" type="java.util.HashMap"></resultMap>
 	
-	<!-- 전달인수 없고 resultType만 있다. -->
-	<!-- HashMap에 저장할거니깐 parameterType 작성 -->
-	<select id="selectBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+	<select id="selectBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
 		{ CALL selectBoard(
-			#{startNum},
+			#{startNum}, 
 			#{endNum},
-			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap}
-		)}
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap }
+		) }
 	</select>
 	
-	<!-- 자바타입 그런거 필요없이 Integer만 쓰면 된다! -->
-	<select id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+	<select  id="getAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL getAllCount(
 			#{ cnt, mode=OUT, jdbcType=INTEGER }
 		) }
 	</select>
 	
+	
+	<update  id="plusReadCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL plusReadCount(	#{ num } ) }
+	</update>
+	
+	<select id="boardView" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL boardView(
+			#{num} ,
+			#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap },
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap2 }
+		) }
+	</select>
+	
+	
+	<update  id="insertReply" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertReply(	#{ boardnum }, #{ userid }, #{ content } ) }
+	</update>
+	
+	
+	<delete  id="deleteReply" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL deleteReply(	#{ replynum } ) }
+	</delete>
+	
+	
+	<select id="getBoard" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL getBoard(
+			#{num} ,
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=boardMap }
+		) }
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+

@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
 <mapper namespace="com.ezen.spg16.dao.IMemberDao">
 
-	<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
-	<!-- 결과로 얻어지는 값들을 해쉬맵 형태로 저장할 예정이며, 그 별칭을 memberMap 이라고 한다는 뜻이다. -->
+	<resultMap  id="memberMap" type="java.util.HashMap"></resultMap>
+	<!-- 결과로 얻어지는 값들을 해쉬맵형태로 저장할 예정이며, 그 별칭을  memberMap 이라고 한다는 뜻입니다 -->
 	
-	<!-- statementType="CALLABLE" 이건 프로시져를 사용하겠다는 의미 -->
-	<!-- id의 이름은 IMemberDao의 이름, { } 안의 이름은 프로시져의 getMember() 의 이름이다. -->
-	<!-- mode=IN은 생략 가능! -->
-	<!-- 이걸 거치고 나면 null값이였던 ref_cursor에 값이 들어간다! -->
+	
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL getMember(
-		#{userid},
-		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+		{ CALL getMember(  
+			#{userid} , 
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap }  
 		) }
 	</select>
-
+	
+	
+	
+	
+	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL insertMember( #{userid}, #{pwd}, #{name}, #{email}, #{phone} ) }
+	</insert>
+	<!-- 
+	<insert id="insertMember" statementType="CALLABLE" parameterType="com.ezen.spg16.dto.MemberVO" >
+		{ CALL insertMember( #{userid}, #{pwd}, #{name}, #{email}, #{phone} ) }
+	</insert>
+	 -->
+	 
+	 
+	 
+	 <update id="updateMember" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ CALL updateMember( #{USERID}, #{PWD}, #{NAME}, #{EMAIL}, #{PHONE} ) }
+	</update>
+	 
+	 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

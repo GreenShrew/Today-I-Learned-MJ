@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="로그아웃"/>
+		<item key="selection" value="탈퇴"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="true"/>
 		<list key="findhistory">
+			<item value="탈퇴"/>
 			<item value="로그아웃"/>
 			<item value="nvl"/>
 			<item value="floor"/>
@@ -22,7 +23,6 @@
 			<item value="email"/>
 			<item value="scott"/>
 			<item value="delete"/>
-			<item value="oseq"/>
 		</list>
 		<list key="replacehistory">
 			<item value="VO"/>

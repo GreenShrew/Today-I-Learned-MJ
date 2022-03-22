@@ -141,7 +141,7 @@ begin
                     FROM employees 
                     WHERE department_id = 90)
     LOOP
-        DBMS_OUTPUT.PUT_LINE(employee_id || ' - ' || emp_name);
+        DBMS_OUTPUT.PUT_LINE(emp_rec.employee_id || ' - ' || emp_rec.emp_name);
     END LOOP;
 end;
 

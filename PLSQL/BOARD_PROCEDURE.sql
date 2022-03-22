@@ -65,3 +65,94 @@ END;
 
 
 
+CREATE OR REPLACE PROCEDURE insertMember(
+    p_userid IN member.userid%TYPE,
+    p_pwd IN member.pwd%TYPE,
+    p_name IN member.name%TYPE,
+    p_email IN member.email%TYPE,
+    p_phone IN member.phone%TYPE
+)
+IS
+-- 별도의 변수는 필요 없다...
+BEGIN
+    insert into member(userid, pwd, name, email, phone) values(p_userid, p_pwd, p_name, p_email, p_phone);
+    commit;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE updateMember(
+    p_userid IN member.userid%TYPE,
+    p_pwd IN member.pwd%TYPE,
+    p_name IN member.name%TYPE,
+    p_email IN member.email%TYPE,
+    p_phone IN member.phone%TYPE
+)
+IS
+
+BEGIN
+    update member set pwd=p_pwd, name=p_name, email=p_email, phone=p_phone where userid=p_userid;
+    commit;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE plusReadCount(
+    p_num IN board.num%TYPE
+)
+IS
+BEGIN
+    update board set readcount = readcount + 1 where num = p_num;
+    commit;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE boardView(
+    p_num IN board.num%TYPE,
+    p_cur1 OUT SYS_REFCURSOR,
+    p_cur2 OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cur1 FOR select * from board where num = p_num ORDER BY num DESC;
+    OPEN p_cur2 FOR select * from reply where boardnum = p_num ORDER BY replynum DESC;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE insertReply(
+    p_boardnum IN reply.boardnum%TYPE,
+    p_userid IN reply.userid%TYPE,
+    p_content IN reply.content%TYPE
+)
+IS
+BEGIN
+    insert into reply(replynum, boardnum, userid, content) values(reply_seq.nextVal, p_boardnum, p_userid, p_content);
+    commit;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE deleteReply(
+    p_replynum IN reply.replynum%TYPE
+)
+IS
+BEGIN
+    delete from reply where replynum = p_replynum;
+    commit;
+END;
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE getBoard(
+    p_num IN board.num%TYPE,
+    p_cur OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_cur FOR
+        select * from board where num = p_num ORDER BY num DESC;
+END;

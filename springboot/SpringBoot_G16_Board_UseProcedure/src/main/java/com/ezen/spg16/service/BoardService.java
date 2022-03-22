@@ -14,10 +14,25 @@ public class BoardService {
 	IBoardDao bdao;
 
 	public void selectBoard(HashMap<String, Object> paramMap) {
-		bdao.selectBoard(paramMap);
+		bdao.selectBoard( paramMap );		
 	}
-
 	public void getAllCount(HashMap<String, Object> paramMap) {
-		bdao.getAllCount(paramMap);
+		bdao.getAllCount( paramMap );		
+	}
+	public void boardView(HashMap<String, Object> paramMap) {
+		bdao.plusReadCount( paramMap );
+		bdao.boardView( paramMap );
+	}
+	public void insertReply(HashMap<String, Object> paramMap) {
+		bdao.insertReply( paramMap );		
+	}
+	public void boardViewWithoutCount(HashMap<String, Object> paramMap) {
+		bdao.boardView( paramMap );	// 	plusReadCount 없이 boardView  만 실행
+	}
+	public void deleteReply(HashMap<String, Object> paramMap) {
+		bdao.deleteReply( paramMap );
+	}
+	public void getBoard(HashMap<String, Object> paramMap) {
+		bdao.getBoard( paramMap );		
 	}
 }

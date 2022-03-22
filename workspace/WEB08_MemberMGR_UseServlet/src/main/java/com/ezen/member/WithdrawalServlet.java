@@ -34,7 +34,6 @@ public class WithdrawalServlet extends HttpServlet {
 		String userid = request.getParameter("userid");
 		
 		MemberDao mdao = MemberDao.getInstance();
-		mdao.editAdmin(userid);
 		mdao.deleteMember(userid);
 		
 		RequestDispatcher dp = request.getRequestDispatcher("member/loginForm.jsp");	// 삭제가 끝나면 다시 로그인창으로

@@ -23,4 +23,5 @@ public class MemberVO {
 	@NotEmpty(message="전화번호를 입력하세요")
 	@NotNull(message="전화번호를 입력하세요")
 	private String phone;
+	
 }

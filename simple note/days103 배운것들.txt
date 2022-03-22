@@ -1,0 +1,336 @@
+days103 배운것들
+
+==> 오늘은 days102에 이어 G16을 진행하였다.
+
+
+※ 잠깐의 깨달음
+ArrayList<X> 는 X 형의 데이터, 객체들을 배열 형식으로 담는다.
+HashMap<String, Object> 는 여러 데이터 형식의 데이터, 객체들을 담아둘 수 있다.
+
+
+
+
+※ 확인할것...
+- G16의 회원가입이 안 된다...
+-> xml의 sql 문제인가?
+--> 해결! xml에서 대괄호 하나가 더 붙어있었다...
+---> 또 문제! insertmember 프로시져 고장난듯...
+----> 해결! 테이블 컬럼 변경함! 테이블 중에 address랑 zip_num 이 not null 인데 이걸 넣는 칸이 없어서 자꾸 에러나던 것이였음...
+
+
+- BoardView가 자꾸 안 나온다...Userid가 문제라는데 왜지?
+-> @RequestMapping("/boardView") 한번 갈아봐...
+--> 아마 이게 문제면 @RequestMapping("/boardViewWithoutCount") 이것도 확인해야한다.
+---> 해결! 내가 addObject로 mav에 담을 때 게시글, 댓글 내용을 둘 다 "board" 에 넣어서 보내버렸다!
+
+- @RequestMapping("/boardViewWithoutCount") 한번 확인해
+
+- 프로시져 제작중에 boardViewWithdoutCount 안 만들었나보다? boardView 가 두개인데?
+-> boardWithoutCount 관련된거 싹 확인해봐야 한다.
+
+
+
+SpringBoot_G16_Board_UseProcedure
+====================================
+
+## 로그아웃 기능
+- DB에 접근하지 않아도 되는 기능이므로 먼저 만들었다.
+@RequestMapping(value="/logout", method=RequestMethod.POST) 제작
+
+
+
+
+## 회원가입 기능
+- memberJoinForm 으로 이동시켜주는 @RequestMapping("/memberJoinForm") 제작.
+-> G15에서 memberJoinForm 카피
+
+
+
+# 회원가입 창에서 아이디 중복체크 기능
+- @RequestMapping("/idcheck") 제작
+-> 다만, Member mvo = ms.getMember(userid); 이 부분을 HashMap을 사용해서 바꾼다.
+-->HashMap에 넣고, 이를 꺼내서 쓰는 과정...익숙해져야해
+
+
+
+# 회원가입 완료시키기
+- @RequestMapping(value="memberJoin", method=RequestMethod.POST) 추가
+-> HashMap을 굳이 쓸 필요는 없다.
+
+--> @Valid 통과 후 else 부분이 바뀐다...
+
+---> insertMember 메소드 제작
+---> xml에도 제작 후에 SQL에 프로시져 제작
+
+
+
+
+
+
+## 회원정보 수정
+- @RequestMapping("/memberEditForm") 추가
+
+-> session에 저장되어 있는 유저 정보를 HashMap으로 받는다.
+-> HashMap으로 받은 데이터를 MemberVO 형태의 객체 dto에 담아서 보낸다.
+-> HashMap에서 값을 가져오므로 컬럼값을 대문자로 가져간다!
+-> Object에 있던 내용이 나오므로 String으로 형변환!
+
+--> memberEditForm.jsp 추가, 여기에서는 @RequestMapping("/memberEditForm")에서 데이터를 전부 수정해서 dto에 넣어 보내주었다.
+--> 따라서 소문자로 파라미터를 쓰게 된다...
+
+※ "loginUser"를 바로 보내지 않고 dto를 거치는 이유!
+ @Valid 에서 dto를 사용하고 있기 때문에 형태를 맞추고자 변환을 해준것이다!
+
+
+
+
+## 회원 정보 수정
+- @RequestMapping(value="/memberEdit", method=RequestMethod.POST) 추가
+-> 여기에서의 @Valid 때문에 @RequestMapping("/memberEditForm") 에서 dto를 거쳐서 보냈다!
+
+--> 이 또한 전달할때 HashMap에 저장해서 보낸다!
+
+---> updateMember 메소드 작성
+---> MemberDao.xml 에도 id 가 updateMember인 update 태그 작성
+※ 주의, 여기서는 xml에도 대문자를 사용한다!
+Controller의 mvo에 대문자로 넣었기 때문에 대문자로 써야한다!
+
+----> UPDATEMEMBER 프로시져 생성
+
+
+
+
+
+
+
+## 게시글 쓰기 기능
+- @RequestMapping("/boardView") 제작
+-> 댓글 조회, 게시글 내용 조회, 조회수 1 늘려야한다.
+
+#1. CURSOR를 두개로 만들어서 처리하는 방법!
+커서를 두개로 만들어서 ref_cursor1에는 게시글 내용을, ref_cursor2 에는 댓글 내용을 담아온다.
+
+
+--> boardView 메소드 제작
+---> BoardService에서는 게시글 조회수를 늘리는 메소드 plusReadCount, 게시글, 댓글을 얻어오는 메소드 boardView 를 두개 따로 써서 만든다.
+
+----> BoardDao.xml에도 update, select 두 태그를 만들고, 각각의 plusReadCount, boardView 프로시져를 만든다.
+
+
+-----> boardView.jsp를 g15 에서 가져오는데, 전달받는 parameter의 이름을 대문자로 바꿔야 한다.
+
+
+
+
+
+
+
+
+## 댓글 추가하기
+- @RequestMapping("/addReply") 제작
+-> 댓글을 추가하되 ReplyVO를 안 쓴다.
+-> HashMap을 쓴다.
+
+--> HashMap에 전달받은 boardnum, userid, content 를 저장하고 insertReply 메소드로 보내 insert 할 수 있도록 만든다.
+
+
+---> 그리고 Readcount 증가 없이도 게시물로 돌아오게 만드는 @RequestMapping("/boardViewWithoutCount") 추가.
+---> boardViewWithoutCount() 메소드 제작
+---> 위 메소드에서는 기존에 boardView 메소드에서 plusReadCount를 뺀 나머지를 쓰면 된다.
+
+
+
+
+## 댓글 삭제 기능
+- @RequestMapping("/deleteReply") 추가
+-> deleteReply 메소드 생성
+--> deleteReply 프로시져 생성
+
+
+
+
+
+## 게시글 수정 기능
+- 게시글 수정 페이지로 보내기 전, 게시글 비밀번호 등을 확인하는 @RequestMapping("/boardEditForm") 추가
+-> boardCheckPassForm.jsp 카피해서 넣는다.
+
+--> 비밀번호 확인이 되면 num과 함께 @RequestMapping("/boardEdit") 로 보낸다.
+--> 해당 게시글의 정보를 가져오는 getBoard 메소드 제작
+--> BoardDao.xml에도 id가 getBoard 인 select 태그 제작
+
+
+---> 이제 게시글 수정인지 삭제인지 구분하는 boardCheckPass.jsp (카피해와)를 거쳐서 비밀번호가 맞다면 @RequestMapping("boardUpdateForm") 로 이동한다.
+
+----> 여기서는 게시글을 수정할 때 @Valid를 사용하기 위해 "dto" 로 사용한다.
+----> 따라서 HashMap에 저장된 bvo 에서 이를 꺼내서 dto에 따로 담아서 dto라는 이름으로 보낸다.
+
+
+# 이미지 파일 수정하기
+- 이미지 파일을 업로드 하기 위한 팝업창을 띄우고, 이미지를 업로드 하는 동작을 하는 두개의 RequestMapping을 추가한다.
+
+-> 팝업창 띄우는 @RequestMapping("/selectimg")
+-> 업로드 하는 @RequestMapping(value="/fileupload", method=RequestMethod.POST)
+
+-> static 폴더 아래, 그리고 webapp 폴더 아래에 upload 폴더를 만들어준다.
+-> completupload.jsp, selectimg.jsp 파일을 G15에서 긁어온다.
+
+--> 이미지를 업로드 하기 위해서는 아래의 어노테이션을 추가해야한다.
+@Autowired
+ServletContext context;
+
+---> 그리고 게시글 수정내용을 가지고 DB을 update 할 @RequestMapping(value="/boardUpdate", method=RequestMethod.POST) 추가
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
