@@ -270,10 +270,19 @@ public class BoardController {
 		else {
 			if( boardvo.getImgfilename()==null || boardvo.getImgfilename().equals("") )	
 				boardvo.setImgfilename(oldfilename);
+
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("num", boardvo.getNum());
+			paramMap.put("userid", boardvo.getUserid());
+			paramMap.put("pass", boardvo.getPass());
+			paramMap.put("email", boardvo.getEmail());
+			paramMap.put("title", boardvo.getTitle());
+			paramMap.put("content", boardvo.getContent());
+			paramMap.put("imgfilename", boardvo.getImgfilename());
 			
+			bs.updateBoard(paramMap);
 			
-			
-			// bs.updateBoard( boardvo );
+			// 다시 해당 번호의 게시물로 돌아간다.
 			url = "redirect:/boardViewWithoutCount?num=" + boardvo.getNum();
 		}	
 		
@@ -281,6 +290,70 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping("boardDeleteForm")
+	public String board_delete_form(@RequestParam("num") int num,
+			Model model, HttpServletRequest request) {
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	
+	@RequestMapping("boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("num", num);
+		
+		bs.removeBoard(paramMap);
+		
+		return "redirect:/main";
+	}
+	
+	
+	@RequestMapping("/boardWriteForm")
+	public String write_form(HttpServletRequest request) {
+		
+		String url = "board/boardWriteForm";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) {
+			url = "member/loginForm";
+		}
+		return url;
+	}
+	
+	
+	@RequestMapping(value="boardWrite", method=RequestMethod.POST)
+	public String board_write(
+			@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, 
+			Model model, 
+			HttpServletRequest request) {
+		
+		String url="board/WriteForm";
+		if(result.getFieldError("pass")!=null) {
+			model.addAttribute("message", result.getFieldError("pass").getDefaultMessage());
+		}else if(result.getFieldError("title")!=null) {
+			model.addAttribute("message", result.getFieldError("title").getDefaultMessage());
+		}else if(result.getFieldError("content")!=null) {
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		}else {
+		
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			
+			paramMap.put("userid", boardvo.getUserid());
+			paramMap.put("pass", boardvo.getPass());
+			paramMap.put("email", boardvo.getEmail());
+			paramMap.put("content", boardvo.getContent());
+			paramMap.put("title", boardvo.getTitle());
+			paramMap.put("imgfilename", boardvo.getImgfilename());
+			
+			bs.insertBoard(paramMap);
+			url = "redirect:/main";
+		}
+		
+		return url;
+	}
 }
 
 

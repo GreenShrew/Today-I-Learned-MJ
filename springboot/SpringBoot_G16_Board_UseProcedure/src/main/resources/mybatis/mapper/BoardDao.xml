@@ -54,6 +54,22 @@
 		) }
 	</select>
 	
+	<update id="updateBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL updateBoard( 
+		#{ num }, #{ userid }, #{ pass }, #{ email }, #{ title }, #{ content }, #{ imgfilename } 
+		) }
+	</update>
+	
+	<delete  id="removeBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL removeBoard(	#{ num } ) }
+	</delete>
+	
+	<insert id="insertBoard" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertBoard(
+		#{ userid }, #{ pass }, #{ email }, #{ title }, #{ content }, #{ imgfilename }
+		) }
+	</insert>
+	
 </mapper>
 
 

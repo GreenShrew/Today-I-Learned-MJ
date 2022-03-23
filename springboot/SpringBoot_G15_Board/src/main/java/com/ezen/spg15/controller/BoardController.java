@@ -121,10 +121,9 @@ public class BoardController {
 		}else if(result.getFieldError("content")!=null) {
 			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
 		}else {
+			bs.insertBoard(boardvo);
 			url = "redirect:/main";
 		}
-		
-		bs.insertBoard(boardvo);
 		
 		return url;
 	}

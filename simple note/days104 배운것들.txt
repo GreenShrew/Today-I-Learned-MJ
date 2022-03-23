@@ -1,0 +1,555 @@
+days104 배운것들
+
+==> 오늘은 days103에 이어 G16을 진행하였다.
+==> 그리고 ShoppingMall 제작을 시작하였다.
+
+
+※ 확인할 내용
+- sub2의 파일을 확인하자!
+
+- joinForm.jsp의 Address 부분 확인한다.
+
+
+
+
+## 게시글 업데이트 기능
+- 내용 다 적고 수정하기 버튼 누르면 실행되는 @RequestMapping(value="/boardUpdate", method = RequestMethod.POST)를 추가한다.
+
+-> 역시나 HashMap의 객체 paramMap에 boardvo로 전달되어진 유저이름, 비밀번호, 이메일, 제목, 내용, 이미지 제목을 넣고, updateBoard 메소드의 전달인수로 사용한다.
+
+--> BoardDao.xml에 id가 updateBoard인 update 태그 생성
+
+---> 이름이 updateBoard 인 프로시져를 제작하고 컴파일한다.
+
+----> 여기까지 하면 게시글의 수정이 가능해진다.
+
+
+
+
+
+## 게시글 삭제 기능
+- 리퀘스트가 boardDeleteForm인 @RequestMapping("boardDeleteForm") 추가
+-> boardView.jsp 에서 삭제하기 버튼 누르면 실행된다.
+--> 게시물을 수정하는지 제거하는지 파악하는 boardCheckPassForm.jsp로 이동한다.
+
+---> boardCheckPassForm.jsp에서는 boardDelete request를 요청
+
+---> @RequestMapping("boardDelete") 추가
+----> removeBoard 메소드 제작
+----> BoardDao.xml에도 id가 removeBoard 인 delete 태그 제작
+----> removeBoard 프로시져 제작 후 컴파일.
+
+-----> 여기까지 하면 게시글의 삭제가 가능해진다.
+
+
+
+
+
+
+## 게시글 작성 기능
+※ 기존에 사용하던 게시글이 있어서 무심코 게시글 수정 기능부터 제작하였다.
+- main에서 게시글 작성을 누르면 boardWriteForm request를 요청한다.
+-> @RequestMapping("/boardWriteForm") 추가
+--> boardWriteForm.jsp 를 G15에서 긁어오기
+
+---> 위에서 게시글 수정 기능 만들면서 파일 업로드는 만들어두었으므로 boardWriteForm.jsp에서 그대로 쓰면 된다.
+
+
+----> "등록" 버튼을 누르면 request가 boardWrite로 요청한다.
+----> @RequestMapping(value="boardWrite", method=RequestMethod.POST) 추가
+
+-----> insertBoard 메소드 제작
+-----> BoardDao.xml에도 id가 insertBoard 인 insert 태그 제작
+-----> insertBoard 프로시져 제작 후 컴파일
+
+------> 여기까지 하면 게시글의 작성이 가능해진다.
+
+
+
+
+여기까지가 G16이다.
+제작한 프로시져를 다른곳에서 쓰기 위해 views 폴더에 복사해서 넣었다.
+※ 참고로 이클립스에서는 프로시져를 만들 수 없다. 그렇기에 오라클에서 제작된 SQL Developer를 사용하는 것이다.
+===========================
+
+
+
+
+
+
+
+
+SpringBoot_M17_shop
+
+SpringLegacy 프로젝트에서 JSP 파일 등을 긁어오는 작업을 많이 한다.
+가져올 때, jsp 파일에서는 el문에서 컬럼명 대문자 문제라던가, css, header 등의 경로 설정을 제대로 해야한다! (단, validation 할 내용은 dto 등으로 다르게 쓴다!)
+
+==================================
+- 이번에는 Maven 방식으로 만든다.
+-> Gradle과 다른건 pom.xml 존재 여부이다.
+-> Maven은 pom.xml을 이용해 개발 환경을 셋팅한다!
+
+
+## 개발환경 구축
+- 새로운 프로젝트 제작 (§ 사진 01, 02)
+-> New Spring Starter Project에서 (§ 사진 01, 02) 를 따라 프로젝트를 만든다.
+
+
+-> pom.xml을 오픈한다.
+-> 오라클 DB를 쓰기 위한 repositories를 추가한다.
+
+--> dependencies 태그 안에는 프로젝트를 만들면서 체크했던 기능들이 자동으로 들어가있다.
+--> 다만 JSP를 사용하기 위한 dependency 태그는 따로 추가해야한다.
+--> dependencies 태그 안에 JSP 관련 dependency 추가
+
+
+---> file 업로드를 위한 dependency 태그도 추가한다.
+---> 다만 gradle 처럼 따로 cos.jar 파일을 가져와서 추가해주지 않아도 자동으로 다운로드하여 넣어준다.
+
+
+- resources 패키지에서 application.properties 파일을 오픈
+-> 이전 프로젝트 (G16) 에서 썼던 내용을 복사 붙여넣기 해준다.
+
+
+- src/ain 폴더 아래에 webapp/WEB-INF/views 폴더를 제작한다.
+
+
+- com.ezen.spm17 패키지 아래에 controller, dao, dto, service 패키지 제작
+
+
+- src/main/resources 에 mybatis.mapper 패키지 제작
+
+- 프로젝트 우클릭하여 update 진행
+
+여기까지 하면 환경설정은 완료!
+
+
+
+
+## 쇼핑몰의 물품을 다룰 controller 등 파일 만들기
+- controller 패키지에 ProductController 클래스 제작
+-> service 패키지에 ProductService 클래스 제작
+--> dao 패키지에 IProductDao 인터페이스 제작
+---> mybatis/mapper 패키지에 ProductDao.xml 제작
+---> xml에서 필요한 <!DOCTYPE.... 과 mapper 태그, 그리고 HashMap으로 파라미터를 가져오도록 하기 위한 resultMap 태그 추가
+
+
+----> static 폴더 아래에 admin, css, images, product_images, script 폴더를 제작한다.
+----> 그리고 Legacy 프로젝트 3번의 ShoppingMall을 만들 떄 사용한 파일들을 해당 촐더 아래에 넣는다.
+
+----> views 폴더 아래에 include/headerfooter 폴더를 제작한다.
+----> 이전에 사용했던 header.jsp, footer.jsp 를 복사 붙여넣기 한다.
+----> 다만, css, script, 이미지파일 경로를 체크해주고 el문으로 들어오는 파라미터의 필드명을 대문자로 바꾼다.
+
+
+## sql 점검
+- 
+
+
+
+## 첫 페이지 출력 (§ 사진 03)
+- 첫 페이지는 request가 / 이다.
+-> @RequestMapping("/") 생성
+-> 위 request 에서는 main 페이지에서 출력할 내용들을 담아서 main.jsp 로 보낸다.
+
+--> getBestNewProduct() 메소드 생성
+--> ProductDao.xml에 id가 getBestNewProduct인 select 태그 제작
+※ select로 내용을 조회해서 받아오므로 mode=OUT 이며, 두개의 내용(베스트 상품, 신상품)을 조회해서 가져오므로 두개의 ref_cursor 를 쓴다는것을 명심하자.
+
+
+---> 프로시져를 만들기 위한 SQL 생성.
+---> views 폴더 아래에 Procedure.sql 생성
+---> 그리고 getBestNewProduct 프로시져 생성 후 컴파일
+
+
+----> 첫번째로 열릴 main.jsp를 제작한다.
+
+-----> 여기까지 하면 첫 페이지가 출력된다.
+
+
+
+
+
+## 로그인 기능 (§ 사진 04)
+- 우선 member에 대하여 DB를 다루고 요청할 클래스 MemberController, MemberService와 인터페이스 IMemberDao, 그리고 MemberDao.xml 을 제작한다.
+
+-> header.jsp 에서 로그인하기 버튼을 누르면 loginForm 이라는 request가 요청된다.
+-> @RequestMapping(value="loginForm") 추가
+
+--> views 폴더에 member 폴더를 만들고, login.jsp 파일 복사
+--> 그리고 legacy 프로젝트에서 sub02 폴더 가져온다! (페이지에 넣는 사진과, 좌측의 메뉴이다.)
+
+---> Validation을 쓰기 위해 MemberVO를 만들어야 한다.
+---> MemberVO 작성
+
+----> login.jsp에서 값을 가져와 로그인 여부를 @Valid 하고 로그인 성공시 세션에 저장한 뒤 main.jsp로 보내는 @RequestMapping(value="/login", method=RequestMethod.POST) 추가
+----> getMember() 메소드 제작
+----> 다만, 이전 G16 프로젝트에서 만들어둔 프로시져중에 같은 이름의 프로시져가 존재한다!
+ 따라서 프로시져의 이름을 getMember_s 로 만들 것이다!
+
+
+-----> 여기까지 만들면 로그인이 된다.
+
+
+
+
+## 로그아웃 기능
+- @RequestMapping(value="/logout") 추가
+removeAttribute("loginUser"); 으로 "loginUser"라는 key값으로 저장된 세션을 제거
+-> 그리고 다시 메인 페이지로 가는 request / 로...
+
+
+
+
+
+## 회원가입 기능
+- contract request로 이동.
+-> @RequestMapping(value="/contract") 추가
+--> contract.jsp 를 긁어온다.
+---> go_next() script는 이미 있다...
+
+---> contract.jsp에서 joinForm.jsp로 보내는 
+
+
+----> 위 함수에서 joinForm.jsp로 이동시킨다.
+----> joinForm.jsp에서 value="${dto.email}"와 같이 추가하여, validation에 걸려서 다시 페이지로 돌아왔을 때 이전에 썼던 내용이 남아있도록 만든다.
+
+
+-----> loginForm에서 확인해야할 두개의 함수는 idcheck(), post_zip() 이다.
+
+------> idcheck() 함수에서는 idCheckForm 이라는 request로 보낸다.(팝업창 오픈)
+------> @RequestMapping("/idCheckForm") 추가
+
+-------> idcheck.jsp로 간다. 여기서는 idCheckForm request 에서 이미 가입된 아이디가 있나없나 체크해서 넘어온 result 값에 따라 화면을 나타낸다.
+
+
+--------> 이제 post_zip() 함수를 확인. findZipNum 이라는 request 에 연결되어있다.
+
+--------> @RequestMapping(value="/findZipNum") 추가
+--------> selectAddressByDong() 메소드 추가
+--------> 중간에 메소드 이름을 getAddress 으로 변경하고, 프로시져의 이름을 getAddress_s 로 만들 것이다.
+
+---------> member 폴더에 팝업창인 findZipNum.jsp 추가
+ 주소검색까지 완료!
+
+
+
+# 회원가입 시키기...는 day 105에
+- 회원가입 버튼을 누르면 join 으로 request 가 연결되어있다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
