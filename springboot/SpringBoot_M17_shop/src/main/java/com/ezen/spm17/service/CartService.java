@@ -18,4 +18,12 @@ public class CartService {
 	public void insertCart(HashMap<String, Object> paramMap) {
 		cdao.insertCart(paramMap);
 	}
+
+	public void listCart(HashMap<String, Object> paramMap) {
+		cdao.listCart(paramMap);
+	}
+
+	public void deleteCart(HashMap<String, Object> paramMap) {
+		cdao.deleteCart(paramMap);
+	}
 }

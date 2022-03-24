@@ -14,7 +14,7 @@
 <div id="wrap">
 	<header>
 		<div id="logo"><!-- 최상단 "/" 리퀘스트 요청 링크 -->
-			<a href="/shop/"><img src="/images/logo.png" width="180" height="100"></a></div>
+			<a href="/"><img src="/images/logo.png" width="180" height="100"></a></div>
 		<nav id="top_menu"> <!-- top menu -->
 			<ul>
 				<c:choose>

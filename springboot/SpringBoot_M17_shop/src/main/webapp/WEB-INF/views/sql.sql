@@ -276,7 +276,7 @@ create or replace view cart_view
 as
 select c.cseq, c.id, m.name as mname, c.pseq, p.name as pname, c.quantity, p.price2, c.result, c.indate
 from cart c, product p, member m
-where c.pseq = p.pseq and c.id = m.id;
+where c.pseq = p.pseq and c.id = m.userid;
 
 select * from cart_view;
 

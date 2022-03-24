@@ -11,5 +11,20 @@
 		{ CALL insertCart(#{id}, #{pseq}, #{quantity}) }
 	</insert>
 	
+	<select id="listCart" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL listCart(
+		#{id},
+		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+		) }
+	</select>
+	
+	<delete id="deleteCart" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL deleteCart(#{cseq}) }
+	</delete>
+	
+	
+	
+	
+	
 	
 </mapper>

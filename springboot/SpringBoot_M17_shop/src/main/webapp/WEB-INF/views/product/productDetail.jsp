@@ -19,7 +19,7 @@
 			<div id="buttons">
 				<input type="button" value="장바구니에 담기" class="submit"    onclick="go_cart()"> 
 			    <input type="button" value="즉시 구매" 	class="submit"    onclick="go_order()"> 
-			    <input type="button"  value="메인으로" class="submit" onclick="location.href='/shop/'">
+			    <input type="button"  value="메인으로" class="submit" onclick="location.href='/'">
         	</div>
 		</form>
 	</div>

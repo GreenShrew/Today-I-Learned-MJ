@@ -6,6 +6,13 @@ days105 배운것들
 ※ 배운점
 - 프로시져에서 select로 조회해서 얻어온 값의 key 값은 대문자로 써야한다! (USERID, PWD...)
 
+※ 확인할것
+- 상품 상세보기에서 카트 담으면 카트에 내용은 담기는데 페이지 이동이 안 된다...
+-> @RequestMapping(value="/cartInsert") 의 return 경로 확인하고 고쳐
+
+- sub03/sub_image.html 확인
+
+
 
 
 
@@ -93,6 +100,24 @@ days105 배운것들
 --> @RequestMapping(value="/cartInsert") 제작
 --> insertCart() 메소드 제작
 
+---> 여기까지 하면 카트에 내용이 담긴다
+
+
+
+
+## 카트에 담긴 내역 확인 (§ 사진 09)
+- views 폴더 아래에 mypage 폴더 생성
+-> cartList.jsp 긁어온다.
+
+
+- @RequestMapping(value="/cartList") 추가
+-> listCart() 메소드 작성
+-> CartDao.xml에 id가 listCart인 select 태그 추가
+-> listCart 프로시져 생성 후 컴파일
+
+--> include 폴더 아래에 sub03 폴더와 파일을 넣는다.
+
+---> 여기까지 하면 카트 페이지가 보인다.
 
 
 
@@ -100,35 +125,48 @@ days105 배운것들
 
 
 
+## 장바구니 삭제
+- @RequestMapping(value="/cartDelete") 추가
+-> 카트 리스트에서 체크박스로 카트에서 삭제할 내용들을 배열로 가져온다!
+String[] cseqArr = request.getParameterValues("cseq");
+
+--> deleteCart() 메소드 제작
+--> CartDao.xml에 id 가 deleteCart 인 delete 태그 제작
+--> deleteCart 프로시져 제작 후 컴파일!
 
 
 
 
 
 
+## 주문하기 기능
+- OrderDao.xml, IOrderDao 인터페이스, OrderService 클래스, OrderController 클래스 제작
 
+- cartList.jsp에서 '주문하기' 버튼을 누르면 orderInsert를 request로 가지는 mapping으로 이동한다.
+-> @RequestMapping(value="/orderInsert") 제작
 
+--> insertOrder() 메소드 제작
+--> Service에 @Transactional(rollbackFor = Exception.class)를 추가한다!
+ 여기서 에러가 나면 롤백!
+--> insertOrder 프로시져 제작 후 컴파일
 
+---> insertOrder 프로시져에서 할게 많다! (FETCH 를 쓰는 방법을 익혀!)
+1. oreders 테이블에 레코드 추가
+2.orders 테이블에서 가장 큰 oseq 조회
+3. cart 테이블에서 id로 목록 조회
+4. 목록과 oseq로 order_detail 테이블에 레코드 추가
+4-1. 주문한 카트 목록을 지우거나 result를 2로 바꾼다.
+5. oseq 값을 OUT 변수에 저장
 
+----> 위의 처리를 끝내면 주문이 추가되고 cart의 해당 내용은 삭제된다.
+그리고 조회한 주문번호를 가지고 orderList 가 request인 @RequestMapping(value="/orderList") 으로 이동한다.
+----> 여기서는 주문번호에 의한 주문 목록을 조회해서 이 정보들을 담아서 orderList.jsp로 보낸다!
 
+-----> listOrderByOseq() 메소드 제작!
+-----> OrderDao.xml에 id가 listOrderByOseq인 select 태그를 만든다.
+-----> listOrderByOseq 프로시져 생성 후 컴파일!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+------> mypage 폴더에 orderList.jsp 파일 긁어오기
 
 
 

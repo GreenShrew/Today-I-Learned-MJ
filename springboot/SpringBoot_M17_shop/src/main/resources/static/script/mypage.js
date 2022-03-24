@@ -14,7 +14,7 @@ function go_cart(){
 function go_cart_delete(){
 	
 	var count = 0;  	
-	if(document.formm.cseq.length==undefined){   
+	if(document.formm.cseq.length==undefined){ // 체크박스가 한개인 경우  
 		if( document.formm.cseq.checked == true )
 			count++;
 	}else{  // 체크박스가 두개 이상일때
