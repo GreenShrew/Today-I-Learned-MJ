@@ -21,11 +21,19 @@
 		) }
 	</select>
 	
-	<insert id="join" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL join_s(
-			#{userid}, #{pwd}, #{name}, #{email}, #{phone}, #{zip_num}, #{address}
+	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertMember_s(
+			#{userid}, #{pwd}, #{name}, #{email}, #{phone}, #{zip_num}, #{address}, #{address2}
 		) }
 	</insert>
+	
+	
+	<!-- 주의! Controller에서 대문자로 보냈다! 따라서 대문자로 써야한다! -->
+	<update id="updateMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL updateMember_s(
+			#{USERID}, #{PWD}, #{NAME}, #{EMAIL}, #{PHONE}, #{ZIP_NUM}, #{ADDRESS}, #{ADDRESS2}
+		) }
+	</update>
 	
 
 </mapper>

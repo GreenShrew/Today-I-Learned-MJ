@@ -9,4 +9,8 @@ public interface IProductDao {
 
 	void getBestNewProduct(HashMap<String, Object> paramMap);
 
+	void getKindList(HashMap<String, Object> paramMap);
+
+	void getProduct(HashMap<String, Object> paramMap);
+
 }

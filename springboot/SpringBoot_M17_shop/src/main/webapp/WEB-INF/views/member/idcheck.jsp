@@ -1,17 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link  rel="stylesheet" href="/css/shopping.css">
+<style type="text/css">
+body{  background-color:pink;  font-family: Verdana;}
+h1 {font-family:Verdana; font-size: 45px; color: #000; font-weight: normal;}
+input[type=button], input[type=submit] { float: right;}
+</style>
 <script type="text/javascript">
-	function idok(userid){
-		opener.formm.userid.value=userid; 
-		opener.formm.reid.value=userid;
+function idok(){
+		opener.formm.userid.value="${userid}"; 		
+		opener.formm.reid.value="${userid}";		
 		self.close();
-	}
+}
 </script>
 </head>
 <body>
@@ -27,7 +32,7 @@
 		</c:if>
 		<c:if test="${result==-1}">
 			${userid}는 사용 가능한 ID입니다.    
-			<input type="button" value="사용" class="cancel"	onclick="idok('${userid}')">
+			<input type="button" value="사용" class="cancel"	onclick="idok()">
 		</c:if>
 	</div>
 </form>

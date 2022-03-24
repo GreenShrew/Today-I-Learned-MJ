@@ -22,8 +22,8 @@
         <legend>Optional</legend>
         <label>Zip Code</label><input type="text" name="zip_num"   size="10" >      
         <input type="button" value="주소 찾기" class="dup" onclick="post_zip()"><br>
-        <label>Address</label><input type="text" name="addr1"   size="50"><br>
-        <label>&nbsp;</label><input type="text" name="addr2"   size="25"> <br>
+        <label>Address</label><input type="text" name="address"   size="50"><br>
+        <label>&nbsp;</label><input type="text" name="address2"   size="25"> <br>
       	</fieldset>
       	<div class="clear"></div>
       	<div id="buttons"><input type="submit" value="회원가입" class="submit"> 

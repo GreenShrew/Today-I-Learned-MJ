@@ -148,44 +148,131 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute("dto") @Valid MemberVO membervo,
 			BindingResult result,
-			@RequestParam("reid") String reid,
+			@RequestParam(value = "reid", required=false) String reid,
+			@RequestParam(value = "pwdCheck", required=false) String pwdCheck,
+			HttpServletRequest request,
 			Model model) {
+		
 		// validation 적용 후 해쉬맵에 내용을 담아서 회원가입을 실행한다.
+		model.addAttribute("reid");	// reid는 hidden 태그로 숨겨져있다... 이걸 안 하면 아이디 중복체크를 다시 해야한다.
+		
+		String url = "member/login";
+		
 		if(result.getFieldError("userid") != null) {
-			model.addAttribute("message", "아이디를 입력해주세요.");
+			model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
 			return "member/joinForm";
-		}else if(reid != null) {
+		}else if(reid == null || ( reid != null && !reid.equals(membervo.getUserid()) )) {
 			model.addAttribute("message", "아이디 중복확인을 해주세요.");
 			return "member/joinForm";
 		}else if(result.getFieldError("pwd")!=null) {
+			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+			return "member/joinForm";
+		}else if(pwdCheck == null || ( pwdCheck != null && !pwdCheck.equals(membervo.getPwd()) )) {
 			model.addAttribute("message", "비밀번호를 입력해주세요.");
 			return "member/joinForm";
 		}else if(result.getFieldError("name")!=null) {
-			model.addAttribute("message", "이름을 입력해주세요.");
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
 			return "member/joinForm";
 		}else if(result.getFieldError("email")!=null) {
-			model.addAttribute("message", "이메일을 입력해주세요.");
+			model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
 			return "member/joinForm";
 		}else if(result.getFieldError("phone")!=null) {
 			model.addAttribute("message", "전화번호를 입력해주세요.");
 			return "member/joinForm";
-		}else {
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-
-			paramMap.put("userid", membervo.getUserid());
-			paramMap.put("pwd", membervo.getPwd());
-			paramMap.put("name", membervo.getName());
-			paramMap.put("email", membervo.getEmail());
-			paramMap.put("phone", membervo.getPhone());
-			paramMap.put("zip_num", membervo.getZip_num());
-			paramMap.put("address", membervo.getAddress());
-			
-			ms.join(paramMap);
-
-			
-			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요.");
-			return "member/login";
 		}
+
+		// validation을 통과했다면 HashMap에 내용을 담아 insert 하도록 한다.
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("userid", membervo.getUserid());
+		paramMap.put("pwd", membervo.getPwd());
+		paramMap.put("name", membervo.getName());
+		paramMap.put("email", membervo.getEmail());
+		paramMap.put("phone", membervo.getPhone());
+		paramMap.put("zip_num", membervo.getZip_num());
+		paramMap.put("address", membervo.getAddress());
+		paramMap.put("address2", membervo.getAddress2());
 		
+		ms.insertMember(paramMap);
+		
+		model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요.");
+		return "member/login";
+	}
+	
+	
+	@RequestMapping(value="/memberEditForm")
+	public String memberEditForm(HttpServletRequest request, Model model) {
+		
+		MemberVO dto = new MemberVO();
+		HttpSession session = request.getSession();
+		
+		// HashMap에 session의 loginUser의 정보를 넣는다.
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		
+		// 대문자 조심!
+		dto.setUserid((String)loginUser.get("USERID"));
+		dto.setName((String)loginUser.get("NAME"));
+		dto.setEmail((String)loginUser.get("EMAIL"));
+		dto.setPhone((String)loginUser.get("PHONE"));
+		dto.setZip_num((String)loginUser.get("ZIP_NUM"));
+		dto.setAddress((String)loginUser.get("ADDRESS"));
+		dto.setAddress2((String)loginUser.get("ADDRESS2"));
+		
+		model.addAttribute("dto", dto);
+		
+		return "member/memberUpdateForm";
+	}
+	
+	
+	// request join과 거의 비슷하다!
+	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
+	public String memberUpdate(@ModelAttribute("dto") @Valid MemberVO membervo,
+			BindingResult result,
+			@RequestParam(value = "pwdCheck", required=false) String pwdCheck,
+			HttpServletRequest request,
+			Model model) {
+		
+		// validation 적용 후 해쉬맵에 내용을 담아서 회원가입을 실행한다.
+		String url = "member/login";
+		
+		if(result.getFieldError("pwd")!=null) {
+			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if(pwdCheck == null || ( pwdCheck != null && !pwdCheck.equals(membervo.getPwd()) )) {
+			model.addAttribute("message", "비밀번호를 입력해주세요.");
+			return "member/memberUpdateForm";
+		}else if(result.getFieldError("name")!=null) {
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if(result.getFieldError("email")!=null) {
+			model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+			return "member/memberUpdateForm";
+		}else if(result.getFieldError("phone")!=null) {
+			model.addAttribute("message", "전화번호를 입력해주세요.");
+			return "member/memberUpdateForm";
+		}
+
+		// validation을 통과했다면 HashMap에 내용을 담아 update 하도록 한다.
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("USERID", membervo.getUserid());
+		paramMap.put("PWD", membervo.getPwd());
+		paramMap.put("NAME", membervo.getName());
+		paramMap.put("EMAIL", membervo.getEmail());
+		paramMap.put("PHONE", membervo.getPhone());
+		paramMap.put("ZIP_NUM", membervo.getZip_num());
+		paramMap.put("ADDRESS", membervo.getAddress());
+		paramMap.put("ADDRESS2", membervo.getAddress2());
+		
+		ms.updateMember(paramMap);
+		
+		// paramMap에 담긴 내용을 session에 담는데, 
+		// select로 조회해서 얻어온 내용이 아니므로 위에서 put을 쓸때 소문자를 쓰면 소문자로 쓴 key 값으로 저장되어버린다.
+		// 따라서 다른 페이지와 이를 맞추기 위해 put 할때 미리 대문자로 넣는다!
+		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", paramMap);
+		
+		return "redirect:/";
 	}
 }

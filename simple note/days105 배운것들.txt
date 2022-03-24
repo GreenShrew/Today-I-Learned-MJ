@@ -1,0 +1,334 @@
+days105 배운것들
+
+==> day 104에 이어 M17 프로젝트를 진행하였다.
+
+
+※ 배운점
+- 프로시져에서 select로 조회해서 얻어온 값의 key 값은 대문자로 써야한다! (USERID, PWD...)
+
+
+
+
+
+## 회원가입 기능 (§ 사진 05 <- 회원가입 창)
+- 어제에 이어서 @RequestMapping(value="/join", method=RequestMethod.POST) 추가하였다.
+-> reid와 pwchk는 memberVO에 있는 값이 아니므로 @RequestParam으로 가져와야 한다.
+--> 단, 비어있을 경우 에러가 나온다! 따라서 비어있는 경우를 허용하기위해 아래와 같이 작성한다.
+@RequestParam(value = "reid", required=false) String reid
+
+---> insertMember() 메소드 제작
+---> MemberDao.xml 에서 id가 insertMember 인 insert 태그 제작
+---> insertMember_s 프로시져 제작 후 컴파일!
+
+
+----> 여기까지 하면 회원가입 기능이 작동한다.
+
+
+
+
+## 회원 정보 수정 페이지(§ 사진 06)
+- @RequestMapping(value="/memberEditForm") 제작
+-> session의 loginUser 에 저장된 내용을 "dto"라는 이름으로 보내주어야 회원정보 수정 페이지에서 validation이 가능하다!
+-> memberUpdateForm.jsp 로 간다
+
+--> memberUpdateForm.jsp를 긁어온다.
+
+---> 그러면 회원정보 수정 페이지가 나온다. (§ 사진 06)
+
+
+# 회원 정보 수정 기능
+- @RequestMapping(value="/memberUpdate", method=RequestMethod.POST) 추가
+-> updateMember() 메소드 작성
+--> MemberDao.xml에도 id가 updateMember인 update 태그 생성
+--> updateMember_s 프로시져 생성 후 컴파일
+
+
+---> 그리고 session에 paramMap에 저장된 내용을 담는다.
+※ paramMap에 담긴 내용을 session에 담는데, select로 조회해서 얻어온 내용이 아니므로 위에서 put을 쓸때 소문자를 쓰면 소문자로 쓴 key 값으로 저장되어버린다.
+ 따라서 다른 페이지와 이를 맞추기 위해 put 할때 미리 대문자로 넣는다!
+
+
+----> 여기까지 하면 회원 정보 수정 기능이 작동한다.
+
+
+
+## 예외 발생시 트렌젝션 취소!
+- Service 단에서 insertMember, updateMember 에다가 아래 어노테이션을 추가한다.
+ @Transactional(rollbackFor = Exception.class)
+
+-> 이게 뭔지.....구글에 검색해봐야 할듯?
+
+
+
+
+## 카테고리별 상품 보기(§ 사진 07 <- Heels 카테고리를 눌렀을 때 나오는 화면)
+- ProductController에서 @RequestMapping(value="/catagory") 추가
+-> getKindList() 메소드 생성
+--> ProductDao.xmp 에 id가 getKindList 인 select 태그를 만든다.
+--> getKindList 프로시져 생성 후 컴파일.
+
+---> views 폴더 아래에 product 폴더를 만들고, productKind.jsp 를 긁어온다.
+---> include 폴더 안에 sub01 폴더를 만들고, 파일을 제작한다.
+
+
+
+## 상품 상세보기 (§ 사진 08)
+- @RequestMapping(value="/productDetail") 추가
+-> getProduct() 메소드 제작
+--> ProductDao.xml 에 id가 getProduct인 select 태그 추가
+--> getProduct 프로시져 생성 후 컴파일
+
+---> productDetail.jsp를 긁어온다.
+
+
+
+
+## 카트에 담기 기능
+- mapper 패키지에 CartDao.xml, ICartDao 인터페이스, CartService 클래스, CartController 클래스를 제작한다.
+
+
+- ProductDetail.jsp 에서 장바구니 담기 버튼을 누르면 mypage.js의 go_cart 함수로 간다.
+-> 해당 함수에서는 cartInsert request로 이동시킨다.
+
+--> @RequestMapping(value="/cartInsert") 제작
+--> insertCart() 메소드 제작
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

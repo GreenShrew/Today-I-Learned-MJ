@@ -11,6 +11,8 @@ public interface IMemberDao {
 
 	void getAddress(HashMap<String, Object> paramMap);
 
-	void join(HashMap<String, Object> paramMap);
+	void insertMember(HashMap<String, Object> paramMap);
+
+	void updateMember(HashMap<String, Object> paramMap);
 
 }

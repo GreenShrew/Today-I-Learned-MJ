@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.spm17.dao.ICartDao">
+
+	<resultMap id="cartMap" type="java.util.HashMap"></resultMap>
+	
+	<insert id="insertCart" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertCart(#{id}, #{pseq}, #{quantity}) }
+	</insert>
+	
+	
+</mapper>

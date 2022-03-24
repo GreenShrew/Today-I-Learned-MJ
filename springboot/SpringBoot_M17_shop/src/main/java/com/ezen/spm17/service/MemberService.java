@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ezen.spm17.dao.IMemberDao;
 
@@ -21,7 +22,13 @@ public class MemberService {
 		mdao.getAddress(paramMap);
 	}
 
-	public void join(HashMap<String, Object> paramMap) {
-		mdao.join(paramMap);
+	@Transactional(rollbackFor = Exception.class)
+	public void insertMember(HashMap<String, Object> paramMap) {
+		mdao.insertMember(paramMap);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public void updateMember(HashMap<String, Object> paramMap) {
+		mdao.updateMember(paramMap);
 	}
 }

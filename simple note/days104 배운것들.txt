@@ -1,7 +1,7 @@
 days104 배운것들
 
 ==> 오늘은 days103에 이어 G16을 진행하였다.
-==> 그리고 ShoppingMall 제작을 시작하였다.
+==> 그리고 Maven으로 ShoppingMall 제작을 시작하였다.
 
 
 ※ 확인할 내용
