@@ -21,4 +21,9 @@
 		) }
 	</select>
 	
+	<insert id="insertQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertQna(#{id}, #{subject}, #{content}) }
+	</insert>
+	
+	
 </mapper>

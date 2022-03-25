@@ -14,7 +14,7 @@
 <div id="wrap">
 	<header>
 		<div id="logo"><!-- 최상단 "/" 리퀘스트 요청 링크 -->
-			<a href="/"><img src="/images/logo.png" width="180" height="100"></a></div>
+			<a href="/"><img src="/images/logo.png"  width="180" height="100"></a></div>
 		<nav id="top_menu"> <!-- top menu -->
 			<ul>
 				<c:choose>
@@ -31,7 +31,8 @@
 				</c:choose>
 				<li><a href="cartList">CART</a></li>
 				<li><a href="myPage">MY PAGE</a></li>
-		    	<li ><a href="qnaList">Q&amp;A(1:1)</a></li>
+		    	<li ><a href="qnaList" >Q&amp;A(1:1)</a></li>
+		    	<li ><a href="admin" >admin</a></li>
 			</ul>
 		</nav>
 		<nav id="catagory_menu"> <!-- catagory menu -->

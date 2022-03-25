@@ -273,3 +273,66 @@ BEGIN
 END;
 
 
+
+
+
+create or replace PROCEDURE insertQna(
+    p_id IN qna.id%TYPE,
+    p_subject IN qna.subject%TYPE,
+    p_content IN qna.content%TYPE
+)
+IS
+BEGIN
+    insert into qna(qseq, subject, content, id) values(qna_seq.nextVal, p_subject, p_content, p_id);
+    commit;
+END;
+
+
+
+
+
+
+
+create or replace PROCEDURE getAdmin(
+    p_id IN worker.id%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        select * from worker where id = p_id;
+END;
+
+
+
+
+
+create or replace PROCEDURE getAllCountProduct(
+    p_key IN product.name%TYPE,
+    p_cnt OUT NUMBER
+)
+IS
+    v_cnt NUMBER;
+BEGIN
+    select count(*) as cnt into v_cnt from product where name like '%'||p_key||'%';
+    p_cnt := v_cnt;
+END;
+
+
+
+
+create or replace PROCEDURE productList(
+    p_startNum IN NUMBER,
+    p_endNum IN NUMBER,
+    p_key IN product.name%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        select * from (
+        select * from (
+        select rownum as rn, p.* from ((select * from product where name like '%'||p_key||'%' order by pseq desc) p)
+        ) where rn>=p_startNum
+        ) where rn<=p_endNum;
+END;

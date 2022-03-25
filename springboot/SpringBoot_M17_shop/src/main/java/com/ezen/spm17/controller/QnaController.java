@@ -5,14 +5,18 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.spm17.dto.QnaVO;
 import com.ezen.spm17.service.QnaService;
 
 @Controller
@@ -88,4 +92,36 @@ public class QnaController {
 		return "qna/qnaWrite";
 	}
 	
+	
+	@RequestMapping(value="/qnaWrite")
+	public ModelAndView qnaWrite(@ModelAttribute("dto") @Valid QnaVO qnavo,
+			BindingResult result, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		HashMap<String, Object> loginUser
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		if(loginUser == null) {
+			mav.setViewName("member/login");
+			return mav;
+		}else {
+			if(result.getFieldError("subject")!=null) {
+				mav.addObject("message", result.getFieldError("subject").getDefaultMessage());
+				mav.setViewName("qna/qnaWrite");
+				return mav;
+			}else if(result.getFieldError("content")!=null) {
+				mav.addObject("message", result.getFieldError("content").getDefaultMessage());
+				mav.setViewName("qna/qnaWrite");
+				return mav;
+			}
+			
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("id", loginUser.get("USERID"));
+			paramMap.put("subject", qnavo.getSubject());
+			paramMap.put("content", qnavo.getContent());
+			qs.insertQna(paramMap);
+			mav.setViewName("redirect:/qnaList");
+		}
+		return mav;
+	}
 }

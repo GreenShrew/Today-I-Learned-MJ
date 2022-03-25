@@ -2,17 +2,23 @@
 <%@ include file="../include/headerfooter/header.jsp" %>
 <%@ include file="../include/sub04/sub_image.html" %> 
 <%@ include file="../include/sub04/sub_menu.jsp" %>
+<style>
+tr{text-align:"left";}
+</style>
 <article>
 <h2> 1:1 고객 게시판 </h2>
 <h3> 고객님의 질문에 대해서 운영자가 1:1 답변을 드립니다.</h3>
 	<form name="formm" method="post">
-	<table>
+	<table width="600">
 		<tr><th width="100" align="center">제목</th>
-			<td align="center">${qnaVO.SUBJECT}</td></tr>
+			<td style="font-size:120%; text-align:left">${qnaVO.SUBJECT}</td></tr>
 		<tr><th align="center">등록일</th>
-			<td align="left"><fmt:formatDate value="${qnaVO.INDATE}" type="date"/></td></tr>
-		<tr><th align="center">질문내용</th><td align="left">${qnaVO.CONTENT}</td></tr>
-		<tr><th align="center">답변 내용</th><td align="left">${qnaVO.REPLY}</tr>
+			<td style="font-size:120%; text-align:left">
+				<fmt:formatDate value="${qnaVO.INDATE}" type="date"/></td></tr>
+		<tr><th align="center">질문내용</th>
+			<td style="text-align:left">
+			<pre style="font-size:120%; text-align:left">${qnaVO.CONTENT}</pre></td></tr>
+		<tr><th align="center">답변 내용</th><td style="text-align:left">${qnaVO.REPLY}</tr>
 		</table>
 		<div class="clear"></div>
 		<div id="buttons" style="float:right">

@@ -2,13 +2,6 @@ days106 배운것들
 
 ==> 오늘도 M17 프로젝트를 만들었다.
 
-※ 확인할것...
-- qnaView.jsp를 긁어와
-
-
-
-
-
 
 
 
@@ -105,8 +98,112 @@ days106 배운것들
 
 
 
-## qna 작성하기 기능
+## qna 작성하기 기능 (§ 사진 16)
 - QnaVo를 제작한다.
+
+-> @RequestMapping(value="/qnaWrite") 제작
+--> 작성한 qna 내용을 insert 해주는 insertQna() 메소드 제작
+
+※ insert 하는 내용은 DB의 레코드를 추가하는 행위... DB를 조작하므로 중간에 에러가 났을 시 이를 취소시키기 위해 Service 클래스에서 @Transactional(rollbackFor = Exception.class) 를 추가해주어야 한다!
+
+---> qnaWrite.jsp 수정
+
+----> 그러면 (§ 사진 16)이 나온다.
+
+
+
+
+
+
+※ 이번 파일 업로드는 Ajax를 써서 올릴 예정이다!
+
+## 관리자 페이지 만들기 (§ 사진 17)
+- AdminDao.xml, IAdminDao 인터페이스, AdminService 클래스, AdminController 클래스를 제작한다.
+-> AdminController 에는 AdminService 뿐만 아니라 ProductService 클래스를 쓸 예정이며, 파일 업로드를 위한 ServletContext를 쓸 예정이므로 어노테이션 @Autowired가 더 추가된다!
+
+
+- adminLoginForm.jsp로 이동시켜주는 @RequestMapping("/admin") 추가
+※ header.jsp 에 admin으로 가기 위한 버튼을 추가한다.
+
+-> 예전 ShoppingMall 프로젝트에서 쓰던 admin 폴더를 통째로 views 폴더 아래에 넣는다.
+
+--> 그러면 (§ 사진 17)이 나온다.
+
+
+
+
+## 관리자 로그인 기능 (§ 사진 18)
+- 버튼을 누르면 worker_check() 함수로 간다.
+-> @RequestMapping("/adminLogin") 추가
+--> getAdmin() 메소드 제작, 로그인 체크!
+
+
+## 로그인 후 메인 페이지로 이동
+- productList가 request인 요청으로 가는데, 할게 엄청 많다!
+
+-> 우선 페이징이 필요하다. dto 패키지에 Paging.java 를 넣는다.
+
+--> 다시 Controller로 돌아와서, 전달되는 페이지, 검색어 설정을 한다.
+
+---> 이제 페이징 처리를 한다.
+
+#1. 전체 게시물 갯수를 조회해서 cnt 에 저장한다.
+----> getAllCountProduct() 메소드 생성
+----> xml에서는, cnt 로 전달받는 값이 정수 하나이다!
+----> getAllCountProduct 프로시져 생성 후 컴파일
+
+#2. 전체 게시물 갯수를 설정해서 setTotalCount에 저장했다면, paging() 메소드를 호출해서 startNum, endNum을 계산하도록 만든다.
+
+#3. startNum, endNum이 계산되면, 이를 이용하여 페이지에 나타낼 10개의 게시물을 조회한다.
+----> productList() 메소드 제작
+----> productList 프로시져 생성 후 컴파일
+
+-----> 그렇게 담아온 10개의 product 리스트를 ArrayList형의 객체 list에 담는다.
+
+------> 그리고 list, paging, key를 ModelAndView 형태의 객체 mav에 담고 보낸다.
+
+
+-----> admin 메인 페이지 (§ 사진 18)가 출력된다.
+
+
+
+
+## 상품 등록 (§ 사진 19) (Ajax 사용...퍼블리셔(프론트 엔드) 부분이지만, 알고 있어도 나쁠것은 없을 것이다.
+- 상품 등록할 때 사진을 올린다. 이전에는 팝업창 하나를 띄워서 했는데, 이번에는 Ajax를 이용해서 등록할 것이다.
+
+- productWriteForm.jsp에서 name이 fromm인 form 태그를 만든다!
+
+-> admin 의 header 파일에 스크립트를 제작한다.
+-> ajax를 사용하기 위해서는 
+<script src="https://ajax.googleapis.com/ajax/libs/jqiery/3.4.1/jquery.min.js"></script>
+ 이 태그가 필요하다!
+
+--> ajax에 대해서는...개인적으로 공부해야하면 공부한다...
+
+---> 어쨌든 ajax에서 fileup로 request한다.
+
+
+----> 사진 업로드를 위해서는 static 폴더에도 product_images 폴더가 있어야 하지만, webapp 폴더에도 product_images 폴더가 있어야 한다!
+
+
+-----> 그러면 (§ 사진 19) 화면이 나온다...
+-----> 사진 추가 버튼이 아래있는 이유는 form 태그 안에 form 태그를 넣으니 작동을 안 해서 form 태그 바깥으로 빼내었기 때문이다.
+-----> 따라서 position을 잘 이동시켜서 이를 고쳐줄 수 있다.
+
+------> 어쨌든, file을 업로드할때 별도의 form을 ajax와 연동해서 사용한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

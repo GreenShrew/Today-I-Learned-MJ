@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ezen.spm17.dao.IQnaDao;
 
@@ -19,5 +20,10 @@ public class QnaService {
 
 	public void getQna(HashMap<String, Object> paramMap) {
 		qdao.getQna(paramMap);
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public void insertQna(HashMap<String, Object> paramMap) {
+		qdao.insertQna(paramMap);
 	}
 }
