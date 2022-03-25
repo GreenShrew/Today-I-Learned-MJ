@@ -194,6 +194,82 @@ END;
 
 
 
+create or replace PROCEDURE listOrderByIdIng(
+    p_id IN orders.id%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT distinct oseq FROM order_view WHERE id = p_id and result='1' order by oseq desc;
+END;
 
+
+
+
+
+create or replace PROCEDURE listOrderByIdAll(
+    p_id IN orders.id%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        -- result로 오름차순 정렬하여 oseq, id를 구하고, 서브쿼리로 중복된 oseq를 제거하며 id가 p_id인 oseq를 내림차순으로 정렬하여 얻어온다.
+        SELECT DISTINCT oseq from (SELECT oseq, id FROM order_view ORDER BY result)
+        WHERE id = p_id ORDER BY oseq DESC;
+END;
+
+
+
+
+create or replace PROCEDURE insertOrderOne(
+    p_id IN orders.id%TYPE,
+    p_pseq IN order_detail.pseq%TYPE,
+    p_quantity IN order_detail.quantity%TYPE,
+    p_oseq OUT orders.oseq%TYPE
+)
+IS
+    v_oseq orders.oseq%TYPE;
+BEGIN
+    -- orders 테이블에 주문번호와 id 저장
+    INSERT INTO orders(oseq, id) values(orders_seq.nextVal, p_id);
+    
+    -- 방금 추가된 가장 큰 oseq 조회해서 v_oseq에 저장해서 p_oseq에 넣기
+    select max(oseq) into v_oseq from orders;
+    p_oseq := v_oseq;
+    
+    -- order_detail 테이블에 주문번호와 상품번호, 수량을 이용하여 주문 추가하기
+    INSERT INTO order_detail(odseq, oseq, pseq, quantity)
+    values(order_detail_seq.nextVal, v_oseq, p_pseq, p_quantity);
+    
+    commit;
+END;
+
+
+select * from qna;
+
+create or replace PROCEDURE listQna(
+    p_userid IN qna.id%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM qna WHERE id = p_userid;
+END;
+
+
+
+
+create or replace PROCEDURE getQna(
+    p_qseq IN qna.qseq%TYPE,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR
+        SELECT * FROM qna WHERE qseq = p_qseq;
+END;
 
 

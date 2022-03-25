@@ -128,7 +128,7 @@ create table order_detail(
   result      char(1)      default '1'                -- 1: 미처리 2: 처리     
 );
 drop sequence order_detail_seq;
-create sequence order_detail_seq start with 1;
+create sequence order_detail_seq start with 28;
 
 select * from order_detail;
 
@@ -266,6 +266,8 @@ insert into qna (qseq, subject, content, id)
 values(qna_seq.nextval, '배송이 많이 지연되고 있습니다', '언제 받을 수 있나요', 'scott');
 insert into qna (qseq, subject, content, id) 
 values(qna_seq.nextval, '불량품 교환 문의', '교환 또는 환불 등의 안내가 필요합니다. 유선안내부탁드려요', 'hong7');
+insert into qna (qseq, subject, content, id) 
+values(qna_seq.nextval, '환불은 불가능한가요?', '알고싶어요.', 'scott');
 
 
 
@@ -294,6 +296,9 @@ select d.odseq, o.oseq, o.indate,  o.id,
 			d.pseq,  p.name as pname, p.price2,  d.quantity, d.result
 from orders o, order_detail d, member m, product p
 where o.oseq=d.oseq and o.id=m.userid and d.pseq=p.pseq;
+
+drop sequence order_detail_seq;
+create sequence order_detail_seq start with 1;
 
 select * from order_view;
 

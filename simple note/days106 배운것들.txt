@@ -1,0 +1,119 @@
+days106 배운것들
+
+==> 오늘도 M17 프로젝트를 만들었다.
+
+※ 확인할것...
+- qnaView.jsp를 긁어와
+
+
+
+
+
+
+
+
+
+## 진행중인 주문내역 기능(§ 사진 10)
+- @RequestMapping(value="/myPage") 추가 <-- 좀 길다
+-> 로그인 조회
+-> 현재 로그인 중인 유저의 진행중인 주문번호 리스트 조회
+-> 현재 로그인 유저의 진행중인 주문들의 "주문번호들" 조회
+-> 주문번호별 주문내역을 조회
+-> 조회한 내용을 바탕으로 첫번째 상품의 상품명을 "XX 포함 X건" 이라고 수정
+->추출한 첫번째 상품의 가격을 총 가격으로 수정
+-> 주문 번호별 대표 상품(첫번째 상품)을 별도의 ArrayList의 객체 finalList로 모아서 modelandview에 저장한다!
+
+
+--> listOrderByIdIng() 메소드 추가 <-- 현재 로그인 유저의 진행중인 주문들의 "주문번호들" 조회
+
+※ 조회는 @Transactional(rollbackFor = Exception.class) 안 붙인다!
+
+---> OrderDao.xml 에 id가 listOrderByIdIng인 select 태그 생성
+
+----> 여기까지 하면 (§ 사진 12) 화면이 나온다
+
+
+
+## 총 주문내역 확인 기능 (§ 사진 11)
+- @RequestMapping(value="/orderAll") 추가
+-> 근데 이건 @RequestMapping(value="/mypage")와 비슷하다!
+-> listOrderByIdIng() 이 메소드만 변한다!
+--> listOrderByIdAll() 메소드 제작 <-- 진행중인 주문만이 아니라 모든 주문을 가져온다!
+
+---> 여기까지 하면 (§ 사진 11) 화면이 나온다
+
+
+
+
+## 주문내역 상세보기 (§ 사진 12)
+- 'XX 포함 X건' 옆에 있는 '조회' 버튼을 누르면 실행된다.
+-> @RequestMapping(value="/orderDetail") 추가
+--> 메소드들은 기존에 만들었던 메소드를 사용한다!
+
+---> mypage 폴더에 orderDetail.jsp 추가
+
+----> 여기까지 하면 (§ 사진 12) 화면이 나온다
+
+
+
+
+## 상품 즉시 구매 기능 (§ 사진 13)
+- 상품 상세보기 페이지에서 '즉시구매' 버튼을 누르면 실행된다.
+-> mypage.js 의 go_order() 함수에서 orderInsertOne request로 보낸다!
+-> 주문 수량과 상품 번호를 controller로 가져와서 주문을 추가한다.
+(카트에서 주문하는게 아니기 때문에 이를 가져와서 만들어야 한다.)
+
+--> @RequestMapping(value="/orderInsert")와 비슷하다!
+--> @RequestMapping(value="/orderInsertOne") 추가
+
+---> insertOrderOne() 메소드 생성
+---> OrderDao.xml에 id가 insertOrderOne인 insert 태그 제작
+---> insertOrderOne 프로시져 제작 후 컴파일!
+
+
+
+----> 여기까지 하면 즉시 구매 기능이 작동한다. (§ 사진 13)
+
+
+
+
+
+## qna 리스트 페이지 (§ 사진 14)
+- QnaDao.xml, IQnaDao 인터페이스, QnaService 클래스, QnaController 클래스를 만든다.
+-> include 파일에 sub04 폴더 및 파일을 넣는다.
+--> views 폴더 아래에 qna 폴더를 생성한다.
+---> qna 폴더에 qnaList.jsp, qnaView.jsp, qnaWrite.jsp를 먼저 넣어둔다.
+
+
+- @RequestMapping(value="/qnaList") 추가
+-> listQna() 메소드 작성
+-> QnaDao.xml에 id가 listQna인 select 태그 추가
+-> listQna 프로시져 생성 후 컴파일
+
+--> (§ 사진 14) 가 나온다.
+
+
+
+
+## qna 내용 확인하기 (§ 사진 15)
+- @RequestMapping("/qnaView") 추가
+-> getQna() 메소드 제작
+-> QnaDao.xml에 id가 getQna인 select 태그 추가
+-> getQna 프로시져 생성 후 컴파일
+
+--> (§ 사진 15) 가 나온다.
+
+
+
+## qna 작성하기 기능
+- QnaVo를 제작한다.
+
+
+
+
+
+
+
+
+
+

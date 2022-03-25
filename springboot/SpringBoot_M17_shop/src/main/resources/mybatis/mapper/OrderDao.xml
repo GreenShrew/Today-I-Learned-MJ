@@ -21,6 +21,27 @@
 		) }
 	</select>
 	
+	<select id="listOrderByIdIng" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL listOrderByIdIng(
+			#{id},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+		) }
+	</select>
+	
+	<select id="listOrderByIdAll" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL listOrderByIdAll(
+			#{id},
+			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
+		) }
+	</select>
+	
+	<insert id="insertOrderOne" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertOrderOne(
+			#{id}, #{pseq}, #{quantity},
+			#{oseq, mode=OUT, jdbcType=INTEGER}	<!-- 반환값이 Integer! -->
+		) }
+	</insert>
+	
 	
 	
 </mapper>

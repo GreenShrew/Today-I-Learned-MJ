@@ -22,4 +22,17 @@ public class OrderService {
 	public void listOrderByOseq(HashMap<String, Object> paramMap) {
 		odao.listOrderByOseq(paramMap);
 	}
+
+	// 조회는 @Transactional(rollbackFor = Exception.class) 안 붙인다!
+	public void listOrderByIdIng(HashMap<String, Object> paramMap) {
+		odao.listOrderByIdIng(paramMap);
+	}
+
+	public void listOrderByIdAll(HashMap<String, Object> paramMap) {
+		odao.listOrderByIdAll(paramMap);
+	}
+
+	public void insertOrderOne(HashMap<String, Object> paramMap) {
+		odao.insertOrderOne(paramMap);
+	}
 }

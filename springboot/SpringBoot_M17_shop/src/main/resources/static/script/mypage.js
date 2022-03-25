@@ -45,7 +45,7 @@ function go_order_insert(){
 
 
 function go_order(){
-	document.formm.action = "orderOne";
+	document.formm.action = "orderInsertOne";
 	document.formm.submit();
 }
 
