@@ -1,4 +1,6 @@
 # Today-I-Learned-MJ
 
 
-공부하거나 작업한걸 마지막에 한꺼번에 올리지 말고, 중간중간 올리는 버릇을 들이자!
+무엇을 배웠나요?
+
+Java, HTML, CSS, JavaScript, JQuery, JDBC, Spring Framework, Spring Boot, Maven, Gradle
