@@ -3,4 +3,4 @@
 
 무엇을 배웠나요?
 
-Java, HTML, CSS, JavaScript, JQuery, JDBC, Spring Framework, Spring Boot
+Java, HTML, CSS, JavaScript, JQuery, JDBC, Spring Framework, Spring Boot, Maven, Gradle
