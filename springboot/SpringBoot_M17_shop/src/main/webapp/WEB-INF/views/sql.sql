@@ -9,7 +9,7 @@ select * from order_view;
 DROP VIEW cart_view;
 DROP VIEW order_view;
 
-
+select * from product;
 
 -- member 테이블 : 상품을 구매하기위해서 회원으로 가입한 구매자들.
 CREATE TABLE member (

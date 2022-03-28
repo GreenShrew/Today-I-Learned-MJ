@@ -21,7 +21,11 @@ public class AdminService {
 		adao.getAllCountProduct(paramMap);
 	}
 
-	public void productList(HashMap<String, Object> paramMap) {
-		adao.productList(paramMap);
+	public void getProductList(HashMap<String, Object> paramMap) {
+		adao.getProductList( paramMap );		
+	}
+
+	public void insertProduct(HashMap<String, Object> paramMap) {
+		adao.insertProduct(paramMap);
 	}
 }

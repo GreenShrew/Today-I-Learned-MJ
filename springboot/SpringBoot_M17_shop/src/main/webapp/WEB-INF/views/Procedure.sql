@@ -321,7 +321,7 @@ END;
 
 
 
-create or replace PROCEDURE productList(
+create or replace PROCEDURE getProductList(
     p_startNum IN NUMBER,
     p_endNum IN NUMBER,
     p_key IN product.name%TYPE,
@@ -335,4 +335,23 @@ BEGIN
         select rownum as rn, p.* from ((select * from product where name like '%'||p_key||'%' order by pseq desc) p)
         ) where rn>=p_startNum
         ) where rn<=p_endNum;
+END;
+
+
+
+
+create or replace PROCEDURE insertProduct(
+    p_name IN product.name%TYPE,
+    p_kind IN product.kind%TYPE,
+    p_price1 IN product.price1%TYPE,
+    p_price2 IN product.price2%TYPE,
+    p_price3 IN product.price3%TYPE,
+    p_content IN product.content%TYPE,
+    p_image IN product.image%TYPE
+)
+IS
+BEGIN
+    INSERT INTO member(pseq, name, kind, price1, price2, price3, content, image)
+    values(product_seq.nextVal, p_name, p_kind, p_price1, p_price2, p_price3, p_content, p_image);
+    commit;
 END;

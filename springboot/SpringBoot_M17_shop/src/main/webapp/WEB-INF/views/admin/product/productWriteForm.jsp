@@ -22,22 +22,21 @@
     <!-- <tr><th>상품이미지</th><td width="343" colspan="5"><input type="file" name="image"></td></tr>-->
     
     
-    <tr><th>상품이미지</th><td width="343" colspan="5">
-   		<input type="hidden" name="image" id="image">
+    <tr height="200"><th>상품이미지</th><td width="343" colspan="5">
+   		<input type="hidden" name="image" id="image"><div id="filename" style="vertical-align:"></div>
 	</td></tr>
     
     
 </table>
-<input class="btn" type="button" value="등록" onClick="go_save()">           
+<input class="btn" type="button" value="등록" onClick="go_save()">
 <input class="btn" type="button" value="취소" onClick="go_mov()"><br/>
 <div id="msg" ></div>
 </form> 
-
-<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
-			<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
-</form>
-<div id="filename"></div>
-
+<div style="position:relative; top:-50px;">
+	<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
+				<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+	</form>
+</div>
 </article>
 <%@ include file="../../include/adminheaderfooter/footer.jsp"%>
 

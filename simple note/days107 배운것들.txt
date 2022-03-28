@@ -1,0 +1,98 @@
+days107 배운것들
+
+==> 오늘은 M17 프로젝트를 마무리하고 조별 프로젝트에 진입한다.
+
+
+※ 다시 볼것들
+
+
+- admin쪽의 AdminController.java의 getProductList() 메소드가 AdminService에 없는데 무슨일이지?
+
+- admin쪽의 productWriteForm.jsp를 한번 다시 확인해야해.
+
+- admin쪽의 header도 확인해
+
+
+
+
+
+
+
+
+## 물품 등록
+- 물품을 DB에 등록하는 @RequestMapping(value="/productWrite", method=RequestMethod.POST) 제작
+
+-> 이번에는 validation을 Controller에서 진행하지 않고 js에서 진행한 뒤 JSP에서 넘어오는 Parameter 값을 getParameter로 얻어서 paramMap에 넣었다.
+
+--> insertProduct() 메소드 제작
+--> AdminDao.xml에 id가 insertProduct 인 inert 태그를 만든다.
+--> insertProduct 프로시져를 만들고 컴파일
+
+---> 여기까지 하면 상품을 등록할 수 있다...
+
+
+
+
+M17 프로젝트는 여기까지...
+이후의 내용들은 어차피 비슷비슷하므로!
+
+이 다음부터는 조별 프로젝트를 진행한다!
+======================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,10 +21,14 @@
 		) }
 	</select>
 	
-	<select id="productList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL productList(
+	<select id="getProductList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL getProductList(
 		#{startNum}, #{endNum}, #{key},
 		#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
 		) }
 	</select>
+	
+	<insert id="insertProduct" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL insertProduct(#{name}, #{kind}, #{price1}, #{price2}, #{price3}, #{content}, #{image}) }
+	</insert>
 </mapper>
