@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<!-- ¸ÞÀÎ¸Þ´º -->
+<!-- ë©”ì¸ë©”ë‰´ -->
 <div id="wrap">
 <header>
 		<c:choose>
@@ -34,7 +34,7 @@
     		<nav id="top_menu">
     			<ul>
 	       			<li><span style="color:yellow;">${loginUser.USERID}</span>
-	       				<a href="mmemberEditForm"> ¡¤ Á¤º¸¼öÁ¤</a> <a href="logout"> ¡¤ LOGOUT</a></li>
+	       				<a href="mmemberEditForm"> Â· ì •ë³´ìˆ˜ì •</a> <a href="logout"> Â· LOGOUT</a></li>
 	       				<li><a href="mcartList">CART</a></li>
 						<li><a href="mmyPage">MY PAGE</a></li>
 						<li ><a href="mqnaList" >Q&amp;A(1:1)</a></li>
