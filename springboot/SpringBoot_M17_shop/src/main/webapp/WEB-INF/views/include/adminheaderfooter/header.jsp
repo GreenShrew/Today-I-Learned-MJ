@@ -31,7 +31,7 @@ $(function(){
 	        success : function(data){
 	            if(data.STATUS == 1){
 	            	//동적으로 div태그 달아주기.
-	            	$("#filename").empty();
+	            	$("#filename").empty();	// 기존의 oldfilename 지우기!
 	            	$("#filename").append("<div>"+data.FILENAME+"</div>");
 	            	$("#image").val(data.FILENAME);
 	            }
