@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"  pageEncoding="EUC-KR"%>
-<%@ include file="include/headerfooter/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 <article>
 <div id="sub_img"><img src="images/product/sub_img.jpg"/></div>
 <nav id="sub_menu">
@@ -24,8 +24,17 @@
 	</div>
 </div>
 <div class="clear"></div><br/><br/>
-
-
-
-
+<div id="front">
+	<div style="width:100%; margin:0 auto;">
+		<h2>BEST ITEM</h2><br/>
+		<c:forEach items="${bestProductList}" var="${productVO.PSEQ}">
+			<div class="item"><a href="mproductDetail?pseq=${productVO.PSEQ}">
+				<img src="<c:url value='product_images/${priductVO.IMAGE}'/>"/>
+				<br>${productVO.NAME}<br>${productVO.PRICE2}</a>
+			</div>
+		</c:forEach>
+	</div>
+</div>
 </article>
+
+<%@ include file="include/footer.jsp" %>

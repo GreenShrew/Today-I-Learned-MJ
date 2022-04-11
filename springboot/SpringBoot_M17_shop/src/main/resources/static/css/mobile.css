@@ -30,3 +30,19 @@ nav#top_menu a{text-decoration:none; color:#000000;}
 #sub_menu ul li:first-child{margin-left:0;}
 #sub_menu ul li:last-child{margin-left:0;}
 #sub_menu a{text-decoration:none; color:white; font-weight:bold; font-size:100%;}
+
+
+#front{width:100%; margin:0 auto; text-align:center; height:500px;}
+#front h2{font-family:'Bebas Neue', cursive;'}
+.item{width:185px; float:left; margin:5px 5px; text-align:center;}
+.item img{width:180px; height:180px; border-radius:20px 20px 20px 20px; overflow:hidden;}
+.item a{text-decoration:none;}
+#itemdetail{font-family:'Barlow', sans-serif;'}
+form .submit, form .cancel{height:30px; width:100px; border:1px solid #666; border-radius:10px;
+	font-size:14px; background-repeat:repeat-x; background-position:center center; color:#fff; margin:0 0 0 20px;}
+form .submit{background-image:url(../images/submit_back.jpg);}
+form .cancel{background-image:url(../images/cancel_back.jpg);}
+
+article{width:98%; text-align:center;}
+article h1{font-family:'Bebas Neue', cursize;}
+article h2{font-family:'Barlow', sans-serif;}
