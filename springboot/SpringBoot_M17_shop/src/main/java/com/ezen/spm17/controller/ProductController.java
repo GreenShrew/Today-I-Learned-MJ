@@ -21,6 +21,12 @@ public class ProductController {
 	ProductService ps;
 	
 	@RequestMapping("/")
+	public String start(HttpServletRequest request, Model model) {
+		return "index";
+	}
+	
+	
+	@RequestMapping("/webmain")
 	public ModelAndView main(HttpServletRequest request, Model model) {
 		
 		ModelAndView mav = new ModelAndView();

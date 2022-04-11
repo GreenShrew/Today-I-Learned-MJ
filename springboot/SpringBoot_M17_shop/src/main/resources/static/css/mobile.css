@@ -1,0 +1,32 @@
+@charset "EUC-KR";
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Bebas+Neue&display=swap');
+
+body{background-color:#34C0B4; margin:0; padding:0;}
+
+#warp{width:100%; margin:0 auto;}
+
+article{width:98%; margin:0 auto;}
+#copy{width:80%; font-size:100%; margin:0 auto; font-family:'Bebas Neue', cursive;}
+
+.clear{clear:both;}
+
+nav#top_menu{widht:100%; margin:0 auto; height:30px; line-height:30px;
+	font-family:'Bebas Neue', cursive; text-align:center;}
+
+nav#top_menu ul{list-style:none; padding:0; margin:0; display:inline-block;}
+nav#top_menu ul li{height:30px; float:left; font-size:120%; margin:0 6px;}
+nav#top_menu a{text-decoration:none; color:#000000;}
+
+#logo{width:300px; height:100px; margin:0 auto; text-align:center;}
+#logo a{text-decoration:none; color:yellow; font-size:400%; text-shadow:3px 3px 3px black;
+	font-family:'Bebas Neue', cursive;}
+#sub_img{width:95%; margint:0 auto; text-align:center; overflow:hidden;
+	border-radius:20px 20px 20px 20px;}
+#sub_menu{width:95%; height:40px; margin:0 auto; text-align:center;
+	font-family:'Bebas Neue', cursive; line-height:40px;}
+#sub_menu ul{margin:0; padding:0; list-style:none; display:inline-block;}
+#sub_menu ul li{margin:0 7px; float:left;}
+#sub_menu ul li:first-child{margin-left:0;}
+#sub_menu ul li:last-child{margin-left:0;}
+#sub_menu a{text-decoration:none; color:white; font-weight:bold; font-size:100%;}
