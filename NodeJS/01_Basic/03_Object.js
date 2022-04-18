@@ -31,7 +31,7 @@ var object = {
     }
 };
 object.method();    // 함수의 이름에 괄호를 붙여서 함수의 내용을 실행한다.
-console.log(object.method);     // 변수만 출력할 경우, [function:method] 이 출력된다.
+console.log(object.method);     // 변수만 출력할 경우, 해당 메소드의 정보인 [function:method] 이 출력된다.
 console.log(object.method());   // 함수의 내부에 있는 console.log('멤버 함수를 실행합니다.'); '멤버 함수를 실행합니다.' 출력. 그리고 console.log(object.method()); 의 console.log는 undefined를 출력한다.
 console.log(object.useNumber); 
 console.log(object.useArray);
