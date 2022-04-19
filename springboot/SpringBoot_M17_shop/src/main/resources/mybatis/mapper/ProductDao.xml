@@ -11,7 +11,7 @@
 	<select id="getBestNewProduct" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL getBestNewProduct (
 			#{ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=productMap},
-			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=productMap}
+			#{ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=productMap2}
 		) }
 	</select>
 

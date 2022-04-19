@@ -16,7 +16,7 @@
 $(function(){
 	$('#myButton').click(function(){
 		var formselect = $("#fileupForm")[0];   // 지목된 폼을 변수에 저장
-		var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
+		var formdata = new FormData(formselect);   // 전송용 폼 객체에 다시 저장
 		
 		// ajax : 웹페이지 새로고침이 필요없는 request(요청)
 		$.ajax({
