@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        a{color:blue; text-decoration:none;}
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--
+        1. axios 라이브러리 : jquery 와 같은 종류의 javascript 라이브러리이다.
+        2. HTTP 통신을 하는데 매우 인기있게 사용되는 라이브러리이며,
+        3. 브라우저와 Node.js 플랫폼에서 모두 사용이 가능하다.
+        4. 현재는 부라우저 상에서 사용하기 위해 src 로 로딩하였고,
+        5. 익스프레스 서버에서 사용하려면 설치 명령으로 설치 후 사용한다.
+        6. JSON 데이터 자동변환 기능이 있고, get, post, put, delete 등을 다양하게 구분하여 request 요청이 가능하다.
+    -->
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a></br>
+        <a href="/about">About</a></br>
+    </nav>
+    <div>
+        <form id="form">    <!-- form의 순수한 submit 이벤트를 이용한다면, 페이지 전환이 일어난다. 페이지 전환없이 등록 절차 실행후 현재 위치로 되돌아오기 위해 axios 객체를 이용한다. submit 버튼이 클릭되는 이벤트를 자바스크립트의 이벤트로 처리하고, axios 객체가 유저 등록 절차를 실행한다. -->
+            <input type="text" id="username">
+            <button type="submit">등록</button>
+        </form>
+    </div>
+    <div id="list"></div>
+
+    <script type="text/javascript">
+        // addEventListener : 클릭 또는 더블클릭 또는 현재의 form 태그에서 있을 수 있는 submit 같은 이벤트가 발생하면, 전달인수로 전달된 익명함수를 실행해주는 함수(전달인수 : 이벤트 이름과 익명함수를 함께 전달해준다). 아래의 경우, id가 form인 객체에 submit 이벤트가 일어나면, (e)=>{ } 익명함수가 실행된다. e 변수에는 이벤트 주인공이 되는 form이 전달되고 함수가 실행된다.
+        document.getElementById('form').addEventListener('submit', (e)=>{
+            e.preventDefault(); // 폼의 이벤트 동작(submit)이 계속 진행되면 화면 전환이 일어나므로, 이벤트 동작(submit)이 멈춘다.
+            const name = e.target.username.value;
+            console.log(name);
+        });
+
+    </script>
+</body>
+</html>
