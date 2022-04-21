@@ -24,3 +24,5 @@ const num6 = 3;
 const text = `${num5} 원 짜리 모자를 ${num6} 개 구입하여, ${num5*num6} 원을 지출하였습니다.`;
 console.log(text);
 
+
+

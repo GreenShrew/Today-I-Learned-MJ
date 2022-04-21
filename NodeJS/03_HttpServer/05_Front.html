@@ -27,18 +27,104 @@
         <form id="form">    <!-- form의 순수한 submit 이벤트를 이용한다면, 페이지 전환이 일어난다. 페이지 전환없이 등록 절차 실행후 현재 위치로 되돌아오기 위해 axios 객체를 이용한다. submit 버튼이 클릭되는 이벤트를 자바스크립트의 이벤트로 처리하고, axios 객체가 유저 등록 절차를 실행한다. -->
             <input type="text" id="username">
             <button type="submit">등록</button>
-        </form>
+        </form><!-- 일반적으로 form의 submit 은 전송 -> 처리 -> 새로운페이지 로딩 의 과정을 거치면서 화면전환이 일어난다. 현재는 화면전환 없이 전송->처리->현재위치 로 복귀하기 위해 자바스크립트의 이벤트 리스너와 axios 객체를 이용하여 등록을 처리한다. -->
     </div>
     <div id="list"></div>
 
     <script type="text/javascript">
+        // form이 submit 되는 때를 잡아서 실행될 이벤트리스너 설정!
         // addEventListener : 클릭 또는 더블클릭 또는 현재의 form 태그에서 있을 수 있는 submit 같은 이벤트가 발생하면, 전달인수로 전달된 익명함수를 실행해주는 함수(전달인수 : 이벤트 이름과 익명함수를 함께 전달해준다). 아래의 경우, id가 form인 객체에 submit 이벤트가 일어나면, (e)=>{ } 익명함수가 실행된다. e 변수에는 이벤트 주인공이 되는 form이 전달되고 함수가 실행된다.
-        document.getElementById('form').addEventListener('submit', (e)=>{
-            e.preventDefault(); // 폼의 이벤트 동작(submit)이 계속 진행되면 화면 전환이 일어나므로, 이벤트 동작(submit)이 멈춘다.
-            const name = e.target.username.value;
-            console.log(name);
+        document.getElementById('form').addEventListener('submit', async (event)=>{
+            // 현재 익명함수에서는 document.getElementById('form')을 부르기 위한 이름이 없다. 따라서 함수의 매개변수로 event를 만들고 여기에 넣는 방식으로 이용한다. event에 document.getElementById('form')이 들어간다.
+            event.preventDefault(); // 폼의 이벤트 동작(submit)이 계속 진행되면 화면 전환이 일어나므로, 이벤트 동작(submit)이 멈춘다.
+            const name = event.target.username.value;
+            // alert(name); // 확인용 alert
+
+            if(!name){
+                return alert("이름을 입력하세요.");
+            }
+
+            try{
+                // 이제 axios 객체를 이용하여 server로 요청을 보낼 것이다.
+                // 아래는 POST에 url /user를 요청한 것이다. 그리고 이름과 값을 객체 형식으로 보낸다.
+                await axios.post('/users', /*{name : name} 키값과 변수 이름이 같으면 생략가능*/ {name});     // 조회 요청
+                // axios 특성상 서버에서 보내오는 응답은 현재의 위치로 응답되어져 복귀한다.
+                // 현재는 값을 가지고 돌아오는게 아니라 위와 같은 코드가 되었으나, 값이 있다면 변수에 값을 넣어주어야 한다.
+
+                // 요청 뒤 복귀 후 해야할 일 : 현재 등록된 user들을 조회해서 화면에 보여주는 동작이 추가된다.
+                // 이름이 보여질 곳 : <div id="list"></div>
+                getUsers(); // 함수를 만들어서 호출할것.
+            }catch(err){
+                console.error(err);
+            }
+            event.target.username.value = '';
         });
+        // 스크립트를 이용한 이벤트 리스너는 head 부분에 정의하면 실행에 오류가 많기 때문에, 지금처럼 body 부분에 설정해야한다.
+
+        async function getUsers(){
+            try{
+                const res = await axios.get('/users');
+                // get 메서드 방식의 /users 요청, 결과 형식은 json 형식이다.
+                // 비동기를 동기처럼 사용하기 위해 await 추가 + 값을 리턴받아서 써야하므로 변수에 저장
+                const users = res.data; // 요청에 대한 반환(리턴) 값을 객체형식으로 변환(키:값)
+
+                const list = document.getElementById('list');
+                list.innerHTML = '';    // id가 list인 태그를 가져오고, list의 내용을 싹 비운다.
+
+                // users 변수에 있는 키값들을 전달인수로 하여 키값 갯수만큼 반복실행한다.
+                Object.keys(users).map(function(key){
+                    // users에서 key 값들을 추출 -> 각 key 별로 function(key){} 익명함수를 실행한다.
+                    // 추출된 키들 중 하나에 대해 실행될 함수.
+                    // map에 의해 키값의 갯수만큼 실행된다.
+
+                    const userDiv = document.createElement('div');  // div 태그 생성 <div></div>
+                    const span = document.createElement('span');    // <span></span>
+                    span.textContent = users[key];  // span 태그 안에 키값으로 얻어낸 users 값을 삽입한다.
+
+                    // 수정버튼 생성
+                    const edit = document.createElement('button');  // <button></button>
+                    edit.textContent = '수정';  // 버튼에 쓰여질 라벨
+                    edit.addEventListener('click', async()=>{
+                        // 버튼을 누르면 익명함수 실행!
+                        const name = promt('바꿀 이름을 입력하세요.');  // 수정할 이름 입력
+                        if(!name){
+                            return alert('이름을 반드시 입력하셔야 합니다.');
+                        }
+                        try{
+                            await axios.put('/user/' + key, {name});    // put으로 보낸다.
+                            getUsers(); // put의 /user/ 로 보내고나서 다시 getUsers(); 메서드로 되돌아 온 뒤, 다시 유저 정보를 Server.js에서 긁어서 웹에 되돌아온다!
+                        }catch(err){
+                            console.error(err);
+                        }
+                    });
+
+                    // 삭제버튼 생성
+                    const remove = document.createElement('button');  // <button></button>
+                    remove.textContent = '삭제';  // 버튼에 쓰여질 라벨
+                    remove.addEventListener('click', ()=>{
+                        try{
+                            await axios.delete('/user/' + key); // delete로 보낸다.
+                            getUsers();
+                        }catch(err){
+                            console.error(err);
+                        }
+                    });
+
+
+
+
+                    userDiv.appendChild(span); // div안에 span 삽입
+                    userDiv.appendChild(edit); // div안에 button 삽입
+                    userDiv.appendChild(remove); // div안에 button 삽입
+                    list.appendChild(userDiv);  // div 태그를 list 태그에 삽입.
+
+                });
+            }catch(err){
+
+            }
+        }
 
     </script>
+
 </body>
 </html>
