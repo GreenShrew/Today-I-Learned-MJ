@@ -52,9 +52,31 @@ http.createServer( async(req, res)=>{   // 클라이언트에서 현재 서버�
                 // 마지막 전송과 끝내기 위한 리턴. 단순히 req.end()만 실행하는게 아니라 다른 동작이 함게 실행되어야 한다면, 위와 같이 익명함수를 'end' 키워드와 함께 실행해서 그 여러 실행들이 함께 실행되고 리턴&종료되게 한다.
             }
         }else if(req.method == 'PUT'){  // 주로 특정 자료를 수정(update)할때 사용한다.
-            
+            // 요청 내용 : axios.put('/user/' + key, {name});
+            // console.log(req.url);    -> /user/1617773005525  숫자는 시간 밀리초... 
+            // 어쨌든 startsWith는 앞 부분이 괄호 속 내용(아래에서는 /user/)인 경우를 불러온다!
+            if(req.url.startsWith('/user/')){
+                // 우선 /user/ 뒤에 붙은 숫자를 떼내야한다.
+                const key = req.url.split('/')[2];  // /로 split 하면 /로 나눠서 배열로 저장한다. [0]은 ' ', [1]은 'user', [2]는 1617773005525 이다.
+                let body = '';
+                // data <- {name:실제전송된값}
+                req.on('data', (data)=>{
+                    body += data;
+                });
+                return req.on('end', ()=>{
+                    users[key] = JSON.parse(body).name;
+                    res.writeHead(200, {'Context-Type':'text/html; charset=utf-8'});
+                    return res.end('ok');
+                });
+            }
         }else if(req.method == 'DELETE'){  // 주로 delete 용도로 사용한다.
-            
+            if(req.url.startsWith('/user/')){
+                const key = req.url.split('/')[2];
+                delete users[key];
+                res.writeHead(200, {'Context-Type':'text/html; charset=utf-8'});
+                return res.end('ok');
+            }
+
         }
 
         // 원하는 url이 없거나, 웹에 표시할 파일이 없을 경우 생기는 404 에러를 처리해준다.
