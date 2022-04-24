@@ -33,9 +33,9 @@ public class MainClass {
 		
 		// 아직까지 일반 자바 프로젝트에서 사용하는 new WalkClass()와 사용상 차이점은 없어보이기도 하고, 오히려 더 불편해보인다.
 		// 차이점을 굳이 써보면, 자바는 new 인스턴스를 사용하면 사용할때마다 새로운 인스턴스가 생성되는 반면
-		// getBean() 은 싱글턴 방식처럼 하나의 생선된 객체가 계속 사용된다는 점이 다르다.
+		// getBean() 은 싱글턴 방식처럼 하나의 생산된 객체가 계속 사용된다는 점이 다르다.
 		// getBean() 으로 같은 클래스의 서로 다른 인스턴스를 두개 사용해야 한다면, 다른 id 값으로 Bean을 두개 추가하여 사용한다.
-		// <bean class="com.ezen.spcon.WalkClass" id="cWalk2"></bean>
+		// <bean class="com.ezen.sp03.WalkClass" id="cWalk2"></bean>
 	}
 
 }

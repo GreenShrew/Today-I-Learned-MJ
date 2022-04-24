@@ -14,7 +14,7 @@ const server = http.createServer( (req, res)=>{
 } ).listen(8081, ()=>{  // 포트번호와 함께 이벤트 리스너 설정
     console.log('8081 포트에서 서버가 대기중입니다!');
 });
-// req, res : 알고있는 request, response 의 의미를 갖는 변수이다.
+// req, res : 내가 이전부터 알고있는 request, response 의 의미를 갖는 변수이다.
 // 매개변수이고, 서버에 있는 실제 request, response 객체가 전달된다.
 // 매개 변수는 그 객체를 전달받아 사용하는 것으로 변수의 이름은 자유롭게 변경이 가능하다. 다만 함수 내에서 변경된 이름을 일관되게 사용해주는게 중요하다.
 
