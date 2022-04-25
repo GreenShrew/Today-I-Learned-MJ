@@ -42,7 +42,7 @@ const upload = multer({
                 done(null, path.basename(file.originalname, ext) + Date.now() + ext);
                 // abc.jpg -> 'abc' + 123456483 + '.jpg' -> abc123456483.jpg
                 // 업로드 파일명이 같은 경우 cos 처럼 처리할 객체가 없고, 위와 같은 방법으로 파일명의 충돌을 방지한다.(오늘날짜시간의 밀리초 값)
-            }
+            },
         }  
     ),
     limits:{
@@ -59,7 +59,7 @@ app.get('/', (req, res)=>{
 
 
 app.post('/upload', upload.single('image'), (req, res)=>{
-    console.log(req.file);
+    console.log(req.file);  // 파일 정보를 객체 형태로 콘솔에 보여줌
     console.log(req.body.title);
     return res.json({title:req.body.title, filename:req.file.filename});
     // 전달받은 파일 title과 이름을 return 해준다.

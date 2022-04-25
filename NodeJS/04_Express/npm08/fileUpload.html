@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form" method="post" enctype="multipart/form-data">
+        <table border="1">
+            <tr><td>제목</td><td><input type="text" name="title"></td></tr>
+            <tr><td>설명</td><td><input type="text" name="description"></td></tr>
+            <tr><td>가격</td><td><input type="text" name="price"></td></tr>
+            <tr><td>이미지</td><td><input type="file" name="image"></td></tr>
+            <tr><td colspan="2"><input type="submit" value="전송"></td></tr>
+        </table>
+    </form><br/>
+
+    <table border="1">
+        <tr><td>제목</td><td><div id="title">&nbsp;</div></td></tr>
+        <tr><td>설명</td><td><div id="description">&nbsp;</div></td></tr>
+        <tr><td>가격</td><td><div id="price">&nbsp;</div></td></tr>
+        <tr><td>이미지</td><td><div id="img">&nbsp;</div></td></tr>
+        <tr><td colspan="2"><input type="submit" value="전송"></td></tr>
+    </table>
+
+    <!-- 연습문제
+        1. 서버가 시작되면 첫 페이지로 현재 파일이 화면에 표시되도록 해주세요.
+        2. 위쪽 테이블의 내용을 이용하여 파일을 업로드하고, 다시 돌아와서 아래쪽 표에 입력한 내용을 각 div에 넣어주세요. img div는 가로크기 400의 이미지를 넣어주세요
+        3. 위쪽 테이블의 입력란은 모두 비워주세요
+    -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+
+        document.getElementById('form').addEventListener('submit', async(e)=>{
+            // submit의 동작을 멈추어 페이지가 넘어가는것을 방지
+            e.preventDefault();
+
+            // FormData 객체를 이용하여 객체에 image, title, description, price 를 키로 하는 데이터 추가.
+            const formData = new FormData();
+            formData.append('image', e.target.image.files[0]);
+            formData.append('title', e.target.title.value);
+            formData.append('description', e.target.description.value);
+            formData.append('price', e.target.price.value);
+
+            try{
+                // 순차적으로 실행시키기 위해 await 이용
+                // 정보를 넣은 formData 객체를 '/upload'로 전송
+                const res = await axios.post('/upload',  formData);
+
+                const result = res.data;
+                // '/upload' 에서 return받은 정보를 id가 각각 img, title, description, price인 태그에 넣는다.
+                document.getElementById("title").innerHTML = res.data.title;
+                document.getElementById("description").innerHTML = res.data.description;
+                document.getElementById("price").innerHTML = result.price;  // 이런식으로 써도 된다.
+                // 이미지에는 태그가 들어가야 한다.
+                document.getElementById("img").innerHTML = '<img src="' + res.data.img + '" width=400>';
+            }catch(err){
+                console.error(err);
+            }
+            e.target.title.value='';
+            e.target.description.value='';
+            e.target.price.value='';
+            e.target.image.value='';
+        });
+
+    </script>
+</body>
+</html>

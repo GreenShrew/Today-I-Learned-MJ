@@ -1,0 +1,358 @@
+days127 배운것들 (사진들 있음)
+
+저번 시간에 이어 node.js로 파일을 업로드하는 방법에 대하여 연습한다.
+
+
+오후에는 시험을 봤다.
+
+
+※ npm10 작동을 안한다! 긁어다가 붙여
+
+※ npm11의 index.html if문 오류! 내가 잘못 썼나보다...
+-> 긁어다가 붙여넣어
+
+
+
+
+npm08 (사진 있다)
+-> 참고로 여기에서 app.js의 상단에 모듈 설정하는 내용들은 계속 사용할 내용이다..
+-> 외워도 좋고 복붙해도 좋고...
+-> 기억해!
+============================================
+파일 업로드 연습하기
+
+- express, multer, nodemon 설치
+
+
+fileUpload.html 파일을 만든다.
+-> 하단의 연습문제 주석을 읽고 해당 조건에 맞추어 코드를 작성해본다.
+
+
+※ 작업 순서는 아래와 같다!
+
+- 우선 fileUpload.html 를 웹 페이지에 띄우도록 만든다.
+-> app.get('/', (req, res)
+
+- html에서 스크립트에서 submit의 동작을 멈추어 페이지가 넘어가는것을 방지하고,
+
+- FormData 객체를 이용하여 객체에 image, title, description, price 를 키로 하는 데이터 추가.
+
+- 정보를 넣은 formData 객체를 '/upload'로 전송
+-> app.post('/upload', upload.single('image'), (req, res)
+
+- '/upload' 에서 return받은 정보를 id가 각각 img, title, description, price인 태그에 넣는다.
+
+
+
+
+npm09
+======================================
+이번에는 라우터를 분리하는 작업을 한다.
+
+
+- app.js에 모든 라우터를 넣으면...너무 복잡하다! 수많은 기능을 하나의 js에 넣는다? 정말 끔찍한 결말이 그려진다.
+-> 이전에 Spring 프로젝트에서 유사한 기능들을 여러 컨트롤러 클래스에 분리한것처럼, 라우터도 관련된 라우터끼리 분리할 것이다.
+
+
+- 이번에는 분리하는것을 배우므로 express, nodemon만 설치한다.
+
+- routers 폴더를 만든다. 여기에 라우터들을 넣고 여기서 꺼내쓸것이다.
+-> routers 폴더 아래에 index.js, users.js 폴더를 만든다.
+
+
+
+- index.js
+-> express 모듈을 require 한다.
+--> 여기에는 기존에 app.js에 라우터를 만들던것처럼 만들지 않는다.
+--> 불려져서 사용될 라우터를 만든다!
+router.get('/', (req, res)=>{});
+
+---> 이렇게 라우터를 만들었으면, module.exports로 다른곳에서 require해서 쓸 수 있는 모듈로 만든다!
+---> 만들었다고 그냥 쓸 수 있는게 아니다! 다른곳에서 쓸 수 있도록 모듈로 만들어줘야한다!
+
+
+- users.js
+-> 여기도 index.js 처럼 불려져서 사용될 라우터를 제작하고, 이를 exports 한다.
+
+※ 어? URL이 '/' 인게 index.js 에도 있고 users.js에도 있는데?
+-> 어차피 app.js에서 둘을 require 하면 서로 다른 이름으로 모듈을 불러온다.
+-> 이름을 사용하고 '/' 를 쓸거라, 이름에 따른 URL로 이동하게 되어있다!
+
+
+- app.js
+-> 내가 만든 모듈을 require한다!
+※ 경로에 아무것도 안 쓰고 ./routers만 쓰면 index.js가 자동으로 인식된다.
+
+--> 아래 코드로 모듈과 '/' 를 조합한다!
+app.use('/', indexRouter);
+app.use('/users', userRouter);
+
+위의 조합을 통해...
+---> indexRouter의 '/about' 요청 : http://localhost:3000/about
+---> userRouter의 '/search' 요청 : http://localhost:3000/users/search
+이런식으로 요청을 하게 된다!
+
+
+
+- app.js의 하단에 req 객체와 res 객체의 쓰임새에 대해 주석으로 정리했다.
+
+
+
+
+
+
+npm10
+==========================================
+이전에 쿠키를 만들때 암호화키를 만든적이 있다.
+근데 이거 app.js에 적어놨는데, 서버 한번 털리면 싹 털린다!
+
+이를 보호하는 최소한의 장치를 다루어본다.
+
+- 중요한 정보를 파일에 담아두고, 이 파일은 보호하려는 시도!
+
+
+- express, express-session, nodemon, dotenv, cookie-parser 설치
+
+
+- 로그인 화면(login.html)과 기능(app.js의 '/') 을 만든다.
+
+app.use(session({
+    resave:false,
+    saveUninitialized:false,
+    secret:'nodejsdotenv',  // 저장될때 사용하는 암호화키
+    cookie:{
+        httpOnly:true,
+        secure:false,
+    },
+    name:'session-cookie',
+}));
+
+위 코드에서 secret 이 부분을 본다!
+-> 이것은 암호화 키, 내가 마음대로 정하거나 프로젝트 하면서 팀에서 정하는 값이 된다.
+--> 이 암호화 키를 이용해 곱하던 2진수로 바꾸던 해서 암호화 시킨다!
+
+다만 위 처럼 그대로 쓰면 털리기 쉽다!
+-> secret : process.env.COOKIE_SECRET 이렇게 쓴다!
+--> 그리고 npm10 폴더 내에 .env 파일을 만든다!
+---> 그럼 설정 파일이 생성된다!
+
+
+- .env
+-> 여기에 아까 썼던 COOKIE_SECRET이라는 이름의 값을 정한다.
+COOKIE_SECRET=nodejsdotenv
+
+--> 그럼 app.js에 secret:'nodejsdotenv' 이렇게 쓴 효과가 나온다!
+
+---> 나중에 .env 파일을 다른곳에 꽁꽁 숨겨두면 된다!
+
+※ 비밀키의 비공개를 위한 기본 환경 구성을 해주어야 한다. 아래의 코드를 입력하면 해당 환경설정이 된다.
+dotenv.config();
+
+
+
+- 다시 app.js
+ 그 이후에 아래에 쓰는 내용들은 아이디, 비밀번호를 대조해서 로그인 여부를 정하는 것이다.
+
+
+
+
+
+
+
+
+npm11
+=============================================
+지금 여기에는 EL, JSTL이 없다! 환경이 다르기 때문!
+이를 대체할 것으로는 요즘 대세인 React가 있다.
+-> 근데 이걸 지금 배우는건 아니다...
+-> React의 전신인 Fax.js를 배운다.
+
+
+
+- 이번에는 npm11 폴더 아래에 views 폴더를 만든다. 이전 프로젝트에서 JSP 파일이 모여있던 그 views 폴더와 같은 역할을 한다.
+
+
+- 이번엔 express, nodemon 그리고 nunjucks를 설치한다!
+-> nunjucks는 템플릿 엔진 사용을 위한 모듈이라고 한다!
+--> nunjucks 템플릿 엔진을 사용하기 위한 설정도 추가한다!
+
+
+
+- '/' 에 대한 라우터를 작성한다.
+-> 여기서 nunjucks를 이용하여 html 파일을 클라이언트에 보내는 방법을 사용한다!
+
+--> nunjucks 를 이용해서 html 파일을 클라이언트에 보낼때, 그 파일에 전달해줄 데이터를 객체 형식으로 하나 이상 같이 태워 보낼 수 있다!
+--> 스프링에서의 request.setAttribute, model.addAttribute, mav.addObject 와 비슷한 기능!
+
+※ 파일을 클라이언트에 응답으로 보낼때는 render라는 메서드를 사용한다.
+
+
+
+- nunjucks는 이렇게 사용이 가능하다!
+ <h1>Welcome to {{title}} nunjucks!</h1>
+-> 이러면 app.js에서 title이라는 이름으로 전달된 값이 들어간다!
+app.get('/', (req, res)=>{
+    res.render('index', {title:'Express'});
+});
+
+--> EL문을 ${ ~~~ } 이런식으로 사용했듯이, nunjucks는 {{ ~~~ }} 이런식으로 사용한다!
+
+
+
+- EL, JSTL은 내부 변수를 만들어서 사용할 수 있었다.
+nunjucks도 그러하다!
+
+※ 내부변수 셋팅, 반복문, 조건문을 사용할 때는 {% ~~~ %} 이렇게 쓴다!
+
+-> index.html에 내부변수를 사용하는 방법에 대해 썼다.
+
+- 그리고 꺽쇠괄호 태그의 적용 유무를 결정할 수 있다. <strong> 같은거
+-> | safe 를 쓰면 이스케이프를 하지 않는다! 따라서 꺽쇠괄호 태그가 동작하지 않는다!
+
+
+- 그리고 nunjucks 은 반복문도 사용이 가능하다!
+-> 또한, loop.index로 반복문의 실행 횟수를 알 수 있다.
+
+
+
+
+
+nunjucks를 이용한 파일 include하기
+- views 폴더 아래에 main.html을 만든다.
+-> 이번에는 main.html에 header.html, footer.html을 include 한다!
+
+--> 같은 폴더 안에 header.html, footer.html을 만든다.
+
+
+
+
+
+
+extends
+html에 추가내용 확장하여 최종 파일 완성하기
+- view 폴더 아래에 layout.html 을 만든다.
+-> layout.html에 설명을 썼다.
+
+--> {% block content %} 에 어떤 내용이 들어가는지 알려지지 않았다!
+--> 여기에 내용이 들어오는게 아니라, layout.html 양식을 다른곳으로 가져가서 쓰는것!
+
+- extends.html 을 만든다.
+-> 이 파일은 layout.html을 양식으로 사용할 것이다!
+{% extends 'layout.html' %}
+
+위의 명령으로 사용이 가능하다!
+
+{% block content %}
+내용추가내용추가
+{% endblock %}
+
+그리고 위의 명령 사이에 양식에 내용을 추가하는 것!
+
+※ Block Content의 본 내용이 layout.html 에 전달되어 표시되는 것 같아 보이지만, 실제로는 layout.html에 담긴 전체 페이지 양식이 이곳에 와서 주위에 배치된 형식이다.
+
+-> 그렇기 때문에, app.js에서 layout.html을 지목하는게 아니라, layout.html을 extends 해서 쓰고있는 extends.html을 지목하는 것이다!
+
+
+
+
+
+
+
+
+
+npm12
+===============================================
+Node.js에서 DB를 구성하는 방법에 대해 알아볼것이다!
+-> Oracle이 아니라 mysql을 사용한다.
+※ 참고로 mysql root 계정의 비밀번호를 adminuser라고 해놨었다!
+
+
+※ 스키마는 집에서도 만들어놔야해!
+- mysql에서 새로운 스키마를 만든다. (사진 참고!)
+-> nodejs라는 스키마를 만들었다!
+우선 여기까지만 만들어둔다.
+
+
+- 이번에는 nodemon, express, nunjucks, sequelize, sequelize-cli, mysql2
+
+sequelize : Node.js에서 DB 접근을 좀 더 용이하게 만들어준다.
+
+-> 이번에는 sequelize 초기화가 필요하다.
+터미널에 아래의 명령을 입력한다.
+npx sequelize init
+
+--> 이러면 config, migrations, models, seeders 폴더가 생긴다!
+--> DB에 연결하는데에 필요한 파일들이다!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

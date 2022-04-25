@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>layout.html 파일</h1>
+        <h2>여기가 layout.html의 본 파일 내용입니다.<br>
+        아래에 추가 내용이 확장되어 최종 파일이 완성될 예정이다.</h2>
+        <h3>layout.html 파일은 특정 위치의 내용을 상황별로 달리하지만, 양식은 하나로 유지해야할때 사용한다.</h3>
+        <h2>여기서부터 확장 시작이다.</h2>
+        <hr>
+            {% block content %}
+            {% endblock %}
+        <hr>
+        <h2>여기서까지가 확장 끝이다.</h2>
+        <h2>다시 layout.html이 시작한다.</h2>
+        <h3>include 는 다른 파일의 내용을 이곳으로 불러와서 표시하는 형식이다. extends는 현재 파일이 다른 내용에 제공되어 양식을 구성하는 형식이다. 그래서 app.js에서 render 할때도 layout.html 파일을 지목하지 않고, block content 의 내용을 이루는 파일을 지목한다.</h3>
+    </main>
+</body>
+</html>
