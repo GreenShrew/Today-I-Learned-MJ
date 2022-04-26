@@ -197,8 +197,8 @@ users.map(function(user){ }
 --> Join을 이용한다!
 
 
-
-
+- routers에 comments.js
+-> 조인 방법 주석으로!
 
 
 
