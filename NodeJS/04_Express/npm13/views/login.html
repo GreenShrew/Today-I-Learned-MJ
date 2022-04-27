@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form id="login-form">
+            <fieldset>
+                <legend>LogIn</legend>
+                <div><input id="userid" type="text" placeholder="userid"></div>
+                <div><input id="pwd" type="password" placeholder="password"></div>
+                <button type="submit">로그인</button>
+                <input type="button" onClick="location.href='/members/joinform'" value="회원가입" />&nbsp;&nbsp;
+                <span id="msg"></span>
+            </fieldset>
+        </form>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+days129 배운것들
+
+
+오늘은 npm12 회원 목록과 댓글다는 기능 제작부터 시작하였다.
+
+※ npm12 comments.js 문제인가? 삭제 안 먹힘..
+
+※ sequelize.js 다 못 씀...
+
+
+
+npm12
+삭제와 수정 버튼의 기능을을 만든다
+================================
+- 수정, 삭제 버튼을 만들었다
+
+레코드의...
+#6. 수정
+#7. 삭제
+에 대한 설명이 주석으로 적혀있다!
+
+-> 이제 이 버튼을 동작하게 하기 위해, 클릭했을때 동작하도록 이벤트리스너를 설정한다.
+
+--> 참고로 현재 comment 테이블을 보면, 글쓴이의 아이디는 자동 만들어진 id 라는 테이블로  설정되어있다.. 실제 commenter 라는 아이디에 저장된게 아니야..
+
+---> 그리고 여기서 댓글을 수정하는 기능의 라우터인 /update로 정보를 보낸다.
+
+
+
+- routers의 comments.js에 url /update 를 작성한다.
+※ 어떤 id값이 들어올지 모르니 와일드카드를 사용한다.
+
+
+
+- 삭제 기능에도 이벤트리스너를 설정한다.
+
+
+
+
+
+- 마지막으로 유저 이름을 클릭하면 해당 유저가 쓴 댓글만 보이도록 하는 기능을 추가한다.
+
+-> getUsers() 메서드에 이벤트리스너를 추가한다.
+
+--> 그리고 추가한 getCommentOne에 대한 메서드를 아래쪽에 추가한다.
+
+---> 그 안에 comments 의 /search 라우터를 제작한다.
+---> 전달되는 id로 검색해서 데이터를 가져오는 것...
+
+
+
+
+여기까지가 npm12 이다.
+
+db에서 데이터를 CRUD 하는 동작을 연습했다!
+
+
+
+
+
+
+
+
+
+
+npm13 - 게시판을 만들어볼 것이다. CURD의 기본!
+========================================
+환경 셋팅
+1. npm init 할때, app.js를 기본 파일로
+2. npm i express nunjucks sequelize sequelize-cli mysql2 nunjucks-date-filter multer
+3. npm i cookie-parser express-session  로그인을 위한 쿠키와 세션 이용 모듈
+4. npm i -D nodemon
+5. npx sequelize init 로 시퀄라이즈 초기화
+6. package.json 파일로 가서 test 항목을 "start": "nodemon app" 로 바꾼다.
+
+7. config 폴더 아래의 config.json 파일에서 development 항목에서 password를 mysql root 계정의 비밀번호인 adminuser로, database를 예전에 만든 스키마 이름인 nodejs로 만든다.
+
+8. npm13 아래에 public, routers, views 폴더를 만든다.
+
+9. DB에 있는 각각의 테이블을 사용하기 위한 model을 설정해야한다. 
+9-1. models 폴더의 index.js 수정한다.
+9-2. models 폴더에 Member.js, Board.js, Reply.js 파일을 만든다.
+
+10. 기능들을 만들 routers를 담을 파일들을 만들어야 한다.
+10-1 routers 파일에 index.js, boards.js, member.js 파일을 만든다.
+
+11. app.js 를 만든다.
+
+
+※ 이번에는 css, javascript를 적용할 예정이다. public 폴더 안에 이를 넣는다.
+
+
+
+
+- DB를 만들어보자.
+
+1. Member 테이블을 생성한다.
+- models 폴더의 Member.js에 model을 작성한다.
+
+2. Board 테이블도 생성한다.
+- models 폴더의 Board.js에 model을 작성한다.
+
+--> member와 board 모델을 1:N 관계로 묶는다.
+--> 둘의 associate를 작성!
+
+3. Reply 테이블도 생성한다.
+- models 폴더의 Reply.js에 model을 작성한다.
+
+
+
+- 3개의 테이블에 대한 model을 제작하였으면, 이를 다른곳에서 쓰기 위해 묶어서 exports 시켜준다.
+
+1. model 폴더의 index.js 에서 각 테이블에 대한 모델을 require한다.
+2. db 객체에 이들을 넣고, init, associate 를 실행한다.
+3. db를 exports 한다.
+
+
+
+
+- 이제 테이블의 모델이 담긴 모듈을 app.js에서 사용한다.
+-> 데이터베이스 연결이 잘 되었다면, models 안에 있는 파일은 앞으로 열지 않아도 된다!
+
+
+
+
+- routers 폴더에 있는 index.js, board.js, member.js 에 필요한 모듈들과 모델들을 require한다.
+
+
+
+- index.js에 메인 페이지로 이동하는 '/' 작성
+
+
+- app.js에 nunjucks 와 같은 필요 모듈들 require 및 제작한 router 연결, 모듈 환경설정, 에러처리 미들웨어를 추가한다. 
+
+
+
+- 첫번째 페이지가 나오게 만들도록 views 폴더에 login.html을 만든다.
+
+-> 그리고 npm start 하면 로그인창이 나온다.
+
+
+※ 이번에는 자바스크립트 동작을 다른 파일에 따로 작성할 것이다.
+- javascript를 다룰 파일을 만든다.
+-> public 폴더 아래에 login.js 파일 제작
+
+
+
+
+- 로그인 기능을 만든다.
+-> routers의 /login 을 제작한다.
+
+
+- 그리고 mysql의 members 에다가 해당 명령을 하여 로그인을 할 유저 하나를 만든다..
+insert into nodejs.member(userid, pwd, name, phone) values('scott', '1234', '홍길동', '010-1234-1234');
+
+
+- views 폴더에 main.html을 만든다
+-> 여기에는 css가 적용된다.
+
+--> 그리고 public 폴더에 main.js 파일을 만든다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

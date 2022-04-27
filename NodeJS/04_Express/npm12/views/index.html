@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- 사용자 내용 표시 -->
+    <!--사용자-->
     <div>
         <form id="user-form">
             <fieldset>
                 <legend>사용자 등록</legend>
                 <div><input name="username" type="text" placeholder="이름"></div>
                 <div><input name="age" type="number" placeholder="나이"></div>
-                <div><input name="married" type="checkbox"><label for=""married>결혼 여부</label></div>
+                <div><input name="married" type="checkbox"><label for="married">결혼 여부</label></div>
                 <button type="submit">등록</button>
             </fieldset>
         </form>
@@ -23,12 +23,13 @@
         <thead><tr><th>아이디</th><th>이름</th><th>나이</th><th>결혼여부</th></tr></thead>
         <tbody>
             {% for user in users %}
-            <tr><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.age}}</td><td>{{ '기혼' if user.married lese '미혼' }}</td></tr>
+            <tr><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.age}}</td>
+                <td>{{ '기혼' if user.married else '미혼'}}</td></tr>
             {% endfor %}
         </tbody>
     </table><br>
-
-    <!-- 댓글 표시 -->
+    
+    <!--댓글-->
     <div>
         <form id="comment-form">
             <fieldset>
@@ -39,15 +40,12 @@
             </fieldset>
         </form>
     </div><br>
-    <table id="comment-list" border="1">
+    <table id="comment-list"  border="1">
         <thead><tr><th>아이디</th><th>작성자</th><th>댓글</th><th>수정</th><th>삭제</th></tr></thead>
-        <tbody></tbody> <!-- 댓글 쓴 내용은 tbody 안에 들어갈 예정이다.. -->
+        <tbody></tbody>
     </table>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/sequelize.js"></script>   <!-- 여기서 이 경로는 뭘 의미하는거지? app.js에서 아래의 경로를 의미한다. -->
-    <!-- app.use(express.static('/', path.join(__dirname, 'public'))); 여기서 '/'는 생략 가능... -->
-    <!-- 즉, public 폴더 안에 있는 sequelize.js 파일을 의미한다. -->
-
+    <script src="/sequelize.js"></script>
 </body>
 </html>
