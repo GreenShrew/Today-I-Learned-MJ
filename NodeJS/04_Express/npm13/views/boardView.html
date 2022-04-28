@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boardView.html</title>
+    <link rel="stylesheet" type="text/css" href="/board.css">
+    <style>
+        #time { text-align: center;}
+        #writer { text-align: center;}
+        #remove { text-align: center;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <h1 style="text-align: center;">게시글 내용</h1>
+        <table>
+            <tr><th width="150" align="center">번호</td><td  width="200" align="center">
+                {{board.id}}<input type="hidden" id="boardnum" value="{{board.id}}"></td>
+                <th width="150" align="center">작성자</td>
+                <td width="200" align="center">{{board.writer}}</td></tr>
+            <tr><th align="center">작성일</td><td align="center">{{board.created_at | date("YYYY/MM/DD")}}</td>
+                <th align="center">조회수</td><td align="center">{{board.readCount}}</td></tr>
+            <tr><th align="center" width="150">제목</td><td colspan="3">&nbsp;{{board.subject}}</td></tr>
+            <tr height="300"><th align="center" width="150">내용</td>
+                <td colspan="2" height="300" width="300"><pre>{{board.content}}</pre><br></td>
+                <td width="150" align="center">
+                    {% if board.filename %}
+                        <img src="/upload/{{board.realfilename}}" width="150" />
+                    {% endif %}
+                </td>
+            </tr>
+            <tr height="50"><td colspan="4" align="center">
+                <input type="button" value="수정" onclick="location.href='/boards/UpdateForm/{{board.id}}'"/>
+                <input type="button" value="삭제" onclick="location.href='/boards/deleteBoard/{{board.id}}'"/>
+                <input type="button" value="돌아가기" onClick="location.href='/boards'"/>    
+            </td></tr>
+        </table><br><br>
+
+        <form id="reply-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="140" align="center">작성일시</th><th width="90" align="center">작성자</th>
+                        <th width="400" align="center">내용</th><th width="70" align="center">&nbsp;</th>
+                    </tr>
+                    <tr><td align="center">{{dt | date("MM/DD HH:mm")}}</td>
+                        <td align="center">{{luser.userid}}
+                        <input type="hidden" id="writer" value="{{luser.userid}}"></td>
+                        <input type="hidden" id="boardnum" value="{{board.id}}">
+                        <td>&nbsp;<input type="text" size="50" id="reply"></td>
+                        <td align="center"><input type="submit" value="작성"></td>
+                    </tr>
+                </thead>
+                <tbody><tr><td></td><td></td><td></td><td></td></tr></tbody>
+            </table>
+        </form>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript">
+            getReplys( '{{board.id}}' , '{{luser.userid}}' );
+
+            async function getReplys( boardnum, loginUser ){
+                try{
+                    const result = await axios.get( `/boards/replyList/${boardnum}`);
+                    const replys = result.data;
+                    const tbody = document.querySelector('#reply-list tbody');
+                    tbody.innerHTML='';
+
+                    replys.map(function(reply){
+                        const row = document.createElement('tr');
+
+                        let td = document.createElement('td');
+                        td.textContent = reply.created_at.substring(5,7)+"/"+reply.created_at.substring(8,10)
+                            +" "+reply.created_at.substring(11,13)+":"+reply.created_at.substring(14,16);
+                        td.id = 'time';
+                        row.append( td );
+
+                        td = document.createElement('td');    td.textContent = reply.writer;
+                        td.id = 'writer';                     row.appendChild(td);
+
+                        td = document.createElement('td');     td.textContent = reply.content; 
+                        td.id = 'content';                     row.appendChild(td);
+
+                        const remove1 = document.createElement('input');
+                        remove1.setAttribute('type', 'button');   remove1.value = '삭제';
+
+                        
+                        remove1.addEventListener( 'click', async () => {
+                            try {
+                                await axios.delete(`/boards/deleteReply/${reply.id}`);
+                                getReplys(boardnum , loginUser);
+                            } catch (err) {
+                                console.error(err);
+                            }
+                        });
+
+
+
+                        td = document.createElement('td');     td.id='remove';
+                        if(  reply.writer == loginUser  ){ td.appendChild(remove1); }
+                        else{ td.innerHTML='&nbsp;'; }           row.appendChild(td);
+
+                        tbody.appendChild(row); 
+                        
+                    });
+                }catch(err){
+
+                }
+            }
+
+
+            document.getElementById('reply-list').addEventListener('submit', async (e)=>{
+
+                e.preventDefault();
+                const writer = e.target.writer.value;
+                const boardnum = e.target.boardnum.value;
+                const reply = e.target.reply.value;
+
+                if(!reply){ return alert("댓글내용을 입력하세요");}
+
+                try{
+                    await axios.post('/boards/addReply', { writer, boardnum, reply });
+                    getReplys(boardnum, writer);
+                }catch(err){
+                    console.error(err);
+                }
+                e.target.reply.value='';
+            });
+
+
+        </script>
+    </div>
+</body>
+</html>

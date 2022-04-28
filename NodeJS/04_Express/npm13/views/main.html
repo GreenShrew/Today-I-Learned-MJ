@@ -13,17 +13,19 @@
     </style>
 </head>
 <body>
-    {{lUser.userid}}({{lUser.name}}) 님 어서오세요 &nbsp; 
-    <input type="button" value="회원수정" onClick="location.href='/members/updateForm/{{lUser.userid}}'">
-    <input type="button" value="로그아웃" onClick="location.href='/members/logout/'">
-    <input type="button" value="글쓰기" onClick="location.href='/boards/writeForm'"><br><br>
-    <table id="board-list" align="left">
-        <thead>
-            <tr><th width="100">번호</th><th width="400">제목</th><th width="100">작성자</th><th width = "100" >조회수</th></tr>
-        </thead>
-        <tbody><tr><td></td><td></td><td></td></tr></tbody>
-    </table>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/main.js"></script>
+    <div id="wrap">
+        {{lUser.userid}}({{lUser.name}}) 님 어서오세요 &nbsp; 
+        <input type="button" value="회원수정" onClick="location.href='/members/updateForm/{{lUser.userid}}'">
+        <input type="button" value="로그아웃" onClick="location.href='/members/logout/'">
+        <input type="button" value="글쓰기" onClick="location.href='/boards/writeForm'"><br><br>
+        <table id="board-list" align="left">
+            <thead>
+                <tr><th width="100">번호</th><th width="400">제목</th><th width="100">작성자</th><th width = "100" >조회수</th></tr>
+            </thead>
+            <tbody><tr><td></td><td></td><td></td></tr></tbody>
+        </table>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/main.js"></script>
+    </div>
 </body>
 </html>

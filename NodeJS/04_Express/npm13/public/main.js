@@ -13,13 +13,30 @@ async function getBoard_list(){
         boards.map( async function(board){
             const row = document.createElement('tr');
 
+            row.addEventListener('click', ()=>{
+                location.href="/boards/boardView/" + board.id;
+            });
+
             let td = document.createElement('td');
             td.textContent = board.id;
             td.id = 'boardnum';
-            row.append( td );
+            row.appendChild( td );
 
             td = document.createElement('td');
+            // 현재 게시물의 댓글 갯수를 조회해서 제목옆에 추가로 표시합니다.  갯수:조회된 댓글객체의 length(객체.length)
             let tContent = board.subject;
+
+            try{
+                const result  = await axios.get(`/boards/replycnt/${board.id}`);
+                const data  = result.data;
+                let cnt = data.cnt;
+                if(cnt!=0){
+                    tContent = tContent + ' <span style="color:red;font-weight:bold">[' + cnt + ']</span>'; 
+                } 
+            }catch(err){
+                console.error(err);
+            }
+
             td.innerHTML = tContent;
             row.appendChild(td);
 

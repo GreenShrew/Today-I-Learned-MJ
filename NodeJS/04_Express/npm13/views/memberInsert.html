@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>memberInsert.html</title>
+    <link rel="stylesheet" type="text/css" href="/board.css">
+</head>
+<body>
+    <div id="wrap">
+        <form id="join-form">
+            <fieldset>
+                <legend>회원가입 - 사용자 등록</legend>
+                <div><input id="userid" type="text" placeholder="userid"></div>
+                <div><input id="pwd" type="password" placeholder="password"></div>
+                <div><input id="name" type="text" placeholder="name"></div>
+                <div><input id="phone" type="text" placeholder="phone"></div>
+                <div><input id="email" type="text" placeholder="email"></div>
+                <button type="submit">등록완료</button>
+            </fieldset>
+        </form>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/insertmember.js"></script>
+</body>
+</html>
