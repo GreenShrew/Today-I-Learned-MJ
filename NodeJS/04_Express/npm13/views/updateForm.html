@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/board.css">
+</head>
+<body>
+    <form id="update-form">
+        <table>
+            <tr><th width="150" align="center">번호</th>
+                <td  width="150" align="center">{{board.id}}<input type="hidden" name="id" value="{{board.id}}" /></td><th width="150" align="center">작성자</th>
+                <td width="150" align="center">{{board.writer}}
+                <input type="hidden" name="writer" value="{{board.writer}}" /></td></tr>
+            <tr><th width="150" align="center">작성일</th>
+                <td  width="150"  align="center">{{board.created_at | date("YYYY/MM/DD")}}</td>
+                <th align="center">조회수</th><td align="center">{{board.readCount}}</td></tr>
+            <tr><th align="center" width="150">제목</th><td  width="150"  colspan="3">&nbsp;
+                <input type="text" name="subject" size="50" value="{{board.subject}}"></td>
+            <tr ><th align="center" width="150">내용</th>
+                <td  width="150"  colspan="3">
+                &nbsp;<textarea name="text" rows="15" cols="60">{{board.content}}</textarea></td></tr>
+            <tr ><th align="center" width="150">이미지</th>
+                <td  colspan="3">&nbsp;<img src="/upload/{{board.realfilename}}" width="50" /><br>
+                <input type='file' name="image", id="image" /><br>이미지를 수정하고자 할때만 선택하세요
+                </td></tr>
+            <tr height="80"><td colspan="4" align="center"><input type="submit" value="수정" />
+                <input type="button" value="돌아가기" onClick="location.href='/boards/boardView2/{{board.id}}'"/></td></tr>
+        </table>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        document.getElementById('update-form').addEventListener('submit', async(e)=>{
+            e.preventDefault();
+            const id = e.target.id.value;
+            const subject = e.target.subject.value;
+            const text = e.target.text.value;
+
+            if (!subject) {  return alert('제목을 입력하세요');    }
+            if (!text) {  return alert('내용을 입력하세요');    }
+
+            const formData = new FormData();
+            formData.append('id', id);  // 게시글 아이디
+            formData.append('subject', subject);
+            formData.append('text', text);
+            formData.append('image', e.target.image.files[0]);
+            try{
+                await axios.post('/boards/update', formData);
+                location.href = '/boards/boardView2/{{board.id}}';
+            }catch(err){
+
+            }
+        });
+    </script>
+</body>
+</html>

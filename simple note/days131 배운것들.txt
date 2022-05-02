@@ -1,0 +1,210 @@
+days131 배운것들 영상 있음...
+
+기능을 실행시켜가며 작성하자.
+
+day130에서 글 옆에 댓글 갯수까지 넣는 작업을 하다 중단했다.
+
+
+※ npm13 어째 글쓰기가 안 된다? 이전부터 자꾸 테이블에 에러가 생겼었는데..
+-> 아예 스키마를 날려버리고 만들어보자
+--> 그래도 안 된다...
+
+---> 일단 해결! 사진을 안 넣으면 글이 작성 안 되더라...아니 이거 예외 못 하나?
+
+
+※ npm14에서 post.js, user.js 모델 한번 확인해..
+
+
+※ app.js의 셋팅의 의미가 궁금하다면, 코드를 복사해서 구글에 쳐보자!
+
+
+
+npm13
+======================================
+댓글 갯수를 게시물 제목 옆에 나타내는 작업을 한다.
+- routers의 boards.js에서 /replycnt/:id 라우터를 만든다
+-> reply 테이블에서 boardnum 필드중 전달된 params.id 로 검색
+
+
+
+
+- 이제 게시글 수정을 만든다.
+-> 게시글을 수정할 수 있는 페이지로 보내는 /UpdateForm/:id 라우터를 만든다.
+--> views에 updateForm.html을 만든다.
+
+---> 이전에는 글을 수정할 때 dto를 이용하여 글을 수정하였다.
+---> 만약 사진을 바꾸지 않는다면, 이전에 있던 사진을 불러와서 dto에 넣은 후 다시 싹 저장하는 방식으로 글을 수정하였다.
+---> 이번에는 그렇게 안 한다.
+
+----> updateForm.html 하단에 script를 제작한다.
+----> 이벤트리스너를 만들고, 그 안에 validation 을 하고, formData를 만들어서 그 안에 작성된 게시글 아이디, 제목, 내용, 이미지를 넣는다.
+----> 그리고 boards 라우터에 /update 로 요청한다. formData를 보낸다.
+----> 글을 수정시켜주는 라우터이다.
+
+-----> 업데이트가 잘 되었다면 이번에는 다시 게시글 상세보기로 보내주는 /boardView2로 요청한다. 이는 /boardView와는 달리 조회수를 높이지 않는 요청이다.
+
+
+------> 이제 boards.js 에 가서 /update 요청과 /boardView 요청을 작성한다.
+
+
+- boards.js로 와서
+- /update에서 upload.single('image') 명령을 통해 file은 업로드 된다. 다만 borads 테이블의 filename 을 업로드된 파일의 이름으로 바꾸지 않으면 아무리 업로드를 한다고 해도 바뀐 사진이 나오지 않을 것이다.
+
+-> 만약 업로드된 파일이 있다면...(req.file != undefined) 
+-> 제목, 내용, 사진 이름, 사진 경로를 전부 저장해야한다.
+
+--> 만약 업로드된 파일이 없다면...
+--> 제목, 내용만 저장하면 된다.
+
+---> 여기서 res.send('ok'); 를 이용해 요청을 전달했던 위치(updateForm.html의 스크립트)로 다시 돌려보낼 수 있지만, res.redirect(' 요청 url '); 을 통해 라우터로 바로 보낼 수 있다.
+
+
+
+- 게시물 삭제하기
+-> boards 라우터의 /deleteBoard 요청을 제작한다.
+
+--> href로 들어오기 때문에 delete가 아니라 get으로 라우터를 만들어야 한다.
+
+
+
+
+여기까지가 게시판이었다.
+
+
+
+
+sns 만들기
+npm14
+===========================================
+- 트위터나 페이스북과 같은 sns 기능을 만들어본다.
+-> 여기서 사용되는 DB간의 관계도 한번 체크해보자!
+--> 또한 카카오톡 계정을 이용한 로그인을 할 수 있도록 만들어볼 것이다..
+※ 카카오톡의 경우, 개인 사업을 하기 위해서는 개인사업증을 가지고 있어야하나, 개인 웹 페이지를 제작하는데에는 필요하지 않다.
+
+
+
+
+
+※ 초기 설정 시작
+- npm init (entry point는 app.js로)
+- npm i express (express 서버 설치)
+- npm i -D nodemon
+- package.json에서 test를 "start" : "nodemon app" 으로 변경
+
+- DB 초기화를 해야한다...
+npm i sequelize sequelize-cli mysql2
+- npx sequelize init  <- config, models, migration, seeders 가 생성된다.
+
+- config.json 파일에서 development 항목에 username : root, 비번은 adminuser, database는 nodegram으로 한다.
+-> mysql workbench로 가서 nodegram 이라는 이름의 스키마를 만든다. (utf8mb, general 뭐시기 ci)
+
+- models 폴더의 index.js 수정
+-> 필요없는 모듈 require 코드 제거
+
+
+§ 테이블 만들기
+- 사용할 테이블을 만든다. models 폴더에 모델들을 만든다.
+
+#1. sns에 포스팅하는 내용의 post.js를 만든다.
+
+-> 모델명 : Post, 테이블명 : posts, 필드 : content(문자 140, null 허용안함), img(문자200, null 허용)
+-> user 와 1:N 관계 표시 - user 모델 생성 후 설정 예정
+
+--> 글쓴이 필드를 만들지 않는 이유! 외래키로 들어온다.
+
+
+#2. sns를 사용하는 사용자들의 정보를 담을 user 테이블의 모델을 만들 user.js를 만든다.
+
+※ 참고로 email 필드에 null 허용에 unique 를 주는데, null 값은 고유값 적용을 하지 않으므로, null 이 여러개 있다고 해서 unique가 아니게 되는건 아니다.
+
+※ paranoid: true 로 설정했다.
+ 회원 탈퇴시 레코드를 삭제하지 않고 삭제 명령이 내려진 시간만 적어두겠다는 의미.
+
+
+- 이제 Post 모델에 User 모델의 id를 외래키로 넣어야한다.
+-> associate 작성
+
+
+- 만든 post.js와 user.js 를 index.js로 불러온다.
+
+
+- 이제 테이블이 잘 만들어지는지 확인해보기 위해 app.js를 제작한다.
+-> 서버를 실행하는데 필요한 모듈을 require하고(express), url이 '/'인 라우터를 임시로 만들어서 웹 페이지에 표시되기 만든다.
+
+
+
+- 이번에는 hash태그를 저장하는 hashtag 테이블을 만드는 hashtag.js 모델을 만든다.
+-> hashtags 테이블은 필드가 id와 title 2개뿐이다.
+-> posts 테이블과 N:N 관계가 성립된다.
+--> 주석으로 예시가 쓰여있다!
+---> 중간에서 N:N 관계를 만들어주고 이를 처리해줄 테이블을 Sequelize가 자동으로 만들어준다.
+----> 여기서는 PostHashtag 라는 이름으로 제작!
+
+- 또한, user.js로 간다.
+-> 유저 1이 유저 2를 follow 할때, 유저가 유저를 추가한다...즉, user 테이블이 user 테이블과 N:N 관계를 만들게 된다!
+--> associate 에 해당 코드를 만든다!
+
+---> following, follower를 구분하는 내용을 N:N으로 만든다.
+---> 두 필드에 모두 user의 id가 들어간다. 누가 누구를 팔로우 했는지, 팔로워인지 알려준다.
+
+----> 근데 여기서 A 가 B를 following 하고, B 가 A를 following 하는 맞팔의 경우는?
+----> follow에는 두개의 레코드가 생긴다.
+
+
+
+
+
+※ 이제 추가적으로 설치해야 할 module을 설치한다.
+- npm i cookie-parser express-session nunjucks dotenv
+- npm i multer
+
+- passport 모듈 설치
+-> npm i passport passport-local passport-kakao bcrypt
+-> 코드가 지저분해지는걸 깔끔하게 만들 수 있다(뭐가 지저분해지는지는 영상 보고 확인해..3시 10분임)
+
+※ bcrypt는 암호화를 위한 모듈
+
+
+
+
+- app.js에 가서 방금 설치한 cookie-parser, express-session, nunjucks, dotenv, passport path를 require 한다.
+-> 그리고 패스포트에 대한 설정, static 폴더 설정(이미지용 폴더를 따로 제작했다) 등등을 한다.
+
+※ app.js의 셋팅에서 코드의 의미가 궁금하다면, 코드를 복사해서 구글에 쳐보자!
+
+
+
+- npm14 폴더 아래에 passport, public, routers, uploads, views 폴더를 만든다.
+
+
+- 이번에는 npm14 폴더 아래에 .env 파일을 만든다. (dotenv)
+-> 쿠키와 세션에 사용할 암호화 비밀번호를 적는 파일이다.
+--> COOKIE_SECRET에 nodejssns를 설정한다.
+
+
+- 라우터 폴더에 user.js, post.js, auth.js(로그인, 로그아웃), page.js(post 페이지나 profile 페이지 등) 를 만든다.
+
+
+- views 폴더에 layout.html 파일을 만든다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
