@@ -12,14 +12,15 @@
     <div class="container">
         <div class="profile-wrap">
             <div class="profile">
-                {% if user %}
+                {% if user %}   <!-- 로그인 유저가 null이 아니라면(로그인한 사람이 있다면)
+                한 사람의 접오가 세션에 저장이 되고 그 세션값이 현재 파일에 render에 의해서 전송되어져 있다는 의미이다(객체 형식으로). -->
                     <div class="user-name">{{'안녕하세요 ' + user.nick  + '님'}}</div>
                     <div class="half">
                         <div>팔로워</div>
                         <div class="count follower-count">{{followerCount}}</div> 
                     </div>
                     <div class="half">
-                        <div>필로잉</div>
+                        <div>팔로잉</div>
                         <div class="count following-count">{{followingCount}}</div> 
                     </div>
                     <input type="hidden" id="my-id" value="{{user.id}}">
@@ -45,5 +46,8 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% block script %}
+    {% endblock %}
 </body>
 </html>

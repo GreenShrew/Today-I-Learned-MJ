@@ -7,7 +7,10 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 
 const app = express();
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 3000);
+
+// dotenv 설정
+dotenv.config();    // dotenv 설정은 가장 위에 쓰는것이 좋다.
 
 const passportConfig = require('./passport');
 passportConfig(); // 패스포트 설정
@@ -45,10 +48,10 @@ sequelize.sync({force:false})
 });
 
 
-const postRouter = require('./routes/post');
-const pageRouter = require('./routes/page');
-const authRouter = require('./routes/auth');
-const userRouter = require('./routes/user');
+const postRouter = require('./routers/post');
+const pageRouter = require('./routers/page');
+const authRouter = require('./routers/auth');
+const userRouter = require('./routers/user');
 
 app.use('/', pageRouter);
 app.use('/post', postRouter);
