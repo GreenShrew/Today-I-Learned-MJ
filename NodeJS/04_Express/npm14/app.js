@@ -6,11 +6,10 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
 
-const app = express();
+const app = express(); 
 app.set('port', process.env.PORT || 3000);
 
-// dotenv 설정
-dotenv.config();    // dotenv 설정은 가장 위에 쓰는것이 좋다.
+dotenv.config(); // dotenv 설정은 가장 위에 쓰는것이 좋습니다.
 
 const passportConfig = require('./passport');
 passportConfig(); // 패스포트 설정

@@ -1,17 +1,14 @@
 {% extends 'layout.html' %}
 
-
-{% block content %}
+{% block content %} 
 <div class="timeline">
     <form id="join-form" action="/auth/join" method="post">
         <div class="input-group">
             <label for="join-email">이메일</label>
-            <input id="join-email" type="email" name="email">
-        </div>
+            <input id="join-email" type="email" name="email"></div>
         <div class="input-group">
             <label for="join-nick">닉네임</label>
-            <input id="join-nick" type="nick" name="nick">
-        </div>
+            <input id="join-nick" type="nick" name="nick"></div>
         <div class="input-group">
             <label for="join-password">비밀번호</label>
             <input id="join-password" type="password" name="password">
@@ -22,17 +19,14 @@
 {% endblock %}
 
 {% block script %}
-
     <script type="text/javascript">
-        // form이 로딩되면 익명함수가 실행된다.
         window.onLoad = ()=>{
-            // localhost:3000/join.html?error=exist 이런식으로 페이지에 되돌아올 경우!
-            // 폼 실행 후 되돌아와서 페이지 전환을 하고자 하는 주소에 error 라는 파라미터가 있다면!
-            if(new URL(location.href).searchParams.get('error')){    // error 라는 이름의 파라미터 감지
+            // localhost:3000/join.html?error=exits
+            // 폼실행후 되돌아와서 페이지 전환을 하고자하는 주소에  error 라는 파라미터가 있다면
+            if (new URL(location.href).searchParams.get('error')) { 
                 alert('이미 존재하는 이메일입니다.');
                 location.href='/';
             }
         };
     </script>
-
 {% endblock %}

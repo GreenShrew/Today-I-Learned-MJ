@@ -1,6 +1,7 @@
 {
   "name": "npm14",
   "version": "1.0.0",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app"
@@ -24,6 +25,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
-  },
-  "description": ""
+  }
 }

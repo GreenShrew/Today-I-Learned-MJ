@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <title>{{title}}</title>
     <link rel="stylesheet" href="/main.css">
 </head>
@@ -12,15 +11,12 @@
     <div class="container">
         <div class="profile-wrap">
             <div class="profile">
-                {% if user %}   <!-- 로그인 유저가 null이 아니라면(로그인한 사람이 있다면)
-                한 사람의 접오가 세션에 저장이 되고 그 세션값이 현재 파일에 render에 의해서 전송되어져 있다는 의미이다(객체 형식으로). -->
+                {% if user %}  <!-- 로그인 유저가 널이 아니라면(로그인 한 사람이 있다면) - 로그인 한사람의 정보가 세션에 저장이 되고 그 세션값이 현재 파일에 render 에 의해서 전송되어져 있다는 뜻입니다(객체형식으로)-->
                     <div class="user-name">{{'안녕하세요 ' + user.nick  + '님'}}</div>
-                    <div class="half">
-                        <div>팔로워</div>
+                    <div class="half"><div>팔로워</div>
                         <div class="count follower-count">{{followerCount}}</div> 
                     </div>
-                    <div class="half">
-                        <div>팔로잉</div>
+                    <div class="half"><div>필로잉</div>
                         <div class="count following-count">{{followingCount}}</div> 
                     </div>
                     <input type="hidden" id="my-id" value="{{user.id}}">
