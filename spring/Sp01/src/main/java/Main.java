@@ -6,9 +6,18 @@ public class Main {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		// 입력받은 값을 charAt으로 char형 문자로 잘라준다.
-		int result = br.readLine().charAt(0);
+		int[] a = new int[26];
+		for(int i=0; i<26; i++) {
+			a[i] = -1;
+		}
 		
-		System.out.println(result);
+		String S = br.readLine();
+		
+		for(int j=0; j<S.length(); j++) {
+			char c = S.charAt(j);
+			if(a[c-'a']==-1) {
+				a[c-'a']=j;
+			}
+		}
 	}
 }
