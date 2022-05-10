@@ -1,6 +1,9 @@
 package days02
 
+// CH09_Ex
+
 fun main(){
+
     print("연도 입력 : ")
     val year:Int = readLine()!!.toInt()
     print("월 입력 : ")
@@ -8,38 +11,41 @@ fun main(){
     print("일 입력 : ")
     val day:Int = readLine()!!.toInt()
 
-    var days:Int = sumdays(year, month, day)   // 전달인수에 year, day도 추가
-    // sumdays 함수 안에서 월에 해당하는 날짜수 계산할때 when을 이용하지 않고, 배열 생성후 반복 실행과 함께 계산하자.
+    var days:Int = sumdays(year, month, day)  // 전달인수에 year, day 도 추가
+    // sumdays 함수안에서 월에 해당하는 날짜수 계산할때 when 을 이용하지 말고, 배열생성후 반복실행과 함께 계산해주세요
     val temp:Int = days % 7
-    val weekday:String = selectWeekday(temp) // 총 날짜를 7로 나눈 나머지를 계산하는함수 제작
-    print(weekday)
+    val weekday:String = selectWeekday2(temp)
+    println(weekday)
+
 }
 
 
-fun sumdays(a1:Int, a2:Int, a3:Int) : Int{
-    var day:IntRange = 1..(a1-1)
-    var total = 0;
+fun sumdays( y:Int, m:Int, d:Int) : Int{
+    var days:Int = 0
+    var mdays = arrayOf(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) // 배열생성
+    if( y%4==0 && y%100!=0 || y%400==0 ) mdays[2] = 29   // 입력한 년도가 윤년이면 2월을 29일로 변경
+    days = 365*(y-1)
+    val ys:IntRange = 1..(y-1)
+    for( i in ys){
+        if( i%4==0 && i%100!=0 || i%400==0) days++
+    } // 입력한 년도의 전년도까지 있었던 윤년 만큼 +1 반복
+    var i:Int = 0
+    while( i<m ){
+        days += mdays[i]
+        i++
+    } // 입력한 월의 전월까지 날짜 합산
 
-    for(item in day){
-        if(item%4 == 0 || item%100 != 0 || item%400 == 0){
-            total += 366
-        }else{
-            total += 365
-        }
-    }
+    days += d  // 입력한 일만큼 날짜 합산
+    return days
+}
 
-    var month = Array(12,{0})
-    if(a1%4 == 0 || a1%100 != 0 || a1%400 == 0){
-        month = arrayOf(0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30)
-    }else{
-        month = arrayOf(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30)
-    }
-
-    var i:Int = 0;
-    while(i<a2){
-        total += month[i]
-    }
-
-
-    return 10;
+fun selectWeekday2( t:Int ) : String = when(t) {
+        1 -> "월요일입니다"
+        2 -> "화요일입니다"
+        3 -> "수요일입니다"
+        4 -> "목요일입니다"
+        5 -> "금요일입니다"
+        6 -> "토요일입니다"
+        0 -> "일요일입니다"
+        else -> "잘못된 연산입니다"
 }
